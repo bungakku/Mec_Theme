@@ -1,0 +1,159 @@
+/*
+Theme Name: MEC_Theme
+Description: Editor styles for the classic editor – updated for version 1.7.0
+Version: 1.7.0
+*/
+
+/* ===== Base Styles ===== */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    color: #333333;
+    background-color: #ffffff;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* ===== Headings ===== */
+h1, h2, h3, h4, h5, h6 {
+    color: #333333;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.3;
+    font-weight: 600;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.7rem; }
+h3 { font-size: 1.4rem; }
+h4 { font-size: 1.2rem; }
+h5 { font-size: 1.1rem; }
+h6 { font-size: 1rem; }
+
+/* ===== Links ===== */
+a {
+    color: #0274be;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #3a3a3a;
+    text-decoration: underline;
+}
+
+/* ===== Typography ===== */
+p {
+    margin-bottom: 1.5em;
+}
+
+/* ===== Images ===== */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+/* ===== Blockquotes ===== */
+blockquote {
+    border-left: 4px solid #0274be;
+    margin-left: 0;
+    padding-left: 20px;
+    font-style: italic;
+    color: #666666;
+}
+
+/* ===== Code & Pre ===== */
+code, pre {
+    background: #f5f5f5;
+    border-radius: 3px;
+    padding: 2px 5px;
+    font-family: monospace;
+}
+
+pre {
+    padding: 15px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+}
+
+/* ===== Tables ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5em;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f5f5f5;
+    font-weight: 600;
+}
+
+/* ===== Block Editor Specific ===== */
+.wp-block {
+    max-width: 100%;
+}
+
+/* Editor colour palette support */
+.has-primary-color {
+    color: #0274be;
+}
+.has-primary-background-color {
+    background-color: #0274be;
+}
+
+.has-secondary-color {
+    color: #3a3a3a;
+}
+.has-secondary-background-color {
+    background-color: #3a3a3a;
+}
+
+.has-dark-grey-color {
+    color: #333333;
+}
+.has-dark-grey-background-color {
+    background-color: #333333;
+}
+
+.has-light-grey-color {
+    color: #666666;
+}
+.has-light-grey-background-color {
+    background-color: #666666;
+}
+
+.has-white-color {
+    color: #ffffff;
+}
+.has-white-background-color {
+    background-color: #ffffff;
+}
+
+/* List styles */
+ul, ol {
+    margin-bottom: 1.5em;
+    padding-left: 1.5em;
+}
+
+/* Button styles (for classic editor) */
+.wp-block-button__link {
+    background-color: #0274be;
+    color: #ffffff;
+    border-radius: 4px;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.wp-block-button__link:hover {
+    background-color: #3a3a3a;
+    color: #ffffff;
+}

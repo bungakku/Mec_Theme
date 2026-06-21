@@ -1,0 +1,37 @@
+MEC_Theme/
+│
+├── style.css                     // v1.7.0 – Main stylesheet with CSS variables
+├── index.php                     // v1.7.0 – Main blog index template
+├── header.php                    // v1.7.0 – Site header with mobile menu & ARIA labels
+├── footer.php                    // v1.7.0 – Footer with widgets & copyright (wp_date)
+├── functions.php                 // v1.7.0 – Core functions, customizer CSS, custom widget
+├── front-page.php                // v1.7.0 – Front page template
+├── page.php                      // v1.7.0 – Page template
+├── single.php                    // v1.7.0 – Single post template
+├── archive.php                   // v1.7.0 – Archive template
+├── search.php                    // v1.7.0 – Search results template
+├── searchform.php                // v1.7.0 – Search form (accessible)
+├── 404.php                       // v1.7.0 – 404 error template
+├── screenshot.png                // Theme screenshot (not versioned)
+├── readme.txt                    // v1.7.0 – Readme file (text format)
+│
+├── template-parts/
+│   ├── author-bio.php            // v1.7.0 – Author bio for single posts
+│   ├── content.php               // v1.7.0 – Generic content template
+│   ├── content-blog.php          // v1.7.0 – Blog post content with accessible comments
+│   ├── content-none.php          // v1.7.0 – No content message
+│   ├── content-page.php          // v1.7.0 – Page content
+│   └── related-posts.php         // v1.7.0 – Related posts section
+│
+├── inc/
+│   └── customizer.php            // v1.7.0 – Customizer settings (incl. tagline alignment)
+│
+├── assets/
+│   ├── js/
+│   │   ├── navigation.js         // v1.7.0 – Mobile menu & submenu toggles
+│   │   └── customizer-preview.js // v1.7.0 – Live preview for site description hiding
+│   └── css/
+│       └── editor-style.css      // v1.7.0 – Classic editor styles (supports block palette)
+│
+└── languages/
+    └── mec_theme.pot             // v1.7.0 – Translation template (updated strings)
