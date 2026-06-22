@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * The template for displaying 404 pages (not found)
  *
  * @package MEC_Theme
- * @version 1.7.2
+ * @version 1.7.3
  */
 
 get_header();

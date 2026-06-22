@@ -5,14 +5,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Customizer-driven CSS generation and caching.
  *
- * Extracted from functions.php during the 1.7.2 file-organization pass.
+ * Extracted from functions.php during the 1.7.3 file-organization pass.
  * No behavior changed: every function here is identical to its previous
  * version, just grouped together since they form one coherent job
  * (turn theme_mods into the inline <style> block added in functions.php
  * via mec_theme_scripts() -> wp_add_inline_style()).
  *
  * @package MEC_Theme
- * @version 1.7.2
+ * @version 1.7.3
  */
 
 function mec_theme_get_color_var( $mod, $default ) {
@@ -300,11 +300,79 @@ function mec_theme_get_submenu_font_sizes_css() {
 }
 
 /**
- * Generate mobile menu colours CSS (excluding submenu font sizes)
+ * Generate tablet menu colours CSS (481px - 768px): menu items + dropdown/submenu.
+ */
+function mec_theme_get_tablet_menu_colors_css() {
+    $css = '@media (min-width: 481px) and (max-width: 768px) {';
+
+    // Top-level menu items
+    $menu_bg = get_theme_mod( 'mec_theme_tablet_menu_bg', '#ffffff' );
+    if ( $menu_bg && preg_match( '/^#[a-f0-9]{6}$/i', $menu_bg ) ) {
+        $css .= '.main-navigation ul { background-color: ' . esc_attr( $menu_bg ) . '; }';
+    }
+
+    $menu_text = get_theme_mod( 'mec_theme_tablet_menu_text', '#3a3a3a' );
+    if ( $menu_text && preg_match( '/^#[a-f0-9]{6}$/i', $menu_text ) ) {
+        $css .= '.main-navigation a { color: ' . esc_attr( $menu_text ) . '; }';
+    }
+
+    $menu_hover_bg = get_theme_mod( 'mec_theme_tablet_menu_hover_bg', '#f8f9fa' );
+    $menu_hover_text = get_theme_mod( 'mec_theme_tablet_menu_hover_text', '#0274be' );
+    if ( $menu_hover_bg || $menu_hover_text ) {
+        $css .= '.main-navigation a:hover {';
+        if ( $menu_hover_bg && preg_match( '/^#[a-f0-9]{6}$/i', $menu_hover_bg ) ) {
+            $css .= 'background-color: ' . esc_attr( $menu_hover_bg ) . ';';
+        }
+        if ( $menu_hover_text && preg_match( '/^#[a-f0-9]{6}$/i', $menu_hover_text ) ) {
+            $css .= 'color: ' . esc_attr( $menu_hover_text ) . ';';
+        }
+        $css .= '}';
+    }
+
+    // Dropdown / submenu items (more specific selectors so they can differ
+    // from the top-level menu colours above)
+    $dropdown_bg = get_theme_mod( 'mec_theme_tablet_dropdown_bg', '#f9f9f9' );
+    if ( $dropdown_bg && preg_match( '/^#[a-f0-9]{6}$/i', $dropdown_bg ) ) {
+        $css .= '.main-navigation ul ul { background-color: ' . esc_attr( $dropdown_bg ) . '; }';
+    }
+
+    $dropdown_text = get_theme_mod( 'mec_theme_tablet_dropdown_text', '#3a3a3a' );
+    if ( $dropdown_text && preg_match( '/^#[a-f0-9]{6}$/i', $dropdown_text ) ) {
+        $css .= '.main-navigation ul ul a { color: ' . esc_attr( $dropdown_text ) . '; }';
+    }
+
+    $dropdown_hover_bg = get_theme_mod( 'mec_theme_tablet_dropdown_hover_bg', '#f0f0f0' );
+    $dropdown_hover_text = get_theme_mod( 'mec_theme_tablet_dropdown_hover_text', '#0274be' );
+    if ( $dropdown_hover_bg || $dropdown_hover_text ) {
+        $css .= '.main-navigation ul ul a:hover {';
+        if ( $dropdown_hover_bg && preg_match( '/^#[a-f0-9]{6}$/i', $dropdown_hover_bg ) ) {
+            $css .= 'background-color: ' . esc_attr( $dropdown_hover_bg ) . ';';
+        }
+        if ( $dropdown_hover_text && preg_match( '/^#[a-f0-9]{6}$/i', $dropdown_hover_text ) ) {
+            $css .= 'color: ' . esc_attr( $dropdown_hover_text ) . ';';
+        }
+        $css .= '}';
+    }
+
+    $dropdown_border = get_theme_mod( 'mec_theme_tablet_dropdown_border', '#e0e0e0' );
+    if ( $dropdown_border && preg_match( '/^#[a-f0-9]{6}$/i', $dropdown_border ) ) {
+        $css .= '.main-navigation ul ul li { border-bottom-color: ' . esc_attr( $dropdown_border ) . '; }';
+    }
+
+    $css .= '}'; // close @media (min-width: 481px) and (max-width: 768px)
+
+    return $css;
+}
+
+/**
+ * Generate mobile menu colours CSS (480px and below): menu items + dropdown/submenu,
+ * plus the hamburger button and mobile close (X) button, which are shared
+ * across tablet and mobile rather than split per breakpoint.
  */
 function mec_theme_get_mobile_menu_colors_css() {
-    $css = '@media (max-width: 768px) {';
-    
+    $css = '@media (max-width: 480px) {';
+
+    // Top-level menu items
     $mobile_bg = get_theme_mod( 'mec_theme_mobile_menu_bg', '#ffffff' );
     if ( $mobile_bg && preg_match( '/^#[a-f0-9]{6}$/i', $mobile_bg ) ) {
         $css .= '.main-navigation ul { background-color: ' . esc_attr( $mobile_bg ) . '; }';
@@ -327,7 +395,43 @@ function mec_theme_get_mobile_menu_colors_css() {
         }
         $css .= '}';
     }
-    
+
+    // Dropdown / submenu items (more specific selectors so they can differ
+    // from the top-level menu colours above)
+    $mobile_dropdown_bg = get_theme_mod( 'mec_theme_mobile_dropdown_bg', '#f9f9f9' );
+    if ( $mobile_dropdown_bg && preg_match( '/^#[a-f0-9]{6}$/i', $mobile_dropdown_bg ) ) {
+        $css .= '.main-navigation ul ul { background-color: ' . esc_attr( $mobile_dropdown_bg ) . '; }';
+    }
+
+    $mobile_dropdown_text = get_theme_mod( 'mec_theme_mobile_dropdown_text', '#3a3a3a' );
+    if ( $mobile_dropdown_text && preg_match( '/^#[a-f0-9]{6}$/i', $mobile_dropdown_text ) ) {
+        $css .= '.main-navigation ul ul a { color: ' . esc_attr( $mobile_dropdown_text ) . '; }';
+    }
+
+    $mobile_dropdown_hover_bg = get_theme_mod( 'mec_theme_mobile_dropdown_hover_bg', '#f0f0f0' );
+    $mobile_dropdown_hover_text = get_theme_mod( 'mec_theme_mobile_dropdown_hover_text', '#0274be' );
+    if ( $mobile_dropdown_hover_bg || $mobile_dropdown_hover_text ) {
+        $css .= '.main-navigation ul ul a:hover {';
+        if ( $mobile_dropdown_hover_bg && preg_match( '/^#[a-f0-9]{6}$/i', $mobile_dropdown_hover_bg ) ) {
+            $css .= 'background-color: ' . esc_attr( $mobile_dropdown_hover_bg ) . ';';
+        }
+        if ( $mobile_dropdown_hover_text && preg_match( '/^#[a-f0-9]{6}$/i', $mobile_dropdown_hover_text ) ) {
+            $css .= 'color: ' . esc_attr( $mobile_dropdown_hover_text ) . ';';
+        }
+        $css .= '}';
+    }
+
+    $mobile_dropdown_border = get_theme_mod( 'mec_theme_mobile_dropdown_border', '#e0e0e0' );
+    if ( $mobile_dropdown_border && preg_match( '/^#[a-f0-9]{6}$/i', $mobile_dropdown_border ) ) {
+        $css .= '.main-navigation ul ul li { border-bottom-color: ' . esc_attr( $mobile_dropdown_border ) . '; }';
+    }
+
+    $css .= '}'; // close @media (max-width: 480px)
+
+    // Hamburger button and mobile close (X) button: shared across tablet and
+    // mobile, so this block uses the wider 768px breakpoint rather than 480px.
+    $css .= '@media (max-width: 768px) {';
+
     // Hamburger button colours
     $hamburger_bg = get_theme_mod( 'mec_theme_hamburger_bg', 'transparent' );
     $hamburger_color = get_theme_mod( 'mec_theme_hamburger_color', '#3a3a3a' );
@@ -372,7 +476,10 @@ function mec_theme_get_mobile_menu_colors_css() {
             $css .= '.menu-toggle::before { font-size: ' . esc_attr( $hamburger_font ) . 'rem; line-height: ' . absint( $hamburger_height ) . 'px; }';
         }
     }
-    
+
+    // Mobile close (X) button colour is applied via the --mec-mobile-close-color
+    // CSS variable in mec_theme_get_root_variables_css(), not here.
+
     $css .= '}'; // close @media (max-width: 768px)
     
     // Hide description on tablet/mobile
@@ -413,6 +520,9 @@ function mec_theme_get_customizer_css() {
     
     // Submenu font sizes (desktop, tablet, mobile)
     $css .= mec_theme_get_submenu_font_sizes_css();
+    
+    // Tablet menu colours (481px - 768px)
+    $css .= mec_theme_get_tablet_menu_colors_css();
     
     // Mobile menu colours and additional overrides
     $css .= mec_theme_get_mobile_menu_colors_css();

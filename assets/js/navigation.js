@@ -4,7 +4,7 @@
  * Includes aria-expanded for submenu parents and focus management.
  *
  * @package MEC_Theme
- * @version 1.7.2
+ * @version 1.7.3
  */
 (function() {
     'use strict';

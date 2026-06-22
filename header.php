@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * The header for our theme
  *
  * @package MEC_Theme
- * @version 1.7.2
+ * @version 1.7.3
  */
 
 ?>

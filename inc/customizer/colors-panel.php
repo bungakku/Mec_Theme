@@ -8,12 +8,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * General Colors, Colors Dropdown, and Mobile Menu Colors sections.
  * Registered via mec_theme_customize_register() in inc/customizer.php.
  *
- * Extracted from inc/customizer.php during the 1.7.2 file-organization
+ * Extracted from inc/customizer.php during the 1.7.3 file-organization
  * pass. No behavior changed -- this is the same code that used to live
  * inline inside mec_theme_customize_register(), now in its own function.
  *
  * @package MEC_Theme
- * @version 1.7.2
+ * @version 1.7.3
  */
 function mec_theme_register_colors_panel( $wp_customize ) {
     
@@ -153,9 +153,108 @@ function mec_theme_register_colors_panel( $wp_customize ) {
         'section'  => 'mec_theme_colors_dropdown_section',
     ) ) );
 
-    // --- Mobile Menu Colors Section ---
+    // --- Tablet Menu Colors Section (481px - 768px) ---
+    $wp_customize->add_section( 'mec_theme_tablet_menu_colors_section', array(
+        'title'       => __( 'Tablet Menu Colors', 'mec_theme' ),
+        'description' => __( 'Applies between 481px and 768px wide screens.', 'mec_theme' ),
+        'panel'       => 'mec_theme_colors_panel',
+        'priority'    => 65,
+    ) );
+
+    // Tablet menu background
+    $wp_customize->add_setting( 'mec_theme_tablet_menu_bg', array(
+        'default'           => '#ffffff',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_tablet_menu_bg', array(
+        'label'    => __( 'Tablet Menu Background', 'mec_theme' ),
+        'section'  => 'mec_theme_tablet_menu_colors_section',
+    ) ) );
+
+    // Tablet menu text color
+    $wp_customize->add_setting( 'mec_theme_tablet_menu_text', array(
+        'default'           => '#3a3a3a',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_tablet_menu_text', array(
+        'label'    => __( 'Tablet Menu Text', 'mec_theme' ),
+        'section'  => 'mec_theme_tablet_menu_colors_section',
+    ) ) );
+
+    // Tablet menu hover background
+    $wp_customize->add_setting( 'mec_theme_tablet_menu_hover_bg', array(
+        'default'           => '#f8f9fa',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_tablet_menu_hover_bg', array(
+        'label'    => __( 'Tablet Menu Hover Background', 'mec_theme' ),
+        'section'  => 'mec_theme_tablet_menu_colors_section',
+    ) ) );
+
+    // Tablet menu hover text color
+    $wp_customize->add_setting( 'mec_theme_tablet_menu_hover_text', array(
+        'default'           => '#0274be',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_tablet_menu_hover_text', array(
+        'label'    => __( 'Tablet Menu Hover Text', 'mec_theme' ),
+        'section'  => 'mec_theme_tablet_menu_colors_section',
+    ) ) );
+
+    // Tablet dropdown/submenu background
+    $wp_customize->add_setting( 'mec_theme_tablet_dropdown_bg', array(
+        'default'           => '#f9f9f9',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_tablet_dropdown_bg', array(
+        'label'    => __( 'Tablet Dropdown Background', 'mec_theme' ),
+        'section'  => 'mec_theme_tablet_menu_colors_section',
+    ) ) );
+
+    // Tablet dropdown/submenu text
+    $wp_customize->add_setting( 'mec_theme_tablet_dropdown_text', array(
+        'default'           => '#3a3a3a',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_tablet_dropdown_text', array(
+        'label'    => __( 'Tablet Dropdown Text', 'mec_theme' ),
+        'section'  => 'mec_theme_tablet_menu_colors_section',
+    ) ) );
+
+    // Tablet dropdown/submenu hover background
+    $wp_customize->add_setting( 'mec_theme_tablet_dropdown_hover_bg', array(
+        'default'           => '#f0f0f0',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_tablet_dropdown_hover_bg', array(
+        'label'    => __( 'Tablet Dropdown Hover Background', 'mec_theme' ),
+        'section'  => 'mec_theme_tablet_menu_colors_section',
+    ) ) );
+
+    // Tablet dropdown/submenu hover text
+    $wp_customize->add_setting( 'mec_theme_tablet_dropdown_hover_text', array(
+        'default'           => '#0274be',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_tablet_dropdown_hover_text', array(
+        'label'    => __( 'Tablet Dropdown Hover Text', 'mec_theme' ),
+        'section'  => 'mec_theme_tablet_menu_colors_section',
+    ) ) );
+
+    // Tablet dropdown/submenu divider color
+    $wp_customize->add_setting( 'mec_theme_tablet_dropdown_border', array(
+        'default'           => '#e0e0e0',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_tablet_dropdown_border', array(
+        'label'    => __( 'Tablet Dropdown Divider Color', 'mec_theme' ),
+        'section'  => 'mec_theme_tablet_menu_colors_section',
+    ) ) );
+
+    // --- Mobile Menu Colors Section (480px and below) ---
     $wp_customize->add_section( 'mec_theme_mobile_menu_colors_section', array(
         'title'       => __( 'Mobile Menu Colors', 'mec_theme' ),
+        'description' => __( 'Applies at 480px wide and below. Also includes the hamburger button and close (X) button, which are shared across tablet and mobile.', 'mec_theme' ),
         'panel'       => 'mec_theme_colors_panel',
         'priority'    => 70,
     ) );
@@ -197,6 +296,56 @@ function mec_theme_register_colors_panel( $wp_customize ) {
     ) );
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_mobile_menu_hover_text', array(
         'label'    => __( 'Mobile Menu Hover Text', 'mec_theme' ),
+        'section'  => 'mec_theme_mobile_menu_colors_section',
+    ) ) );
+
+    // Mobile dropdown/submenu background
+    $wp_customize->add_setting( 'mec_theme_mobile_dropdown_bg', array(
+        'default'           => '#f9f9f9',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_mobile_dropdown_bg', array(
+        'label'    => __( 'Mobile Dropdown Background', 'mec_theme' ),
+        'section'  => 'mec_theme_mobile_menu_colors_section',
+    ) ) );
+
+    // Mobile dropdown/submenu text
+    $wp_customize->add_setting( 'mec_theme_mobile_dropdown_text', array(
+        'default'           => '#3a3a3a',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_mobile_dropdown_text', array(
+        'label'    => __( 'Mobile Dropdown Text', 'mec_theme' ),
+        'section'  => 'mec_theme_mobile_menu_colors_section',
+    ) ) );
+
+    // Mobile dropdown/submenu hover background
+    $wp_customize->add_setting( 'mec_theme_mobile_dropdown_hover_bg', array(
+        'default'           => '#f0f0f0',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_mobile_dropdown_hover_bg', array(
+        'label'    => __( 'Mobile Dropdown Hover Background', 'mec_theme' ),
+        'section'  => 'mec_theme_mobile_menu_colors_section',
+    ) ) );
+
+    // Mobile dropdown/submenu hover text
+    $wp_customize->add_setting( 'mec_theme_mobile_dropdown_hover_text', array(
+        'default'           => '#0274be',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_mobile_dropdown_hover_text', array(
+        'label'    => __( 'Mobile Dropdown Hover Text', 'mec_theme' ),
+        'section'  => 'mec_theme_mobile_menu_colors_section',
+    ) ) );
+
+    // Mobile dropdown/submenu divider color
+    $wp_customize->add_setting( 'mec_theme_mobile_dropdown_border', array(
+        'default'           => '#e0e0e0',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_mobile_dropdown_border', array(
+        'label'    => __( 'Mobile Dropdown Divider Color', 'mec_theme' ),
         'section'  => 'mec_theme_mobile_menu_colors_section',
     ) ) );
 

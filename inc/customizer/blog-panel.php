@@ -8,12 +8,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Blog Layout, Post Elements, and Single Post sections.
  * Registered via mec_theme_customize_register() in inc/customizer.php.
  *
- * Extracted from inc/customizer.php during the 1.7.2 file-organization
+ * Extracted from inc/customizer.php during the 1.7.3 file-organization
  * pass. No behavior changed -- this is the same code that used to live
  * inline inside mec_theme_customize_register(), now in its own function.
  *
  * @package MEC_Theme
- * @version 1.7.2
+ * @version 1.7.3
  */
 function mec_theme_register_blog_panel( $wp_customize ) {
     
