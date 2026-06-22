@@ -7,16 +7,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * in this theme. Kept in one file so it's easy to audit: every select/radio
  * control's sanitize_callback should resolve to a function defined here.
  *
- * Extracted from functions.php and inc/customizer.php during the 1.7.1
- * file-organization pass. No behavior changed.
- *
- * Note: mec_theme_validate_hex_color() is not currently called anywhere in
- * the theme (mec_theme_get_color_var() in inc/customizer-css.php does the
- * equivalent job via sanitize_hex_color()). Left in place since this pass
- * only reorganizes files and does not remove functionality.
+ * Extracted from functions.php and inc/customizer.php during the 1.7.2
+ * file-organization pass.
  *
  * @package MEC_Theme
- * @version 1.7.1
+ * @version 1.7.2
  */
 
 /**
@@ -25,16 +20,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 function mec_theme_sanitize_text_align( $input ) {
     $valid = array( 'left', 'center', 'right' );
     return in_array( $input, $valid, true ) ? $input : 'left';
-}
-
-/**
- * Validate hex color
- */
-function mec_theme_validate_hex_color( $color, $default = '' ) {
-    if ( preg_match( '/^#[a-f0-9]{6}$/i', $color ) ) {
-        return $color;
-    }
-    return $default;
 }
 
 /**

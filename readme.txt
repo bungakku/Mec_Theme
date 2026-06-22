@@ -3,7 +3,7 @@ Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.1
+Stable tag: 1.7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.2 =
+* Removed: `mec_theme_validate_hex_color()` — dead code, never called anywhere in the theme (`mec_theme_get_color_var()` already does the equivalent job via `sanitize_hex_color()`).
 
 = 1.7.1 =
 * Improved: Reorganized theme files for maintainability. functions.php and inc/customizer.php were each doing several unrelated jobs in one large file; split into focused files with no change in behavior:
