@@ -4,7 +4,7 @@
  * and live updates for tagline alignment.
  *
  * @package MEC_Theme
- * @version 1.7.0
+ * @version 1.7.1
  */
 (function($, api) {
     'use strict';

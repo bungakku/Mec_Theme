@@ -1,9 +1,9 @@
 === MEC Theme ===
-Author: Biswajit
+Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.0
+Stable tag: 1.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,7 +59,13 @@ Yes, the theme includes aria-expanded states for mobile menu and submenu toggles
 
 == Changelog ==
 
-= 1.7.0 =
+= 1.7.1 =
+* Improved: Reorganized theme files for maintainability. functions.php and inc/customizer.php were each doing several unrelated jobs in one large file; split into focused files with no change in behavior:
+  - inc/class-recent-posts-widget.php — the Recent Posts widget class.
+  - inc/customizer-css.php — all Customizer-driven CSS generation + caching.
+  - inc/customizer-sanitizers.php — every Customizer sanitize_callback/validator in one place, for easy auditing.
+  - inc/customizer/layout-panel.php, typography-panel.php, colors-panel.php, blog-panel.php, contact-social-panel.php — one file per Customizer panel.
+  - inc/customizer.php is now a short file that requires the panel files and registers them; functions.php is now limited to theme setup, widget/asset registration, and a handful of small template hooks.
 * Fixed: Tagline Alignment setting had `postMessage` transport but no matching live-preview JS, so changing it in the Customizer did nothing until save/reload. Added a live-preview binding that updates the `--mec-tagline-align` CSS variable in real time, with the same left/center/right whitelist used server-side.
 
 = 1.6.9 =
