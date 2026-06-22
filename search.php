@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * The template for displaying search results
  *
  * @package MEC_Theme
- * @version 1.7.3
+ * @version 1.7.4
  */
 
 get_header();

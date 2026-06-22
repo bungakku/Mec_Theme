@@ -3,7 +3,7 @@ Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.3
+Stable tag: 1.7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.4 =
+* Fixed: Tablet/Mobile Dropdown Hover Background defaulted to `#f0f0f0`, which gave the existing hover-text blue (`#0274be`) a 4.34:1 contrast ratio against it — just under the WCAG AA 4.5:1 threshold for normal text. Changed the default to `#f8f9fa` (4.69:1, passing), matching the hover-background default already used for the desktop dropdown and general menu hover elsewhere in the theme. Sites that already saved a custom value for these two settings are unaffected; this only changes the out-of-the-box default.
 
 = 1.7.3 =
 * Added: Separate Tablet Menu Colors (481px-768px) and Mobile Menu Colors (480px and below) sections in Customizer > Colors. Previously a single "Mobile Menu Colors" section covered both ranges together with no way to set them differently, and dropdown/submenu colors weren't customizable at all below desktop width (the submenu background and divider color were hardcoded). Each range now has its own background, text, hover background, hover text for both the top-level menu and its dropdown/submenu, plus a dropdown divider color. The hamburger button and mobile close (X) button remain shared across both ranges, since they're one UI element rather than two.

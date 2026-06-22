@@ -8,12 +8,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * General Colors, Colors Dropdown, and Mobile Menu Colors sections.
  * Registered via mec_theme_customize_register() in inc/customizer.php.
  *
- * Extracted from inc/customizer.php during the 1.7.3 file-organization
+ * Extracted from inc/customizer.php during the 1.7.4 file-organization
  * pass. No behavior changed -- this is the same code that used to live
  * inline inside mec_theme_customize_register(), now in its own function.
  *
  * @package MEC_Theme
- * @version 1.7.3
+ * @version 1.7.4
  */
 function mec_theme_register_colors_panel( $wp_customize ) {
     
@@ -223,7 +223,7 @@ function mec_theme_register_colors_panel( $wp_customize ) {
 
     // Tablet dropdown/submenu hover background
     $wp_customize->add_setting( 'mec_theme_tablet_dropdown_hover_bg', array(
-        'default'           => '#f0f0f0',
+        'default'           => '#f8f9fa',
         'sanitize_callback' => 'sanitize_hex_color',
     ) );
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_tablet_dropdown_hover_bg', array(
@@ -321,7 +321,7 @@ function mec_theme_register_colors_panel( $wp_customize ) {
 
     // Mobile dropdown/submenu hover background
     $wp_customize->add_setting( 'mec_theme_mobile_dropdown_hover_bg', array(
-        'default'           => '#f0f0f0',
+        'default'           => '#f8f9fa',
         'sanitize_callback' => 'sanitize_hex_color',
     ) );
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_mobile_dropdown_hover_bg', array(

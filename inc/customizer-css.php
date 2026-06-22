@@ -5,14 +5,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Customizer-driven CSS generation and caching.
  *
- * Extracted from functions.php during the 1.7.3 file-organization pass.
+ * Extracted from functions.php during the 1.7.4 file-organization pass.
  * No behavior changed: every function here is identical to its previous
  * version, just grouped together since they form one coherent job
  * (turn theme_mods into the inline <style> block added in functions.php
  * via mec_theme_scripts() -> wp_add_inline_style()).
  *
  * @package MEC_Theme
- * @version 1.7.3
+ * @version 1.7.4
  */
 
 function mec_theme_get_color_var( $mod, $default ) {
@@ -341,7 +341,7 @@ function mec_theme_get_tablet_menu_colors_css() {
         $css .= '.main-navigation ul ul a { color: ' . esc_attr( $dropdown_text ) . '; }';
     }
 
-    $dropdown_hover_bg = get_theme_mod( 'mec_theme_tablet_dropdown_hover_bg', '#f0f0f0' );
+    $dropdown_hover_bg = get_theme_mod( 'mec_theme_tablet_dropdown_hover_bg', '#f8f9fa' );
     $dropdown_hover_text = get_theme_mod( 'mec_theme_tablet_dropdown_hover_text', '#0274be' );
     if ( $dropdown_hover_bg || $dropdown_hover_text ) {
         $css .= '.main-navigation ul ul a:hover {';
@@ -408,7 +408,7 @@ function mec_theme_get_mobile_menu_colors_css() {
         $css .= '.main-navigation ul ul a { color: ' . esc_attr( $mobile_dropdown_text ) . '; }';
     }
 
-    $mobile_dropdown_hover_bg = get_theme_mod( 'mec_theme_mobile_dropdown_hover_bg', '#f0f0f0' );
+    $mobile_dropdown_hover_bg = get_theme_mod( 'mec_theme_mobile_dropdown_hover_bg', '#f8f9fa' );
     $mobile_dropdown_hover_text = get_theme_mod( 'mec_theme_mobile_dropdown_hover_text', '#0274be' );
     if ( $mobile_dropdown_hover_bg || $mobile_dropdown_hover_text ) {
         $css .= '.main-navigation ul ul a:hover {';
