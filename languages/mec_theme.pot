@@ -2,934 +2,1093 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MEC_Theme 1.7.4\n"
+"Project-Id-Version: MEC_Theme 1.7.6\n"
 "Report-Msgid-Bugs-To: https://biswazit.in/mectheme\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-13 12:00+0000\n"
+"POT-Creation-Date: 2026-06-22 12:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: manually generated\n"
 "X-Domain: mec_theme\n"
 
-#: 404.php:16
+#: 404.php:18
 msgid "Oops! That page can’t be found."
 msgstr ""
 
-#: 404.php:20
+#: 404.php:22
 msgid "It looks like nothing was found at this location. Maybe try a search?"
 msgstr ""
 
-#: archive.php:23
+#: archive.php:47
+#: index.php:47
+#: search.php:51
 msgid "Previous"
 msgstr ""
 
-#: archive.php:24 index.php:36 search.php:36
+#: archive.php:48
+#: index.php:48
+#: search.php:52
 msgid "Next"
 msgstr ""
 
-#: author-bio.php:12
-msgid "About the Author"
-msgstr ""
-
-#: content-blog.php:67 content.php:31
-msgid "by"
-msgstr ""
-
-#: content-blog.php:74
-msgid "0 Comments"
-msgstr ""
-
-#: content-blog.php:75
-msgid "1 Comment"
-msgstr ""
-
-#: content-blog.php:76
-msgid "%s Comments"
-msgstr ""
-
-#: content-blog.php:87
-msgid "in"
-msgstr ""
-
-#: content-blog.php:118 content.php:50
-msgid "Continue reading %s <span class=\"meta-nav\">&rarr;</span>"
-msgstr ""
-
-#: content-blog.php:124 content-page.php:21 content.php:56
-msgid "Pages:"
-msgstr ""
-
-#: content-blog.php:134 content.php:61
-msgid "Read More"
-msgstr ""
-
-#: content-none.php:17
-msgid "Nothing Found"
-msgstr ""
-
-#: content-none.php:24
-msgid ""
-"Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
-msgstr ""
-
-#: content-none.php:30
-msgid ""
-"Sorry, but nothing matched your search terms. Please try again with some "
-"different keywords."
-msgstr ""
-
-#: content-none.php:33
-msgid ""
-"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
-"searching can help."
-msgstr ""
-
-#: footer.php:82
+#: footer.php:81
+#: functions.php:122
 msgid "Footer Menu"
 msgstr ""
 
-#: functions.php:58
-msgid "Primary Menu"
+#: functions.php:65
+msgid "Primary"
 msgstr ""
 
-#: functions.php:59
-msgid "Footer Menu"
+#: functions.php:70
+msgid "Secondary"
 msgstr ""
 
-#: functions.php:60
-msgid "Social Menu"
+#: functions.php:75
+msgid "Dark Grey"
 msgstr ""
 
-#: functions.php:89
-msgid "Sidebar"
+#: functions.php:80
+msgid "Light Grey"
 msgstr ""
 
-#: functions.php:90
-msgid "Main sidebar that appears on posts and pages."
+#: functions.php:85
+msgid "White"
+msgstr ""
+
+#: functions.php:94
+msgid "Small"
 msgstr ""
 
 #: functions.php:99
-msgid "Footer Widget Area %d"
+msgid "Normal"
 msgstr ""
 
-#: functions.php:100
-msgid "Add widgets for footer column %d."
-msgstr ""
-
-#: functions.php:110
-msgid "Header Widget Area"
-msgstr ""
-
-#: functions.php:111
-msgid "Add widgets to header."
-msgstr ""
-
-#: functions.php:149
-msgid "Menu"
-msgstr ""
-
-#: functions.php:150
-msgid "Close"
-msgstr ""
-
-#: functions.php:260
-msgid ""
-"Your WordPress version is outdated. MEC_Theme requires WordPress 5.0 or "
-"newer for full functionality."
-msgstr ""
-
-#: header.php:18
-msgid "Skip to content"
-msgstr ""
-
-#: header.php:98
-msgid "Menu"
-msgstr ""
-
-#: header.php (mobile close button)
-msgid "Close menu"
-msgstr ""
-
-#: inc/customizer.php:14
-msgid "Layout Settings"
-msgstr ""
-
-#: inc/customizer.php:23
-msgid "Sidebar"
-msgstr ""
-
-#: inc/customizer.php:27 inc/customizer.php:396
-msgid "Left Sidebar"
-msgstr ""
-
-#: inc/customizer.php:28 inc/customizer.php:397
-msgid "Right Sidebar"
-msgstr ""
-
-#: inc/customizer.php:37
-msgid "Main Content Width (%)"
-msgstr ""
-
-#: inc/customizer.php:38
-msgid ""
-"Recommended: 70% (with sidebar width 25% leaves 5% for gap)."
-msgstr ""
-
-#: inc/customizer.php:49
-msgid "Sidebar Width (%)"
-msgstr ""
-
-#: inc/customizer.php:50
-msgid ""
-"Recommended: 25% (together with content width should not exceed 100%)."
-msgstr ""
-
-#: inc/customizer.php:62
-msgid "Container"
-msgstr ""
-
-#: inc/customizer.php:70
-msgid "Container Width (px)"
-msgstr ""
-
-#: inc/customizer.php:82
-msgid "Header"
-msgstr ""
-
-#: inc/customizer.php:90
-msgid "Logo Position (Desktop)"
-msgstr ""
-
-#: inc/customizer.php:94 inc/customizer.php:104 inc/customizer.php:114
-msgid "Left of Site Title"
-msgstr ""
-
-#: inc/customizer.php:95 inc/customizer.php:105 inc/customizer.php:115
-msgid "Right of Site Title"
-msgstr ""
-
-#: inc/customizer.php:96 inc/customizer.php:106 inc/customizer.php:116
-msgid "Above Site Title"
-msgstr ""
-
-#: inc/customizer.php:97 inc/customizer.php:107 inc/customizer.php:117
-msgid "Below Site Title"
-msgstr ""
-
-#: inc/customizer.php:103
-msgid "Logo Position (Tablet)"
-msgstr ""
-
-#: inc/customizer.php:113
-msgid "Logo Position (Mobile)"
-msgstr ""
-
-#: inc/customizer.php:123
-msgid "Title/Description Alignment (Desktop)"
-msgstr ""
-
-#: inc/customizer.php:127 inc/customizer.php:137 inc/customizer.php:147
-msgid "Left"
-msgstr ""
-
-#: inc/customizer.php:128 inc/customizer.php:138 inc/customizer.php:148
-msgid "Center"
-msgstr ""
-
-#: inc/customizer.php:129 inc/customizer.php:139 inc/customizer.php:149
-msgid "Right"
-msgstr ""
-
-#: inc/customizer.php:136
-msgid "Title/Description Alignment (Tablet)"
-msgstr ""
-
-#: inc/customizer.php:146
-msgid "Title/Description Alignment (Mobile)"
-msgstr ""
-
-#: inc/customizer.php:155
-msgid "Tagline Alignment"
-msgstr ""
-
-#: inc/customizer.php:164
-msgid "Hide Site Description on Tablet"
-msgstr ""
-
-#: inc/customizer.php:172
-msgid "Hide Site Description on Mobile"
-msgstr ""
-
-#: inc/customizer.php:180
-msgid "Logo Max Width - Desktop (>768px)"
-msgstr ""
-
-#: inc/customizer.php:192
-msgid "Logo Max Width - Tablet (481-768px)"
-msgstr ""
-
-#: inc/customizer.php:204
-msgid "Logo Max Width - Mobile (≤480px)"
-msgstr ""
-
-#: inc/customizer.php:216
-msgid "Enable Sticky Header"
-msgstr ""
-
-#: inc/customizer.php:225
-msgid "Header Padding (px)"
-msgstr ""
-
-#: inc/customizer.php:237
-msgid "Show Site Description (Global)"
-msgstr ""
-
-#: inc/customizer.php:246
-msgid "Custom Site Description"
-msgstr ""
-
-#: inc/customizer.php:247
-msgid "You can use HTML tags like &lt;br&gt; for line breaks."
-msgstr ""
-
-#: inc/customizer.php:256
-msgid "Menu Settings"
-msgstr ""
-
-#: inc/customizer.php:264
-msgid "Menu Item Padding (px)"
-msgstr ""
-
-#: inc/customizer.php:276
-msgid "Menu Item Spacing (px)"
-msgstr ""
-
-#: inc/customizer.php:288
-msgid "Main Menu Hover Color"
-msgstr ""
-
-#: inc/customizer.php:297
-msgid "Show Menu Descriptions"
-msgstr ""
-
-#: inc/customizer.php:306
-msgid "Footer Settings"
-msgstr ""
-
-#: inc/customizer.php:314
-msgid "Footer Widget Columns"
-msgstr ""
-
-#: inc/customizer.php:318 inc/customizer.php:696
-msgid "1 Column"
-msgstr ""
-
-#: inc/customizer.php:319 inc/customizer.php:695
-msgid "2 Columns"
-msgstr ""
-
-#: inc/customizer.php:320 inc/customizer.php:696
-msgid "3 Columns"
-msgstr ""
-
-#: inc/customizer.php:321 inc/customizer.php:697
-msgid "4 Columns"
-msgstr ""
-
-#: inc/customizer.php:330
-msgid "Footer Widgets Layout"
-msgstr ""
-
-#: inc/customizer.php:334
-msgid "Horizontal (Row)"
-msgstr ""
-
-#: inc/customizer.php:335
-msgid "Vertical (Stack)"
-msgstr ""
-
-#: inc/customizer.php:344
-msgid "Footer Background"
-msgstr ""
-
-#: inc/customizer.php:353
-msgid "Footer Padding (px)"
-msgstr ""
-
-#: inc/customizer.php:365
-msgid "Copyright Text"
-msgstr ""
-
-#: inc/customizer.php:374
-msgid "Copyright Text Color"
-msgstr ""
-
-#: inc/customizer.php:383
-msgid "Show Footer Menu"
-msgstr ""
-
-#: inc/customizer.php:392
-msgid "Typography"
-msgstr ""
-
-#: inc/customizer.php:393
-msgid ""
-"Customize fonts for different devices. Desktop > 768px, Tablet: 481-768px, "
-"Mobile: ≤ 480px"
-msgstr ""
-
-#: inc/customizer.php:402
-msgid "Font Family"
-msgstr ""
-
-#: inc/customizer.php:410
-msgid "Body Font Family"
-msgstr ""
-
-#: inc/customizer.php:414 inc/customizer.php:439
-msgid "System Default"
-msgstr ""
-
-#: inc/customizer.php:415 inc/customizer.php:440
-msgid "Arial"
-msgstr ""
-
-#: inc/customizer.php:416 inc/customizer.php:441
-msgid "Helvetica"
-msgstr ""
-
-#: inc/customizer.php:417 inc/customizer.php:442
-msgid "Verdana"
-msgstr ""
-
-#: inc/customizer.php:418 inc/customizer.php:443
-msgid "Tahoma"
-msgstr ""
-
-#: inc/customizer.php:419 inc/customizer.php:444
-msgid "Trebuchet MS"
-msgstr ""
-
-#: inc/customizer.php:420 inc/customizer.php:445
-msgid "Georgia"
-msgstr ""
-
-#: inc/customizer.php:421 inc/customizer.php:446
-msgid "Times New Roman"
-msgstr ""
-
-#: inc/customizer.php:422 inc/customizer.php:447
-msgid "Palatino"
-msgstr ""
-
-#: inc/customizer.php:423 inc/customizer.php:448
-msgid "Courier New"
-msgstr ""
-
-#: inc/customizer.php:424
-msgid "Comic Sans"
-msgstr ""
-
-#: inc/customizer.php:434
-msgid "Heading Font Family"
-msgstr ""
-
-#: inc/customizer.php:438
-msgid "Same as Body"
-msgstr ""
-
-#: inc/customizer.php:449
-msgid "Impact"
-msgstr ""
-
-#: inc/customizer.php:458
-msgid "Desktop Sizes (>768px)"
-msgstr ""
-
-#: inc/customizer.php:468
-msgid "Body Font Size (px)"
-msgstr ""
-
-#: inc/customizer.php:480
-msgid "Site Title Font Size (rem)"
-msgstr ""
-
-#: inc/customizer.php:492
-msgid "Tagline Font Size (rem)"
-msgstr ""
-
-#: inc/customizer.php:504
-msgid "Site Description Font Size (rem)"
-msgstr ""
-
-#: inc/customizer.php:516
-msgid "Heading (H1) Font Size (rem)"
-msgstr ""
-
-#: inc/customizer.php:528
-msgid "Menu Font Size (rem)"
-msgstr ""
-
-#: inc/customizer.php:540
-msgid "Tablet Sizes (481-768px)"
-msgstr ""
-
-#: inc/customizer.php:550
-msgid "Body Font Size (px)"
-msgstr ""
-
-#: inc/customizer.php:562
-msgid "Site Title Font Size (rem)"
-msgstr ""
-
-#: inc/customizer.php:574
-msgid "Tagline Font Size (rem)"
-msgstr ""
-
-#: inc/customizer.php:586
-msgid "Site Description Font Size (rem)"
-msgstr ""
-
-#: inc/customizer.php:598
-msgid "Heading (H1) Font Size (rem)"
-msgstr ""
-
-#: inc/customizer.php:610
-msgid "Menu Font Size (rem)"
-msgstr ""
-
-#: inc/customizer.php:622
-msgid "Mobile Sizes (≤480px)"
-msgstr ""
-
-#: inc/customizer.php:632
-msgid "Body Font Size (px)"
-msgstr ""
-
-#: inc/customizer.php:644
-msgid "Site Title Font Size (rem)"
-msgstr ""
-
-#: inc/customizer.php:656
-msgid "Tagline Font Size (rem)"
-msgstr ""
-
-#: inc/customizer.php:668
-msgid "Site Description Font Size (rem)"
-msgstr ""
-
-#: inc/customizer.php:680
-msgid "Heading (H1) Font Size (rem)"
-msgstr ""
-
-#: inc/customizer.php:692
-msgid "Menu Font Size (rem)"
-msgstr ""
-
-#: inc/customizer.php:704
-msgid "Body Line Height (all devices)"
-msgstr ""
-
-#: inc/customizer.php:717
-msgid "Colors"
-msgstr ""
-
-#: inc/customizer.php:725
-msgid "General Colors"
-msgstr ""
-
-#: inc/customizer.php:733
-msgid "Header Background"
-msgstr ""
-
-#: inc/customizer.php:742
-msgid "Site Title Color"
-msgstr ""
-
-#: inc/customizer.php:751
-msgid "Site Description Color"
-msgstr ""
-
-#: inc/customizer.php:760
-msgid "Tagline Color"
-msgstr ""
-
-#: inc/customizer.php:769
-msgid "Primary Menu Color"
-msgstr ""
-
-#: inc/customizer.php:778
-msgid "Heading Color (H1, H2, etc.)"
-msgstr ""
-
-#: inc/customizer.php:787
-msgid "Body Text Color"
-msgstr ""
-
-#: inc/customizer.php:796
-msgid "Link Color"
-msgstr ""
-
-#: inc/customizer.php:805
-msgid "Link Hover Color"
-msgstr ""
-
-#: inc/customizer.php:814
-msgid "Dropdown Menu Colors"
-msgstr ""
-
-#: inc/customizer.php:822
-msgid "Dropdown Menu Background"
-msgstr ""
-
-#: inc/customizer.php:831
-msgid "Dropdown Menu Text Color"
-msgstr ""
-
-#: inc/customizer.php:840
-msgid "Dropdown Menu Hover Background"
-msgstr ""
-
-#: inc/customizer.php:849
-msgid "Dropdown Menu Hover Text Color"
-msgstr ""
-
-#: inc/customizer.php:858
-msgid "Blog Settings"
-msgstr ""
-
-#: inc/customizer.php:866
-msgid "Blog Layout"
-msgstr ""
-
-#: inc/customizer.php:870
-msgid "Blog Layout Style"
-msgstr ""
-
-#: inc/customizer.php:873
-msgid "Classic (Full Width)"
-msgstr ""
-
-#: inc/customizer.php:874
-msgid "Grid Layout"
-msgstr ""
-
-#: inc/customizer.php:875
-msgid "List Layout"
-msgstr ""
-
-#: inc/customizer.php:884
-msgid "Grid Columns"
-msgstr ""
-
-#: inc/customizer.php:888 inc/customizer.php:889 inc/customizer.php:890
-msgid "2 Columns"
-msgstr ""
-
-#: inc/customizer.php:891 inc/customizer.php:892
-msgid "3 Columns"
-msgstr ""
-
-#: inc/customizer.php:893 inc/customizer.php:894
-msgid "4 Columns"
-msgstr ""
-
-#: inc/customizer.php:902
-msgid "Post Elements"
-msgstr ""
-
-#: inc/customizer.php:910
-msgid "Featured Image"
-msgstr ""
-
-#: inc/customizer.php:914
-msgid "Show"
-msgstr ""
-
-#: inc/customizer.php:915
-msgid "Hide"
-msgstr ""
-
-#: inc/customizer.php:924
-msgid "Featured Image Size"
-msgstr ""
-
-#: inc/customizer.php:929
-msgid "Thumbnail"
-msgstr ""
-
-#: inc/customizer.php:930
-msgid "Medium"
-msgstr ""
-
-#: inc/customizer.php:931
+#: functions.php:104
+#: inc/customizer/blog-panel.php:93
 msgid "Large"
 msgstr ""
 
-#: inc/customizer.php:932
-msgid "Full Size"
+#: functions.php:109
+msgid "Huge"
 msgstr ""
 
-#: inc/customizer.php:942
-msgid "Post Meta"
+#: functions.php:121
+msgid "Primary Menu"
 msgstr ""
 
-#: inc/customizer.php:946
-msgid "Show All Meta"
+#: functions.php:142
+#: inc/customizer/layout-panel.php:28
+msgid "Sidebar"
 msgstr ""
 
-#: inc/customizer.php:947
-msgid "Hide All Meta"
+#: functions.php:144
+msgid "Main sidebar that appears on posts and pages."
 msgstr ""
 
-#: inc/customizer.php:948
-msgid "Custom Selection"
+#: functions.php:153
+msgid "Footer Widget Area %d"
 msgstr ""
 
-#: inc/customizer.php:957
-msgid "Show Post Date"
+#: functions.php:155
+msgid "Add widgets for footer column %d."
 msgstr ""
 
-#: inc/customizer.php:968
-msgid "Show Post Author"
+#: functions.php:164
+msgid "Header Widget Area"
 msgstr ""
 
-#: inc/customizer.php:979
-msgid "Show Comment Count"
+#: functions.php:166
+msgid "Add widgets to header."
 msgstr ""
 
-#: inc/customizer.php:990
-msgid "Show Post Categories"
+#: functions.php:193
+#: header.php:161
+msgid "Menu"
 msgstr ""
 
-#: inc/customizer.php:1001
-msgid "Content Display"
+#: functions.php:194
+msgid "Close"
 msgstr ""
 
-#: inc/customizer.php:1005
-msgid "Excerpt"
+#: functions.php:312
+msgid "Your WordPress version is outdated. MEC_Theme requires WordPress 5.0 or newer for full functionality."
 msgstr ""
 
-#: inc/customizer.php:1006
-msgid "Full Content"
+#: header.php:31
+msgid "Skip to content"
 msgstr ""
 
-#: inc/customizer.php:1007
-msgid "No Content (Title Only)"
+#: header.php:109
+msgid "Visit our Facebook page"
 msgstr ""
 
-#: inc/customizer.php:1016
-msgid "Excerpt Length (words)"
+#: header.php:119
+msgid "Visit our Twitter page"
 msgstr ""
 
-#: inc/customizer.php:1028
-msgid "Show Read More Button"
+#: header.php:129
+msgid "Visit our Instagram page"
 msgstr ""
 
-#: inc/customizer.php:1037
-msgid "Read More Button Text"
+#: header.php:139
+msgid "Visit our LinkedIn page"
 msgstr ""
 
-#: inc/customizer.php:1045
-msgid "Single Post"
+#: header.php:149
+msgid "Visit our YouTube channel"
 msgstr ""
 
-#: inc/customizer.php:1053
-msgid "Show Author Bio on Single Posts"
+#: header.php:165
+#: header.php:166
+msgid "Close menu"
 msgstr ""
 
-#: inc/customizer.php:1062
-msgid "Show Related Posts"
-msgstr ""
-
-#: inc/customizer.php:1071
-msgid "Number of Related Posts"
-msgstr ""
-
-#: index.php:35 search.php:35
-msgid "Previous"
-msgstr ""
-
-#: related-posts.php:30
-msgid "Related Posts"
-msgstr ""
-
-#: searchform.php:5
-msgid "Search for:"
-msgstr ""
-
-#: searchform.php:6
-msgid "Search …"
-msgstr ""
-
-#: single.php:20
-msgid "Previous Post"
-msgstr ""
-
-#: single.php:21
-msgid "Next Post"
-msgstr ""
-
-#: template-parts/content-blog.php (accessible comment texts)
-msgid "0 comments"
-msgstr ""
-
-msgid "1 comment"
-msgstr ""
-
-msgid "%s comments"
-msgstr ""
-
-#: functions.php (custom recent posts widget)
+#: inc/class-recent-posts-widget.php:21
 msgid "MEC Recent Posts (with excerpt)"
 msgstr ""
 
+#: inc/class-recent-posts-widget.php:23
 msgid "Display recent posts with thumbnail, excerpt and read more link."
 msgstr ""
 
-msgid "Title:"
+#: inc/class-recent-posts-widget.php:74
+#: template-parts/content.php:79
+msgid "Read More"
 msgstr ""
 
-msgid "Number of posts to show:"
-msgstr ""
-
-msgid "Show featured image"
-msgstr ""
-
-msgid "Show excerpt"
-msgstr ""
-
-msgid "Show \"Read More\" link"
-msgstr ""
-
-msgid "Excerpt length (words):"
-msgstr ""
-
+#: inc/class-recent-posts-widget.php:83
 msgid "No posts found."
 msgstr ""
 
-#: inc/customizer.php (contact & social section)
-msgid "Contact & Social (Header)"
+#: inc/class-recent-posts-widget.php:90
+msgid "Recent Posts"
 msgstr ""
 
-msgid "Phone Number 1"
+#: inc/class-recent-posts-widget.php:98
+msgid "Title:"
 msgstr ""
 
-msgid "Phone Number 2"
+#: inc/class-recent-posts-widget.php:102
+msgid "Number of posts to show:"
 msgstr ""
 
-msgid "Email Address"
+#: inc/class-recent-posts-widget.php:107
+msgid "Show featured image"
 msgstr ""
 
-msgid "Facebook URL"
+#: inc/class-recent-posts-widget.php:111
+msgid "Show excerpt"
 msgstr ""
 
-msgid "Twitter/X URL"
+#: inc/class-recent-posts-widget.php:115
+msgid "Show \"Read More\" link"
 msgstr ""
 
-msgid "Instagram URL"
+#: inc/class-recent-posts-widget.php:118
+msgid "Excerpt length (words):"
 msgstr ""
 
-msgid "LinkedIn URL (optional)"
+#: inc/customizer-sanitizers.php:152
+msgid "Content width and sidebar width must not exceed 100%. Please adjust your values."
 msgstr ""
 
-msgid "YouTube URL (optional)"
+#: inc/customizer/blog-panel.php:22
+msgid "Blog Settings"
 msgstr ""
 
-msgid "Phone Numbers Color"
+#: inc/customizer/blog-panel.php:28
+msgid "Blog Layout"
 msgstr ""
 
-msgid "Email Address Color"
+#: inc/customizer/blog-panel.php:37
+msgid "Blog Layout Style"
 msgstr ""
 
-msgid "Hide contact column on tablet (481px - 768px)"
+#: inc/customizer/blog-panel.php:41
+msgid "Classic (Full Width)"
 msgstr ""
 
-msgid "Hide contact column on mobile (≤480px)"
+#: inc/customizer/blog-panel.php:42
+msgid "Grid Layout"
 msgstr ""
 
-#: inc/customizer.php (submenu & hamburger section)
-msgid "Submenu & Hamburger"
+#: inc/customizer/blog-panel.php:43
+msgid "List Layout"
 msgstr ""
 
-msgid ""
-"Control submenu font sizes (separate from top‑level menu) and hamburger "
-"button size on mobile/tablet."
+#: inc/customizer/blog-panel.php:52
+msgid "Grid Columns"
 msgstr ""
 
-msgid "Submenu Font Size - Desktop (rem)"
+#: inc/customizer/blog-panel.php:56
+#: inc/customizer/layout-panel.php:375
+msgid "2 Columns"
 msgstr ""
 
-msgid "Submenu Font Size - Tablet (rem)"
+#: inc/customizer/blog-panel.php:57
+#: inc/customizer/layout-panel.php:376
+msgid "3 Columns"
 msgstr ""
 
-msgid "Submenu Font Size - Mobile (rem)"
+#: inc/customizer/blog-panel.php:58
+#: inc/customizer/layout-panel.php:377
+msgid "4 Columns"
 msgstr ""
 
-msgid "Hamburger Button Width (px) – Mobile/Tablet"
+#: inc/customizer/blog-panel.php:64
+msgid "Post Elements"
 msgstr ""
 
-msgid "Hamburger Button Height (px) – Mobile/Tablet"
+#: inc/customizer/blog-panel.php:73
+msgid "Featured Image"
 msgstr ""
 
-msgid "Hamburger Icon Font Size (rem) – Mobile/Tablet"
+#: inc/customizer/blog-panel.php:77
+msgid "Show"
 msgstr ""
 
-#: inc/customizer.php (mobile menu colors)
+#: inc/customizer/blog-panel.php:78
+msgid "Hide"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:87
+msgid "Featured Image Size"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:91
+msgid "Thumbnail"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:92
+msgid "Medium"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:94
+msgid "Full Size"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:103
+msgid "Post Meta"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:107
+msgid "Show All Meta"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:108
+msgid "Hide All Meta"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:109
+msgid "Custom Selection"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:118
+msgid "Show Post Date"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:128
+msgid "Show Post Author"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:138
+msgid "Show Comment Count"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:148
+msgid "Show Post Categories"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:158
+msgid "Content Display"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:162
+msgid "Excerpt"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:163
+msgid "Full Content"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:164
+msgid "No Content (Title Only)"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:173
+msgid "Excerpt Length (words)"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:184
+msgid "Show Read More Button"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:194
+msgid "Read More Button Text"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:201
+msgid "Single Post"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:210
+msgid "Show Author Bio on Single Posts"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:220
+msgid "Show Related Posts"
+msgstr ""
+
+#: inc/customizer/blog-panel.php:230
+msgid "Number of Related Posts"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:22
+msgid "Colors"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:28
+msgid "General Colors"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:37
+msgid "Header Background"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:46
+msgid "Site Title Color"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:55
+msgid "Site Description Color"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:65
+msgid "Tagline Color"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:74
+msgid "Primary Menu Color"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:83
+msgid "Heading Color (H1, H2, etc.)"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:92
+msgid "Body Text Color"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:101
+msgid "Link Color"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:110
+msgid "Link Hover Color"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:116
+msgid "Dropdown Menu Colors"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:125
+msgid "Dropdown Menu Background"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:134
+msgid "Dropdown Menu Text Color"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:143
+msgid "Dropdown Menu Hover Background"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:152
+msgid "Dropdown Menu Hover Text Color"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:158
+msgid "Tablet Menu Colors"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:159
+msgid "Applies between 481px and 768px wide screens."
+msgstr ""
+
+#: inc/customizer/colors-panel.php:170
+msgid "Tablet Menu Background"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:180
+msgid "Tablet Menu Text"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:190
+msgid "Tablet Menu Hover Background"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:200
+msgid "Tablet Menu Hover Text"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:210
+msgid "Tablet Dropdown Background"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:220
+msgid "Tablet Dropdown Text"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:230
+msgid "Tablet Dropdown Hover Background"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:240
+msgid "Tablet Dropdown Hover Text"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:250
+msgid "Tablet Dropdown Divider Color"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:256
 msgid "Mobile Menu Colors"
 msgstr ""
 
+#: inc/customizer/colors-panel.php:257
+msgid "Applies at 480px wide and below. Also includes the hamburger button and close (X) button, which are shared across tablet and mobile."
+msgstr ""
+
+#: inc/customizer/colors-panel.php:268
 msgid "Mobile Menu Background"
 msgstr ""
 
+#: inc/customizer/colors-panel.php:278
 msgid "Mobile Menu Text"
 msgstr ""
 
+#: inc/customizer/colors-panel.php:288
 msgid "Mobile Menu Hover Background"
 msgstr ""
 
+#: inc/customizer/colors-panel.php:298
 msgid "Mobile Menu Hover Text"
 msgstr ""
 
+#: inc/customizer/colors-panel.php:308
+msgid "Mobile Dropdown Background"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:318
+msgid "Mobile Dropdown Text"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:328
+msgid "Mobile Dropdown Hover Background"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:338
+msgid "Mobile Dropdown Hover Text"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:348
+msgid "Mobile Dropdown Divider Color"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:358
 msgid "Hamburger Button Background"
 msgstr ""
 
-msgid "Hamburger Icon Color"
-msgstr ""
-
-msgid "Hamburger Button Hover Background"
-msgstr ""
-
-msgid "Hamburger Icon Hover Color"
-msgstr ""
-
-msgid "Mobile Close Button (X) Color"
-msgstr ""
-
-msgid "Mobile Close Button Hover Color"
-msgstr ""
-
+#: inc/customizer/colors-panel.php:361
+#: inc/customizer/colors-panel.php:381
 msgid "Use \"transparent\" or a hex color like #ff0000"
 msgstr ""
 
-#: inc/customizer.php (social icon customizer)
+#: inc/customizer/colors-panel.php:369
+msgid "Hamburger Icon Color"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:378
+msgid "Hamburger Button Hover Background"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:389
+msgid "Hamburger Icon Hover Color"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:399
+msgid "Mobile Close Button (X) Color"
+msgstr ""
+
+#: inc/customizer/colors-panel.php:408
+msgid "Mobile Close Button Hover Color"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:23
+msgid "Contact & Social (Header)"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:34
+msgid "Phone Number 1"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:46
+msgid "Phone Number 2"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:58
+msgid "Email Address"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:70
+msgid "Facebook URL"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:82
+msgid "Twitter/X URL"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:94
+msgid "Instagram URL"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:106
+msgid "LinkedIn URL (optional)"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:118
+msgid "YouTube URL (optional)"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:130
+msgid "Phone Numbers Color"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:140
+msgid "Email Address Color"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:151
+msgid "Hide contact column on tablet (481px - 768px)"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:162
+msgid "Hide contact column on mobile (=480px)"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:284
 msgid "Social Icon Size (px)"
 msgstr ""
 
+#: inc/customizer/contact-social-panel.php:297
 msgid "Social Icon SVG Size (px)"
 msgstr ""
 
+#: inc/customizer/contact-social-panel.php:310
 msgid "Social Icon Background Color"
 msgstr ""
 
+#: inc/customizer/contact-social-panel.php:321
 msgid "Social Icon Color"
 msgstr ""
 
+#: inc/customizer/contact-social-panel.php:332
 msgid "Social Icon Hover Background Color"
 msgstr ""
 
+#: inc/customizer/contact-social-panel.php:343
 msgid "Social Icon Hover Color"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:22
+msgid "Layout Settings"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:37
+msgid "Sidebar Position"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:41
+msgid "Left Sidebar"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:42
+msgid "Right Sidebar"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:51
+msgid "Main Content Width (%)"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:52
+msgid "Recommended: 70% (with sidebar width 25% leaves 5% for gap)."
+msgstr ""
+
+#: inc/customizer/layout-panel.php:63
+msgid "Sidebar Width (%)"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:64
+msgid "Recommended: 25% (together with content width should not exceed 100%)."
+msgstr ""
+
+#: inc/customizer/layout-panel.php:76
+msgid "Sidebar Background Color"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:82
+msgid "Container"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:91
+msgid "Container Width (px)"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:99
+msgid "Header"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:108
+msgid "Logo Position (Desktop)"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:112
+#: inc/customizer/layout-panel.php:128
+#: inc/customizer/layout-panel.php:144
+msgid "Left of Site Title"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:113
+#: inc/customizer/layout-panel.php:129
+#: inc/customizer/layout-panel.php:145
+msgid "Right of Site Title"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:114
+#: inc/customizer/layout-panel.php:130
+#: inc/customizer/layout-panel.php:146
+msgid "Above Site Title"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:115
+#: inc/customizer/layout-panel.php:131
+#: inc/customizer/layout-panel.php:147
+msgid "Below Site Title"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:124
+msgid "Logo Position (Tablet)"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:140
+msgid "Logo Position (Mobile)"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:156
+msgid "Title/Description Alignment (Desktop)"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:160
+#: inc/customizer/layout-panel.php:175
+#: inc/customizer/layout-panel.php:190
+#: inc/customizer/layout-panel.php:207
+msgid "Left"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:161
+#: inc/customizer/layout-panel.php:176
+#: inc/customizer/layout-panel.php:191
+#: inc/customizer/layout-panel.php:208
+msgid "Center"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:162
+#: inc/customizer/layout-panel.php:177
+#: inc/customizer/layout-panel.php:192
+#: inc/customizer/layout-panel.php:209
+msgid "Right"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:171
+msgid "Title/Description Alignment (Tablet)"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:186
+msgid "Title/Description Alignment (Mobile)"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:203
+msgid "Tagline Alignment"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:219
+msgid "Hide Site Description on Tablet"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:230
+msgid "Hide Site Description on Mobile"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:240
+msgid "Logo Max Width - Desktop (>768px)"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:251
+msgid "Logo Max Width - Tablet (481-768px)"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:262
+msgid "Logo Max Width - Mobile (≤480px)"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:273
+msgid "Enable Sticky Header"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:283
+msgid "Header Padding (px)"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:294
+msgid "Show Site Description (Global)"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:304
+msgid "Custom Site Description"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:305
+msgid "You can use HTML tags like &lt;br&gt; for line breaks."
+msgstr ""
+
+#: inc/customizer/layout-panel.php:312
+msgid "Menu Settings"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:321
+msgid "Menu Item Padding (px)"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:332
+msgid "Menu Item Spacing (px)"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:344
+msgid "Main Menu Hover Color"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:354
+msgid "Show Menu Descriptions"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:361
+msgid "Footer Settings"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:370
+msgid "Footer Widget Columns"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:374
+msgid "1 Column"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:386
+msgid "Footer Widgets Layout"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:390
+msgid "Horizontal (Row)"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:391
+msgid "Vertical (Stack)"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:400
+msgid "Footer Background"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:409
+msgid "Footer Padding (px)"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:420
+msgid "Copyright Text"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:430
+msgid "Copyright Text Color"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:439
+msgid "Show Footer Menu"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:22
+msgid "Typography"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:24
+msgid "Customize fonts for different devices. Desktop > 768px, Tablet: 481-768px, Mobile: ≤ 480px"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:29
+msgid "Font Family"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:38
+msgid "Body Font Family"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:42
+msgid "System Default"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:43
+#: inc/customizer/typography-panel.php:66
+msgid "Arial"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:44
+#: inc/customizer/typography-panel.php:67
+msgid "Helvetica"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:45
+#: inc/customizer/typography-panel.php:68
+msgid "Verdana"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:46
+#: inc/customizer/typography-panel.php:69
+msgid "Tahoma"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:47
+#: inc/customizer/typography-panel.php:70
+msgid "Trebuchet MS"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:48
+#: inc/customizer/typography-panel.php:71
+msgid "Georgia"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:49
+#: inc/customizer/typography-panel.php:72
+msgid "Times New Roman"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:50
+#: inc/customizer/typography-panel.php:73
+msgid "Palatino"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:51
+#: inc/customizer/typography-panel.php:74
+msgid "Courier New"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:52
+msgid "Comic Sans"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:61
+msgid "Heading Font Family"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:65
+msgid "Same as Body"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:75
+msgid "Impact"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:81
+msgid "Desktop Sizes (>768px)"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:90
+#: inc/customizer/typography-panel.php:162
+#: inc/customizer/typography-panel.php:234
+msgid "Body Font Size (px)"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:101
+#: inc/customizer/typography-panel.php:173
+#: inc/customizer/typography-panel.php:245
+msgid "Site Title Font Size (rem)"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:112
+#: inc/customizer/typography-panel.php:184
+#: inc/customizer/typography-panel.php:256
+msgid "Tagline Font Size (rem)"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:123
+#: inc/customizer/typography-panel.php:195
+#: inc/customizer/typography-panel.php:267
+msgid "Site Description Font Size (rem)"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:134
+#: inc/customizer/typography-panel.php:206
+#: inc/customizer/typography-panel.php:278
+msgid "Heading (H1) Font Size (rem)"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:145
+#: inc/customizer/typography-panel.php:217
+#: inc/customizer/typography-panel.php:289
+msgid "Menu Font Size (rem)"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:153
+msgid "Tablet Sizes (481-768px)"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:225
+msgid "Mobile Sizes (≤480px)"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:300
+msgid "Body Line Height (all devices)"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:308
+msgid "Submenu & Hamburger"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:310
+msgid "Control submenu font sizes (separate from top‑level menu) and hamburger button size on mobile/tablet."
+msgstr ""
+
+#: inc/customizer/typography-panel.php:319
+msgid "Submenu Font Size - Desktop (rem)"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:331
+msgid "Submenu Font Size - Tablet (rem)"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:343
+msgid "Submenu Font Size - Mobile (rem)"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:355
+msgid "Hamburger Button Width (px) – Mobile/Tablet"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:367
+msgid "Hamburger Button Height (px) – Mobile/Tablet"
+msgstr ""
+
+#: inc/customizer/typography-panel.php:379
+msgid "Hamburger Icon Font Size (rem) – Mobile/Tablet"
+msgstr ""
+
+#: search.php:23
+msgid "Search Results for: %s"
+msgstr ""
+
+#: searchform.php:12
+msgctxt "label"
+msgid "Search for:"
+msgstr ""
+
+#: searchform.php:13
+msgid "Search ..."
+msgstr ""
+
+#: searchform.php:15
+msgid "Search"
+msgstr ""
+
+#: single.php:22
+msgid "Previous Post"
+msgstr ""
+
+#: single.php:23
+msgid "Next Post"
+msgstr ""
+
+#: template-parts/author-bio.php:16
+msgid "About the Author"
+msgstr ""
+
+#: template-parts/content-blog.php:71
+#: template-parts/content.php:34
+msgid "by"
+msgstr ""
+
+#: template-parts/content-blog.php:80
+#: template-parts/content.php:40
+msgid "0 Comments"
+msgstr ""
+
+#: template-parts/content-blog.php:81
+#: template-parts/content.php:41
+msgid "0 comments"
+msgstr ""
+
+#: template-parts/content-blog.php:83
+#: template-parts/content.php:43
+msgid "1 Comment"
+msgstr ""
+
+#: template-parts/content-blog.php:84
+#: template-parts/content.php:44
+msgid "1 comment"
+msgstr ""
+
+#: template-parts/content-blog.php:87
+#: template-parts/content.php:47
+msgid "%s Comments"
+msgstr ""
+
+#: template-parts/content-blog.php:88
+#: template-parts/content.php:48
+msgid "%s comments"
+msgstr ""
+
+#: template-parts/content-blog.php:100
+msgid "in"
+msgstr ""
+
+#: template-parts/content-blog.php:113
+#: template-parts/content.php:65
+msgid "Continue reading %s <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: template-parts/content-blog.php:120
+#: template-parts/content-page.php:27
+#: template-parts/content.php:72
+msgid "Pages:"
+msgstr ""
+
+#: template-parts/content-none.php:13
+msgid "Nothing Found"
+msgstr ""
+
+#: template-parts/content-none.php:22
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: template-parts/content-none.php:30
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr ""
+
+#: template-parts/content-none.php:33
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr ""
+
+#: template-parts/related-posts.php:40
+msgid "Related Posts"
 msgstr ""

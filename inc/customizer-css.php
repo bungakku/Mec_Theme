@@ -5,14 +5,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Customizer-driven CSS generation and caching.
  *
- * Extracted from functions.php during the 1.7.4 file-organization pass.
+ * Extracted from functions.php during the 1.7.6 file-organization pass.
  * No behavior changed: every function here is identical to its previous
  * version, just grouped together since they form one coherent job
  * (turn theme_mods into the inline <style> block added in functions.php
  * via mec_theme_scripts() -> wp_add_inline_style()).
  *
  * @package MEC_Theme
- * @version 1.7.4
+ * @version 1.7.6
  */
 
 function mec_theme_get_color_var( $mod, $default ) {
@@ -147,6 +147,10 @@ function mec_theme_get_root_variables_css() {
     // Mobile close colour
     $close_color = mec_theme_get_color_var( 'mec_theme_mobile_close_color', '#333333' );
     $css .= '--mec-mobile-close-color: ' . $close_color . ';';
+    
+    // Mobile close hover colour
+    $close_hover_color = mec_theme_get_color_var( 'mec_theme_mobile_close_hover_color', '#0274be' );
+    $css .= '--mec-mobile-close-hover-color: ' . $close_hover_color . ';';
     
     // Body line height
     $line_height = get_theme_mod( 'mec_theme_body_line_height', '1.6' );
@@ -477,8 +481,9 @@ function mec_theme_get_mobile_menu_colors_css() {
         }
     }
 
-    // Mobile close (X) button colour is applied via the --mec-mobile-close-color
-    // CSS variable in mec_theme_get_root_variables_css(), not here.
+    // Mobile close (X) button colour (both regular and hover) is applied via
+    // the --mec-mobile-close-color / --mec-mobile-close-hover-color CSS
+    // variables in mec_theme_get_root_variables_css(), not here.
 
     $css .= '}'; // close @media (max-width: 768px)
     

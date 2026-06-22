@@ -3,14 +3,14 @@
  * MEC_Theme functions and definitions
  *
  * @package MEC_Theme
- * @version 1.7.4
+ * @version 1.7.6
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'MEC_THEME_VERSION', '1.7.4' );
+define( 'MEC_THEME_VERSION', '1.7.6' );
 define( 'MEC_THEME_DIR', get_template_directory() );
 define( 'MEC_THEME_URI', get_template_directory_uri() );
 define( 'MEC_THEME_ASSETS', MEC_THEME_URI . '/assets' );
@@ -120,7 +120,6 @@ function mec_theme_setup() {
     register_nav_menus( array(
         'primary' => esc_html__( 'Primary Menu', 'mec_theme' ),
         'footer'  => esc_html__( 'Footer Menu', 'mec_theme' ),
-        'social'  => esc_html__( 'Social Menu', 'mec_theme' ),
     ) );
     
     load_theme_textdomain( 'mec_theme', MEC_THEME_DIR . '/languages' );

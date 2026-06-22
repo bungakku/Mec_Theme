@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Template part for displaying posts
  *
  * @package MEC_Theme
- * @version 1.7.4
+ * @version 1.7.6
  */
 ?>
 

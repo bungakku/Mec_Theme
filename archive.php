@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * The template for displaying archive pages
  *
  * @package MEC_Theme
- * @version 1.7.4
+ * @version 1.7.6
  */
 
 get_header();

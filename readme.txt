@@ -3,7 +3,7 @@ Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.4
+Stable tag: 1.7.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,14 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.6 =
+* Removed: the unused "Social Menu" nav menu location (`register_nav_menus`). The theme already has a dedicated social-icon system in Customizer > Contact & Social with per-platform URL fields, proper icon styling, and accessible labels — a generic menu location for the same purpose was dead weight that could be assigned in the admin but never rendered anywhere.
+* Fixed: "Mobile Close Button Hover Color" was a real Customizer setting with no effect — the hover state was hardcoded to the site's primary color variable instead. Wired it up via a dedicated `--mec-mobile-close-hover-color` CSS variable, matching the pattern already used for its sibling "Mobile Close Button (X) Color" setting.
+* The .pot file was regenerated again to drop the now-removed "Social Menu" string; still 1:1 with source, no missing or orphaned entries.
+
+= 1.7.5 =
+* Fixed: languages/mec_theme.pot was missing 49 translatable strings, mostly the Tablet/Mobile Menu Colors panels added in 1.7.3, plus a handful of older strings (e.g. search form labels, 404/no-results text) that appear to have been missed in earlier exports. Regenerated the file from scratch against the current source; it now covers all 255 translatable strings in the theme, each with accurate file:line references.
 
 = 1.7.4 =
 * Fixed: Tablet/Mobile Dropdown Hover Background defaulted to `#f0f0f0`, which gave the existing hover-text blue (`#0274be`) a 4.34:1 contrast ratio against it — just under the WCAG AA 4.5:1 threshold for normal text. Changed the default to `#f8f9fa` (4.69:1, passing), matching the hover-background default already used for the desktop dropdown and general menu hover elsewhere in the theme. Sites that already saved a custom value for these two settings are unaffected; this only changes the out-of-the-box default.
