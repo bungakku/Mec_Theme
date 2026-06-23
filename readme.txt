@@ -3,7 +3,7 @@ Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.7
+Stable tag: 1.7.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,9 +59,13 @@ Yes, the theme includes aria-expanded states for mobile menu and submenu toggles
 
 == Changelog ==
 
+= 1.7.8 =
+* Fixed: the update checker used GitHub's `/releases/latest` endpoint, which picks "latest" by the release's underlying commit/publish order, not by comparing version numbers. Because v1.7.4 was published after v1.7.6 in this repository's history, `/releases/latest` was pointing at v1.7.4 -- meaning a site on an older version could be told v1.7.4 was the newest available, skipping past v1.7.6 and v1.7.7 entirely. The checker now fetches the recent release list and selects whichever one has the highest version number by semantic comparison, so it gives a correct result regardless of GitHub's ordering or "latest" label. Draft releases, pre-releases, and tags that aren't well-formed version numbers are now explicitly skipped as candidates.
+* Removed: the cached release data included a `body` field (the release notes) that was sanitized but never actually displayed anywhere -- dead weight, same as a couple of earlier cleanups in this theme. Removed rather than wiring up an unused feature.
+* No template, style, or Customizer behaviour was touched; this only affects how inc/github-updater.php decides which GitHub release is newest.
+
 = 1.7.7 =
 * Added: GitHub-based update checker (inc/github-updater.php). Since this theme isn't distributed via WordPress.org, there was previously no way for a site to know when a new version was available. This hooks into WordPress's native theme-update system, checking https://github.com/bungakku/Mec_Theme/releases for new tags -- sites running the theme now get the normal "Update available" notice and a working "Update now" button, exactly like a WordPress.org theme update. Checks are cached for 12 hours to stay well under GitHub's API rate limit. This is purely additive: the only change to any existing file is one new `require_once` line in functions.php; no template, style, or Customizer behaviour was touched.
-
 
 = 1.7.6 =
 * Removed: the unused "Social Menu" nav menu location (`register_nav_menus`). The theme already has a dedicated social-icon system in Customizer > Contact & Social with per-platform URL fields, proper icon styling, and accessible labels — a generic menu location for the same purpose was dead weight that could be assigned in the admin but never rendered anywhere.

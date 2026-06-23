@@ -1,47 +1,47 @@
 MEC_Theme/
 │
-├── style.css                     // v1.7.7 – Main stylesheet with CSS variables
-├── index.php                     // v1.7.7 – Main blog index template
-├── header.php                    // v1.7.7 – Site header with mobile menu & ARIA labels
-├── footer.php                    // v1.7.7 – Footer with widgets & copyright (wp_date)
-├── functions.php                 // v1.7.7 – Theme setup, widget/asset registration, template hooks
-├── front-page.php                // v1.7.7 – Front page template
-├── page.php                      // v1.7.7 – Page template
-├── single.php                    // v1.7.7 – Single post template
-├── archive.php                   // v1.7.7 – Archive template
-├── search.php                    // v1.7.7 – Search results template
-├── searchform.php                // v1.7.7 – Search form (accessible)
-├── 404.php                       // v1.7.7 – 404 error template
+├── style.css                     // v1.7.8 – Main stylesheet with CSS variables
+├── index.php                     // v1.7.8 – Main blog index template
+├── header.php                    // v1.7.8 – Site header with mobile menu & ARIA labels
+├── footer.php                    // v1.7.8 – Footer with widgets & copyright (wp_date)
+├── functions.php                 // v1.7.8 – Theme setup, widget/asset registration, template hooks
+├── front-page.php                // v1.7.8 – Front page template
+├── page.php                      // v1.7.8 – Page template
+├── single.php                    // v1.7.8 – Single post template
+├── archive.php                   // v1.7.8 – Archive template
+├── search.php                    // v1.7.8 – Search results template
+├── searchform.php                // v1.7.8 – Search form (accessible)
+├── 404.php                       // v1.7.8 – 404 error template
 ├── screenshot.png                // Theme screenshot (not versioned)
-├── readme.txt                    // v1.7.7 – Readme file (text format)
+├── readme.txt                    // v1.7.8 – Readme file (text format)
 │
 ├── template-parts/
-│   ├── author-bio.php            // v1.7.7 – Author bio for single posts
-│   ├── content.php               // v1.7.7 – Generic content template
-│   ├── content-blog.php          // v1.7.7 – Blog post content with accessible comments
-│   ├── content-none.php          // v1.7.7 – No content message
-│   ├── content-page.php          // v1.7.7 – Page content
-│   └── related-posts.php         // v1.7.7 – Related posts section
+│   ├── author-bio.php            // v1.7.8 – Author bio for single posts
+│   ├── content.php               // v1.7.8 – Generic content template
+│   ├── content-blog.php          // v1.7.8 – Blog post content with accessible comments
+│   ├── content-none.php          // v1.7.8 – No content message
+│   ├── content-page.php          // v1.7.8 – Page content
+│   └── related-posts.php         // v1.7.8 – Related posts section
 │
 ├── inc/
-│   ├── customizer.php                       // v1.7.7 – Orchestrator: requires + registers all panels below
-│   ├── customizer-css.php                   // v1.7.7 – Customizer-driven CSS generation + transient caching
-│   ├── customizer-sanitizers.php            // v1.7.7 – Every Customizer sanitize_callback/validator, in one place
-│   ├── class-recent-posts-widget.php        // v1.7.7 – Recent Posts widget class
-│   ├── github-updater.php                   // v1.7.7 – Checks GitHub Releases for updates, hooks into WP's native theme-update UI
+│   ├── customizer.php                       // v1.7.8 – Orchestrator: requires + registers all panels below
+│   ├── customizer-css.php                   // v1.7.8 – Customizer-driven CSS generation + transient caching
+│   ├── customizer-sanitizers.php            // v1.7.8 – Every Customizer sanitize_callback/validator, in one place
+│   ├── class-recent-posts-widget.php        // v1.7.8 – Recent Posts widget class
+│   ├── github-updater.php                   // v1.7.8 – Checks GitHub Releases for updates, hooks into WP's native theme-update UI
 │   └── customizer/
-│       ├── layout-panel.php                 // v1.7.7 – Sidebar, Container, Header, Menu, Footer sections
-│       ├── typography-panel.php             // v1.7.7 – Font Family, Font Sizes, Submenu & Hamburger sections
-│       ├── colors-panel.php                 // v1.7.7 – General Colors, Mobile Menu Colors sections
-│       ├── blog-panel.php                   // v1.7.7 – Blog Layout, Post Elements, Single Post sections
-│       └── contact-social-panel.php         // v1.7.7 – Contact & Social fields + their front-end CSS/preview JS
+│       ├── layout-panel.php                 // v1.7.8 – Sidebar, Container, Header, Menu, Footer sections
+│       ├── typography-panel.php             // v1.7.8 – Font Family, Font Sizes, Submenu & Hamburger sections
+│       ├── colors-panel.php                 // v1.7.8 – General Colors, Mobile Menu Colors sections
+│       ├── blog-panel.php                   // v1.7.8 – Blog Layout, Post Elements, Single Post sections
+│       └── contact-social-panel.php         // v1.7.8 – Contact & Social fields + their front-end CSS/preview JS
 │
 ├── assets/
 │   ├── js/
-│   │   ├── navigation.js         // v1.7.7 – Mobile menu & submenu toggles
-│   │   └── customizer-preview.js // v1.7.7 – Live preview: description hiding + tagline alignment
+│   │   ├── navigation.js         // v1.7.8 – Mobile menu & submenu toggles
+│   │   └── customizer-preview.js // v1.7.8 – Live preview: description hiding + tagline alignment
 │   └── css/
-│       └── editor-style.css      // v1.7.7 – Classic editor styles (supports block palette)
+│       └── editor-style.css      // v1.7.8 – Classic editor styles (supports block palette)
 │
 └── languages/
-    └── mec_theme.pot             // v1.7.7 – Translation template (updated strings)
+    └── mec_theme.pot             // v1.7.8 – Translation template (updated strings)
