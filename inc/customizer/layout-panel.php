@@ -8,12 +8,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Sidebar, Container, Header, Menu, and Footer sections.
  * Registered via mec_theme_customize_register() in inc/customizer.php.
  *
- * Extracted from inc/customizer.php during the 1.7.6 file-organization
+ * Extracted from inc/customizer.php during the 1.7.7 file-organization
  * pass. No behavior changed -- this is the same code that used to live
  * inline inside mec_theme_customize_register(), now in its own function.
  *
  * @package MEC_Theme
- * @version 1.7.6
+ * @version 1.7.7
  */
 function mec_theme_register_layout_panel( $wp_customize ) {
     

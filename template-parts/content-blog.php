@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Template part for displaying blog posts with customizable options
  *
  * @package MEC_Theme
- * @version 1.7.6
+ * @version 1.7.7
  */
 
 $blog_layout = get_theme_mod( 'mec_theme_blog_layout', 'classic' );

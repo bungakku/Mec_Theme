@@ -3,14 +3,14 @@
  * MEC_Theme functions and definitions
  *
  * @package MEC_Theme
- * @version 1.7.6
+ * @version 1.7.7
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'MEC_THEME_VERSION', '1.7.6' );
+define( 'MEC_THEME_VERSION', '1.7.7' );
 define( 'MEC_THEME_DIR', get_template_directory() );
 define( 'MEC_THEME_URI', get_template_directory_uri() );
 define( 'MEC_THEME_ASSETS', MEC_THEME_URI . '/assets' );
@@ -28,6 +28,7 @@ require_once MEC_THEME_DIR . '/inc/class-recent-posts-widget.php';
 require_once MEC_THEME_DIR . '/inc/customizer-sanitizers.php';
 require_once MEC_THEME_DIR . '/inc/customizer-css.php';
 require_once MEC_THEME_DIR . '/inc/customizer.php';
+require_once MEC_THEME_DIR . '/inc/github-updater.php';
 
 /**
  * Theme Setup
