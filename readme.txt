@@ -3,7 +3,7 @@ Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.8
+Stable tag: 1.7.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,12 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.9 =
+* Fixed: images inserted into post/page content (via the editor) had no width constraint, so an image uploaded at its native resolution (e.g. 1600px wide) would render at full size regardless of viewport. On mobile and tablet this pushed .entry-content, .primary, .content-area, and .container wider than the screen -- body's existing `overflow-x: hidden` only hid the resulting scrollbar, it didn't stop the layout itself from being oversized, which is what made the page edges look uncontained/"not fixed" on small screens. Added a global `max-width: 100%; height: auto;` rule for img/video/embed/object, scoped narrowly enough that existing more specific image rules (.post-thumbnail img, .author-info img, etc.) still override it as before.
+* Fixed: embedded videos (YouTube/Vimeo embeds pasted into content) had no CSS making the iframe itself scale down. `add_theme_support('responsive-embeds')` wraps embeds in a ratio container, but still needs this to be effective.
+* Fixed: a wide table in post content (more columns than fit a phone screen) would force the same kind of horizontal overflow as the image issue above. Tables now scroll horizontally within their own bounds instead of widening the page.
+* No Customizer settings, template logic, or JS were touched; this is a style.css-only fix.
 
 = 1.7.8 =
 * Fixed: the update checker used GitHub's `/releases/latest` endpoint, which picks "latest" by the release's underlying commit/publish order, not by comparing version numbers. Because v1.7.4 was published after v1.7.6 in this repository's history, `/releases/latest` was pointing at v1.7.4 -- meaning a site on an older version could be told v1.7.4 was the newest available, skipping past v1.7.6 and v1.7.7 entirely. The checker now fetches the recent release list and selects whichever one has the highest version number by semantic comparison, so it gives a correct result regardless of GitHub's ordering or "latest" label. Draft releases, pre-releases, and tags that aren't well-formed version numbers are now explicitly skipped as candidates.

@@ -4,7 +4,7 @@ Theme URI: https://biswazit.in/mectheme
 Author: Biswajit
 Author URI: https://biswazit.in
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.8
+Version: 1.7.9
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -59,6 +59,42 @@ body {
     background-color: var(--mec-background-color);
     line-height: 1.6;
     overflow-x: hidden;
+}
+
+/*
+ * Responsive media: without this, an image inserted into post/page content
+ * at its native resolution (e.g. a 1600px-wide photo) renders at full size
+ * regardless of viewport, pushing .entry-content / .primary / .container
+ * wider than the screen. body's overflow-x: hidden above only hides the
+ * resulting scrollbar -- it doesn't stop the layout from being computed as
+ * wider than the viewport, which is what causes content and backgrounds to
+ * look clipped/misaligned at the right edge on phones and tablets.
+ * More specific rules later in this file (.post-thumbnail img,
+ * .author-info img, etc.) override this safely since they target a
+ * narrower selector.
+ */
+img,
+video,
+embed,
+object {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Embedded video/iframes (YouTube, Vimeo, etc.) pasted into post content.
+   add_theme_support('responsive-embeds') wraps these in a ratio container,
+   but still needs this to make the iframe itself scale down. */
+.entry-content iframe,
+.wp-block-embed iframe,
+.wp-embed-responsive iframe {
+    max-width: 100%;
+}
+
+table {
+    max-width: 100%;
+    width: 100%;
+    overflow-x: auto;
+    display: block;
 }
 
 /* ===== Container System ===== */
