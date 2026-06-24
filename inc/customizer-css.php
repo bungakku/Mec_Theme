@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Customizer-driven CSS generation and caching.
  *
- * Extracted from functions.php during the 1.7.8 file-organization pass.
+ * Extracted from functions.php during the 1.7.1 file-organization pass.
  * No behavior changed: every function here is identical to its previous
  * version, just grouped together since they form one coherent job
  * (turn theme_mods into the inline <style> block added in functions.php

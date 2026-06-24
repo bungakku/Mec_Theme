@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Contact & Social Customizer panel: phone numbers, email, social links,
  * social icon styling, and their front-end CSS/live-preview output.
  *
- * Extracted from functions.php during the 1.7.8 file-organization pass.
+ * Extracted from functions.php during the 1.7.1 file-organization pass.
  * No behavior changed.
  *
  * @package MEC_Theme

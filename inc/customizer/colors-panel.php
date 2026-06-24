@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * General Colors, Colors Dropdown, and Mobile Menu Colors sections.
  * Registered via mec_theme_customize_register() in inc/customizer.php.
  *
- * Extracted from inc/customizer.php during the 1.7.8 file-organization
+ * Extracted from inc/customizer.php during the 1.7.1 file-organization
  * pass. No behavior changed -- this is the same code that used to live
  * inline inside mec_theme_customize_register(), now in its own function.
  *

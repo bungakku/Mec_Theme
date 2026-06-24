@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * or Customizer functionality in any way.
  *
  * @package MEC_Theme
- * @version 1.7.9
+ * @version 1.7.10
  */
 
 /**

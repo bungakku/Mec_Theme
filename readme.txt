@@ -3,7 +3,7 @@ Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.9
+Stable tag: 1.7.10
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.10 =
+* Fixed: the v1.7.9 release zip had an extra nested folder (assets/, inc/, etc. were one level deeper than every prior release), which would have produced an invalid theme structure if extracted directly into wp-content/themes/. This release restores the flat structure used by all releases through 1.7.8.
+* Fixed: several `inc/` files carried a comment noting which version's "file-organization pass" extracted them from functions.php/customizer.php. That reorganization happened once, in 1.7.1 -- the comment was being incorrectly rewritten to the current version number on every release since, falsely implying a reorganization happened every time. Corrected to state the actual version (1.7.1) permanently.
+* Housekeeping: this release contains no template, style, or Customizer behavior changes -- it exists solely to ship a correctly-packaged, consistently-versioned copy of 1.7.9's fixes after a packaging error in that release's zip.
 
 = 1.7.9 =
 * Fixed: images inserted into post/page content (via the editor) had no width constraint, so an image uploaded at its native resolution (e.g. 1600px wide) would render at full size regardless of viewport. On mobile and tablet this pushed .entry-content, .primary, .content-area, and .container wider than the screen -- body's existing `overflow-x: hidden` only hid the resulting scrollbar, it didn't stop the layout itself from being oversized, which is what made the page edges look uncontained/"not fixed" on small screens. Added a global `max-width: 100%; height: auto;` rule for img/video/embed/object, scoped narrowly enough that existing more specific image rules (.post-thumbnail img, .author-info img, etc.) still override it as before.
