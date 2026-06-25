@@ -4,7 +4,7 @@ Theme URI: https://biswazit.in/mectheme
 Author: Biswajit
 Author URI: https://biswazit.in
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.11
+Version: 1.7.12
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1473,4 +1473,92 @@ article {
         max-height: 800px !important;
         overflow-y: auto !important;
     }
+}
+/* ===== Third-Party Plugin Compatibility: Online Admission Manager ===== */
+/*
+ * The admission/application form rendered by the "Online Admission Manager"
+ * plugin (.admission-form-wrapper) ships with no responsive CSS of its own --
+ * its markup places 2-3 <label>+<input> pairs side by side in a single <p>,
+ * relying entirely on the browser's unstyled default input width. On a
+ * phone-width screen, three default-width text inputs on one line (e.g. the
+ * Father's Name / Father's Contact 1 / Father's Contact 2 row) comfortably
+ * exceed the viewport, forcing the page wider than the screen -- which is
+ * why the page needs to be pinched/zoomed out to see content that runs off
+ * the right edge, and why the rest of the page can look misaligned by
+ * comparison once zoomed out to fit the form.
+ *
+ * Fix: stack every label+input pair onto its own line and let inputs fill
+ * the available width, regardless of how many were originally written on
+ * one source line. This only targets .admission-form-wrapper, so it can't
+ * affect anything else on the site.
+ */
+.admission-form-wrapper {
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+.admission-form-wrapper * {
+    box-sizing: border-box;
+}
+
+.admission-form-wrapper p {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0 0 16px;
+}
+
+.admission-form-wrapper p > label {
+    display: block;
+    width: 100%;
+}
+
+.admission-form-wrapper input[type="text"],
+.admission-form-wrapper input[type="email"],
+.admission-form-wrapper input[type="tel"],
+.admission-form-wrapper input[type="date"],
+.admission-form-wrapper input[type="file"],
+.admission-form-wrapper select,
+.admission-form-wrapper textarea {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 4px;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px; /* 16px prevents iOS Safari from auto-zooming in on focus */
+}
+
+.admission-form-wrapper .academic-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #eee;
+}
+
+.admission-form-wrapper .academic-row input,
+.admission-form-wrapper .academic-row textarea {
+    width: 100%;
+}
+
+.admission-form-wrapper fieldset {
+    max-width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.admission-form-wrapper legend {
+    font-weight: 600;
+    padding: 0 6px;
+}
+
+.admission-form-wrapper img {
+    max-width: 100%;
+    height: auto;
 }

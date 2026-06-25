@@ -3,7 +3,7 @@ Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.11
+Stable tag: 1.7.12
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.12 =
+* Fixed: pages using the "Online Admission Manager" plugin's application form needed to be pinched/zoomed out to fit on mobile and tablet -- the plugin's form markup places multiple label+input pairs on a single line (e.g. Father's Name / Father's Contact 1 / Father's Contact 2 in one `<p>`, and six fields plus a button in each "Academic Record" row) with no responsive CSS of its own, so the unstyled default input widths comfortably exceeded any phone screen and forced the whole page wider than the viewport.
+* Added a new "Third-Party Plugin Compatibility: Online Admission Manager" section to style.css, scoped entirely to `.admission-form-wrapper` (the plugin's own wrapper class) so it cannot affect anything else on the site. Every label+input pair now stacks on its own line and inputs fill the available width; the "Academic Record" repeatable row does the same. Form inputs are also set to 16px font-size, which prevents iOS Safari's auto-zoom-on-focus behavior -- a separate small annoyance on the same page.
+* This is a CSS-only override living in the theme, not a change to the plugin itself, so it survives plugin updates and doesn't require editing any plugin files. If "Online Admission Manager" is not installed/active, this section has no effect.
 
 = 1.7.11 =
 * Fixed: with "Enable Sticky Header" turned on (Customize > Layout Settings > Header), `.site-header` was given `position: sticky` with no explicit `width`. On mobile, this could leave the header pinned to whatever width was correct at the exact moment it first became "stuck" during a scroll -- if a vertical scrollbar appeared or disappeared around that same moment (common right after page load, once content below the fold finishes rendering and changes total page height), the header's stuck width didn't always get recalculated afterward. This showed up as a vertical gap along one edge of the page that was present from first scroll, identical across browsers, but disappeared on pinch-zoom (forces a full layout recalculation) or page reload (restarts before the sticky state has triggered) -- exactly the symptoms reported and reproduced in this troubleshooting session. Added explicit `left: 0; width: 100%;` to the sticky header rule so its width is tied directly to the viewport on every layout pass instead of being implicitly inherited once and potentially left stale.
