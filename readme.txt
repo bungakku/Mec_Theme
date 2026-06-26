@@ -3,7 +3,7 @@ Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.12
+Stable tag: 1.7.13
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.13 =
+* Improved: introduced a small spacing scale (`--mec-space-xs` through `--mec-space-xl`, 8px/12px/20px/32px/48px) as CSS variables, and applied it to the main layout and widget spacing that was previously a mix of one-off values (15px, 20px, 30px, 40px used inconsistently in different places). Applied to: the sidebar/content gap, article card padding and spacing, entry header/title margins, sidebar widget padding and title spacing, and the footer widgets area.
+* This is a spacing-only refinement -- sidebar structure, the has-sidebar/no-sidebar logic, sidebar-left/sidebar-right ordering, container width, colors, typography, and all Customizer settings are completely unchanged. Any custom CSS already added via Customizer > Additional CSS (e.g. a widget margin override) continues to apply on top of this exactly as before, since theme defaults always load first.
+* No settings or markup changed; this only touches numeric spacing values in style.css.
 
 = 1.7.12 =
 * Fixed: pages using the "Online Admission Manager" plugin's application form needed to be pinched/zoomed out to fit on mobile and tablet -- the plugin's form markup places multiple label+input pairs on a single line (e.g. Father's Name / Father's Contact 1 / Father's Contact 2 in one `<p>`, and six fields plus a button in each "Academic Record" row) with no responsive CSS of its own, so the unstyled default input widths comfortably exceeded any phone screen and forced the whole page wider than the viewport.

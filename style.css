@@ -4,7 +4,7 @@ Theme URI: https://biswazit.in/mectheme
 Author: Biswajit
 Author URI: https://biswazit.in
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.12
+Version: 1.7.13
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -22,6 +22,24 @@ Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, transl
     --mec-border-color: #dddddd;
     --mec-container-width: 1200px;
     --mec-header-padding: 15px;
+
+    /* ===== Spacing Scale =====
+     * A small, consistent set of spacing values used across layout and
+     * widget rules below, replacing what were previously ad-hoc numbers
+     * (15px, 20px, 30px, etc. used inconsistently in different places).
+     * Using a scale instead of one-off values makes the page's vertical
+     * rhythm read as deliberate rather than patched-together, and means
+     * future spacing tweaks only need to happen in one place. This does
+     * not touch colors, typography, or layout structure (sidebar flex
+     * widths, container width, etc. are unchanged) -- it only standardizes
+     * the gaps/padding/margins applied to existing elements.
+     */
+    --mec-space-xs: 8px;
+    --mec-space-sm: 12px;
+    --mec-space-md: 20px;
+    --mec-space-lg: 32px;
+    --mec-space-xl: 48px;
+
     --mec-footer-bg: #f8f9fa;
     --mec-copyright-color: #666666;
     --mec-dropdown-bg: #ffffff;
@@ -970,7 +988,7 @@ table {
 /* ===== Sidebar & Content Layout ===== */
 .content-area {
     display: flex;
-    gap: 30px;
+    gap: var(--mec-space-lg);
     flex-wrap: wrap;
 }
 
@@ -1009,9 +1027,9 @@ table {
 
 /* ===== Posts & Pages ===== */
 article {
-    margin-bottom: 40px;
+    margin-bottom: var(--mec-space-xl);
     background: #fff;
-    padding: 30px;
+    padding: var(--mec-space-lg);
     border-radius: 4px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
@@ -1021,13 +1039,13 @@ article {
 }
 
 .entry-header {
-    margin-bottom: 20px;
+    margin-bottom: var(--mec-space-md);
 }
 
 .entry-title {
     font-size: 2rem;
     color: var(--mec-heading-color);
-    margin-bottom: 10px;
+    margin-bottom: var(--mec-space-sm);
     line-height: 1.3;
 }
 
@@ -1241,8 +1259,8 @@ article {
 
 /* ===== Sidebar Widgets ===== */
 .widget {
-    margin-bottom: 30px;
-    padding: 20px;
+    margin-bottom: var(--mec-space-lg);
+    padding: var(--mec-space-md);
     background: #fff;
     border-radius: 4px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
@@ -1250,8 +1268,8 @@ article {
 
 .widget-title {
     font-size: 1.2rem;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
+    margin-bottom: var(--mec-space-sm);
+    padding-bottom: var(--mec-space-xs);
     border-bottom: 2px solid var(--mec-primary-color);
     color: var(--mec-heading-color);
 }
@@ -1261,7 +1279,7 @@ article {
 }
 
 .widget li {
-    padding: 8px 0;
+    padding: var(--mec-space-xs) 0;
     border-bottom: 1px solid #f0f0f0;
 }
 
@@ -1283,26 +1301,26 @@ article {
 .site-footer {
     background: var(--mec-footer-bg);
     border-top: 1px solid var(--mec-border-color);
-    padding: 40px 0 20px;
-    margin-top: 40px;
+    padding: var(--mec-space-xl) 0 var(--mec-space-md);
+    margin-top: var(--mec-space-xl);
 }
 
 .footer-widgets-container {
     max-width: var(--mec-container-width);
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 var(--mec-space-md);
 }
 
 .footer-widgets {
     display: grid;
-    gap: 30px;
-    margin-bottom: 30px;
+    gap: var(--mec-space-lg);
+    margin-bottom: var(--mec-space-lg);
 }
 
 .footer-widgets.horizontal {
     display: grid;
-    gap: 30px;
-    margin-bottom: 30px;
+    gap: var(--mec-space-lg);
+    margin-bottom: var(--mec-space-lg);
     width: 100%;
 }
 
@@ -1311,7 +1329,7 @@ article {
 }
 
 .footer-widgets.vertical .footer-widget {
-    margin-bottom: 30px;
+    margin-bottom: var(--mec-space-lg);
 }
 
 .footer-widget {
