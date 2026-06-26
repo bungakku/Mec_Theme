@@ -3,7 +3,7 @@ Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.13
+Stable tag: 1.7.14
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.14 =
+* Improved: reduced .container side padding from 20px to 10px on phones (480px and below) only. Tablet (481-768px) and desktop are unchanged at 20px. This was a direct request after testing 1.7.12 live -- 20px felt like more side margin than needed on small screens, eating into already-limited width.
+* No structural change: this only adjusts one padding value inside an existing mobile media query block. Sidebar layout, header layout, and the admission-form-wrapper fix from 1.7.12 are unaffected (the form's inputs automatically gain a small amount of extra usable width as a side effect, since they fill their parent's width).
 
 = 1.7.13 =
 * Improved: introduced a small spacing scale (`--mec-space-xs` through `--mec-space-xl`, 8px/12px/20px/32px/48px) as CSS variables, and applied it to the main layout and widget spacing that was previously a mix of one-off values (15px, 20px, 30px, 40px used inconsistently in different places). Applied to: the sidebar/content gap, article card padding and spacing, entry header/title margins, sidebar widget padding and title spacing, and the footer widgets area.
