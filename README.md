@@ -1,4 +1,5 @@
 === MEC Theme ===
+=================
 Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
