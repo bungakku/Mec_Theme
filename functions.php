@@ -3,14 +3,14 @@
  * MEC_Theme functions and definitions
  *
  * @package MEC_Theme
- * @version 1.7.14
+ * @version 1.7.15
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'MEC_THEME_VERSION', '1.7.14' );
+define( 'MEC_THEME_VERSION', '1.7.15' );
 define( 'MEC_THEME_DIR', get_template_directory() );
 define( 'MEC_THEME_URI', get_template_directory_uri() );
 define( 'MEC_THEME_ASSETS', MEC_THEME_URI . '/assets' );

@@ -4,7 +4,7 @@ Theme URI: https://biswazit.in/mectheme
 Author: Biswajit
 Author URI: https://biswazit.in
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.14
+Version: 1.7.15
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1090,6 +1090,8 @@ article {
 
 .entry-content {
     line-height: 1.8;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .entry-content p {
@@ -1273,6 +1275,18 @@ article {
     background: #fff;
     border-radius: 4px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    /* A long unbroken string with no spaces/hyphens (most commonly a raw
+       URL pasted into post content or a widget, e.g. a Google Drive link)
+       is treated by the browser as one unbreakable "word" and won't wrap
+       at the container edge by default. If it's wider than the sidebar
+       column, it forces that column wider than its container -- which,
+       depending on what else is on the page, can push the whole layout
+       wider than the viewport. This is a frequent side effect of importing
+       posts/content from elsewhere (copy-pasted links, oEmbed fallback
+       text, etc.) and isn't something a content author would think to fix
+       per-post, so it's handled here for every widget at once. */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .widget-title {

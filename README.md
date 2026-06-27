@@ -3,7 +3,7 @@ Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.14
+Stable tag: 1.7.15
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.15 =
+* Fixed: the long-running "vertical gap / needs pinch-to-fit on mobile" issue, finally root-caused. It traced to imported post content containing long, unbroken URLs with no spaces or hyphens (e.g. Google Drive links pasted directly as plain text, visible in the "Campus News" sidebar widget after importing posts from another site). A browser treats a string like that as a single unbreakable "word" and will not wrap it at the container edge by default -- if it's wider than the sidebar column, it forces that column wider than its parent, which can push the whole page wider than the viewport. This had nothing to do with sticky headers, caching, or any of the other things ruled out in 1.7.11-1.7.14 along the way -- it only appeared once content containing this pattern existed on the site, which is why it tracked so precisely with "started after I imported some posts."
+* Added `overflow-wrap: break-word` (with the `word-wrap` fallback for older browsers) to the base `.widget` rule -- covering every sidebar widget at once -- and to `.entry-content`, covering post/page body text. Any future long unbroken string in either location will now wrap inside its container instead of forcing it wider.
+* The theme already had this exact protection on mobile navigation menu links (added at some earlier point, scoped only to `.main-navigation a`) -- this release extends the same fix to the two places it was actually needed.
 
 = 1.7.14 =
 * Improved: reduced .container side padding from 20px to 10px on phones (480px and below) only. Tablet (481-768px) and desktop are unchanged at 20px. This was a direct request after testing 1.7.12 live -- 20px felt like more side margin than needed on small screens, eating into already-limited width.
