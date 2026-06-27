@@ -3,7 +3,7 @@ Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.15
+Stable tag: 1.7.16
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.16 =
+* Fixed a regression introduced in 1.7.15: the `overflow-wrap: break-word` fix added to `.widget` had an unintended side effect on real sites -- `.secondary` (the sidebar widget column) is a flex child of `.content-area` (display: flex), and `break-word` (the legacy property) does not factor possible word-breaks into an element's min-content size calculation. This meant a flex child containing a long unbroken string got SIZED as if the string could not break at all, stretching the sidebar itself to fit it -- the overflow showed up one level up (the whole sidebar/page), not inside the text that was supposedly being wrapped. This was confirmed on a live test site: a Custom HTML "news ticker" widget, completely unchanged since 1.7.12, started overflowing the moment 1.7.15 was installed and stopped the moment it was reverted.
+* Changed `.widget` and `.entry-content` to use `overflow-wrap: anywhere` instead of `break-word`. `anywhere` does not have the min-content calculation problem and is the current standard replacement; `word-wrap: break-word` is kept only as a fallback for very old browsers without `overflow-wrap` support.
+* If you installed 1.7.15 and saw sidebar/page overflow that wasn't present before, this release fixes it with no other changes needed.
 
 = 1.7.15 =
 * Fixed: the long-running "vertical gap / needs pinch-to-fit on mobile" issue, finally root-caused. It traced to imported post content containing long, unbroken URLs with no spaces or hyphens (e.g. Google Drive links pasted directly as plain text, visible in the "Campus News" sidebar widget after importing posts from another site). A browser treats a string like that as a single unbreakable "word" and will not wrap it at the container edge by default -- if it's wider than the sidebar column, it forces that column wider than its parent, which can push the whole page wider than the viewport. This had nothing to do with sticky headers, caching, or any of the other things ruled out in 1.7.11-1.7.14 along the way -- it only appeared once content containing this pattern existed on the site, which is why it tracked so precisely with "started after I imported some posts."

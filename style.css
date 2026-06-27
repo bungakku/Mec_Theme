@@ -4,7 +4,7 @@ Theme URI: https://biswazit.in/mectheme
 Author: Biswajit
 Author URI: https://biswazit.in
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.15
+Version: 1.7.16
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1090,7 +1090,7 @@ article {
 
 .entry-content {
     line-height: 1.8;
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
     word-wrap: break-word;
 }
 
@@ -1276,16 +1276,22 @@ article {
     border-radius: 4px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     /* A long unbroken string with no spaces/hyphens (most commonly a raw
-       URL pasted into post content or a widget, e.g. a Google Drive link)
-       is treated by the browser as one unbreakable "word" and won't wrap
-       at the container edge by default. If it's wider than the sidebar
-       column, it forces that column wider than its container -- which,
-       depending on what else is on the page, can push the whole layout
-       wider than the viewport. This is a frequent side effect of importing
-       posts/content from elsewhere (copy-pasted links, oEmbed fallback
-       text, etc.) and isn't something a content author would think to fix
-       per-post, so it's handled here for every widget at once. */
-    overflow-wrap: break-word;
+       URL pasted into post content or a widget, e.g. a Google Drive link,
+       or a Custom HTML widget's own markup) is treated by the browser as
+       one unbreakable "word."
+       IMPORTANT: this MUST be `anywhere`, not the legacy `break-word`.
+       `.secondary` (this widget's container) is a flex child of
+       `.content-area` (display: flex). `break-word` does not factor
+       possible word-breaks into an element's min-content size calculation
+       -- so a flex child containing it gets SIZED as if the long string
+       could not break at all, stretching the sidebar itself to fit it,
+       with the overflow showing up one level up rather than inside the
+       wrapped text. This was tested and confirmed: adding break-word here
+       in v1.7.15 caused exactly this regression on a real site (Custom
+       HTML "news ticker" widget with no other changes triggered a ~30px
+       sidebar overflow that did not happen in v1.7.12). `anywhere` does
+       not have this problem and is the current standard replacement. */
+    overflow-wrap: anywhere;
     word-wrap: break-word;
 }
 
