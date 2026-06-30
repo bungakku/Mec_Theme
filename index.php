@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * The main template file - Used for blog index
  *
  * @package MEC_Theme
- * @version 1.7.8
+ * @version 1.7.7
  */
 
 get_header(); 

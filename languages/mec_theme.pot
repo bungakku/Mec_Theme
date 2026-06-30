@@ -2,7 +2,7 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MEC_Theme 1.7.16\n"
+"Project-Id-Version: MEC_Theme 1.7.7\n"
 "Report-Msgid-Bugs-To: https://biswazit.in/mectheme\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,86 +35,86 @@ msgid "Next"
 msgstr ""
 
 #: footer.php:81
-#: functions.php:123
+#: functions.php:122
 msgid "Footer Menu"
 msgstr ""
 
-#: functions.php:66
+#: functions.php:65
 msgid "Primary"
 msgstr ""
 
-#: functions.php:71
+#: functions.php:70
 msgid "Secondary"
 msgstr ""
 
-#: functions.php:76
+#: functions.php:75
 msgid "Dark Grey"
 msgstr ""
 
-#: functions.php:81
+#: functions.php:80
 msgid "Light Grey"
 msgstr ""
 
-#: functions.php:86
+#: functions.php:85
 msgid "White"
 msgstr ""
 
-#: functions.php:95
+#: functions.php:94
 msgid "Small"
 msgstr ""
 
-#: functions.php:100
+#: functions.php:99
 msgid "Normal"
 msgstr ""
 
-#: functions.php:105
+#: functions.php:104
 #: inc/customizer/blog-panel.php:93
 msgid "Large"
 msgstr ""
 
-#: functions.php:110
+#: functions.php:109
 msgid "Huge"
 msgstr ""
 
-#: functions.php:122
+#: functions.php:121
 msgid "Primary Menu"
 msgstr ""
 
-#: functions.php:143
+#: functions.php:142
 #: inc/customizer/layout-panel.php:28
 msgid "Sidebar"
 msgstr ""
 
-#: functions.php:145
+#: functions.php:144
 msgid "Main sidebar that appears on posts and pages."
 msgstr ""
 
-#: functions.php:154
+#: functions.php:153
 msgid "Footer Widget Area %d"
 msgstr ""
 
-#: functions.php:156
+#: functions.php:155
 msgid "Add widgets for footer column %d."
 msgstr ""
 
-#: functions.php:165
+#: functions.php:164
 msgid "Header Widget Area"
 msgstr ""
 
-#: functions.php:167
+#: functions.php:166
 msgid "Add widgets to header."
 msgstr ""
 
-#: functions.php:194
+#: functions.php:193
 #: header.php:161
 msgid "Menu"
 msgstr ""
 
-#: functions.php:195
+#: functions.php:194
 msgid "Close"
 msgstr ""
 
-#: functions.php:313
+#: functions.php:312
 msgid "Your WordPress version is outdated. MEC_Theme requires WordPress 5.0 or newer for full functionality."
 msgstr ""
 

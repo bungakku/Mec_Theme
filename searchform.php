@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Custom search form
  *
  * @package MEC_Theme
- * @version 1.7.8
+ * @version 1.7.7
  */
 ?>
 <form role="search" method="get" class="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">

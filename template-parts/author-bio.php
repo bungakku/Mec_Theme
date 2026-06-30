@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Template part for displaying author bio
  *
  * @package MEC_Theme
- * @version 1.7.8
+ * @version 1.7.7
  */
 
 if ( ! is_single() ) {
