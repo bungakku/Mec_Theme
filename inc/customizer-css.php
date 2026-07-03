@@ -5,14 +5,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Customizer-driven CSS generation and caching.
  *
- * Extracted from functions.php during the 1.7.7 file-organization pass.
+ * Extracted from functions.php during the 1.7.1 file-organization pass.
  * No behavior changed: every function here is identical to its previous
  * version, just grouped together since they form one coherent job
  * (turn theme_mods into the inline <style> block added in functions.php
  * via mec_theme_scripts() -> wp_add_inline_style()).
  *
  * @package MEC_Theme
- * @version 1.7.7
+ * @version 1.7.8
  */
 
 function mec_theme_get_color_var( $mod, $default ) {
@@ -210,7 +210,17 @@ function mec_theme_get_static_rules_css() {
     
     // Sticky header
     if ( get_theme_mod( 'mec_theme_sticky_header', false ) ) {
-        $css .= '.site-header { position: sticky; top: 0; z-index: 100; }';
+        // width: 100% (rather than relying on the implicit block width a
+        // sticky element would otherwise keep) forces the browser to
+        // recompute the header's width against the current viewport on
+        // every layout pass, instead of potentially keeping whatever width
+        // was correct at the exact moment the header first became "stuck"
+        // during a scroll. Without this, some mobile browser engines can
+        // leave the sticky header pinned to a width that was correct before
+        // a vertical scrollbar appeared (or disappeared) later in the page
+        // load -- which looks like a persistent gap on one side until the
+        // user pinch-zooms or reloads and the layout is recalculated fresh.
+        $css .= '.site-header { position: sticky; top: 0; left: 0; width: 100%; z-index: 100; }';
     }
     
     return $css;

@@ -4,7 +4,7 @@ Theme URI: https://biswazit.in/mectheme
 Author: Biswajit
 Author URI: https://biswazit.in
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.7
+Version: 1.7.18
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -22,6 +22,24 @@ Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, transl
     --mec-border-color: #dddddd;
     --mec-container-width: 1200px;
     --mec-header-padding: 15px;
+
+    /* ===== Spacing Scale =====
+     * A small, consistent set of spacing values used across layout and
+     * widget rules below, replacing what were previously ad-hoc numbers
+     * (15px, 20px, 30px, etc. used inconsistently in different places).
+     * Using a scale instead of one-off values makes the page's vertical
+     * rhythm read as deliberate rather than patched-together, and means
+     * future spacing tweaks only need to happen in one place. This does
+     * not touch colors, typography, or layout structure (sidebar flex
+     * widths, container width, etc. are unchanged) -- it only standardizes
+     * the gaps/padding/margins applied to existing elements.
+     */
+    --mec-space-xs: 8px;
+    --mec-space-sm: 12px;
+    --mec-space-md: 20px;
+    --mec-space-lg: 32px;
+    --mec-space-xl: 48px;
+
     --mec-footer-bg: #f8f9fa;
     --mec-copyright-color: #666666;
     --mec-dropdown-bg: #ffffff;
@@ -51,6 +69,18 @@ Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, transl
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* Applied universally rather than only on .widget/.entry-content (as in
+       1.7.15/1.7.16) because a long unbroken string -- most commonly a raw
+       URL from imported/pasted content (Facebook share links, Google Drive
+       links, etc.) -- can end up in ANY text-bearing element: a post title,
+       widget title, post meta line, excerpt, anywhere. Scoping the fix to
+       only two selectors meant any other location was still unprotected
+       and could reproduce the same overflow. `anywhere` (not the legacy
+       `break-word`) is used because break-word does not factor into an
+       element's min-content size calculation, which caused a real
+       regression in 1.7.15 when applied to a flex child (see 1.7.16
+       changelog) -- `anywhere` does not have that problem. */
+    overflow-wrap: anywhere;
 }
 
 body {
@@ -61,12 +91,57 @@ body {
     overflow-x: hidden;
 }
 
+/*
+ * Responsive media: without this, an image inserted into post/page content
+ * at its native resolution (e.g. a 1600px-wide photo) renders at full size
+ * regardless of viewport, pushing .entry-content / .primary / .container
+ * wider than the screen. body's overflow-x: hidden above only hides the
+ * resulting scrollbar -- it doesn't stop the layout from being computed as
+ * wider than the viewport, which is what causes content and backgrounds to
+ * look clipped/misaligned at the right edge on phones and tablets.
+ * More specific rules later in this file (.post-thumbnail img,
+ * .author-info img, etc.) override this safely since they target a
+ * narrower selector.
+ */
+img,
+video,
+embed,
+object {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Embedded video/iframes (YouTube, Vimeo, etc.) pasted into post content.
+   add_theme_support('responsive-embeds') wraps these in a ratio container,
+   but still needs this to make the iframe itself scale down. */
+.entry-content iframe,
+.wp-block-embed iframe,
+.wp-embed-responsive iframe {
+    max-width: 100%;
+}
+
+table {
+    max-width: 100%;
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+}
+
 /* ===== Container System ===== */
 .container {
     max-width: var(--mec-container-width);
     margin: 0 auto;
     padding: 0 20px;
     width: 100%;
+}
+
+/* On phones, 20px of side padding reads as more margin than needed and
+   eats into already-limited width. Tighten to 10px below 480px only --
+   tablet (481-768px) and desktop keep the original 20px. */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 10px;
+    }
 }
 
 .full-width {
@@ -934,7 +1009,7 @@ body {
 /* ===== Sidebar & Content Layout ===== */
 .content-area {
     display: flex;
-    gap: 30px;
+    gap: var(--mec-space-lg);
     flex-wrap: wrap;
 }
 
@@ -973,9 +1048,9 @@ body {
 
 /* ===== Posts & Pages ===== */
 article {
-    margin-bottom: 40px;
+    margin-bottom: var(--mec-space-xl);
     background: #fff;
-    padding: 30px;
+    padding: var(--mec-space-lg);
     border-radius: 4px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
@@ -985,14 +1060,16 @@ article {
 }
 
 .entry-header {
-    margin-bottom: 20px;
+    margin-bottom: var(--mec-space-md);
 }
 
 .entry-title {
     font-size: 2rem;
     color: var(--mec-heading-color);
-    margin-bottom: 10px;
+    margin-bottom: var(--mec-space-sm);
     line-height: 1.3;
+    overflow-wrap: anywhere;
+    word-wrap: break-word;
 }
 
 .entry-title a {
@@ -1009,6 +1086,8 @@ article {
     font-size: 0.9rem;
     color: #666;
     margin-bottom: 15px;
+    overflow-wrap: anywhere;
+    word-wrap: break-word;
 }
 
 .entry-meta span {
@@ -1027,6 +1106,8 @@ article {
 
 .entry-content {
     line-height: 1.8;
+    overflow-wrap: anywhere;
+    word-wrap: break-word;
 }
 
 .entry-content p {
@@ -1205,17 +1286,35 @@ article {
 
 /* ===== Sidebar Widgets ===== */
 .widget {
-    margin-bottom: 30px;
-    padding: 20px;
+    margin-bottom: var(--mec-space-lg);
+    padding: var(--mec-space-md);
     background: #fff;
     border-radius: 4px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    /* A long unbroken string with no spaces/hyphens (most commonly a raw
+       URL pasted into post content or a widget, e.g. a Google Drive link,
+       or a Custom HTML widget's own markup) is treated by the browser as
+       one unbreakable "word."
+       IMPORTANT: this MUST be `anywhere`, not the legacy `break-word`.
+       `.secondary` (this widget's container) is a flex child of
+       `.content-area` (display: flex). `break-word` does not factor
+       possible word-breaks into an element's min-content size calculation
+       -- so a flex child containing it gets SIZED as if the long string
+       could not break at all, stretching the sidebar itself to fit it,
+       with the overflow showing up one level up rather than inside the
+       wrapped text. This was tested and confirmed: adding break-word here
+       in v1.7.15 caused exactly this regression on a real site (Custom
+       HTML "news ticker" widget with no other changes triggered a ~30px
+       sidebar overflow that did not happen in v1.7.12). `anywhere` does
+       not have this problem and is the current standard replacement. */
+    overflow-wrap: anywhere;
+    word-wrap: break-word;
 }
 
 .widget-title {
     font-size: 1.2rem;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
+    margin-bottom: var(--mec-space-sm);
+    padding-bottom: var(--mec-space-xs);
     border-bottom: 2px solid var(--mec-primary-color);
     color: var(--mec-heading-color);
 }
@@ -1225,7 +1324,7 @@ article {
 }
 
 .widget li {
-    padding: 8px 0;
+    padding: var(--mec-space-xs) 0;
     border-bottom: 1px solid #f0f0f0;
 }
 
@@ -1247,26 +1346,26 @@ article {
 .site-footer {
     background: var(--mec-footer-bg);
     border-top: 1px solid var(--mec-border-color);
-    padding: 40px 0 20px;
-    margin-top: 40px;
+    padding: var(--mec-space-xl) 0 var(--mec-space-md);
+    margin-top: var(--mec-space-xl);
 }
 
 .footer-widgets-container {
     max-width: var(--mec-container-width);
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 var(--mec-space-md);
 }
 
 .footer-widgets {
     display: grid;
-    gap: 30px;
-    margin-bottom: 30px;
+    gap: var(--mec-space-lg);
+    margin-bottom: var(--mec-space-lg);
 }
 
 .footer-widgets.horizontal {
     display: grid;
-    gap: 30px;
-    margin-bottom: 30px;
+    gap: var(--mec-space-lg);
+    margin-bottom: var(--mec-space-lg);
     width: 100%;
 }
 
@@ -1275,7 +1374,7 @@ article {
 }
 
 .footer-widgets.vertical .footer-widget {
-    margin-bottom: 30px;
+    margin-bottom: var(--mec-space-lg);
 }
 
 .footer-widget {
@@ -1316,6 +1415,24 @@ article {
 }
 
 .copyright a:hover {
+    text-decoration: underline;
+}
+
+.theme-credit {
+    text-align: center;
+    width: 100%;
+    font-size: 0.8rem;
+    color: var(--mec-copyright-color);
+    opacity: 0.75;
+}
+
+.theme-credit a {
+    color: var(--mec-primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.theme-credit a:hover {
     text-decoration: underline;
 }
 
@@ -1437,4 +1554,92 @@ article {
         max-height: 800px !important;
         overflow-y: auto !important;
     }
+}
+/* ===== Third-Party Plugin Compatibility: Online Admission Manager ===== */
+/*
+ * The admission/application form rendered by the "Online Admission Manager"
+ * plugin (.admission-form-wrapper) ships with no responsive CSS of its own --
+ * its markup places 2-3 <label>+<input> pairs side by side in a single <p>,
+ * relying entirely on the browser's unstyled default input width. On a
+ * phone-width screen, three default-width text inputs on one line (e.g. the
+ * Father's Name / Father's Contact 1 / Father's Contact 2 row) comfortably
+ * exceed the viewport, forcing the page wider than the screen -- which is
+ * why the page needs to be pinched/zoomed out to see content that runs off
+ * the right edge, and why the rest of the page can look misaligned by
+ * comparison once zoomed out to fit the form.
+ *
+ * Fix: stack every label+input pair onto its own line and let inputs fill
+ * the available width, regardless of how many were originally written on
+ * one source line. This only targets .admission-form-wrapper, so it can't
+ * affect anything else on the site.
+ */
+.admission-form-wrapper {
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+.admission-form-wrapper * {
+    box-sizing: border-box;
+}
+
+.admission-form-wrapper p {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0 0 16px;
+}
+
+.admission-form-wrapper p > label {
+    display: block;
+    width: 100%;
+}
+
+.admission-form-wrapper input[type="text"],
+.admission-form-wrapper input[type="email"],
+.admission-form-wrapper input[type="tel"],
+.admission-form-wrapper input[type="date"],
+.admission-form-wrapper input[type="file"],
+.admission-form-wrapper select,
+.admission-form-wrapper textarea {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 4px;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px; /* 16px prevents iOS Safari from auto-zooming in on focus */
+}
+
+.admission-form-wrapper .academic-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #eee;
+}
+
+.admission-form-wrapper .academic-row input,
+.admission-form-wrapper .academic-row textarea {
+    width: 100%;
+}
+
+.admission-form-wrapper fieldset {
+    max-width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.admission-form-wrapper legend {
+    font-weight: 600;
+    padding: 0 6px;
+}
+
+.admission-form-wrapper img {
+    max-width: 100%;
+    height: auto;
 }

@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *   version exactly the way a WordPress.org theme update would.
  *
  * What this requires going forward, for every future release:
- * - Tag the release on GitHub as `vX.Y.Z` (e.g. v1.7.7), matching the
+ * - Tag the release on GitHub as `vX.Y.Z` (e.g. v1.7.8), matching the
  *   `Version:` header in style.css (without the leading "v").
  * - Publish it as a GitHub Release (not just a tag) so it has a downloadable
  *   zip asset, which is what this file fetches.
@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * or Customizer functionality in any way.
  *
  * @package MEC_Theme
- * @version 1.7.7
+ * @version 1.7.10
  */
 
 /**
@@ -42,14 +42,27 @@ if ( ! defined( 'MEC_THEME_GITHUB_REPO' ) ) {
 }
 
 /**
- * Fetch the latest release info from GitHub, cached for 12 hours.
+ * Fetch the newest release info from GitHub, cached for 12 hours.
+ *
+ * This deliberately does NOT use the /releases/latest endpoint. That
+ * endpoint picks "latest" by the release's underlying commit date or
+ * publish order, not by comparing version numbers -- so if releases are
+ * ever tagged or published out of order (which has happened with this
+ * repository: v1.7.4 was published after v1.7.6, so /releases/latest
+ * pointed at the older v1.7.4), it can silently report an older version
+ * as the newest available.
+ *
+ * Instead, this fetches the most recent batch of releases and picks
+ * whichever one has the highest version number by semantic comparison,
+ * which gives a correct result regardless of GitHub's ordering or "latest"
+ * label.
  *
  * Caching matters for two reasons: GitHub's API is rate-limited for
  * unauthenticated requests (60/hour per IP), and there's no reason to make a
  * fresh network request on every single admin page load.
  *
  * @return array|false Associative array with 'version', 'download_url',
- *                      'changelog_url', 'body' on success, false on failure.
+ *                      'changelog_url' on success, false on failure.
  */
 function mec_theme_get_latest_github_release() {
     $cached = get_site_transient( 'mec_theme_github_release' );
@@ -57,8 +70,12 @@ function mec_theme_get_latest_github_release() {
         return $cached;
     }
 
+    // per_page=20 comfortably covers normal release history; if this theme
+    // ever has more than 20 releases between update checks, only the most
+    // recent 20 are considered, which in practice always includes whatever
+    // is genuinely newest.
     $api_url = sprintf(
-        'https://api.github.com/repos/%s/%s/releases/latest',
+        'https://api.github.com/repos/%s/%s/releases?per_page=20',
         MEC_THEME_GITHUB_OWNER,
         MEC_THEME_GITHUB_REPO
     );
@@ -78,24 +95,55 @@ function mec_theme_get_latest_github_release() {
         return false;
     }
 
-    $body = json_decode( wp_remote_retrieve_body( $response ), true );
+    $releases = json_decode( wp_remote_retrieve_body( $response ), true );
 
-    if ( empty( $body['tag_name'] ) || empty( $body['zipball_url'] ) ) {
+    if ( empty( $releases ) || ! is_array( $releases ) ) {
         set_site_transient( 'mec_theme_github_release', false, HOUR_IN_SECONDS );
         return false;
     }
 
-    // Tags are expected as "v1.7.7"; strip the leading "v" to compare
-    // against the plain "1.7.7" used in style.css's Version: header.
-    $version = preg_replace( '/^v/i', '', $body['tag_name'] );
+    $best_version = null;
+    $best_release = null;
+
+    foreach ( $releases as $candidate ) {
+        // Skip drafts and pre-releases; only consider published, stable
+        // releases as real update candidates.
+        if ( ! empty( $candidate['draft'] ) || ! empty( $candidate['prerelease'] ) ) {
+            continue;
+        }
+        if ( empty( $candidate['tag_name'] ) || empty( $candidate['zipball_url'] ) ) {
+            continue;
+        }
+
+        // Tags are expected as "v1.7.8"; strip the leading "v" to compare
+        // against the plain "1.7.8" used in style.css's Version: header.
+        $candidate_version = preg_replace( '/^v/i', '', $candidate['tag_name'] );
+
+        // version_compare() needs a well-formed version string; skip
+        // anything that doesn't look like one rather than letting a
+        // malformed tag (e.g. a one-off "testing" tag) win by accident.
+        if ( ! preg_match( '/^\d+(\.\d+)*$/', $candidate_version ) ) {
+            continue;
+        }
+
+        if ( null === $best_version || version_compare( $candidate_version, $best_version, '>' ) ) {
+            $best_version = $candidate_version;
+            $best_release = $candidate;
+        }
+    }
+
+    if ( null === $best_release ) {
+        set_site_transient( 'mec_theme_github_release', false, HOUR_IN_SECONDS );
+        return false;
+    }
 
     // Prefer an explicitly-attached release zip asset over GitHub's
     // auto-generated source zipball, if one was uploaded, since an
     // uploaded asset can be named/structured deliberately. Fall back to
     // the zipball (always present for any published release) otherwise.
-    $download_url = $body['zipball_url'];
-    if ( ! empty( $body['assets'] ) && is_array( $body['assets'] ) ) {
-        foreach ( $body['assets'] as $asset ) {
+    $download_url = $best_release['zipball_url'];
+    if ( ! empty( $best_release['assets'] ) && is_array( $best_release['assets'] ) ) {
+        foreach ( $best_release['assets'] as $asset ) {
             if ( ! empty( $asset['browser_download_url'] ) && preg_match( '/\.zip$/i', $asset['name'] ) ) {
                 $download_url = $asset['browser_download_url'];
                 break;
@@ -104,10 +152,9 @@ function mec_theme_get_latest_github_release() {
     }
 
     $release = array(
-        'version'       => sanitize_text_field( $version ),
+        'version'       => sanitize_text_field( $best_version ),
         'download_url'  => esc_url_raw( $download_url ),
-        'changelog_url' => esc_url_raw( ! empty( $body['html_url'] ) ? $body['html_url'] : '' ),
-        'body'          => isset( $body['body'] ) ? wp_kses_post( $body['body'] ) : '',
+        'changelog_url' => esc_url_raw( ! empty( $best_release['html_url'] ) ? $best_release['html_url'] : '' ),
     );
 
     set_site_transient( 'mec_theme_github_release', $release, 12 * HOUR_IN_SECONDS );

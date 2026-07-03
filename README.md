@@ -3,7 +3,7 @@ Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.7
+Stable tag: 1.7.18
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,9 +59,61 @@ Yes, the theme includes aria-expanded states for mobile menu and submenu toggles
 
 == Changelog ==
 
+= 1.7.18 =
+* Fixed: `<i>` and `<b>` tags typed into the Customizer's Copyright Text field were silently stripped by `wp_kses()`, since the tag whitelist only included `a`, `br`, `strong`, `em`, and `span`. Added `i` and `b` to the whitelist. (`<em>`/`<strong>` were already supported and are the more semantically correct choice, but `<i>`/`<b>` now work too rather than disappearing without warning.)
+* Added a small "Theme by Biswajit" credit line beneath the copyright text in the footer, linking to https://github.com/bungakku. Built with the same `wp_kses()` discipline as the copyright text above it (translatable name string + escaped URL, final output still passed through `wp_kses` regardless), so it follows the theme's existing security pattern rather than introducing a new one.
+* No Customizer setting controls this -- it's a fixed, small credit line, consistent with how many themes acknowledge their author. Styled to sit visually subordinate to the copyright text (smaller, slightly muted) rather than compete with it.
+
+= 1.7.17 =
+* Fixed: 1.7.16's overflow-wrap fix only covered `.widget` and `.entry-content`. Confirmed by direct testing that a long unbroken URL (e.g. a Facebook share link or Google Drive link from imported post content) could still overflow the page when it appeared in a post title or post meta -- neither of which had this protection. Added `overflow-wrap: anywhere` to `.entry-title`, `.entry-meta`, and as a broad safety net, to all headings (h1-h6) site-wide, since titles render in archive listings, related posts, and search results, not only the single-post template.
+* This was confirmed against a real reproduction: removing long URLs from imported post content fixed the overflow even with all plugins and widgets active; restoring the URLs reproduced it. This release closes the remaining gap rather than relying on .widget/.entry-content alone.
+
+= 1.7.16 =
+* Fixed a regression introduced in 1.7.15: the `overflow-wrap: break-word` fix added to `.widget` had an unintended side effect on real sites -- `.secondary` (the sidebar widget column) is a flex child of `.content-area` (display: flex), and `break-word` (the legacy property) does not factor possible word-breaks into an element's min-content size calculation. This meant a flex child containing a long unbroken string got SIZED as if the string could not break at all, stretching the sidebar itself to fit it -- the overflow showed up one level up (the whole sidebar/page), not inside the text that was supposedly being wrapped. This was confirmed on a live test site: a Custom HTML "news ticker" widget, completely unchanged since 1.7.12, started overflowing the moment 1.7.15 was installed and stopped the moment it was reverted.
+* Changed `.widget` and `.entry-content` to use `overflow-wrap: anywhere` instead of `break-word`. `anywhere` does not have the min-content calculation problem and is the current standard replacement; `word-wrap: break-word` is kept only as a fallback for very old browsers without `overflow-wrap` support.
+* If you installed 1.7.15 and saw sidebar/page overflow that wasn't present before, this release fixes it with no other changes needed.
+
+= 1.7.15 =
+* Fixed: the long-running "vertical gap / needs pinch-to-fit on mobile" issue, finally root-caused. It traced to imported post content containing long, unbroken URLs with no spaces or hyphens (e.g. Google Drive links pasted directly as plain text, visible in the "Campus News" sidebar widget after importing posts from another site). A browser treats a string like that as a single unbreakable "word" and will not wrap it at the container edge by default -- if it's wider than the sidebar column, it forces that column wider than its parent, which can push the whole page wider than the viewport. This had nothing to do with sticky headers, caching, or any of the other things ruled out in 1.7.11-1.7.14 along the way -- it only appeared once content containing this pattern existed on the site, which is why it tracked so precisely with "started after I imported some posts."
+* Added `overflow-wrap: break-word` (with the `word-wrap` fallback for older browsers) to the base `.widget` rule -- covering every sidebar widget at once -- and to `.entry-content`, covering post/page body text. Any future long unbroken string in either location will now wrap inside its container instead of forcing it wider.
+* The theme already had this exact protection on mobile navigation menu links (added at some earlier point, scoped only to `.main-navigation a`) -- this release extends the same fix to the two places it was actually needed.
+
+= 1.7.14 =
+* Improved: reduced .container side padding from 20px to 10px on phones (480px and below) only. Tablet (481-768px) and desktop are unchanged at 20px. This was a direct request after testing 1.7.12 live -- 20px felt like more side margin than needed on small screens, eating into already-limited width.
+* No structural change: this only adjusts one padding value inside an existing mobile media query block. Sidebar layout, header layout, and the admission-form-wrapper fix from 1.7.12 are unaffected (the form's inputs automatically gain a small amount of extra usable width as a side effect, since they fill their parent's width).
+
+= 1.7.13 =
+* Improved: introduced a small spacing scale (`--mec-space-xs` through `--mec-space-xl`, 8px/12px/20px/32px/48px) as CSS variables, and applied it to the main layout and widget spacing that was previously a mix of one-off values (15px, 20px, 30px, 40px used inconsistently in different places). Applied to: the sidebar/content gap, article card padding and spacing, entry header/title margins, sidebar widget padding and title spacing, and the footer widgets area.
+* This is a spacing-only refinement -- sidebar structure, the has-sidebar/no-sidebar logic, sidebar-left/sidebar-right ordering, container width, colors, typography, and all Customizer settings are completely unchanged. Any custom CSS already added via Customizer > Additional CSS (e.g. a widget margin override) continues to apply on top of this exactly as before, since theme defaults always load first.
+* No settings or markup changed; this only touches numeric spacing values in style.css.
+
+= 1.7.12 =
+* Fixed: pages using the "Online Admission Manager" plugin's application form needed to be pinched/zoomed out to fit on mobile and tablet -- the plugin's form markup places multiple label+input pairs on a single line (e.g. Father's Name / Father's Contact 1 / Father's Contact 2 in one `<p>`, and six fields plus a button in each "Academic Record" row) with no responsive CSS of its own, so the unstyled default input widths comfortably exceeded any phone screen and forced the whole page wider than the viewport.
+* Added a new "Third-Party Plugin Compatibility: Online Admission Manager" section to style.css, scoped entirely to `.admission-form-wrapper` (the plugin's own wrapper class) so it cannot affect anything else on the site. Every label+input pair now stacks on its own line and inputs fill the available width; the "Academic Record" repeatable row does the same. Form inputs are also set to 16px font-size, which prevents iOS Safari's auto-zoom-on-focus behavior -- a separate small annoyance on the same page.
+* This is a CSS-only override living in the theme, not a change to the plugin itself, so it survives plugin updates and doesn't require editing any plugin files. If "Online Admission Manager" is not installed/active, this section has no effect.
+
+= 1.7.11 =
+* Fixed: with "Enable Sticky Header" turned on (Customize > Layout Settings > Header), `.site-header` was given `position: sticky` with no explicit `width`. On mobile, this could leave the header pinned to whatever width was correct at the exact moment it first became "stuck" during a scroll -- if a vertical scrollbar appeared or disappeared around that same moment (common right after page load, once content below the fold finishes rendering and changes total page height), the header's stuck width didn't always get recalculated afterward. This showed up as a vertical gap along one edge of the page that was present from first scroll, identical across browsers, but disappeared on pinch-zoom (forces a full layout recalculation) or page reload (restarts before the sticky state has triggered) -- exactly the symptoms reported and reproduced in this troubleshooting session. Added explicit `left: 0; width: 100%;` to the sticky header rule so its width is tied directly to the viewport on every layout pass instead of being implicitly inherited once and potentially left stale.
+* No change for sites with "Enable Sticky Header" turned off; this only touches the CSS generated when that setting is enabled.
+
+= 1.7.10 =
+* Fixed: the v1.7.9 release zip had an extra nested folder (assets/, inc/, etc. were one level deeper than every prior release), which would have produced an invalid theme structure if extracted directly into wp-content/themes/. This release restores the flat structure used by all releases through 1.7.8.
+* Fixed: several `inc/` files carried a comment noting which version's "file-organization pass" extracted them from functions.php/customizer.php. That reorganization happened once, in 1.7.1 -- the comment was being incorrectly rewritten to the current version number on every release since, falsely implying a reorganization happened every time. Corrected to state the actual version (1.7.1) permanently.
+* Housekeeping: this release contains no template, style, or Customizer behavior changes -- it exists solely to ship a correctly-packaged, consistently-versioned copy of 1.7.9's fixes after a packaging error in that release's zip.
+
+= 1.7.9 =
+* Fixed: images inserted into post/page content (via the editor) had no width constraint, so an image uploaded at its native resolution (e.g. 1600px wide) would render at full size regardless of viewport. On mobile and tablet this pushed .entry-content, .primary, .content-area, and .container wider than the screen -- body's existing `overflow-x: hidden` only hid the resulting scrollbar, it didn't stop the layout itself from being oversized, which is what made the page edges look uncontained/"not fixed" on small screens. Added a global `max-width: 100%; height: auto;` rule for img/video/embed/object, scoped narrowly enough that existing more specific image rules (.post-thumbnail img, .author-info img, etc.) still override it as before.
+* Fixed: embedded videos (YouTube/Vimeo embeds pasted into content) had no CSS making the iframe itself scale down. `add_theme_support('responsive-embeds')` wraps embeds in a ratio container, but still needs this to be effective.
+* Fixed: a wide table in post content (more columns than fit a phone screen) would force the same kind of horizontal overflow as the image issue above. Tables now scroll horizontally within their own bounds instead of widening the page.
+* No Customizer settings, template logic, or JS were touched; this is a style.css-only fix.
+
+= 1.7.8 =
+* Fixed: the update checker used GitHub's `/releases/latest` endpoint, which picks "latest" by the release's underlying commit/publish order, not by comparing version numbers. Because v1.7.4 was published after v1.7.6 in this repository's history, `/releases/latest` was pointing at v1.7.4 -- meaning a site on an older version could be told v1.7.4 was the newest available, skipping past v1.7.6 and v1.7.7 entirely. The checker now fetches the recent release list and selects whichever one has the highest version number by semantic comparison, so it gives a correct result regardless of GitHub's ordering or "latest" label. Draft releases, pre-releases, and tags that aren't well-formed version numbers are now explicitly skipped as candidates.
+* Removed: the cached release data included a `body` field (the release notes) that was sanitized but never actually displayed anywhere -- dead weight, same as a couple of earlier cleanups in this theme. Removed rather than wiring up an unused feature.
+* No template, style, or Customizer behaviour was touched; this only affects how inc/github-updater.php decides which GitHub release is newest.
+
 = 1.7.7 =
 * Added: GitHub-based update checker (inc/github-updater.php). Since this theme isn't distributed via WordPress.org, there was previously no way for a site to know when a new version was available. This hooks into WordPress's native theme-update system, checking https://github.com/bungakku/Mec_Theme/releases for new tags -- sites running the theme now get the normal "Update available" notice and a working "Update now" button, exactly like a WordPress.org theme update. Checks are cached for 12 hours to stay well under GitHub's API rate limit. This is purely additive: the only change to any existing file is one new `require_once` line in functions.php; no template, style, or Customizer behaviour was touched.
-
 
 = 1.7.6 =
 * Removed: the unused "Social Menu" nav menu location (`register_nav_menus`). The theme already has a dedicated social-icon system in Customizer > Contact & Social with per-platform URL fields, proper icon styling, and accessible labels — a generic menu location for the same purpose was dead weight that could be assigned in the admin but never rendered anywhere.

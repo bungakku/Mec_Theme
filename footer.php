@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * The footer template
  *
  * @package MEC_Theme
- * @version 1.7.7
+ * @version 1.7.8
  */
 
 ?>
@@ -70,12 +70,35 @@ if ( ! defined( 'ABSPATH' ) ) exit;
                         'br' => array(),
                         'strong' => array(),
                         'em' => array(),
+                        'i' => array(),
+                        'b' => array(),
                         'span' => array(
                             'class' => array(),
                         ),
                     ) );
                     ?>
                 </div>
+                <p class="theme-credit">
+                    <?php
+                    // Theme developer credit. Built with wp_kses (same pattern as
+                    // the copyright text above) rather than printf+raw HTML, so a
+                    // translation string can never carry executable markup -- only
+                    // the developer name itself is translatable; the link markup
+                    // is fixed theme code, and wp_kses has the final say regardless.
+                    $credit_name = '<a href="' . esc_url( 'https://github.com/bungakku' ) . '" target="_blank" rel="noopener noreferrer"><em>' . esc_html__( 'Biswajit', 'mec_theme' ) . '</em></a>';
+                    echo wp_kses(
+                        sprintf(
+                            /* translators: %s: linked developer name */
+                            __( 'Theme by %s', 'mec_theme' ),
+                            $credit_name
+                        ),
+                        array(
+                            'a'  => array( 'href' => array(), 'target' => array(), 'rel' => array() ),
+                            'em' => array(),
+                        )
+                    );
+                    ?>
+                </p>
                 
                 <?php if ( get_theme_mod( 'mec_theme_show_footer_menu', true ) && has_nav_menu( 'footer' ) ) : ?>
                     <nav class="footer-navigation" aria-label="<?php esc_attr_e( 'Footer Menu', 'mec_theme' ); ?>">
