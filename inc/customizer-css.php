@@ -22,6 +22,43 @@ function mec_theme_get_color_var( $mod, $default ) {
 }
 
 /**
+ * Given a hex color, return a contrasting text color (near-black or
+ * near-white) suitable for text placed on top of it.
+ *
+ * Uses the standard relative-luminance formula (the same weighting WCAG
+ * contrast calculations use: 0.299/0.587/0.114 for R/G/B) rather than a
+ * naive average of the three channels, since human eyes are far more
+ * sensitive to green than red or blue -- a naive average misjudges some
+ * colors (e.g. a saturated blue reads as "dark" to this formula but a
+ * naive RGB average can call it borderline).
+ *
+ * This lets a single Customizer color choice (e.g. Footer Background)
+ * automatically produce a readable, contrasting color for dependent text
+ * (e.g. the footer credit link) without the site owner needing to pick a
+ * second, separate color and keep the two in sync by hand every time the
+ * background changes.
+ *
+ * @param string $hex      A #rrggbb hex color (already sanitized by the caller).
+ * @param string $dark     Color to return for light backgrounds. Default near-black.
+ * @param string $light    Color to return for dark backgrounds. Default near-white.
+ * @return string
+ */
+function mec_theme_get_contrast_color( $hex, $dark = '#1a1a1a', $light = '#f5f5f5' ) {
+    $hex = ltrim( (string) $hex, '#' );
+    if ( strlen( $hex ) !== 6 || ! ctype_xdigit( $hex ) ) {
+        return $dark; // Malformed input: fall back to dark text, the safer default against this theme's typically light backgrounds.
+    }
+    $r = hexdec( substr( $hex, 0, 2 ) );
+    $g = hexdec( substr( $hex, 2, 2 ) );
+    $b = hexdec( substr( $hex, 4, 2 ) );
+    $luminance = ( 0.299 * $r + 0.587 * $g + 0.114 * $b ) / 255;
+    // Threshold of 0.55 (rather than the more common 0.5) is deliberately
+    // biased slightly toward returning the dark color, since mid-tone
+    // backgrounds tend to pair more reliably with dark text in practice.
+    return ( $luminance > 0.55 ) ? $dark : $light;
+}
+
+/**
  * Format font family for CSS
  *
  * Defense-in-depth: even though the theme_mod values passed in here are
@@ -79,6 +116,7 @@ function mec_theme_get_root_variables_css() {
     
     $footer_bg = mec_theme_get_color_var( 'mec_theme_footer_bg', '#f8f9fa' );
     $css .= '--mec-footer-bg: ' . $footer_bg . ';';
+    $css .= '--mec-footer-credit-color: ' . mec_theme_get_contrast_color( $footer_bg ) . ';';
     
     $copyright_color = mec_theme_get_color_var( 'mec_theme_copyright_color', '#666666' );
     $css .= '--mec-copyright-color: ' . $copyright_color . ';';

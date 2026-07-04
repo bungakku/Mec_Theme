@@ -3,7 +3,7 @@ Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.18
+Stable tag: 1.7.19
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.19 =
+* Improved: footer copyright text and the "Theme by Biswajit" credit line now sit inline on one row on desktop/tablet (separated by a dash), and stack on separate lines on mobile (768px and below) where the combined text would otherwise wrap awkwardly.
+* Improved: the credit link's color is now automatically computed for readability against whatever Footer Background color is chosen in the Customizer, using a standard relative-luminance calculation (the same weighting used in WCAG contrast formulas) -- light text on dark backgrounds, dark text on light backgrounds, with no extra color setting to manage. New helper: `mec_theme_get_contrast_color()` in inc/customizer-css.php, exposed as the `--mec-footer-credit-color` CSS variable.
+* No other settings changed; the copyright text's own color is untouched and still fully Customizer-controlled as before.
 
 = 1.7.18 =
 * Fixed: `<i>` and `<b>` tags typed into the Customizer's Copyright Text field were silently stripped by `wp_kses()`, since the tag whitelist only included `a`, `br`, `strong`, `em`, and `span`. Added `i` and `b` to the whitelist. (`<em>`/`<strong>` were already supported and are the more semantically correct choice, but `<i>`/`<b>` now work too rather than disappearing without warning.)

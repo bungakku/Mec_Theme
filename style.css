@@ -4,7 +4,7 @@ Theme URI: https://biswazit.in/mectheme
 Author: Biswajit
 Author URI: https://biswazit.in
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.18
+Version: 1.7.19
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1397,15 +1397,26 @@ article {
 
 .footer-bottom {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+    gap: 8px;
+}
+
+/* Below 769px: stack copyright and credit on separate lines instead of
+   trying to fit them on one row, since the combined text is long enough
+   to wrap awkwardly mid-sentence on narrow screens otherwise. */
+@media (max-width: 768px) {
+    .footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+    }
 }
 
 .copyright {
     text-align: center;
-    width: 100%;
+    width: auto;
 }
 
 .copyright a {
@@ -1420,20 +1431,45 @@ article {
 
 .theme-credit {
     text-align: center;
-    width: 100%;
+    width: auto;
     font-size: 0.8rem;
     color: var(--mec-copyright-color);
-    opacity: 0.75;
+}
+
+/* On desktop, .theme-credit sits inline right after .copyright (same row,
+   thanks to .footer-bottom's row layout above) -- this dash visually joins
+   them, like "© 2026 College. All rights reserved. - Theme by Biswajit".
+   Hidden on mobile since the two sit on separate lines there instead. */
+.theme-credit::before {
+    content: "- ";
+}
+
+@media (max-width: 768px) {
+    .copyright,
+    .theme-credit {
+        width: 100%;
+    }
+
+    .theme-credit::before {
+        content: "";
+    }
 }
 
 .theme-credit a {
-    color: var(--mec-primary-color);
+    /* Auto-contrast against the footer background (see
+       mec_theme_get_contrast_color() in inc/customizer-css.php) rather
+       than the fixed accent color, so this stays readable no matter what
+       footer background color is chosen in the Customizer -- no manual
+       color picking or risk of the link disappearing against a dark
+       background. */
+    color: var(--mec-footer-credit-color, var(--mec-primary-color));
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .theme-credit a:hover {
     text-decoration: underline;
+    opacity: 0.85;
 }
 
 .footer-menu {
