@@ -3,9 +3,10 @@ Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.20
+Stable tag: 1.7.21
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Author URI:  https://github.com/bungakku
 
 A lightweight, fully responsive WordPress theme for educational institutions, blogs, and business websites. Optimized for mobile with extensive customizer options.
 
@@ -58,6 +59,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.21 =
+* Fixed: the long-running "page can be pinched/squeezed, leaving a vertical gap on one edge" issue -- the real root cause, finally confirmed by reproducing it from a fresh install with no content, no plugins, and no custom CSS at all, triggered simply by opening the mobile hamburger menu. navigation.js locked background scrolling while the mobile menu panel was open by setting `document.body.style.overflow = 'hidden'` -- the shorthand `overflow` property, which sets BOTH overflow-x and overflow-y at once. As an inline style, this overrides style.css's own `overflow-x: hidden` on body (inline styles always beat stylesheet rules). The result: overflow-y flipped from its normal scrollable state to hidden the instant the menu opened, removing body's vertical scrollbar -- and removing a scrollbar after the page has already been laid out grows the available viewport width, which not every already-rendered element recomputes cleanly. This explains every previous report of the gap: it was never about long URLs, sticky headers, caching, or any specific widget -- those things were coincidental to pages where the menu happened to get opened during testing. Fixed by changing both the open and close handlers to set `overflowY` specifically instead of the `overflow` shorthand, leaving overflow-x exactly as the stylesheet already defines it.
+* Also fixed: `isMobile.addListener()`, a deprecated MediaQueryList method, replaced with the standard `addEventListener('change', ...)`. Flagged in this theme's original code audit but never actually applied until now.
+* Earlier overflow-wrap fixes (1.7.16-1.7.20) for long URLs in widgets/titles/post content are still valid, good defensive practices, and remain in place -- they just were never the cause of this particular, more visible bug.
 
 = 1.7.20 =
 * Fixed: single blog posts never respected the Blog Settings panel (Post Meta show/hide/custom, individual date/author/comments toggles) since the very beginning. single.php requests get_template_part('content', get_post_type()), which for a standard post should load template-parts/content-post.php -- but that file never existed, so WordPress silently fell back to the generic template-parts/content.php, which hardcodes its entry-meta output with no reference to any Customizer setting at all. Added the missing content-post.php, ported from the same working logic content-blog.php (the blog-listing template) already used correctly. If you were using a "Hide Post Meta" custom CSS rule as a workaround, it's no longer needed -- the actual Customizer toggle now works.
@@ -213,6 +219,6 @@ Yes, the theme includes aria-expanded states for mobile menu and submenu toggles
 
 == Credits ==
 
-Developed by Biswajit – https://biswazit.in
+Developed by Biswajit
 Icons are inline SVGs created by the author.
 No external libraries or assets are used.

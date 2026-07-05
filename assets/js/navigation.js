@@ -34,7 +34,25 @@
 
             if (isExpanded) {
                 menuToggle.innerHTML = '✕ ' + defaultCloseText;
-                document.body.style.overflow = 'hidden';
+                // IMPORTANT: only touch overflow-y here, never the `overflow`
+                // shorthand. The shorthand sets BOTH overflow-x and
+                // overflow-y at once -- and since this is an inline style,
+                // it overrides style.css's own `overflow-x: hidden` on body
+                // (inline styles always win over stylesheet rules). Setting
+                // the shorthand was flipping overflow-y from its normal
+                // scrollable state to hidden, which removes body's vertical
+                // scrollbar the instant the menu opens. Removing a
+                // scrollbar after the page has already been laid out grows
+                // the available viewport width by however many pixels that
+                // scrollbar took up, and not every already-rendered element
+                // recomputes its width cleanly in response -- this was the
+                // actual root cause of the long-running "page can be
+                // pinched/squeezed, leaving a vertical gap" issue, confirmed
+                // reproduced on three separate fresh installs by opening the
+                // hamburger menu. Restricting this to overflow-y avoids the
+                // scrollbar-removal reflow entirely while still correctly
+                // locking background scroll behind the open mobile panel.
+                document.body.style.overflowY = 'hidden';
                 // Collapse all submenus when opening
                 document.querySelectorAll('.main-navigation li.menu-item-has-children').forEach(function(item) {
                     item.classList.remove('toggled');
@@ -44,7 +62,7 @@
                 if (closeBtn) closeBtn.focus();
             } else {
                 menuToggle.innerHTML = '☰ ' + defaultMenuText;
-                document.body.style.overflow = '';
+                document.body.style.overflowY = '';
                 document.querySelectorAll('.main-navigation li.menu-item-has-children.toggled').forEach(function(item) {
                     item.classList.remove('toggled');
                     const parentLink = item.querySelector('> a');
@@ -117,7 +135,7 @@
         }
 
         checkScreenSize();
-        isMobile.addListener(checkScreenSize);
+        isMobile.addEventListener('change', checkScreenSize);
         let resizeTimer;
         window.addEventListener('resize', function() {
             clearTimeout(resizeTimer);
