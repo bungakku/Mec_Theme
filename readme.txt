@@ -3,7 +3,7 @@ Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.19
+Stable tag: 1.7.20
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,12 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.20 =
+* Fixed: single blog posts never respected the Blog Settings panel (Post Meta show/hide/custom, individual date/author/comments toggles) since the very beginning. single.php requests get_template_part('content', get_post_type()), which for a standard post should load template-parts/content-post.php -- but that file never existed, so WordPress silently fell back to the generic template-parts/content.php, which hardcodes its entry-meta output with no reference to any Customizer setting at all. Added the missing content-post.php, ported from the same working logic content-blog.php (the blog-listing template) already used correctly. If you were using a "Hide Post Meta" custom CSS rule as a workaround, it's no longer needed -- the actual Customizer toggle now works.
+* Fixed: front-page.php had its own separate, hardcoded post loop (not using get_template_part at all), which ignored every Blog Settings option -- no excerpt length, no featured image size, no read-more text/toggle, no meta controls, just the full post body dumped unconditionally. This was also the source of a long-URL-in-post-content overflow issue specifically on the front page (confirmed: the same long URL wrapped correctly in the sidebar widget but not in the front-page post loop) -- front-page.php's bare <article> markup didn't share the same protective styling as the properly-built template parts. Replaced the hardcoded loop with the same get_template_part('content', 'blog') call index.php/archive.php/search.php already use.
+* Added overflow-wrap: anywhere directly to the base `article` rule as a final safety net, since front-page.php's old hardcoded markup rendered straight into a bare <article> with none of the wrapper elements (.entry-content-wrapper) that already had this protection.
+* Together, these two template fixes mean every blog-post-rendering context in the theme (front page, blog index, archives, search results, and now single posts) goes through the same Customizer-aware, long-URL-safe code path.
 
 = 1.7.19 =
 * Improved: footer copyright text and the "Theme by Biswajit" credit line now sit inline on one row on desktop/tablet (separated by a dash), and stack on separate lines on mobile (768px and below) where the combined text would otherwise wrap awkwardly.
