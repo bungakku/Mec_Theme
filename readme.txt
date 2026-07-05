@@ -1,18 +1,18 @@
 === MEC Theme ===
-Contributors: Biswajit
+Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.21
+Stable tag: 1.7.22
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Author URI:  https://github.com/bungakku
+Author UPI:  https://github.com/bungakku
 
 A lightweight, fully responsive WordPress theme for educational institutions, blogs, and business websites. Optimized for mobile with extensive customizer options.
 
 == Description ==
 
-MEC Theme is a modern, flexible WordPress theme designed for Mount Everest College. It offers a clean design, mobile-first approach, and a wealth of customization settings without needing to touch code.
+MEC Theme is a modern, flexible WordPress theme initially designed for Mount Everest College. It offers a clean design, mobile-first approach, and a wealth of customization settings without needing to touch code.
 
 == Key Features ==
 
@@ -59,6 +59,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.22 =
+* Fixed: 1.7.21 corrected the `overflow` shorthand bug (it was unintentionally also touching overflow-x), but testing on a real device showed the gap survived anyway -- because overflow-y: hidden BY ITSELF is still enough to remove body's vertical scrollbar on browsers/devices using classic, non-overlay scrollbars, and removing a scrollbar after the page has already laid out still grows the available content width regardless of which overflow axis caused it.
+* The actual complete fix: navigation.js now measures the real scrollbar width (window.innerWidth minus document.documentElement.clientWidth) the first time the menu opens, and applies that exact value as `padding-right` on body at the same instant the scrollbar is hidden -- so the body's total width never changes, regardless of whether the scrollbar disappearing would have grown it. On devices using overlay scrollbars (most mobile browsers, recent macOS), the measured width is correctly 0 and this is a harmless no-op. Removed and restored cleanly when the menu closes.
+* This is a standard, well-documented technique for exactly this class of problem (locking scroll without triggering a layout shift), not something specific to this theme -- 1.7.21's analysis of the root cause was correct, the fix just needed one more piece to be complete.
 
 = 1.7.21 =
 * Fixed: the long-running "page can be pinched/squeezed, leaving a vertical gap on one edge" issue -- the real root cause, finally confirmed by reproducing it from a fresh install with no content, no plugins, and no custom CSS at all, triggered simply by opening the mobile hamburger menu. navigation.js locked background scrolling while the mobile menu panel was open by setting `document.body.style.overflow = 'hidden'` -- the shorthand `overflow` property, which sets BOTH overflow-x and overflow-y at once. As an inline style, this overrides style.css's own `overflow-x: hidden` on body (inline styles always beat stylesheet rules). The result: overflow-y flipped from its normal scrollable state to hidden the instant the menu opened, removing body's vertical scrollbar -- and removing a scrollbar after the page has already been laid out grows the available viewport width, which not every already-rendered element recomputes cleanly. This explains every previous report of the gap: it was never about long URLs, sticky headers, caching, or any specific widget -- those things were coincidental to pages where the menu happened to get opened during testing. Fixed by changing both the open and close handlers to set `overflowY` specifically instead of the `overflow` shorthand, leaving overflow-x exactly as the stylesheet already defines it.
@@ -219,6 +224,6 @@ Yes, the theme includes aria-expanded states for mobile menu and submenu toggles
 
 == Credits ==
 
-Developed by Biswajit
+Developed by: Biswajit 
 Icons are inline SVGs created by the author.
 No external libraries or assets are used.
