@@ -16,6 +16,7 @@
         const navigation = document.querySelector('.main-navigation');
         const mobilePanel = document.querySelector('.mobile-menu-panel');
         const closeBtn = document.querySelector('.mobile-menu-close');
+        const backdrop = document.querySelector('.mobile-menu-backdrop');
 
         const vars = window.mecThemeVars || {};
         const defaultMenuText = vars.menuText || 'Menu';
@@ -96,6 +97,13 @@
 
         if (closeBtn) {
             closeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (navigation.classList.contains('toggled')) toggleMenu();
+            });
+        }
+
+        if (backdrop) {
+            backdrop.addEventListener('click', function(e) {
                 e.preventDefault();
                 if (navigation.classList.contains('toggled')) toggleMenu();
             });

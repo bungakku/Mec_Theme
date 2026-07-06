@@ -180,6 +180,7 @@ if ( function_exists( 'wp_body_open' ) ) {
                     );
                     ?>
                 </div><!-- .mobile-menu-panel -->
+                <div class="mobile-menu-backdrop"></div>
             </nav><!-- #site-navigation -->
 
             <?php if ( is_active_sidebar( 'header-widget' ) ) : ?>

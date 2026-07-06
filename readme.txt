@@ -1,18 +1,18 @@
 === MEC Theme ===
-Contributors: Biswajit Thokchom
+Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.22
+Stable tag: 1.7.23
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Author UPI:  https://github.com/bungakku
+Author URI:  https://github.com/bungakku
 
 A lightweight, fully responsive WordPress theme for educational institutions, blogs, and business websites. Optimized for mobile with extensive customizer options.
 
 == Description ==
 
-MEC Theme is a modern, flexible WordPress theme initially designed for Mount Everest College. It offers a clean design, mobile-first approach, and a wealth of customization settings without needing to touch code.
+MEC Theme is a modern, flexible WordPress theme designed for Mount Everest College. It offers a clean design, mobile-first approach, and a wealth of customization settings without needing to touch code.
 
 == Key Features ==
 
@@ -59,6 +59,12 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.23 =
+* Different finding this time: direct DevTools measurement with the menu open showed body at exactly the viewport width, no horizontal scrollbar, no overflow at all -- meaning 1.7.21/1.7.22's scrollbar-width fixes were addressing a real, separate issue, but not the one actually being seen and reported as "a vertical gap." 
+* The actual explanation: .mobile-menu-panel (the off-canvas menu) is only 80% of the screen width by design, sliding in from the right with the remaining 20% intentionally left showing the page behind it (so there's room to tap outside the panel to close it) -- but no backdrop/overlay ever existed to dim that area or indicate it was intentional. That uncovered strip, with nothing visually marking it as deliberate, is what was being seen and described as a gap -- not a layout overflow, since there wasn't one.
+* Added a dimmed backdrop behind the mobile menu panel, visible only while the menu is open, plus tap-to-close on it (previously you could only close via the explicit X button or Escape key). 
+* The overflow-wrap and scrollbar-width fixes from 1.7.16-1.7.22 all remain in place; they were correct fixes for real, separate issues, just not this particular visual report.
 
 = 1.7.22 =
 * Fixed: 1.7.21 corrected the `overflow` shorthand bug (it was unintentionally also touching overflow-x), but testing on a real device showed the gap survived anyway -- because overflow-y: hidden BY ITSELF is still enough to remove body's vertical scrollbar on browsers/devices using classic, non-overlay scrollbars, and removing a scrollbar after the page has already laid out still grows the available content width regardless of which overflow axis caused it.
@@ -224,6 +230,6 @@ Yes, the theme includes aria-expanded states for mobile menu and submenu toggles
 
 == Credits ==
 
-Developed by: Biswajit 
+Developed by Biswajit – https://biswazit.in
 Icons are inline SVGs created by the author.
 No external libraries or assets are used.
