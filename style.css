@@ -4,7 +4,7 @@ Theme URI: https://biswazit.in/mectheme
 Author: Biswajit
 Author URI: https://biswazit.in
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.23
+Version: 1.7.24
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1342,6 +1342,42 @@ article {
        not have this problem and is the current standard replacement. */
     overflow-wrap: anywhere;
     word-wrap: break-word;
+}
+
+/* Excludes .screen-reader-text (WordPress core's standard visually-hidden-
+   but-accessible utility class) from inheriting .widget's overflow-wrap.
+   That class's entire job is to stay clipped to exactly 1x1px via
+   position:absolute + clip-path + a negative margin -- it never needs to
+   wrap text, since nothing about it is ever visible. Confirmed via
+   real-device testing: turning OFF "Show label" on a Gutenberg Search
+   block widget applies this exact class to the label, and inheriting
+   overflow-wrap: anywhere onto it was found to interfere with the
+   1px-clipping technique on some mobile browsers, producing a full-width,
+   position:absolute box instead of the intended invisible 1px one --
+   which in turn affected the rest of the page's layout. This is the third
+   distinct way overflow-wrap has interacted badly with a sizing-sensitive
+   element in this theme (see the comment above for the first, from
+   v1.7.15); excluding utility classes like this one outright is safer
+   than chasing each new interaction individually. */
+.widget .screen-reader-text {
+    overflow-wrap: normal;
+    word-wrap: normal;
+}
+
+/* Defensive second layer: pins down the screen-reader-text utility
+   class's critical sizing properties explicitly, with !important, rather
+   than relying solely on excluding overflow-wrap above. This is the one
+   place in this theme !important is used outside the admin-only/print
+   contexts elsewhere, justified because this is a narrow, well-defined
+   utility class (not a content selector), and getting it wrong has a
+   real, confirmed history of affecting page-wide layout. */
+.screen-reader-text {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
 }
 
 .widget-title {

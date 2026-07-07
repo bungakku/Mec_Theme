@@ -3,10 +3,10 @@ Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.23
+Stable tag: 1.7.24
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Author URI:  https://github.com/bungakku
+Auther URI:  https://github.com/bungakku
 
 A lightweight, fully responsive WordPress theme for educational institutions, blogs, and business websites. Optimized for mobile with extensive customizer options.
 
@@ -59,6 +59,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.24 =
+* Fixed: turning OFF "Show label" on a sidebar Search widget (the Gutenberg core Search block) triggered the same "page needs pinching, vertical gap" symptom, isolated and confirmed via direct DevTools testing on a real device. Root cause: WordPress core applies its standard .screen-reader-text utility class to the hidden label (correct, standard behavior -- the label is hidden visually but kept for screen readers). That class is normally clipped to exactly 1x1px via position:absolute + clip-path + a negative margin. This theme's .widget rule (added in 1.7.15/1.7.16 to fix long-URL overflow) applies overflow-wrap: anywhere to everything inside a widget, including this label -- and on at least some mobile browsers, that combination interfered with the 1px-clipping technique, producing a full-width position:absolute box instead of an invisible one, which affected the rest of the page's layout.
+* Excluded .screen-reader-text from inheriting .widget's overflow-wrap, and added a defensive, explicit .screen-reader-text rule pinning down its critical sizing properties directly, as a second safety net.
+* This is the third distinct way overflow-wrap: anywhere has interacted badly with a sizing-sensitive element in this theme (the others: a flex sidebar in 1.7.15, addressed in 1.7.16). If you've been keeping "Show label" forced ON as a workaround, it should no longer be necessary after this update.
 
 = 1.7.23 =
 * Different finding this time: direct DevTools measurement with the menu open showed body at exactly the viewport width, no horizontal scrollbar, no overflow at all -- meaning 1.7.21/1.7.22's scrollbar-width fixes were addressing a real, separate issue, but not the one actually being seen and reported as "a vertical gap." 
@@ -230,6 +235,6 @@ Yes, the theme includes aria-expanded states for mobile menu and submenu toggles
 
 == Credits ==
 
-Developed by Biswajit – https://biswazit.in
+Developed by: Biswajit
 Icons are inline SVGs created by the author.
 No external libraries or assets are used.
