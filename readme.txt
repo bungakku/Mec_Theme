@@ -3,10 +3,10 @@ Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.24
+Stable tag: 1.7.25
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Auther URI:  https://github.com/bungakku
+Author URI:  https://github.com/bungakku
 
 A lightweight, fully responsive WordPress theme for educational institutions, blogs, and business websites. Optimized for mobile with extensive customizer options.
 
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.25 =
+* Improved: reduced the mobile menu panel's top padding from 80px to 24px. The panel is position:fixed, so it always starts at the very top of the screen regardless of scroll position -- the old 80px gap above the close button had no functional purpose and just pushed menu content down, visually eating into space where the header would otherwise be visible.
+* Cosmetic only; no functional/layout-bug changes in this release.
 
 = 1.7.24 =
 * Fixed: turning OFF "Show label" on a sidebar Search widget (the Gutenberg core Search block) triggered the same "page needs pinching, vertical gap" symptom, isolated and confirmed via direct DevTools testing on a real device. Root cause: WordPress core applies its standard .screen-reader-text utility class to the hidden label (correct, standard behavior -- the label is hidden visually but kept for screen readers). That class is normally clipped to exactly 1x1px via position:absolute + clip-path + a negative margin. This theme's .widget rule (added in 1.7.15/1.7.16 to fix long-URL overflow) applies overflow-wrap: anywhere to everything inside a widget, including this label -- and on at least some mobile browsers, that combination interfered with the 1px-clipping technique, producing a full-width position:absolute box instead of an invisible one, which affected the rest of the page's layout.
