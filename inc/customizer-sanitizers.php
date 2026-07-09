@@ -11,7 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * file-organization pass.
  *
  * @package MEC_Theme
- * @version 1.7.8
  */
 
 /**

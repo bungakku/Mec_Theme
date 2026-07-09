@@ -4,7 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Template part for displaying a message that posts cannot be found
  *
  * @package MEC_Theme
- * @version 1.7.8
  */
 ?>
 

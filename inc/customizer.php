@@ -21,7 +21,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * lived in functions.php), so it only needs to be required here, not called.
  *
  * @package MEC_Theme
- * @version 1.7.8
  */
 
 require_once MEC_THEME_DIR . '/inc/customizer/layout-panel.php';

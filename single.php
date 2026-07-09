@@ -4,7 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * The template for displaying all single posts
  *
  * @package MEC_Theme
- * @version 1.7.8
  */
 
 get_header(); ?>

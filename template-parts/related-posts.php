@@ -4,7 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Template part for displaying related posts
  *
  * @package MEC_Theme
- * @version 1.7.8
  */
 
 if ( ! is_single() ) {

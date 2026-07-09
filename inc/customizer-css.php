@@ -12,7 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * via mec_theme_scripts() -> wp_add_inline_style()).
  *
  * @package MEC_Theme
- * @version 1.7.8
  */
 
 function mec_theme_get_color_var( $mod, $default ) {

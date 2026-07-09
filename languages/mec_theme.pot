@@ -2,7 +2,7 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MEC_Theme 1.7.26\n"
+"Project-Id-Version: MEC_Theme 1.7.27\n"
 "Report-Msgid-Bugs-To: https://biswazit.in/mectheme\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1099,4 +1099,32 @@ msgstr ""
 
 #: footer.php:88
 msgid "Biswajit"
+msgstr ""
+
+#: inc/title-settings.php:25
+msgid "Title Settings"
+msgstr ""
+
+#: inc/title-settings.php:39
+msgid "Hide title on this page"
+msgstr ""
+
+#: inc/title-settings.php:42
+msgid "Title alignment"
+msgstr ""
+
+#: inc/title-settings.php:45
+msgid "Left"
+msgstr ""
+
+#: inc/title-settings.php:46
+msgid "Center"
+msgstr ""
+
+#: inc/title-settings.php:47
+msgid "Right"
+msgstr ""
+
+#: inc/title-settings.php:51
+msgid "Alignment has no effect if the title is hidden. The front page never shows its title, regardless of this setting."
 msgstr ""

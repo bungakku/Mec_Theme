@@ -15,7 +15,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * page now respects the same settings a blog listing already did.
  *
  * @package MEC_Theme
- * @version 1.7.20
  */
 
 $show_meta = get_theme_mod( 'mec_theme_show_post_meta', 'show' );
@@ -32,7 +31,14 @@ $show_meta = get_theme_mod( 'mec_theme_show_post_meta', 'show' );
 
     <header class="entry-header">
         <?php
-        the_title( '<h1 class="entry-title">', '</h1>' );
+        if ( mec_theme_should_show_title() ) {
+            printf(
+                '<h1 class="entry-title entry-title--align-%s">',
+                esc_attr( mec_theme_get_title_align() )
+            );
+            the_title();
+            echo '</h1>';
+        }
 
         if ( 'post' === get_post_type() ) :
             $show_date = true;

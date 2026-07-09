@@ -10,7 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * No behavior changed.
  *
  * @package MEC_Theme
- * @version 1.7.8
  */
 
 /**

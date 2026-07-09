@@ -4,7 +4,7 @@ Theme URI: https://biswazit.in/mectheme
 Author: Biswajit
 Author URI: https://biswazit.in
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.26
+Version: 1.7.27
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -764,11 +764,13 @@ table {
         position: absolute;
         right: 15px;
         top: 50%;
+        color: var(--mec-menu-color);
         transform: translateY(-50%);
-        transition: transform 0.2s;
+        transition: transform 0.2s, color 0.2s;
     }
 
     .main-navigation li.menu-item-has-children.toggled > a::after {
+        color: var(--mec-primary-color);
         transform: translateY(-50%) rotate(180deg);
     }
 
@@ -1100,6 +1102,26 @@ article {
 
 .entry-header {
     margin-bottom: var(--mec-space-md);
+}
+
+/* Title alignment, set per-page/per-post via the "Title Settings" meta box.
+   .entry-header--align-* covers pages (content-page.php), where the whole
+   header is just the title; .entry-title--align-* covers single posts
+   (content-post.php), where only the title itself should align since post
+   meta sits in the same header and stays left-aligned regardless. */
+.entry-header--align-left,
+.entry-title--align-left {
+    text-align: left;
+}
+
+.entry-header--align-center,
+.entry-title--align-center {
+    text-align: center;
+}
+
+.entry-header--align-right,
+.entry-title--align-right {
+    text-align: right;
 }
 
 .entry-title {

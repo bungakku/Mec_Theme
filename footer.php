@@ -4,7 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * The footer template
  *
  * @package MEC_Theme
- * @version 1.7.8
  */
 
 ?>

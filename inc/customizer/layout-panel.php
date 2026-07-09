@@ -13,7 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * inline inside mec_theme_customize_register(), now in its own function.
  *
  * @package MEC_Theme
- * @version 1.7.8
  */
 function mec_theme_register_layout_panel( $wp_customize ) {
     

@@ -10,7 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * register_widget( 'MEC_Theme_Recent_Posts_Widget' ) in functions.php.
  *
  * @package MEC_Theme
- * @version 1.7.8
  */
 
 class MEC_Theme_Recent_Posts_Widget extends WP_Widget {

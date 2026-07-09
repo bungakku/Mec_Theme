@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.26
+Stable tag: 1.7.27
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URI:  https://github.com/bungakku
@@ -59,6 +59,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.27 =
+* Added: a proper "Title Settings" meta box on every Page and Post (in the editor sidebar) with two controls -- "Hide title on this page" and "Title alignment" (left/center/right). This replaces relying on a third-party title-hiding plugin: hiding the title here never leaves a gap behind, since the theme controls both the visibility and the spacing together rather than a plugin hiding content the layout still reserves room for. The front page continues to never show its title, regardless of this setting, same as 1.7.26.
+* Fixed: the mobile dropdown caret (the small triangle next to menu items with submenus) had no color of its own and was silently inheriting whatever color happened to cascade to it. It now explicitly uses the Menu Color when closed and the Primary Color when open, so it always matches the chosen color scheme and visibly indicates open/closed state.
+* Removed the `@version` line from every theme file's docblock. These had drifted out of sync repeatedly throughout this theme's development (several files were still showing 1.7.8 long after dozens of real releases) and never added information beyond what style.css's own Version: header and the MEC_THEME_VERSION constant already provide authoritatively. Removing them eliminates a stale, easily-forgotten second version trail rather than trying to keep 29 individual file headers in sync on every release going forward.
 
 = 1.7.26 =
 * Fixed: pages set as the static front page (Settings > Reading > "A static page") were displaying their admin-facing title (e.g. "FRONT PAGE") as visible content on the live site. The entry-header block is now suppressed entirely on the front page, which also removes the gap that appeared below the header when using a title-hiding plugin (the gap was the header's own margin-bottom rendering even when its content was hidden).

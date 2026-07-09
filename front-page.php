@@ -4,7 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * The front page template file
  *
  * @package MEC_Theme
- * @version 1.7.8
  */
 
 get_header(); ?>
