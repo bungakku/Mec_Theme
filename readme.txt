@@ -3,16 +3,16 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.32
+Stable tag: 1.7.33
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Author URI:  https://github.com/bungakku
+Author URl:  https://github.com/bungakku
 
 A lightweight, fully responsive WordPress theme for educational institutions, blogs, and business websites. Optimized for mobile with extensive customizer options.
 
 == Description ==
 
-MEC Theme is a modern, flexible WordPress theme designed for Mount Everest College. It offers a clean design, mobile-first approach, and a wealth of customization settings without needing to touch code.
+MEC Theme is a modern, flexible WordPress theme initially designed for Mount Everest College. It offers a clean design, mobile-first approach, and a wealth of customization settings without needing to touch code.
 
 == Key Features ==
 
@@ -59,6 +59,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.33 =
+* Improved: unified .container side padding to 10px on every breakpoint. Previously only phones (<=480px) got 10px while tablet (481-768px) and desktop kept the original 20px, so the reduction from 1.7.14 was inconsistent across devices. Confirmed feasible: no other rule (header rows, site branding, logo wrapper, etc.) depends on the old 20px gutter.
+* Improved: reduced the gap above the mobile/tablet search bar in the off-canvas menu -- .mobile-search-form's top margin reduced from 15px to 6px, tightening the space between the close (X) button and the search field. Bottom spacing (before the menu list) is unchanged.
+* Improved: reduced the gap between the main content and sidebar on desktop/tablet from 32px to 20px (.content-area now uses --mec-space-md instead of --mec-space-lg), matching the gap already used in the stacked mobile layout. The shared --mec-space-lg variable itself was left untouched, so article spacing, footer widgets, and other consumers of that variable are unaffected.
 
 = 1.7.32 =
 * Fixed: the "Desktop Menu Hover Underline Color" control (added in 1.7.31) had no visible effect -- no underline appeared on hover at all, in any color. Root cause: the CSS rule used a direct-child selector, `.main-navigation > ul > li > a:hover`, which never actually matched the real markup. The top-level menu `<ul id="primary-menu">` is not a direct child of `.main-navigation`; it sits inside `.mobile-menu-panel` (kept in the DOM on desktop too, just reset via CSS to blend in). Because the selector matched nothing, the entire rule -- including `text-decoration-color: var(--mec-menu-hover-underline-color)` -- was dead CSS, regardless of the color chosen in the Customizer. The setting, its sanitization, and the `--mec-menu-hover-underline-color` CSS variable pipeline (`inc/customizer/layout-panel.php`, `inc/customizer-css.php`) were all correct and did not need changes.

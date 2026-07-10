@@ -4,7 +4,7 @@ Theme URI: https://biswazit.in/mectheme
 Author: Biswajit
 Author URI: https://biswazit.in
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.32
+Version: 1.7.33
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -132,17 +132,13 @@ table {
 .container {
     max-width: var(--mec-container-width);
     margin: 0 auto;
-    padding: 0 20px;
+    /* Unified to 10px on every breakpoint (1.7.33) -- previously only
+       phones (<=480px) got 10px while tablet and desktop kept 20px.
+       10px is feasible everywhere: no other rule (header rows, site
+       branding, logo wrapper, etc.) depends on the old 20px gutter, so
+       this is a pure edge-spacing reduction with no layout side effects. */
+    padding: 0 10px;
     width: 100%;
-}
-
-/* On phones, 20px of side padding reads as more margin than needed and
-   eats into already-limited width. Tighten to 10px below 480px only --
-   tablet (481-768px) and desktop keep the original 20px. */
-@media (max-width: 480px) {
-    .container {
-        padding: 0 10px;
-    }
 }
 
 .full-width {
@@ -651,7 +647,10 @@ table {
         position: relative;
         width: 95%;
         max-width: 280px;
-        margin: 15px auto 20px auto;
+        /* Top margin reduced 15px -> 6px (1.7.33) to tighten the gap
+           between the close button and the search field; bottom margin
+           (spacing before the menu list) is unchanged. */
+        margin: 6px auto 20px auto;
         background: transparent;
         padding: 0;
     }
@@ -1057,7 +1056,12 @@ table {
 /* ===== Sidebar & Content Layout ===== */
 .content-area {
     display: flex;
-    gap: var(--mec-space-lg);
+    /* Reduced 1.7.33: var(--mec-space-lg) (32px) -> var(--mec-space-md)
+       (20px) to tighten the gap between .primary and .secondary on
+       desktop/tablet. Reuses the existing spacing scale rather than a
+       new hardcoded value; also now matches the 20px already used for
+       this same gap in the <=768px stacked layout below. */
+    gap: var(--mec-space-md);
     flex-wrap: wrap;
 }
 
