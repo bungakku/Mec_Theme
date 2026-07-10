@@ -231,8 +231,8 @@ function mec_theme_get_static_rules_css() {
     $css .= '.site-footer { padding: ' . absint( $footer_padding ) . 'px 0 20px; }';
     
     // Sidebar widths
-    $content_width = get_theme_mod( 'mec_theme_content_width', 70 );
-    $sidebar_width = get_theme_mod( 'mec_theme_sidebar_width', 25 );
+    $content_width = get_theme_mod( 'mec_theme_content_width', 75 );
+    $sidebar_width = get_theme_mod( 'mec_theme_sidebar_width', 22 );
     if ( $content_width && $sidebar_width ) {
         $css .= '.has-sidebar .primary { flex: 1 1 ' . absint( $content_width ) . '%; }';
         $css .= '.has-sidebar .secondary { flex: 1 1 ' . absint( $sidebar_width ) . '%; }';

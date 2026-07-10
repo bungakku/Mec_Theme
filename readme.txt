@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.41
+Stable tag: 1.7.42
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,12 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.42 =
+* Changed: default Main Content Width / Sidebar Width raised from 70%/25% to 75%/22% (Customize > Layout Settings > Sidebar). Sites that already saved custom values for either setting are unaffected -- this only changes the out-of-the-box defaults, and the underlying validation rule (content + sidebar must not exceed 100%) is unchanged.
+* Fixed: the "Content + sidebar width must not exceed 100%" validation could make Main Content Width appear to silently reject values above 75% when Sidebar Width was left at its old 25% default (75 + 25 = 100 was the practical ceiling; anything above 75 pushed the total over 100 and the Customizer would not save it, which looked like the sidebar being forced to disappear). Not a bug in the validation itself -- lowering the Sidebar Width default to 22% raises that practical ceiling to 78% before the same rule is hit.
+* Changed: reduced the gap between main content and sidebar on desktop/tablet from 20px to 14px (`.content-area`), a further tightening after 1.7.33's 32px-to-20px reduction, per direct request. The <=768px stacked mobile/tablet gap (12px) is unchanged.
+* Removed: the Header Widget Area (Appearance > Widgets), along with its output in header.php. The theme already has an equivalent, more visible footer widget system (1-4 columns, horizontal/vertical); the header area was redundant and is now clean/compact by default. Any widgets previously placed in Header Widget Area are preserved by WordPress as inactive widgets (Appearance > Widgets > Inactive Widgets) and can be moved elsewhere -- they are not deleted, just no longer rendered.
 
 = 1.7.41 =
 * Fixed: the "By Biswajit" author link WordPress shows on Appearance > Themes (and other wp-admin theme-info screens) pointed to https://biswazit.in, while the public-facing footer credit and readme.txt's own Author URl field both already pointed to https://github.com/bungakku -- two separate, disconnected theme-header fields that had simply never been kept in sync. Updated style.css's `Author URI` header to match. `Theme URI` (a different field, linking to the theme's own homepage rather than the author) is unrelated and untouched.

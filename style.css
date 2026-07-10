@@ -4,7 +4,7 @@ Theme URI: https://biswazit.in/mectheme
 Author: Biswajit
 Author URI: https://github.com/bungakku
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.41
+Version: 1.7.42
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1142,12 +1142,15 @@ table {
 /* ===== Sidebar & Content Layout ===== */
 .content-area {
     display: flex;
-    /* Reduced 1.7.33: var(--mec-space-lg) (32px) -> var(--mec-space-md)
-       (20px) to tighten the gap between .primary and .secondary on
-       desktop/tablet. Reuses the existing spacing scale rather than a
-       new hardcoded value; also now matches the 20px already used for
-       this same gap in the <=768px stacked layout below. */
-    gap: var(--mec-space-md);
+    /* Reduced 1.7.42: 20px (var(--mec-space-md)) -> 14px, a further
+       tightening of the gap between .primary and .secondary on
+       desktop/tablet, per direct follow-up request after 1.7.33. A
+       hardcoded value is used here (rather than adding a new spacing-scale
+       variable) since 14px doesn't fit the existing xs/sm/md/lg/xl steps
+       and this is the only consumer of this specific value. The <=768px
+       stacked layout keeps its own gap (var(--mec-space-sm), 12px)
+       unchanged -- that value was never part of this request. */
+    gap: 14px;
     flex-wrap: wrap;
 }
 

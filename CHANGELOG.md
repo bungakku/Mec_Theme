@@ -7,6 +7,18 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.42]
+
+### Changed
+- default Main Content Width / Sidebar Width raised from 70%/25% to 75%/22% (Customize > Layout Settings > Sidebar). Sites that already saved custom values for either setting are unaffected -- this only changes the out-of-the-box defaults, and the underlying validation rule (content + sidebar must not exceed 100%) is unchanged.
+- reduced the gap between main content and sidebar on desktop/tablet from 20px to 14px (`.content-area`), a further tightening after 1.7.33's 32px-to-20px reduction, per direct request. The <=768px stacked mobile/tablet gap (12px) is unchanged.
+
+### Fixed
+- the "Content + sidebar width must not exceed 100%" validation could make Main Content Width appear to silently reject values above 75% when Sidebar Width was left at its old 25% default (75 + 25 = 100 was the practical ceiling; anything above 75 pushed the total over 100 and the Customizer would not save it, which looked like the sidebar being forced to disappear). Not a bug in the validation itself -- lowering the Sidebar Width default to 22% raises that practical ceiling to 78% before the same rule is hit.
+
+### Removed
+- the Header Widget Area (Appearance > Widgets), along with its output in header.php. The theme already has an equivalent, more visible footer widget system (1-4 columns, horizontal/vertical); the header area was redundant and is now clean/compact by default. Any widgets previously placed in Header Widget Area are preserved by WordPress as inactive widgets (Appearance > Widgets > Inactive Widgets) and can be moved elsewhere -- they are not deleted, just no longer rendered.
+
 ## [1.7.41]
 
 ### Fixed

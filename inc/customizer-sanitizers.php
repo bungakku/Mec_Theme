@@ -137,8 +137,8 @@ function mec_theme_validate_layout_widths( $validity, $value, $setting ) {
     }
 
     // Get the other setting's value (as it will be after saving)
-    $content_width = get_theme_mod( 'mec_theme_content_width', 70 );
-    $sidebar_width = get_theme_mod( 'mec_theme_sidebar_width', 25 );
+    $content_width = get_theme_mod( 'mec_theme_content_width', 75 );
+    $sidebar_width = get_theme_mod( 'mec_theme_sidebar_width', 22 );
 
     // If the current setting is being updated, use the new value
     if ( 'mec_theme_content_width' === $setting->id ) {

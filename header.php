@@ -183,12 +183,6 @@ if ( function_exists( 'wp_body_open' ) ) {
                 </div><!-- .mobile-menu-panel -->
                 <div class="mobile-menu-backdrop"></div>
             </nav><!-- #site-navigation -->
-
-            <?php if ( is_active_sidebar( 'header-widget' ) ) : ?>
-                <div class="header-widget-area">
-                    <?php dynamic_sidebar( 'header-widget' ); ?>
-                </div>
-            <?php endif; ?>
         </div><!-- .container -->
     </header><!-- #masthead -->
 

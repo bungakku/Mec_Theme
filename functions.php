@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'MEC_THEME_VERSION', '1.7.41' );
+define( 'MEC_THEME_VERSION', '1.7.42' );
 define( 'MEC_THEME_DIR', get_template_directory() );
 define( 'MEC_THEME_URI', get_template_directory_uri() );
 define( 'MEC_THEME_ASSETS', MEC_THEME_URI . '/assets' );
@@ -160,16 +160,6 @@ function mec_theme_widgets_init() {
             'after_title'   => '</h2>',
         ) );
     }
-    
-    register_sidebar( array(
-        'name'          => esc_html__( 'Header Widget Area', 'mec_theme' ),
-        'id'            => 'header-widget',
-        'description'   => esc_html__( 'Add widgets to header.', 'mec_theme' ),
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<h3 class="widget-title">',
-        'after_title'   => '</h3>',
-    ) );
     
     // Register custom recent posts widget
     register_widget( 'MEC_Theme_Recent_Posts_Widget' );

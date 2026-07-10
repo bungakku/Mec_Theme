@@ -43,24 +43,24 @@ function mec_theme_register_layout_panel( $wp_customize ) {
     ) );
     
     $wp_customize->add_setting( 'mec_theme_content_width', array(
-        'default'           => 70,
+        'default'           => 75,
         'sanitize_callback' => 'absint',
     ) );
     $wp_customize->add_control( 'mec_theme_content_width', array(
         'label'       => __( 'Main Content Width (%)', 'mec_theme' ),
-        'description' => __( 'Recommended: 70% (with sidebar width 25% leaves 5% for gap).', 'mec_theme' ),
+        'description' => __( 'Recommended: 75% (with sidebar width 22% leaves 3% for gap).', 'mec_theme' ),
         'section'     => 'mec_theme_sidebar_section',
         'type'        => 'number',
         'input_attrs' => array( 'min' => 50, 'max' => 80, 'step' => 1 ),
     ) );
     
     $wp_customize->add_setting( 'mec_theme_sidebar_width', array(
-        'default'           => 25,
+        'default'           => 22,
         'sanitize_callback' => 'absint',
     ) );
     $wp_customize->add_control( 'mec_theme_sidebar_width', array(
         'label'       => __( 'Sidebar Width (%)', 'mec_theme' ),
-        'description' => __( 'Recommended: 25% (together with content width should not exceed 100%).', 'mec_theme' ),
+        'description' => __( 'Recommended: 22% (together with content width should not exceed 100%).', 'mec_theme' ),
         'section'     => 'mec_theme_sidebar_section',
         'type'        => 'number',
         'input_attrs' => array( 'min' => 20, 'max' => 40, 'step' => 1 ),
