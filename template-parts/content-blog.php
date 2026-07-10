@@ -34,11 +34,14 @@ if ( 'grid' === $blog_layout ) {
     <div class="entry-content-wrapper">
         <header class="entry-header">
             <?php
-            if ( is_singular() ) :
-                the_title( '<h1 class="entry-title">', '</h1>' );
-            else :
-                the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-            endif;
+            if ( mec_theme_should_show_title() ) {
+                $title_align_class = ' entry-title--align-' . esc_attr( mec_theme_get_title_align() );
+                if ( is_singular() ) {
+                    the_title( '<h1 class="entry-title' . $title_align_class . '">', '</h1>' );
+                } else {
+                    the_title( '<h2 class="entry-title' . $title_align_class . '"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
+                }
+            }
             ?>
 
             <?php if ( 'post' === get_post_type() ) : ?>

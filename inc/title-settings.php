@@ -93,7 +93,16 @@ add_action( 'save_post', 'mec_theme_save_title_settings_meta_box' );
  * Always false on the front page, regardless of the per-page setting.
  */
 function mec_theme_should_show_title() {
-    if ( is_front_page() ) {
+    // is_front_page() is true for the entire request when displaying the
+    // homepage -- including when Settings > Reading is set to "Your latest
+    // posts" and the homepage is really a loop of multiple blog posts, each
+    // with its own title that should display normally. The intent here is
+    // only to suppress a STATIC PAGE's own title when that page is used as
+    // the front page (e.g. a page literally titled "FRONT PAGE" used as a
+    // landing page) -- so this must also confirm we're looking at a Page,
+    // not just any front-page request, or every post's title in a blog
+    // listing on the homepage gets incorrectly hidden too.
+    if ( is_front_page() && is_page() ) {
         return false;
     }
     $hide_title = get_post_meta( get_the_ID(), '_mec_theme_hide_title', true );

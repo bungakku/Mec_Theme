@@ -1,9 +1,9 @@
 === MEC Theme ===
-Contributors: Biswajit Thokchom
+Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.27
+Stable tag: 1.7.28
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URI:  https://github.com/bungakku
@@ -59,6 +59,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.28 =
+* Fixed: 1.7.27's Title Settings (hide/align) had no effect on the front page. Cause: front-page.php renders through template-parts/content-blog.php, not content-page.php or content-post.php -- the two files 1.7.27 actually wired the feature into. content-blog.php now has the same logic.
+* Fixed a second, related bug found while fixing the first: mec_theme_should_show_title() suppressed the title on EVERY post when the homepage setting (Settings > Reading) is "Your latest posts" -- is_front_page() is true for the whole request in that case too, not just when a static page is assigned as the front page, so every individual post in that blog-listing loop was incorrectly losing its title. Now also checks is_page(), so the suppression only applies to an actual static page used as the front page (e.g. one literally titled "FRONT PAGE"), and a blog-listing homepage shows each post's title normally, respecting that post's own per-post setting.
+* If you tested 1.7.27's title settings on the front page and saw no effect (or saw every post's title disappear), this resolves both.
 
 = 1.7.27 =
 * Added: a proper "Title Settings" meta box on every Page and Post (in the editor sidebar) with two controls -- "Hide title on this page" and "Title alignment" (left/center/right). This replaces relying on a third-party title-hiding plugin: hiding the title here never leaves a gap behind, since the theme controls both the visibility and the spacing together rather than a plugin hiding content the layout still reserves room for. The front page continues to never show its title, regardless of this setting, same as 1.7.26.
@@ -245,6 +250,6 @@ Yes, the theme includes aria-expanded states for mobile menu and submenu toggles
 
 == Credits ==
 
-Developed by: Biswajit Thokchom
+Developed by Biswajit – https://biswazit.in
 Icons are inline SVGs created by the author.
 No external libraries or assets are used.
