@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.35
+Stable tag: 1.7.36
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.36 =
+* Changed: the three block-visibility toggles added in 1.7.35 ("Show Phone Numbers", "Show Email Address", "Show Social Icons") were global -- unchecking one removed that block from the page entirely, on desktop too. They are now scoped to tablet + mobile only (768px wide and below): desktop always shows all three blocks regardless of these settings, matching how the existing "Hide contact column on tablet/mobile" toggles already behave at the whole-column level. Labels and descriptions updated in the Customizer to make this scope explicit ("Show Phone Numbers (Tablet & Mobile)", etc.).
+* No change to the 1.7.35 hover-color settings or CSS, or to any other Contact & Social field -- this only corrects the effective breakpoint scope of the three new visibility toggles.
 
 = 1.7.35 =
 * Added: independent Show/Hide toggles for the three Contact & Social blocks -- "Show Phone Numbers", "Show Email Address", "Show Social Icons" (Customize > Contact & Social). Each block can now be disabled on its own without affecting the others, separate from the existing tablet/mobile "hide contact column" toggles, which still hide the whole column at those breakpoints.

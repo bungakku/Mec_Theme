@@ -23,20 +23,23 @@ function mec_theme_customize_contact_social( $wp_customize ) {
         'priority' => 35, // after Header section
     ) );
 
-    // --- Independent block visibility toggles ---
-    // These control whether each block renders at all (server-side, via
-    // header.php), separate from mec_theme_hide_contact_tablet/mobile
-    // below, which only hide the whole .header-contact-column at specific
-    // breakpoints. 'refresh' (the default transport) is used deliberately
-    // here rather than postMessage: toggling a block's existence changes
-    // what header.php outputs, not just a style, so a full preview refresh
-    // is the correct behavior rather than partial JS-driven visibility.
+    // --- Independent block visibility toggles: tablet + mobile only ---
+    // These hide each block via CSS at <=768px (tablet + mobile combined),
+    // matching the existing mec_theme_hide_contact_tablet/mobile pattern
+    // just below -- desktop (>768px) always shows all three blocks
+    // regardless of these settings. 'postMessage' transport is used since
+    // this is purely a CSS display toggle at a breakpoint, live-previewed
+    // via updateContactVisibility() in mec_theme_customize_contact_preview()
+    // further down this file, the same way hide_contact_tablet/mobile
+    // already is.
     $wp_customize->add_setting( 'mec_theme_show_contact_phones', array(
         'default'           => true,
         'sanitize_callback' => 'wp_validate_boolean',
+        'transport'         => 'postMessage',
     ) );
     $wp_customize->add_control( 'mec_theme_show_contact_phones', array(
-        'label'       => __( 'Show Phone Numbers', 'mec_theme' ),
+        'label'       => __( 'Show Phone Numbers (Tablet & Mobile)', 'mec_theme' ),
+        'description' => __( 'Applies at 768px wide and below only. Desktop always shows phone numbers.', 'mec_theme' ),
         'section'     => 'mec_theme_contact_social_section',
         'type'        => 'checkbox',
         'priority'    => 5,
@@ -45,9 +48,11 @@ function mec_theme_customize_contact_social( $wp_customize ) {
     $wp_customize->add_setting( 'mec_theme_show_contact_email', array(
         'default'           => true,
         'sanitize_callback' => 'wp_validate_boolean',
+        'transport'         => 'postMessage',
     ) );
     $wp_customize->add_control( 'mec_theme_show_contact_email', array(
-        'label'       => __( 'Show Email Address', 'mec_theme' ),
+        'label'       => __( 'Show Email Address (Tablet & Mobile)', 'mec_theme' ),
+        'description' => __( 'Applies at 768px wide and below only. Desktop always shows the email address.', 'mec_theme' ),
         'section'     => 'mec_theme_contact_social_section',
         'type'        => 'checkbox',
         'priority'    => 6,
@@ -56,9 +61,11 @@ function mec_theme_customize_contact_social( $wp_customize ) {
     $wp_customize->add_setting( 'mec_theme_show_contact_social', array(
         'default'           => true,
         'sanitize_callback' => 'wp_validate_boolean',
+        'transport'         => 'postMessage',
     ) );
     $wp_customize->add_control( 'mec_theme_show_contact_social', array(
-        'label'       => __( 'Show Social Icons', 'mec_theme' ),
+        'label'       => __( 'Show Social Icons (Tablet & Mobile)', 'mec_theme' ),
+        'description' => __( 'Applies at 768px wide and below only. Desktop always shows social icons.', 'mec_theme' ),
         'section'     => 'mec_theme_contact_social_section',
         'type'        => 'checkbox',
         'priority'    => 7,
@@ -327,10 +334,14 @@ function mec_theme_customize_contact_preview() {
         } );
         updateContactHoverPreview();
 
-        // Live preview for hiding contact column
+        // Live preview for hiding contact column, and for the individual
+        // phone/email/social block toggles (all tablet+mobile-only, <=768px)
         function updateContactVisibility() {
             var hideTablet = wp.customize( 'mec_theme_hide_contact_tablet' ).get();
             var hideMobile = wp.customize( 'mec_theme_hide_contact_mobile' ).get();
+            var showPhones = wp.customize( 'mec_theme_show_contact_phones' ).get();
+            var showEmail = wp.customize( 'mec_theme_show_contact_email' ).get();
+            var showSocial = wp.customize( 'mec_theme_show_contact_social' ).get();
             var styleId = 'mec-theme-hide-contact-preview';
             var $style = $('#' + styleId);
             if ( $style.length === 0 ) {
@@ -343,12 +354,30 @@ function mec_theme_customize_contact_preview() {
             if ( hideMobile ) {
                 css += '@media (max-width: 480px) { .header-contact-column { display: none !important; } }';
             }
+            if ( ! showPhones ) {
+                css += '@media (max-width: 768px) { .contact-phones-row { display: none !important; } }';
+            }
+            if ( ! showEmail ) {
+                css += '@media (max-width: 768px) { .header-contact-column .contact-email { display: none !important; } }';
+            }
+            if ( ! showSocial ) {
+                css += '@media (max-width: 768px) { .header-contact-column .contact-social { display: none !important; } }';
+            }
             $style.html(css);
         }
         wp.customize( 'mec_theme_hide_contact_tablet', function( value ) {
             value.bind( updateContactVisibility );
         } );
         wp.customize( 'mec_theme_hide_contact_mobile', function( value ) {
+            value.bind( updateContactVisibility );
+        } );
+        wp.customize( 'mec_theme_show_contact_phones', function( value ) {
+            value.bind( updateContactVisibility );
+        } );
+        wp.customize( 'mec_theme_show_contact_email', function( value ) {
+            value.bind( updateContactVisibility );
+        } );
+        wp.customize( 'mec_theme_show_contact_social', function( value ) {
             value.bind( updateContactVisibility );
         } );
         updateContactVisibility();

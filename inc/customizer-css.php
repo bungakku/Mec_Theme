@@ -554,6 +554,20 @@ function mec_theme_get_mobile_menu_colors_css() {
     if ( $hide_contact_mobile ) {
         $css .= '@media (max-width: 480px) { .header-contact-column { display: none !important; } }';
     }
+
+    // Individual phone/email/social block toggles -- tablet + mobile only
+    // (<=768px combined). Desktop is never affected: these blocks always
+    // render in header.php's markup; this CSS is the only thing that ever
+    // hides them, and only within this single media query.
+    if ( ! get_theme_mod( 'mec_theme_show_contact_phones', true ) ) {
+        $css .= '@media (max-width: 768px) { .contact-phones-row { display: none !important; } }';
+    }
+    if ( ! get_theme_mod( 'mec_theme_show_contact_email', true ) ) {
+        $css .= '@media (max-width: 768px) { .header-contact-column .contact-email { display: none !important; } }';
+    }
+    if ( ! get_theme_mod( 'mec_theme_show_contact_social', true ) ) {
+        $css .= '@media (max-width: 768px) { .header-contact-column .contact-social { display: none !important; } }';
+    }
     
     return $css;
 }

@@ -81,7 +81,6 @@ if ( function_exists( 'wp_body_open' ) ) {
                 </div><!-- .site-branding -->
 
                 <div class="header-contact-column">
-                    <?php if ( get_theme_mod( 'mec_theme_show_contact_phones', true ) ) : ?>
                     <div class="contact-phones-row">
                         <?php 
                         $phone1 = get_theme_mod( 'mec_theme_phone_1', '+1 (234) 567-8901' );
@@ -95,9 +94,7 @@ if ( function_exists( 'wp_body_open' ) ) {
                             <div class="contact-phone contact-phone-2"><?php echo esc_html( $phone2 ); ?></div>
                         <?php endif; ?>
                     </div><!-- .contact-phones-row -->
-                    <?php endif; ?>
 
-                    <?php if ( get_theme_mod( 'mec_theme_show_contact_email', true ) ) : ?>
                     <?php 
                     $email = get_theme_mod( 'mec_theme_email', 'info@yournonprofit.org' );
                     if ( ! empty( $email ) ) : ?>
@@ -105,9 +102,7 @@ if ( function_exists( 'wp_body_open' ) ) {
                             <a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a>
                         </div>
                     <?php endif; ?>
-                    <?php endif; ?>
 
-                    <?php if ( get_theme_mod( 'mec_theme_show_contact_social', true ) ) : ?>
                     <div class="contact-social">
                         <?php 
                         $facebook = get_theme_mod( 'mec_theme_facebook_url', '' );
@@ -159,7 +154,6 @@ if ( function_exists( 'wp_body_open' ) ) {
                             </a>
                         <?php endif; ?>
                     </div><!-- .contact-social -->
-                    <?php endif; ?>
                 </div><!-- .header-contact-column -->
             </div><!-- .header-top-row -->
 
