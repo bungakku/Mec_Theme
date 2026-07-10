@@ -139,6 +139,9 @@ function mec_theme_get_root_variables_css() {
     $menu_hover = mec_theme_get_color_var( 'mec_theme_menu_hover_color', '#0274be' );
     $css .= '--mec-menu-hover-color: ' . $menu_hover . ';';
     
+    $menu_hover_underline = mec_theme_get_color_var( 'mec_theme_menu_hover_underline_color', '#0274be' );
+    $css .= '--mec-menu-hover-underline-color: ' . $menu_hover_underline . ';';
+    
     $dropdown_bg = mec_theme_get_color_var( 'mec_theme_dropdown_bg', '#ffffff' );
     $css .= '--mec-dropdown-bg: ' . $dropdown_bg . ';';
     

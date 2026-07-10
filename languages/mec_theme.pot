@@ -2,7 +2,7 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MEC_Theme 1.7.30\n"
+"Project-Id-Version: MEC_Theme 1.7.31\n"
 "Report-Msgid-Bugs-To: https://biswazit.in/mectheme\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -779,6 +779,10 @@ msgstr ""
 
 #: inc/customizer/layout-panel.php:344
 msgid "Main Menu Hover Color"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:363
+msgid "Desktop Menu Hover Underline Color"
 msgstr ""
 
 #: inc/customizer/layout-panel.php:354

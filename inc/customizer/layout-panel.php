@@ -344,6 +344,22 @@ function mec_theme_register_layout_panel( $wp_customize ) {
         'section'  => 'mec_theme_menu_section',
         'settings' => 'mec_theme_menu_hover_color',
     ) ) );
+
+    // Desktop Menu Hover Underline Color -- independent of the hover text
+    // color above. The underline effect itself (text-decoration: underline
+    // on .main-navigation > ul > li > a:hover) already exists in style.css,
+    // but previously had no text-decoration-color of its own, so it always
+    // rendered in whatever color currentColor resolved to (the hover text
+    // color) with no way to set it separately.
+    $wp_customize->add_setting( 'mec_theme_menu_hover_underline_color', array(
+        'default'           => '#0274be',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_menu_hover_underline_color', array(
+        'label'    => __( 'Desktop Menu Hover Underline Color', 'mec_theme' ),
+        'section'  => 'mec_theme_menu_section',
+        'settings' => 'mec_theme_menu_hover_underline_color',
+    ) ) );
     
     $wp_customize->add_setting( 'mec_theme_show_menu_descriptions', array(
         'default'           => false,
