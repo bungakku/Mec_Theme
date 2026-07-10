@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.39
+Stable tag: 1.7.40
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.40 =
+* Added: a diagnostic-only build fingerprint -- a short hash of the footer's "Theme by Biswajit" credit markup plus the current theme version, output as a hidden HTML comment (`<!-- mec-theme-build: ... -->`) near the credit line. Purely informational: it does not restrict, hide, alter, or gate any theme functionality, and nothing in the theme reads it back. It exists solely so the theme author can verify, via "View Source" or a plain HTTP fetch, that a live deployment is running the exact, unmodified credit for a given version -- without needing admin access. The hash is computed from whatever the credit markup actually renders, so editing or removing the credit simply changes the emitted value; there's no hidden check being "passed" or "failed."
+* Added: CHANGELOG.md at the theme root -- a Keep a Changelog-formatted, GitHub-friendly companion to this file's history, covering every release from 1.6.0 through 1.7.40. readme.txt remains the authoritative WordPress-facing changelog; CHANGELOG.md is generated from it for repo-browsing convenience and will be kept in sync on every future release.
 
 = 1.7.39 =
 * Fixed: title/logo and the phone/email/social block visibly aligned differently on tablet (481-768px), confirmed via screenshot -- the logo+title+tagline group sat flush-left while phone/email centered normally. Root cause: a legacy rule forces `.site-branding { width: 100% !important; }` at this breakpoint (originally paired with a `.header-content.title-align-tablet-center` centering rule that has never actually matched anything, since no element in header.php carries a `.header-content` class), leaving `.site-branding`'s content with no centering behavior of its own once it became full-width. `.header-contact-column` (fixed in 1.7.38) already correctly shrink-wraps and centers via `.header-top-row`'s `align-items: center`; `.site-branding` did not. Added `justify-content: center` to `.site-branding` at <=768px so the logo+text group now centers on the same axis as the contact column, at both tablet and mobile widths.

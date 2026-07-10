@@ -85,7 +85,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
                     // the developer name itself is translatable; the link markup
                     // is fixed theme code, and wp_kses has the final say regardless.
                     $credit_name = '<a href="' . esc_url( 'https://github.com/bungakku' ) . '" target="_blank" rel="noopener noreferrer"><em>' . esc_html__( 'Biswajit', 'mec_theme' ) . '</em></a>';
-                    echo wp_kses(
+                    $credit_html = wp_kses(
                         sprintf(
                             /* translators: %s: linked developer name */
                             __( 'Theme by %s', 'mec_theme' ),
@@ -96,8 +96,30 @@ if ( ! defined( 'ABSPATH' ) ) exit;
                             'em' => array(),
                         )
                     );
+                    echo $credit_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- already passed through wp_kses above.
                     ?>
                 </p>
+                <?php
+                /**
+                 * Diagnostic-only build fingerprint.
+                 *
+                 * Purely informational -- this NEVER restricts, hides, alters, or
+                 * gates any theme functionality based on its value; nothing in the
+                 * theme reads this comment back. It exists solely so the theme
+                 * author can verify, via "View Source" or a plain HTTP fetch (e.g.
+                 * `curl`), that a given live deployment is running the exact,
+                 * unmodified footer credit for a given theme version, without
+                 * needing admin access to the site. A visitor or site owner who
+                 * sees this comment learns nothing sensitive from it; it does not
+                 * identify the site, the visitor, or transmit anything anywhere.
+                 *
+                 * The hash is computed from the credit markup actually rendered
+                 * above plus the current theme version, so editing or removing the
+                 * credit changes the emitted value -- there is no hidden reference
+                 * hash to "pass"; it simply reports what's really on the page.
+                 */
+                echo "\n<!-- mec-theme-build: " . esc_html( substr( hash( 'sha256', $credit_html . '|' . MEC_THEME_VERSION ), 0, 16 ) ) . " -->\n";
+                ?>
                 
                 <?php if ( get_theme_mod( 'mec_theme_show_footer_menu', true ) && has_nav_menu( 'footer' ) ) : ?>
                     <nav class="footer-navigation" aria-label="<?php esc_attr_e( 'Footer Menu', 'mec_theme' ); ?>">
