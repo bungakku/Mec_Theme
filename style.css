@@ -4,7 +4,7 @@ Theme URI: https://biswazit.in/mectheme
 Author: Biswajit
 Author URI: https://biswazit.in
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.31
+Version: 1.7.32
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -450,7 +450,18 @@ table {
         white-space: nowrap;
         font-size: 0.95rem;
     }
-    .main-navigation > ul > li > a:hover {
+    /* Bug fix (1.7.32): this rule previously used a direct-child
+       combinator (.main-navigation > ul > li > a:hover), which never
+       matched anything -- the actual DOM is
+       .main-navigation > .mobile-menu-panel > ul#primary-menu > li > a,
+       so the ul is never a direct child of .main-navigation. That made
+       the whole rule (including the hover-underline-color variable
+       below) dead CSS: no underline of any kind rendered on hover,
+       regardless of what was picked in the Customizer. Targeting the
+       menu's own #primary-menu id instead of relying on DOM depth
+       fixes this and stays robust even if the markup around the menu
+       changes again in future. */
+    .main-navigation #primary-menu > li > a:hover {
         text-decoration: underline;
         text-underline-offset: 5px;
         text-decoration-color: var(--mec-menu-hover-underline-color);

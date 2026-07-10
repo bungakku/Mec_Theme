@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.31
+Stable tag: 1.7.32
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URI:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.32 =
+* Fixed: the "Desktop Menu Hover Underline Color" control (added in 1.7.31) had no visible effect -- no underline appeared on hover at all, in any color. Root cause: the CSS rule used a direct-child selector, `.main-navigation > ul > li > a:hover`, which never actually matched the real markup. The top-level menu `<ul id="primary-menu">` is not a direct child of `.main-navigation`; it sits inside `.mobile-menu-panel` (kept in the DOM on desktop too, just reset via CSS to blend in). Because the selector matched nothing, the entire rule -- including `text-decoration-color: var(--mec-menu-hover-underline-color)` -- was dead CSS, regardless of the color chosen in the Customizer. The setting, its sanitization, and the `--mec-menu-hover-underline-color` CSS variable pipeline (`inc/customizer/layout-panel.php`, `inc/customizer-css.php`) were all correct and did not need changes.
+* Fixed the rule by targeting `.main-navigation #primary-menu > li > a:hover` (using the menu's own id, set via `wp_nav_menu()`'s `menu_id` in header.php) instead of relying on DOM depth. This is the only change; no other selector, setting, or file was touched.
 
 = 1.7.31 =
 * Added: "Desktop Menu Hover Underline Color" control (Layout Settings > Menu Settings, next to "Main Menu Hover Color"). The desktop top-level menu already underlines on hover (`.main-navigation > ul > li > a:hover`), but that underline had no color of its own -- it always rendered in whatever the hover text color happened to be, with no way to set it independently. New `--mec-menu-hover-underline-color` CSS variable, applied via `text-decoration-color`, controls just the underline; the hover text color setting is unaffected. Defaults to the same blue as the existing hover color, so sites see no visual change until this new option is explicitly customized.
