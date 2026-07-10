@@ -345,25 +345,14 @@ function mec_theme_social_icon_customizer( $wp_customize ) {
 }
 add_action( 'customize_register', 'mec_theme_social_icon_customizer' );
 
-// Output CSS variables for social icons
-function mec_theme_social_icon_css() {
-    $size = get_theme_mod( 'mec_theme_social_icon_size', 36 );
-    $font_size = get_theme_mod( 'mec_theme_social_icon_font_size', 18 );
-    $bg = get_theme_mod( 'mec_theme_social_icon_bg', '#e0e0e0' );
-    $color = get_theme_mod( 'mec_theme_social_icon_color', '#333333' );
-    $hover_bg = get_theme_mod( 'mec_theme_social_icon_hover_bg', '#cccccc' );
-    $hover_color = get_theme_mod( 'mec_theme_social_icon_hover_color', '#ffffff' );
-    ?>
-    <style type="text/css">
-        :root {
-            --social-icon-size: <?php echo absint( $size ); ?>px;
-            --social-icon-font-size: <?php echo absint( $font_size ); ?>px;
-            --social-icon-bg: <?php echo esc_attr( $bg ); ?>;
-            --social-icon-color: <?php echo esc_attr( $color ); ?>;
-            --social-icon-hover-bg: <?php echo esc_attr( $hover_bg ); ?>;
-            --social-icon-hover-color: <?php echo esc_attr( $hover_color ); ?>;
-        }
-    </style>
-    <?php
-}
-add_action( 'wp_head', 'mec_theme_social_icon_css', 20 );
+/*
+ * Note: CSS output for these social icon settings is handled by
+ * mec_theme_get_root_variables_css() in inc/customizer-css.php, which
+ * generates the properly-namespaced --mec-social-icon-* variables that
+ * style.css's .social-icon rules actually consume. A duplicate
+ * mec_theme_social_icon_css() function used to run on wp_head here,
+ * outputting a second, unprefixed variable set (--social-icon-size, etc.)
+ * that style.css never referenced -- pure dead weight on every page load.
+ * Removed in 1.7.30; the settings above are unaffected and continue to
+ * work exactly as before via the customizer-css.php path.
+ */

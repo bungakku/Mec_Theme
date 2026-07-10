@@ -590,8 +590,8 @@ function mec_theme_get_customizer_css() {
     }
     
     // Site title colour (using variable but also direct for older browsers)
-    $site_title_color = get_theme_mod( 'mec_theme_site_title_color', '#333333' );
-    $css .= '.site-title a { color: ' . esc_attr( $site_title_color ) . '; }';
+    $site_title_color = mec_theme_get_color_var( 'mec_theme_site_title_color', '#333333' );
+    $css .= '.site-title a { color: ' . $site_title_color . '; }';
     
     // Body line height
     $line_height = get_theme_mod( 'mec_theme_body_line_height', '1.6' );
