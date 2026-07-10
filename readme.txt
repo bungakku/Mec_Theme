@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.40
+Stable tag: 1.7.41
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.41 =
+* Fixed: the "By Biswajit" author link WordPress shows on Appearance > Themes (and other wp-admin theme-info screens) pointed to https://biswazit.in, while the public-facing footer credit and readme.txt's own Author URl field both already pointed to https://github.com/bungakku -- two separate, disconnected theme-header fields that had simply never been kept in sync. Updated style.css's `Author URI` header to match. `Theme URI` (a different field, linking to the theme's own homepage rather than the author) is unrelated and untouched.
 
 = 1.7.40 =
 * Added: a diagnostic-only build fingerprint -- a short hash of the footer's "Theme by Biswajit" credit markup plus the current theme version, output as a hidden HTML comment (`<!-- mec-theme-build: ... -->`) near the credit line. Purely informational: it does not restrict, hide, alter, or gate any theme functionality, and nothing in the theme reads it back. It exists solely so the theme author can verify, via "View Source" or a plain HTTP fetch, that a live deployment is running the exact, unmodified credit for a given version -- without needing admin access. The hash is computed from whatever the credit markup actually renders, so editing or removing the credit simply changes the emitted value; there's no hidden check being "passed" or "failed."

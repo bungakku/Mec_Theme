@@ -7,6 +7,11 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.41]
+
+### Fixed
+- the "By Biswajit" author link WordPress shows on Appearance > Themes (and other wp-admin theme-info screens) pointed to https://biswazit.in, while the public-facing footer credit and readme.txt's own Author URl field both already pointed to https://github.com/bungakku -- two separate, disconnected theme-header fields that had simply never been kept in sync. Updated style.css's `Author URI` header to match. `Theme URI` (a different field, linking to the theme's own homepage rather than the author) is unrelated and untouched.
+
 ## [1.7.40]
 
 ### Added
