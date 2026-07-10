@@ -4,7 +4,7 @@ Theme URI: https://biswazit.in/mectheme
 Author: Biswajit
 Author URI: https://biswazit.in
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.28
+Version: 1.7.29
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1003,19 +1003,19 @@ table {
     transform: scale(1.05);
 }
 
-.social-icon-facebook:hover {
+.mec-network-facebook:hover {
     background-color: #1877f2;
 }
-.social-icon-twitter:hover {
+.mec-network-twitter:hover {
     background-color: #1da1f2;
 }
-.social-icon-instagram:hover {
+.mec-network-instagram:hover {
     background: radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
 }
-.social-icon-linkedin:hover {
+.mec-network-linkedin:hover {
     background-color: #0077b5;
 }
-.social-icon-youtube:hover {
+.mec-network-youtube:hover {
     background-color: #ff0000;
 }
 

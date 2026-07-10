@@ -1,12 +1,11 @@
 === MEC Theme ===
-Contributors: Biswajit Thokchom
+Contributors: Biswajit
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
 Stable tag: 1.7.29
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Author URI:  https://github.com/bungakku
 
 A lightweight, fully responsive WordPress theme for educational institutions, blogs, and business websites. Optimized for mobile with extensive customizer options.
 
@@ -255,6 +254,6 @@ Yes, the theme includes aria-expanded states for mobile menu and submenu toggles
 
 == Credits ==
 
-Developed by: Biswajit Thokchom
+Developed by Biswajit – https://biswazit.in
 Icons are inline SVGs created by the author.
 No external libraries or assets are used.

@@ -61,7 +61,7 @@ function mec_theme_customize_contact_social( $wp_customize ) {
     
     // Social: Facebook
     $wp_customize->add_setting( 'mec_theme_facebook_url', array(
-        'default'           => '#',
+        'default'           => '',
         'sanitize_callback' => 'esc_url_raw',
         'transport'         => 'postMessage',
     ) );
@@ -73,7 +73,7 @@ function mec_theme_customize_contact_social( $wp_customize ) {
     
     // Social: Twitter
     $wp_customize->add_setting( 'mec_theme_twitter_url', array(
-        'default'           => '#',
+        'default'           => '',
         'sanitize_callback' => 'esc_url_raw',
         'transport'         => 'postMessage',
     ) );
@@ -85,7 +85,7 @@ function mec_theme_customize_contact_social( $wp_customize ) {
     
     // Social: Instagram
     $wp_customize->add_setting( 'mec_theme_instagram_url', array(
-        'default'           => '#',
+        'default'           => '',
         'sanitize_callback' => 'esc_url_raw',
         'transport'         => 'postMessage',
     ) );
@@ -219,11 +219,11 @@ function mec_theme_customize_contact_preview() {
                 } );
             } );
         }
-        updateSocial( 'mec_theme_facebook_url', '.social-icon-facebook' );
-        updateSocial( 'mec_theme_twitter_url', '.social-icon-twitter' );
-        updateSocial( 'mec_theme_instagram_url', '.social-icon-instagram' );
-        updateSocial( 'mec_theme_linkedin_url', '.social-icon-linkedin' );
-        updateSocial( 'mec_theme_youtube_url', '.social-icon-youtube' );
+        updateSocial( 'mec_theme_facebook_url', '.mec-network-facebook' );
+        updateSocial( 'mec_theme_twitter_url', '.mec-network-twitter' );
+        updateSocial( 'mec_theme_instagram_url', '.mec-network-instagram' );
+        updateSocial( 'mec_theme_linkedin_url', '.mec-network-linkedin' );
+        updateSocial( 'mec_theme_youtube_url', '.mec-network-youtube' );
 
         // Live preview for contact phone and email colors
         wp.customize( 'mec_theme_contact_phone_color', function( value ) {
