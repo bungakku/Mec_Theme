@@ -81,17 +81,19 @@ if ( function_exists( 'wp_body_open' ) ) {
                 </div><!-- .site-branding -->
 
                 <div class="header-contact-column">
-                    <?php 
-                    $phone1 = get_theme_mod( 'mec_theme_phone_1', '+1 (234) 567-8901' );
-                    if ( ! empty( $phone1 ) ) : ?>
-                        <div class="contact-phone contact-phone-1"><?php echo esc_html( $phone1 ); ?></div>
-                    <?php endif; ?>
+                    <div class="contact-phones-row">
+                        <?php 
+                        $phone1 = get_theme_mod( 'mec_theme_phone_1', '+1 (234) 567-8901' );
+                        if ( ! empty( $phone1 ) ) : ?>
+                            <div class="contact-phone contact-phone-1"><?php echo esc_html( $phone1 ); ?></div>
+                        <?php endif; ?>
 
-                    <?php 
-                    $phone2 = get_theme_mod( 'mec_theme_phone_2', '+1 (234) 567-8902' );
-                    if ( ! empty( $phone2 ) ) : ?>
-                        <div class="contact-phone contact-phone-2"><?php echo esc_html( $phone2 ); ?></div>
-                    <?php endif; ?>
+                        <?php 
+                        $phone2 = get_theme_mod( 'mec_theme_phone_2', '+1 (234) 567-8902' );
+                        if ( ! empty( $phone2 ) ) : ?>
+                            <div class="contact-phone contact-phone-2"><?php echo esc_html( $phone2 ); ?></div>
+                        <?php endif; ?>
+                    </div><!-- .contact-phones-row -->
 
                     <?php 
                     $email = get_theme_mod( 'mec_theme_email', 'info@yournonprofit.org' );

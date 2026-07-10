@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.33
+Stable tag: 1.7.34
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.34 =
+* Added: separate side-by-side layout for Phone Number 1 and Phone Number 2 on tablet (481-768px) and mobile (<=480px) -- both now sit in a shared, centered, wrapping row (`.contact-phones-row`) above the email and social icons, instead of stacking fully vertically with everything else. Desktop (>768px) layout is unchanged.
+* No new Customizer settings, sanitizers, or JS were added -- `header.php` now wraps the two existing phone `<div>`s in a new `.contact-phones-row` container, and `style.css`'s existing `@media (max-width: 768px)` block (already shared by tablet and mobile) gained the row styling. All existing classes (`.contact-phone`, `.contact-phone-1/2`, `.contact-email`, `.contact-social`) are untouched, so the live-preview JS in `inc/customizer/contact-social-panel.php` and the `mec_theme_hide_contact_tablet/mobile` toggles continue to work exactly as before.
 
 = 1.7.33 =
 * Improved: unified .container side padding to 10px on every breakpoint. Previously only phones (<=480px) got 10px while tablet (481-768px) and desktop kept the original 20px, so the reduction from 1.7.14 was inconsistent across devices. Confirmed feasible: no other rule (header rows, site branding, logo wrapper, etc.) depends on the old 20px gutter.
