@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.36
+Stable tag: 1.7.37
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.37 =
+* Fixed: large gap between the main content and sidebar widgets once the layout stacks into a single column on tablet/mobile (<=768px). Root cause: `.content-area` uses flex `gap` (20px) to space `.primary` and `.secondary` apart -- but on blog listing pages (front page, index, archive, search), the last `<article>` in `.primary` also had its own `margin-bottom` (20px at this breakpoint), and flex `gap` adds space ON TOP OF a child's own margin rather than replacing it. The two combined into a 40px gap that looked like one oversized value. Added `.has-sidebar .primary > *:last-child { margin-bottom: 0; }` (mobile/tablet only) so the trailing element's own spacing no longer stacks with the container gap, and reduced `.content-area`'s gap itself from 20px to `var(--mec-space-sm)` (12px) for a tighter overall feel. Desktop (>768px) is unaffected either way.
+* Fixed: same doubled-gap pattern in the header's contact info once it stacks (tablet/mobile): `.header-contact-column` already spaces phone numbers / email / social icons apart via its own flex `gap: 8px`, but 1.7.34's mobile CSS additionally set `margin-bottom` on `.contact-phones-row` and `.contact-email`, doubling that spacing. Removed the redundant margins so the parent's `gap: 8px` is the only thing controlling that spacing. Also reduced `.header-top-row`'s gap (between the site branding block and the contact column) from 20px to `var(--mec-space-xs)` (8px) at this breakpoint -- it was sized for a horizontal desktop gap and felt oversized once stacked vertically. Desktop is unaffected; both changes live inside the existing `@media (max-width: 768px)` block.
+* Added: "Phone & Email Text Size - Tablet (rem)" and "Phone & Email Text Size - Mobile (rem)" controls (Customize > Contact & Social), each independently sizing phone number and email text at that breakpoint only. No desktop control was added on purpose -- desktop keeps its existing fixed size from `.header-contact-column` in style.css, completely unaffected by either new setting. Implemented via `mec_theme_get_responsive_css()` in `inc/customizer-css.php`, the same function that already handles every other per-breakpoint font size in this theme (body, site title, tagline, description, heading, menu).
 
 = 1.7.36 =
 * Changed: the three block-visibility toggles added in 1.7.35 ("Show Phone Numbers", "Show Email Address", "Show Social Icons") were global -- unchecking one removed that block from the page entirely, on desktop too. They are now scoped to tablet + mobile only (768px wide and below): desktop always shows all three blocks regardless of these settings, matching how the existing "Hide contact column on tablet/mobile" toggles already behave at the whole-column level. Labels and descriptions updated in the Customizer to make this scope explicit ("Show Phone Numbers (Tablet & Mobile)", etc.).

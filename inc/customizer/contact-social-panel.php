@@ -230,6 +230,36 @@ function mec_theme_customize_contact_social( $wp_customize ) {
         'section'     => 'mec_theme_contact_social_section',
         'type'        => 'checkbox',
     ) );
+
+    // Phone/Email text size -- tablet + mobile ONLY. No desktop control is
+    // added here on purpose: desktop keeps its existing fixed size from
+    // .header-contact-column in style.css, exactly as it did before this
+    // setting existed. Reuses mec_theme_sanitize_float(), the same
+    // sanitizer every other rem-based font-size setting in this theme
+    // (see inc/customizer/typography-panel.php) already uses.
+    $wp_customize->add_setting( 'mec_theme_contact_text_size_tablet', array(
+        'default'           => '0.85',
+        'sanitize_callback' => 'mec_theme_sanitize_float',
+    ) );
+    $wp_customize->add_control( 'mec_theme_contact_text_size_tablet', array(
+        'label'       => __( 'Phone & Email Text Size - Tablet (rem)', 'mec_theme' ),
+        'description' => __( 'Applies at 481-768px only. Desktop size is unaffected.', 'mec_theme' ),
+        'section'     => 'mec_theme_contact_social_section',
+        'type'        => 'number',
+        'input_attrs' => array( 'min' => 0.6, 'max' => 1.2, 'step' => 0.05 ),
+    ) );
+
+    $wp_customize->add_setting( 'mec_theme_contact_text_size_mobile', array(
+        'default'           => '0.8',
+        'sanitize_callback' => 'mec_theme_sanitize_float',
+    ) );
+    $wp_customize->add_control( 'mec_theme_contact_text_size_mobile', array(
+        'label'       => __( 'Phone & Email Text Size - Mobile (rem)', 'mec_theme' ),
+        'description' => __( 'Applies at 480px and below only. Desktop size is unaffected.', 'mec_theme' ),
+        'section'     => 'mec_theme_contact_social_section',
+        'type'        => 'number',
+        'input_attrs' => array( 'min' => 0.6, 'max' => 1.2, 'step' => 0.05 ),
+    ) );
 }
 add_action( 'customize_register', 'mec_theme_customize_contact_social' );
 

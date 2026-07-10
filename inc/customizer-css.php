@@ -310,6 +310,13 @@ function mec_theme_get_responsive_css() {
     $menu_size_tablet = get_theme_mod( 'mec_theme_menu_size_tablet', '0.95' );
     $css .= '@media (min-width: 481px) and (max-width: 768px) { .main-navigation a { font-size: ' . floatval( $menu_size_tablet ) . 'rem; } }';
     
+    // Contact phone/email text size -- tablet + mobile ONLY (no desktop
+    // setting exists here deliberately). Desktop keeps its fixed 0.9rem
+    // from .header-contact-column's base rule in style.css, unaffected by
+    // this or the mobile block below.
+    $contact_text_size_tablet = get_theme_mod( 'mec_theme_contact_text_size_tablet', '0.85' );
+    $css .= '@media (min-width: 481px) and (max-width: 768px) { .header-contact-column .contact-phone, .header-contact-column .contact-email { font-size: ' . floatval( $contact_text_size_tablet ) . 'rem; } }';
+    
     // Mobile
     $body_font_mobile = get_theme_mod( 'mec_theme_body_font_size_mobile', 14 );
     $css .= '@media (max-width: 480px) { body { font-size: ' . absint( $body_font_mobile ) . 'px; } }';
@@ -328,6 +335,9 @@ function mec_theme_get_responsive_css() {
     
     $menu_size_mobile = get_theme_mod( 'mec_theme_menu_size_mobile', '0.9' );
     $css .= '@media (max-width: 480px) { .main-navigation a { font-size: ' . floatval( $menu_size_mobile ) . 'rem; } }';
+    
+    $contact_text_size_mobile = get_theme_mod( 'mec_theme_contact_text_size_mobile', '0.8' );
+    $css .= '@media (max-width: 480px) { .header-contact-column .contact-phone, .header-contact-column .contact-email { font-size: ' . floatval( $contact_text_size_mobile ) . 'rem; } }';
     
     return $css;
 }

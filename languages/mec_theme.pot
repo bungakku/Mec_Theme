@@ -2,7 +2,7 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MEC_Theme 1.7.36\n"
+"Project-Id-Version: MEC_Theme 1.7.37\n"
 "Report-Msgid-Bugs-To: https://biswazit.in/mectheme\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -612,27 +612,43 @@ msgstr ""
 msgid "Hide contact column on mobile (=480px)"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:402
+#: inc/customizer/contact-social-panel.php:245
+msgid "Phone & Email Text Size - Tablet (rem)"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:246
+msgid "Applies at 481-768px only. Desktop size is unaffected."
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:257
+msgid "Phone & Email Text Size - Mobile (rem)"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:258
+msgid "Applies at 480px and below only. Desktop size is unaffected."
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:432
 msgid "Social Icon Size (px)"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:415
+#: inc/customizer/contact-social-panel.php:445
 msgid "Social Icon SVG Size (px)"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:428
+#: inc/customizer/contact-social-panel.php:458
 msgid "Social Icon Background Color"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:439
+#: inc/customizer/contact-social-panel.php:469
 msgid "Social Icon Color"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:450
+#: inc/customizer/contact-social-panel.php:480
 msgid "Social Icon Hover Background Color"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:461
+#: inc/customizer/contact-social-panel.php:491
 msgid "Social Icon Hover Color"
 msgstr ""
 

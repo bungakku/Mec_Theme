@@ -4,7 +4,7 @@ Theme URI: https://biswazit.in/mectheme
 Author: Biswajit
 Author URI: https://biswazit.in
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.36
+Version: 1.7.37
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -794,7 +794,33 @@ table {
 
     .content-area {
         flex-direction: column;
-        gap: 20px;
+        /* Reduced 20px -> var(--mec-space-sm) (12px). The visible gap here
+           was never just this value though -- .content-area uses flex
+           `gap`, which adds space BETWEEN flex items IN ADDITION to any
+           margin those items already have. On a blog listing (front page,
+           index, archive, search), .primary's last <article> still had its
+           own margin-bottom (20px at this breakpoint, see the `article`
+           rule below), so the real gap before the stacked sidebar was
+           20px (article) + 20px (this gap) = 40px, not the 20px it looked
+           like from this rule alone. See the new
+           `.has-sidebar .primary > *:last-child` rule further down, which
+           zeroes that trailing margin so this gap value is the ONLY thing
+           controlling the space, on every template (blog listings, single
+           posts, pages) rather than compounding differently on each. */
+        gap: var(--mec-space-sm);
+    }
+
+    /* Prevents the last element inside .primary (an <article> in a blog
+       listing, or whatever the final element is on a single post/page)
+       from adding its own trailing margin-bottom on top of the
+       .content-area gap above, once the layout has stacked into a single
+       column. That margin exists to space consecutive articles/elements
+       apart from EACH OTHER -- it was never meant to also add extra space
+       before the now-stacked sidebar. Scoped to .has-sidebar so pages
+       with no sidebar (where .primary is simply the last thing in
+       .content-area) are unaffected. */
+    .has-sidebar .primary > *:last-child {
+        margin-bottom: 0;
     }
 
     .has-sidebar .primary,
@@ -1038,6 +1064,15 @@ table {
         flex-direction: column;
         align-items: center;
         text-align: center;
+        /* Reduced from the inherited 20px (meant for the desktop row
+           layout, where it's horizontal space between site-branding and
+           the contact column) to var(--mec-space-xs) (8px) now that this
+           becomes a VERTICAL gap between the two stacked blocks --
+           matching the same 8px already used for the gap between
+           individual items inside .header-contact-column just below, so
+           the whole stacked header reads as one consistent rhythm instead
+           of one large gap followed by several small ones. */
+        gap: var(--mec-space-xs);
     }
     .header-contact-column {
         text-align: center;
@@ -1061,17 +1096,18 @@ table {
         flex-wrap: wrap;
         gap: 15px;
         width: 100%;
-        margin-bottom: 4px;
     }
 
-    .header-contact-column .contact-phone {
-        margin: 0;
-    }
-
-    .header-contact-column .contact-email {
-        margin-bottom: 8px;
-    }
+    /* No margin-bottom overrides here for .contact-phones-row or
+       .contact-email: .header-contact-column already spaces its children
+       (phones row / email / social) apart via its own flex `gap: 8px`
+       (see base rule above). Adding margin-bottom here on top of that
+       gap was compounding the two, doubling the visible space between
+       phones->email and email->social. Letting the parent's gap be the
+       ONLY spacing mechanism keeps every gap in this stack equal and
+       intentional. */
 }
+
 
 /* ===== Sidebar & Content Layout ===== */
 .content-area {
