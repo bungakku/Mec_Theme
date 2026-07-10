@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.38
+Stable tag: 1.7.39
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.39 =
+* Fixed: title/logo and the phone/email/social block visibly aligned differently on tablet (481-768px), confirmed via screenshot -- the logo+title+tagline group sat flush-left while phone/email centered normally. Root cause: a legacy rule forces `.site-branding { width: 100% !important; }` at this breakpoint (originally paired with a `.header-content.title-align-tablet-center` centering rule that has never actually matched anything, since no element in header.php carries a `.header-content` class), leaving `.site-branding`'s content with no centering behavior of its own once it became full-width. `.header-contact-column` (fixed in 1.7.38) already correctly shrink-wraps and centers via `.header-top-row`'s `align-items: center`; `.site-branding` did not. Added `justify-content: center` to `.site-branding` at <=768px so the logo+text group now centers on the same axis as the contact column, at both tablet and mobile widths.
+* Note: because the logo still sits beside the title (not stacked above it) at this breakpoint, the tagline's own text can still sit slightly off the exact same center point as phone/email, by roughly half the logo's width -- this is a much smaller, secondary effect than the flush-left/centered mismatch fixed here. Setting Logo Position (Tablet/Mobile) to "Above Site Title" in Customize > Layout Settings > Header removes this residual offset entirely, since the logo no longer sits beside the text.
 
 = 1.7.38 =
 * Fixed: on tablet/mobile (<=768px), phone numbers, email, and social icons were centered against the FULL header width (`.header-contact-column` had `width: 100%`), while the tagline and site description centered only within their own, narrower shrink-wrapped content width -- two different alignment behaviors that didn't visually match, even though both blocks sit in the same stacked column. Removed `width: 100%` from `.header-contact-column` so it now shrink-wraps and gets centered as a block by `.header-top-row`'s existing `align-items: center`, the exact same mechanism `.site-branding`/`.site-text` already use. The contact block now aligns with the site's actual content width instead of the full page, consistently with the tagline/description, across tablet and mobile (desktop's row layout was never affected either way).

@@ -4,7 +4,7 @@ Theme URI: https://biswazit.in/mectheme
 Author: Biswajit
 Author URI: https://biswazit.in
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.38
+Version: 1.7.39
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1071,6 +1071,23 @@ table {
            one continuous, evenly-tight rhythm rather than one block
            having a visibly bigger gap than the rest. */
         gap: 4px;
+    }
+    .site-branding {
+        /* Fixes a real mismatch: at tablet width (481-768px), a legacy
+           rule further up this file forces `.site-branding { width: 100%
+           !important; }`, but nothing was ever centering the CONTENT
+           inside that now-full-width box -- .logo-text-wrapper (logo +
+           title + tagline + description) shrink-wraps to its own content
+           and, with no justify-content set here, sat flush at the LEFT
+           edge instead of centering. Meanwhile .header-contact-column
+           (fixed in 1.7.38) correctly shrink-wraps AND centers via
+           .header-top-row's align-items: center. That's exactly the
+           mismatch in the reported screenshot: title/tagline sitting
+           left, phone/email sitting centered. This rule centers
+           .logo-text-wrapper as a whole inside .site-branding at both
+           tablet and mobile widths, putting the branding block on the
+           same central axis as the contact column. */
+        justify-content: center;
     }
     .header-contact-column {
         text-align: center;
