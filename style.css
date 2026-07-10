@@ -4,7 +4,7 @@ Theme URI: https://biswazit.in/mectheme
 Author: Biswajit
 Author URI: https://biswazit.in
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.37
+Version: 1.7.38
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1064,20 +1064,33 @@ table {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        /* Reduced from the inherited 20px (meant for the desktop row
-           layout, where it's horizontal space between site-branding and
-           the contact column) to var(--mec-space-xs) (8px) now that this
-           becomes a VERTICAL gap between the two stacked blocks --
-           matching the same 8px already used for the gap between
-           individual items inside .header-contact-column just below, so
-           the whole stacked header reads as one consistent rhythm instead
-           of one large gap followed by several small ones. */
-        gap: var(--mec-space-xs);
+        /* Tightened further per request: var(--mec-space-xs) (8px) ->
+           4px, matching the ~5px already used for .site-description's own
+           margin-top, so the whole stacked header (title, tagline,
+           description, then this gap, then the contact blocks) reads as
+           one continuous, evenly-tight rhythm rather than one block
+           having a visibly bigger gap than the rest. */
+        gap: 4px;
     }
     .header-contact-column {
         text-align: center;
-        width: 100%;
+        /* No `width: 100%` here (removed): .site-branding / .site-text
+           never had one either -- they shrink-wrap to their own content
+           and get centered as a block purely by .header-top-row's
+           `align-items: center` above. Forcing header-contact-column to
+           span the full container width made phone/email/social center
+           against the ENTIRE page, while the tagline/description centered
+           only within their own, narrower content width -- two different
+           alignment behaviors that didn't visually match. Removing this
+           makes the contact column follow the exact same shrink-wrap +
+           parent-centers-it pattern as the branding block above it. */
         align-items: center;
+        /* Tightened alongside the header-top-row gap above, for the same
+           reason: was var(--mec-space-xs) (8px, inherited from the base
+           rule further up this file), now 4px to match. Desktop's 8px gap
+           is untouched -- this override only applies inside this <=768px
+           media query. */
+        gap: 4px;
     }
     .header-contact-column .contact-social {
         justify-content: center;
@@ -1100,9 +1113,9 @@ table {
 
     /* No margin-bottom overrides here for .contact-phones-row or
        .contact-email: .header-contact-column already spaces its children
-       (phones row / email / social) apart via its own flex `gap: 8px`
-       (see base rule above). Adding margin-bottom here on top of that
-       gap was compounding the two, doubling the visible space between
+       (phones row / email / social) apart via its own flex `gap`
+       (see override above). Adding margin-bottom here on top of that gap
+       would compound the two, doubling the visible space between
        phones->email and email->social. Letting the parent's gap be the
        ONLY spacing mechanism keeps every gap in this stack equal and
        intentional. */

@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.37
+Stable tag: 1.7.38
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.38 =
+* Fixed: on tablet/mobile (<=768px), phone numbers, email, and social icons were centered against the FULL header width (`.header-contact-column` had `width: 100%`), while the tagline and site description centered only within their own, narrower shrink-wrapped content width -- two different alignment behaviors that didn't visually match, even though both blocks sit in the same stacked column. Removed `width: 100%` from `.header-contact-column` so it now shrink-wraps and gets centered as a block by `.header-top-row`'s existing `align-items: center`, the exact same mechanism `.site-branding`/`.site-text` already use. The contact block now aligns with the site's actual content width instead of the full page, consistently with the tagline/description, across tablet and mobile (desktop's row layout was never affected either way).
+* Improved: further tightened the tablet/mobile stacked-header spacing per follow-up request -- `.header-top-row`'s gap (between the branding block and the contact block) reduced from 8px to 4px, and `.header-contact-column`'s own internal gap (between phones/email/social) reduced from 8px to 4px at this breakpoint only. Desktop's 8px contact-column gap is untouched.
 
 = 1.7.37 =
 * Fixed: large gap between the main content and sidebar widgets once the layout stacks into a single column on tablet/mobile (<=768px). Root cause: `.content-area` uses flex `gap` (20px) to space `.primary` and `.secondary` apart -- but on blog listing pages (front page, index, archive, search), the last `<article>` in `.primary` also had its own `margin-bottom` (20px at this breakpoint), and flex `gap` adds space ON TOP OF a child's own margin rather than replacing it. The two combined into a 40px gap that looked like one oversized value. Added `.has-sidebar .primary > *:last-child { margin-bottom: 0; }` (mobile/tablet only) so the trailing element's own spacing no longer stacks with the container gap, and reduced `.content-area`'s gap itself from 20px to `var(--mec-space-sm)` (12px) for a tighter overall feel. Desktop (>768px) is unaffected either way.
