@@ -22,7 +22,48 @@ function mec_theme_customize_contact_social( $wp_customize ) {
         'title'    => __( 'Contact & Social (Header)', 'mec_theme' ),
         'priority' => 35, // after Header section
     ) );
-    
+
+    // --- Independent block visibility toggles ---
+    // These control whether each block renders at all (server-side, via
+    // header.php), separate from mec_theme_hide_contact_tablet/mobile
+    // below, which only hide the whole .header-contact-column at specific
+    // breakpoints. 'refresh' (the default transport) is used deliberately
+    // here rather than postMessage: toggling a block's existence changes
+    // what header.php outputs, not just a style, so a full preview refresh
+    // is the correct behavior rather than partial JS-driven visibility.
+    $wp_customize->add_setting( 'mec_theme_show_contact_phones', array(
+        'default'           => true,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ) );
+    $wp_customize->add_control( 'mec_theme_show_contact_phones', array(
+        'label'       => __( 'Show Phone Numbers', 'mec_theme' ),
+        'section'     => 'mec_theme_contact_social_section',
+        'type'        => 'checkbox',
+        'priority'    => 5,
+    ) );
+
+    $wp_customize->add_setting( 'mec_theme_show_contact_email', array(
+        'default'           => true,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ) );
+    $wp_customize->add_control( 'mec_theme_show_contact_email', array(
+        'label'       => __( 'Show Email Address', 'mec_theme' ),
+        'section'     => 'mec_theme_contact_social_section',
+        'type'        => 'checkbox',
+        'priority'    => 6,
+    ) );
+
+    $wp_customize->add_setting( 'mec_theme_show_contact_social', array(
+        'default'           => true,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ) );
+    $wp_customize->add_control( 'mec_theme_show_contact_social', array(
+        'label'       => __( 'Show Social Icons', 'mec_theme' ),
+        'section'     => 'mec_theme_contact_social_section',
+        'type'        => 'checkbox',
+        'priority'    => 7,
+    ) );
+
     // Phone number 1
     $wp_customize->add_setting( 'mec_theme_phone_1', array(
         'default'           => '+1 (234) 567-8901',
@@ -130,6 +171,16 @@ function mec_theme_customize_contact_social( $wp_customize ) {
         'section'  => 'mec_theme_contact_social_section',
     ) ) );
 
+    $wp_customize->add_setting( 'mec_theme_contact_phone_hover_color', array(
+        'default'           => '#0274be',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_contact_phone_hover_color', array(
+        'label'    => __( 'Phone Numbers Hover Color', 'mec_theme' ),
+        'section'  => 'mec_theme_contact_social_section',
+    ) ) );
+
     $wp_customize->add_setting( 'mec_theme_contact_email_color', array(
         'default'           => '#333333',
         'sanitize_callback' => 'sanitize_hex_color',
@@ -137,6 +188,16 @@ function mec_theme_customize_contact_social( $wp_customize ) {
     ) );
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_contact_email_color', array(
         'label'    => __( 'Email Address Color', 'mec_theme' ),
+        'section'  => 'mec_theme_contact_social_section',
+    ) ) );
+
+    $wp_customize->add_setting( 'mec_theme_contact_email_hover_color', array(
+        'default'           => '#0274be',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport'         => 'postMessage',
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_contact_email_hover_color', array(
+        'label'    => __( 'Email Address Hover Color', 'mec_theme' ),
         'section'  => 'mec_theme_contact_social_section',
     ) ) );
 
@@ -236,6 +297,35 @@ function mec_theme_customize_contact_preview() {
                 $( '.contact-email a' ).css( 'color', newval );
             } );
         } );
+
+        // Live preview for phone/email hover colors. :hover can't be set
+        // via jQuery .css(), so this maintains its own <style> tag and
+        // rewrites it on change -- same pattern already used for tagline
+        // alignment and description-hiding preview elsewhere in the theme.
+        function updateContactHoverPreview() {
+            var phoneHover = wp.customize( 'mec_theme_contact_phone_hover_color' ).get();
+            var emailHover = wp.customize( 'mec_theme_contact_email_hover_color' ).get();
+            var styleId = 'mec-theme-contact-hover-preview';
+            var $style = $( '#' + styleId );
+            if ( $style.length === 0 ) {
+                $style = $( '<style id="' + styleId + '"></style>' ).appendTo( 'head' );
+            }
+            var css = '';
+            if ( phoneHover ) {
+                css += '.header-contact-column .contact-phone:hover { color: ' + phoneHover + '; }';
+            }
+            if ( emailHover ) {
+                css += '.header-contact-column .contact-email a:hover { color: ' + emailHover + '; }';
+            }
+            $style.html( css );
+        }
+        wp.customize( 'mec_theme_contact_phone_hover_color', function( value ) {
+            value.bind( updateContactHoverPreview );
+        } );
+        wp.customize( 'mec_theme_contact_email_hover_color', function( value ) {
+            value.bind( updateContactHoverPreview );
+        } );
+        updateContactHoverPreview();
 
         // Live preview for hiding contact column
         function updateContactVisibility() {

@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.34
+Stable tag: 1.7.35
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.35 =
+* Added: independent Show/Hide toggles for the three Contact & Social blocks -- "Show Phone Numbers", "Show Email Address", "Show Social Icons" (Customize > Contact & Social). Each block can now be disabled on its own without affecting the others, separate from the existing tablet/mobile "hide contact column" toggles, which still hide the whole column at those breakpoints.
+* Added: "Phone Numbers Hover Color" and "Email Address Hover Color" controls, next to their existing (non-hover) color settings. Phone numbers and the email link now have a smooth color transition on hover, live-previewed in the Customizer the same way the existing phone/email colors already were.
+* No existing settings, classes, or markup were removed or renamed. `header.php`'s phone/email/social blocks are now each wrapped in their own visibility check (default: shown, matching current behavior on upgrade); `inc/customizer-css.php` gained two new hover CSS rules alongside the existing phone/email color rules.
 
 = 1.7.34 =
 * Added: separate side-by-side layout for Phone Number 1 and Phone Number 2 on tablet (481-768px) and mobile (<=480px) -- both now sit in a shared, centered, wrapping row (`.contact-phones-row`) above the email and social icons, instead of stacking fully vertically with everything else. Desktop (>768px) layout is unchanged.

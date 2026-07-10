@@ -582,14 +582,24 @@ function mec_theme_get_customizer_css() {
     // Mobile menu colours and additional overrides
     $css .= mec_theme_get_mobile_menu_colors_css();
     
-    // Contact phone/email colours (specific selectors)
+    // Contact phone/email colours (specific selectors) + hover states
     $phone_color = get_theme_mod( 'mec_theme_contact_phone_color', '#333333' );
     if ( $phone_color && preg_match( '/^#[a-f0-9]{6}$/i', $phone_color ) ) {
         $css .= '.header-contact-column .contact-phone { color: ' . esc_attr( $phone_color ) . '; }';
     }
+    $phone_hover_color = get_theme_mod( 'mec_theme_contact_phone_hover_color', '#0274be' );
+    if ( $phone_hover_color && preg_match( '/^#[a-f0-9]{6}$/i', $phone_hover_color ) ) {
+        $css .= '.header-contact-column .contact-phone { transition: color 0.3s ease; }';
+        $css .= '.header-contact-column .contact-phone:hover { color: ' . esc_attr( $phone_hover_color ) . '; }';
+    }
     $email_color = get_theme_mod( 'mec_theme_contact_email_color', '#333333' );
     if ( $email_color && preg_match( '/^#[a-f0-9]{6}$/i', $email_color ) ) {
         $css .= '.header-contact-column .contact-email a { color: ' . esc_attr( $email_color ) . '; }';
+    }
+    $email_hover_color = get_theme_mod( 'mec_theme_contact_email_hover_color', '#0274be' );
+    if ( $email_hover_color && preg_match( '/^#[a-f0-9]{6}$/i', $email_hover_color ) ) {
+        $css .= '.header-contact-column .contact-email a { transition: color 0.3s ease; }';
+        $css .= '.header-contact-column .contact-email a:hover { color: ' . esc_attr( $email_hover_color ) . '; }';
     }
     
     // Site title colour (using variable but also direct for older browsers)

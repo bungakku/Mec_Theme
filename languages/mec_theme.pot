@@ -2,7 +2,7 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MEC_Theme 1.7.34\n"
+"Project-Id-Version: MEC_Theme 1.7.35\n"
 "Report-Msgid-Bugs-To: https://biswazit.in/mectheme\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -528,79 +528,99 @@ msgstr ""
 msgid "Mobile Close Button Hover Color"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:23
+#: inc/customizer/contact-social-panel.php:22
 msgid "Contact & Social (Header)"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:34
+#: inc/customizer/contact-social-panel.php:39
+msgid "Show Phone Numbers"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:50
+msgid "Show Email Address"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:61
+msgid "Show Social Icons"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:74
 msgid "Phone Number 1"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:46
+#: inc/customizer/contact-social-panel.php:86
 msgid "Phone Number 2"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:58
+#: inc/customizer/contact-social-panel.php:98
 msgid "Email Address"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:70
+#: inc/customizer/contact-social-panel.php:110
 msgid "Facebook URL"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:82
+#: inc/customizer/contact-social-panel.php:122
 msgid "Twitter/X URL"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:94
+#: inc/customizer/contact-social-panel.php:134
 msgid "Instagram URL"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:106
+#: inc/customizer/contact-social-panel.php:146
 msgid "LinkedIn URL (optional)"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:118
+#: inc/customizer/contact-social-panel.php:158
 msgid "YouTube URL (optional)"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:130
+#: inc/customizer/contact-social-panel.php:170
 msgid "Phone Numbers Color"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:140
+#: inc/customizer/contact-social-panel.php:180
+msgid "Phone Numbers Hover Color"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:190
 msgid "Email Address Color"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:151
+#: inc/customizer/contact-social-panel.php:200
+msgid "Email Address Hover Color"
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:211
 msgid "Hide contact column on tablet (481px - 768px)"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:162
+#: inc/customizer/contact-social-panel.php:222
 msgid "Hide contact column on mobile (=480px)"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:284
+#: inc/customizer/contact-social-panel.php:373
 msgid "Social Icon Size (px)"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:297
+#: inc/customizer/contact-social-panel.php:386
 msgid "Social Icon SVG Size (px)"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:310
+#: inc/customizer/contact-social-panel.php:399
 msgid "Social Icon Background Color"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:321
+#: inc/customizer/contact-social-panel.php:410
 msgid "Social Icon Color"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:332
+#: inc/customizer/contact-social-panel.php:421
 msgid "Social Icon Hover Background Color"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:343
+#: inc/customizer/contact-social-panel.php:432
 msgid "Social Icon Hover Color"
 msgstr ""
 
