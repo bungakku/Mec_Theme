@@ -71,6 +71,37 @@ function mec_theme_customize_contact_social( $wp_customize ) {
         'priority'    => 7,
     ) );
 
+    // --- Dashboard Login Button (Teacher/Student login) ---
+    // Off by default: this is an opt-in feature for sites that actually run
+    // a teacher/student portal through wp-login.php, not something every
+    // site needs. Uses the default 'refresh' transport (no postMessage)
+    // since toggling it changes markup, not just CSS -- consistent with
+    // other markup-affecting toggles in this theme (e.g.
+    // mec_theme_show_author_bio, mec_theme_show_related_posts) which also
+    // rely on a full preview refresh rather than live JS binding.
+    $wp_customize->add_setting( 'mec_theme_show_login_button', array(
+        'default'           => false,
+        'sanitize_callback' => 'wp_validate_boolean',
+    ) );
+    $wp_customize->add_control( 'mec_theme_show_login_button', array(
+        'label'       => __( 'Show Dashboard Login Button', 'mec_theme' ),
+        'description' => __( 'Adds a login link (using the site\'s real login URL) as its own element below the social icons -- separate from them, not styled as one. Intended for teacher/student portal access. Off by default.', 'mec_theme' ),
+        'section'     => 'mec_theme_contact_social_section',
+        'type'        => 'checkbox',
+        'priority'    => 8,
+    ) );
+
+    $wp_customize->add_setting( 'mec_theme_login_button_text', array(
+        'default'           => 'Teacher/Student Login',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'mec_theme_login_button_text', array(
+        'label'       => __( 'Login Button Text', 'mec_theme' ),
+        'section'     => 'mec_theme_contact_social_section',
+        'type'        => 'text',
+        'priority'    => 9,
+    ) );
+
     // Phone number 1
     $wp_customize->add_setting( 'mec_theme_phone_1', array(
         'default'           => '+1 (234) 567-8901',

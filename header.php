@@ -154,6 +154,36 @@ if ( function_exists( 'wp_body_open' ) ) {
                             </a>
                         <?php endif; ?>
                     </div><!-- .contact-social -->
+
+                    <?php if ( get_theme_mod( 'mec_theme_show_login_button', false ) ) :
+                        // Deliberately its own element, not merged into
+                        // .contact-social -- semantically the social icons
+                        // are all "leave the site" links, while this stays
+                        // on-site. redirect_to sends the user back to the
+                        // page they were on after logging in. home_url()
+                        // anchors the redirect to this site's own domain
+                        // regardless of the REQUEST_URI value, and the
+                        // final output still goes through esc_url() before
+                        // being printed, matching this theme's existing
+                        // escaping pattern for every other href in this file.
+                        $mec_login_redirect = isset( $_SERVER['REQUEST_URI'] )
+                            ? esc_url_raw( home_url( wp_unslash( $_SERVER['REQUEST_URI'] ) ) )
+                            : home_url( '/' );
+                        $mec_login_url = wp_login_url( $mec_login_redirect );
+                        $mec_login_text = get_theme_mod( 'mec_theme_login_button_text', 'Teacher/Student Login' );
+                        if ( '' === trim( (string) $mec_login_text ) ) {
+                            $mec_login_text = __( 'Teacher/Student Login', 'mec_theme' );
+                        }
+                        ?>
+                        <div class="contact-login">
+                            <a href="<?php echo esc_url( $mec_login_url ); ?>" class="mec-login-button" rel="nofollow">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true" focusable="false">
+                                    <path d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z"/>
+                                </svg>
+                                <?php echo esc_html( $mec_login_text ); ?>
+                            </a>
+                        </div><!-- .contact-login -->
+                    <?php endif; ?>
                 </div><!-- .header-contact-column -->
             </div><!-- .header-top-row -->
 

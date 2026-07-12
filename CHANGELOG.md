@@ -7,6 +7,14 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.43]
+
+### Added
+- optional "Dashboard Login Button" (Customize > Contact & Social), off by default. Intended for teacher/student portal access -- adds a login link as its own element below the social icons, deliberately not styled as one of them since it stays on-site rather than leaving it. Uses `wp_login_url()` with a `redirect_to` back to the current page, so visitors return to where they were after logging in, and respects any login-URL-changing security plugin already active rather than hardcoding `/wp-login.php`. Button text is customizable ("Teacher/Student Login" by default).
+
+### Fixed
+- two Sidebar section descriptions in the Customizer ("Recommended: 70%..." / "Recommended: 25%...") were left un-regenerated in languages/mec_theme.pot after 1.7.42 changed the underlying defaults to 75%/22% -- the source strings were correct, only the translation catalog was stale. Regenerated; the .pot file is now a full 1:1 match with every translatable string in the theme (278 strings, 0 missing).
+
 ## [1.7.42]
 
 ### Changed

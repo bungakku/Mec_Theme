@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.42
+Stable tag: 1.7.43
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.43 =
+* Added: optional "Dashboard Login Button" (Customize > Contact & Social), off by default. Intended for teacher/student portal access -- adds a login link as its own element below the social icons, deliberately not styled as one of them since it stays on-site rather than leaving it. Uses `wp_login_url()` with a `redirect_to` back to the current page, so visitors return to where they were after logging in, and respects any login-URL-changing security plugin already active rather than hardcoding `/wp-login.php`. Button text is customizable ("Teacher/Student Login" by default).
+* Fixed: two Sidebar section descriptions in the Customizer ("Recommended: 70%..." / "Recommended: 25%...") were left un-regenerated in languages/mec_theme.pot after 1.7.42 changed the underlying defaults to 75%/22% -- the source strings were correct, only the translation catalog was stale. Regenerated; the .pot file is now a full 1:1 match with every translatable string in the theme (278 strings, 0 missing).
 
 = 1.7.42 =
 * Changed: default Main Content Width / Sidebar Width raised from 70%/25% to 75%/22% (Customize > Layout Settings > Sidebar). Sites that already saved custom values for either setting are unaffected -- this only changes the out-of-the-box defaults, and the underlying validation rule (content + sidebar must not exceed 100%) is unchanged.
