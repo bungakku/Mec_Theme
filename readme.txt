@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.43
+Stable tag: 1.7.44
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.44 =
+* Fixed: the skip-link ("Skip to content") was visually clipped to 1x1px permanently, even when a keyboard user tabbed to and focused it -- it carried the .screen-reader-text class with no :focus override to reveal it, so the accessibility feature existed in markup but had no working effect for keyboard navigation (WCAG 2.4.1). Added a .skip-link:focus rule that reveals it as a visible, styled button while focused, and hides it again on blur; scoped narrowly to .skip-link (not screen-reader-text generally) so unrelated screen-reader-only elements are unaffected.
+* Fixed: functions.php declares add_theme_support('align-wide'), offering "Wide width" and "Full width" options in the block editor, but no matching CSS existed for .alignwide/.alignfull -- selecting either had no visible effect on the front end. Added CSS for both: .alignwide is a near-no-op since this theme's articles have no narrower text column to break out of (content is already full-width within the card), documented as such; .alignfull now breaks out of the article card's own left/right padding so a full-width image/cover can reach the card's edges, without bleeding past them into a broken-looking full-viewport break.
 
 = 1.7.43 =
 * Added: optional "Dashboard Login Button" (Customize > Contact & Social), off by default. Intended for teacher/student portal access -- adds a login link as its own element below the social icons, deliberately not styled as one of them since it stays on-site rather than leaving it. Uses `wp_login_url()` with a `redirect_to` back to the current page, so visitors return to where they were after logging in, and respects any login-URL-changing security plugin already active rather than hardcoding `/wp-login.php`. Button text is customizable ("Teacher/Student Login" by default).

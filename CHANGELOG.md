@@ -7,6 +7,12 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.44]
+
+### Fixed
+- the skip-link ("Skip to content") was visually clipped to 1x1px permanently, even when a keyboard user tabbed to and focused it -- it carried the .screen-reader-text class with no :focus override to reveal it, so the accessibility feature existed in markup but had no working effect for keyboard navigation (WCAG 2.4.1). Added a .skip-link:focus rule that reveals it as a visible, styled button while focused, and hides it again on blur; scoped narrowly to .skip-link (not screen-reader-text generally) so unrelated screen-reader-only elements are unaffected.
+- functions.php declares add_theme_support('align-wide'), offering "Wide width" and "Full width" options in the block editor, but no matching CSS existed for .alignwide/.alignfull -- selecting either had no visible effect on the front end. Added CSS for both: .alignwide is a near-no-op since this theme's articles have no narrower text column to break out of (content is already full-width within the card), documented as such; .alignfull now breaks out of the article card's own left/right padding so a full-width image/cover can reach the card's edges, without bleeding past them into a broken-looking full-viewport break.
+
 ## [1.7.43]
 
 ### Added

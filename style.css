@@ -4,7 +4,7 @@ Theme URI: https://biswazit.in/mectheme
 Author: Biswajit
 Author URI: https://github.com/bungakku
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.43
+Version: 1.7.44
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1324,6 +1324,47 @@ article {
     word-wrap: break-word;
 }
 
+/* ===== Block Editor Wide & Full Alignment =====
+ * functions.php declares add_theme_support('align-wide'), which tells the
+ * block editor to offer "Wide width" and "Full width" alignment options --
+ * but no matching front-end CSS existed for either .alignwide or
+ * .alignfull, so selecting them had no visible effect at all (not broken,
+ * just inert).
+ *
+ * This theme's articles render as a padded, rounded "card" (see the
+ * `article` rule below: padding + border-radius + box-shadow), and
+ * .entry-content itself is never narrower than its card -- there's no
+ * separate narrow text column the way there is in many block themes. That
+ * means:
+ * - .alignwide has nothing meaningfully wider to break out to (content is
+ *   already full-width within the card), so it's a deliberate near-no-op:
+ *   explicit here for clarity/documentation rather than left undefined.
+ * - .alignfull breaks out of the card's own left/right padding only, so a
+ *   full-width image/cover can reach the card's edges -- a literal
+ *   edge-to-viewport bleed would visually punch through the card's
+ *   padding/border-radius/shadow in a broken-looking way, so this is
+ *   scoped to the card's own bounds instead of 100vw.
+ */
+.entry-content > .alignwide {
+    width: 100%;
+    max-width: 100%;
+}
+
+.entry-content > .alignfull {
+    width: calc(100% + (var(--mec-space-lg) * 2));
+    max-width: calc(100% + (var(--mec-space-lg) * 2));
+    margin-left: calc(var(--mec-space-lg) * -1);
+    margin-right: calc(var(--mec-space-lg) * -1);
+}
+
+.entry-content > .alignfull > img,
+.entry-content > .alignfull > .wp-block-image img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 0;
+}
+
 .entry-content p {
     margin-bottom: 1.5rem;
 }
@@ -1559,6 +1600,37 @@ article {
     overflow: hidden !important;
     clip-path: inset(50%) !important;
     white-space: nowrap !important;
+}
+
+/* Skip-link focus reveal.
+ * The skip-link in header.php carries both .skip-link and
+ * .screen-reader-text, which clips it to 1x1px permanently -- with no
+ * :focus override, a keyboard user tabbing to it never actually sees
+ * "Skip to content" appear, so the feature existed in markup but had no
+ * working effect. This overrides .screen-reader-text's !important sizing
+ * properties (needs matching !important to win) ONLY on :focus, and ONLY
+ * for .skip-link specifically -- not screen-reader-text generally, since
+ * other screen-reader-text elements (comment counts, etc.) are not
+ * navigation targets and should stay hidden even if something unusual
+ * focuses them. */
+.skip-link:focus {
+    position: fixed !important;
+    top: 10px !important;
+    left: 10px !important;
+    width: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+    clip-path: none !important;
+    white-space: normal !important;
+    z-index: 100000;
+    padding: 10px 18px;
+    background: var(--mec-primary-color, #0274be);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 3px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .widget-title {
