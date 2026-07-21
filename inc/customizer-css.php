@@ -219,10 +219,24 @@ function mec_theme_get_static_rules_css() {
         $css .= 'h1, h2, h3, h4, h5, h6, .entry-title, .widget-title { font-family: ' . $formatted_heading_font . '; }';
     }
     
-    // Menu padding and spacing
+    // Menu padding – scoped to desktop (>=769px) only. Fixed in 1.7.45:
+    // this rule previously had no media-query scope, and since it's loaded
+    // AFTER style.css via wp_add_inline_style(), an unscoped
+    // ".main-navigation a { padding: ... }" here won at equal specificity
+    // against style.css's own scoped mobile rule
+    // (@media max-width: 768px) .main-navigation a { padding: 12px 15px; }),
+    // silently overriding the mobile nav's padding regardless of what the
+    // Customizer's Menu Item Padding control was actually meant to affect.
+    // The desktop rule this setting is intended for
+    // (@media min-width: 769px .main-navigation a in style.css) has no such
+    // conflict, so scoping this generated rule the same way fixes the
+    // override without changing the setting's own desktop behavior at all.
     $menu_padding = get_theme_mod( 'mec_theme_menu_padding', 10 );
-    $css .= '.main-navigation a { padding: ' . absint( $menu_padding ) . 'px 0; }';
+    $css .= '@media (min-width: 769px) { .main-navigation a { padding: ' . absint( $menu_padding ) . 'px 0; } }';
     
+    // Menu spacing (ul gap) is left unscoped -- mobile nav uses
+    // display: block, not flex `gap`, so there is no equivalent mobile
+    // conflict for this rule the way there was for menu padding above.
     $menu_spacing = get_theme_mod( 'mec_theme_menu_spacing', 20 );
     $css .= '.main-navigation ul { gap: ' . absint( $menu_spacing ) . 'px; }';
     

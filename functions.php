@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'MEC_THEME_VERSION', '1.7.44' );
+define( 'MEC_THEME_VERSION', '1.7.45' );
 define( 'MEC_THEME_DIR', get_template_directory() );
 define( 'MEC_THEME_URI', get_template_directory_uri() );
 define( 'MEC_THEME_ASSETS', MEC_THEME_URI . '/assets' );
@@ -272,6 +272,37 @@ function mec_theme_related_posts() {
     if ( get_theme_mod( 'mec_theme_show_related_posts', true ) ) {
         get_template_part( 'template-parts/related-posts' );
     }
+}
+
+/**
+ * Shared "N Comments" link markup.
+ *
+ * Added in 1.7.45: this exact block (compute singular/plural + screen-reader
+ * text, then print the comments_link() anchor) was duplicated verbatim
+ * across template-parts/content.php, content-blog.php, and content-post.php.
+ * Extracted into one helper so future changes to comment-count wording only
+ * need to happen once. Output is byte-for-byte identical to the previous
+ * inline code in all three callers.
+ */
+function mec_theme_comments_link_markup() {
+    $comment_count = get_comments_number();
+    if ( $comment_count == 0 ) {
+        $comments_text = __( '0 Comments', 'mec_theme' );
+        $screen_reader_text = __( '0 comments', 'mec_theme' );
+    } elseif ( $comment_count == 1 ) {
+        $comments_text = __( '1 Comment', 'mec_theme' );
+        $screen_reader_text = __( '1 comment', 'mec_theme' );
+    } else {
+        /* translators: %s: number of comments */
+        $comments_text = sprintf( __( '%s Comments', 'mec_theme' ), number_format_i18n( $comment_count ) );
+        $screen_reader_text = sprintf( __( '%s comments', 'mec_theme' ), number_format_i18n( $comment_count ) );
+    }
+    ?>
+    <a href="<?php comments_link(); ?>">
+        <span aria-hidden="true"><?php echo esc_html( $comments_text ); ?></span>
+        <span class="screen-reader-text"><?php echo esc_html( $screen_reader_text ); ?></span>
+    </a>
+    <?php
 }
 
 /**

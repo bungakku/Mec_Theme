@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.44
+Stable tag: 1.7.45
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.45 =
+* Fixed: the Customizer's "Menu Item Padding" setting (Layout Settings > Menu Settings) silently overrode the mobile off-canvas menu's padding, even though the control only visually affected desktop. Root cause: `inc/customizer-css.php` generated `.main-navigation a { padding: ...px 0; }` with no media-query scope, and since this inline `<style>` block loads after `style.css` via `wp_add_inline_style()`, it won at equal specificity against `style.css`'s own scoped mobile rule (`@media (max-width: 768px) .main-navigation a { padding: 12px 15px; }`). Scoped the generated rule to `@media (min-width: 769px)`, matching the desktop-only rule it was actually meant to affect. `mec_theme_menu_spacing` (the `ul` gap rule) needed no equivalent fix -- mobile nav uses `display: block`, not flex `gap`, so there's no conflict there.
+* Changed: `style.css`'s `Theme URI` header updated from `https://biswazit.in/mectheme` to `https://github.com/bungakku/Mec_Theme` -- the `biswazit.in` domain is retired and no longer in use. `Author URI` (already pointing at `https://github.com/bungakku` since 1.7.41) is unaffected.
+* Note: extracted the duplicated "N Comments" markup (singular/plural text + screen-reader text + the `comments_link()` anchor) that appeared verbatim in `template-parts/content.php`, `content-blog.php`, and `content-post.php` into one shared `mec_theme_comments_link_markup()` helper in `functions.php`. Output is byte-for-byte identical to the previous inline code in all three callers; purely a maintainability cleanup.
 
 = 1.7.44 =
 * Fixed: the skip-link ("Skip to content") was visually clipped to 1x1px permanently, even when a keyboard user tabbed to and focused it -- it carried the .screen-reader-text class with no :focus override to reveal it, so the accessibility feature existed in markup but had no working effect for keyboard navigation (WCAG 2.4.1). Added a .skip-link:focus rule that reveals it as a visible, styled button while focused, and hides it again on blur; scoped narrowly to .skip-link (not screen-reader-text generally) so unrelated screen-reader-only elements are unaffected.

@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MEC_Theme 1.7.44\n"
+"Project-Id-Version: MEC_Theme 1.7.45\n"
 "Report-Msgid-Bugs-To: https://biswazit.in/mectheme\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-22 12:00+0000\n"
+"POT-Creation-Date: 2026-07-21 12:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: manually generated\n"
 "X-Domain: mec_theme\n"
@@ -97,14 +97,6 @@ msgstr ""
 msgid "Add widgets for footer column %d."
 msgstr ""
 
-#: functions.php:165
-msgid "Header Widget Area"
-msgstr ""
-
-#: functions.php:167
-msgid "Add widgets to header."
-msgstr ""
-
 #: functions.php:194
 #: header.php:192
 msgid "Menu"
@@ -114,7 +106,31 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: functions.php:313
+#: functions.php:290
+msgid "0 Comments"
+msgstr ""
+
+#: functions.php:291
+msgid "0 comments"
+msgstr ""
+
+#: functions.php:293
+msgid "1 Comment"
+msgstr ""
+
+#: functions.php:294
+msgid "1 comment"
+msgstr ""
+
+#: functions.php:297
+msgid "%s Comments"
+msgstr ""
+
+#: functions.php:298
+msgid "%s comments"
+msgstr ""
+
+#: functions.php:337
 msgid "Your WordPress version is outdated. MEC_Theme requires WordPress 5.0 or newer for full functionality."
 msgstr ""
 
@@ -141,10 +157,10 @@ msgstr ""
 #: header.php:150
 msgid "Visit our YouTube channel"
 msgstr ""
+
 #: header.php:175
 msgid "Teacher/Student Login"
 msgstr ""
-
 
 #: header.php:196
 #: header.php:197
@@ -160,7 +176,7 @@ msgid "Display recent posts with thumbnail, excerpt and read more link."
 msgstr ""
 
 #: inc/class-recent-posts-widget.php:74
-#: template-parts/content.php:79
+#: template-parts/content.php:65
 msgid "Read More"
 msgstr ""
 
@@ -1096,49 +1112,18 @@ msgstr ""
 msgid "by"
 msgstr ""
 
-#: template-parts/content-blog.php:80
-#: template-parts/content.php:40
-msgid "0 Comments"
-msgstr ""
-
-#: template-parts/content-blog.php:81
-#: template-parts/content.php:41
-msgid "0 comments"
-msgstr ""
-
-#: template-parts/content-blog.php:83
-#: template-parts/content.php:43
-msgid "1 Comment"
-msgstr ""
-
-#: template-parts/content-blog.php:84
-#: template-parts/content.php:44
-msgid "1 comment"
-msgstr ""
-
-#: template-parts/content-blog.php:87
-#: template-parts/content.php:47
-msgid "%s Comments"
-msgstr ""
-
-#: template-parts/content-blog.php:88
-#: template-parts/content.php:48
-msgid "%s comments"
+#: template-parts/content-blog.php:113
+#: template-parts/content-page.php:27
+#: template-parts/content.php:65
+msgid "Pages:"
 msgstr ""
 
 #: template-parts/content-blog.php:100
 msgid "in"
 msgstr ""
 
-#: template-parts/content-blog.php:113
-#: template-parts/content.php:65
+#: template-parts/content-blog.php:106
 msgid "Continue reading %s <span class=\"meta-nav\">&rarr;</span>"
-msgstr ""
-
-#: template-parts/content-blog.php:120
-#: template-parts/content-page.php:27
-#: template-parts/content.php:72
-msgid "Pages:"
 msgstr ""
 
 #: template-parts/content-none.php:13

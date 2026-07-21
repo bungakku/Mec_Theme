@@ -33,24 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
                     <?php esc_html_e( 'by', 'mec_theme' ); ?> <?php the_author_posts_link(); ?>
                 </span>
                 <span class="comments-link">
-                    <?php
-                    $comment_count = get_comments_number();
-                    if ( $comment_count == 0 ) {
-                        $comments_text = __( '0 Comments', 'mec_theme' );
-                        $screen_reader_text = __( '0 comments', 'mec_theme' );
-                    } elseif ( $comment_count == 1 ) {
-                        $comments_text = __( '1 Comment', 'mec_theme' );
-                        $screen_reader_text = __( '1 comment', 'mec_theme' );
-                    } else {
-                        /* translators: %s: number of comments */
-                        $comments_text = sprintf( __( '%s Comments', 'mec_theme' ), number_format_i18n( $comment_count ) );
-                        $screen_reader_text = sprintf( __( '%s comments', 'mec_theme' ), number_format_i18n( $comment_count ) );
-                    }
-                    ?>
-                    <a href="<?php comments_link(); ?>">
-                        <span aria-hidden="true"><?php echo esc_html( $comments_text ); ?></span>
-                        <span class="screen-reader-text"><?php echo esc_html( $screen_reader_text ); ?></span>
-                    </a>
+                    <?php mec_theme_comments_link_markup(); ?>
                 </span>
             </div><!-- .entry-meta -->
         <?php endif; ?>

@@ -7,6 +7,17 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.45]
+
+### Fixed
+- the Customizer's "Menu Item Padding" setting (Layout Settings > Menu Settings) silently overrode the mobile off-canvas menu's padding, even though the control only visually affected desktop. Root cause: `inc/customizer-css.php` generated `.main-navigation a { padding: ...px 0; }` with no media-query scope, and since this inline `<style>` block loads *after* `style.css` via `wp_add_inline_style()`, it won at equal specificity against `style.css`'s own scoped mobile rule (`@media (max-width: 768px) .main-navigation a { padding: 12px 15px; }`). Scoped the generated rule to `@media (min-width: 769px)`, matching the desktop-only rule it was actually meant to affect. `mec_theme_menu_spacing` (the `ul` gap rule) needed no equivalent fix -- mobile nav uses `display: block`, not flex `gap`, so there's no conflict there.
+
+### Changed
+- `style.css`'s `Theme URI` header updated from `https://biswazit.in/mectheme` to `https://github.com/bungakku/Mec_Theme` -- the `biswazit.in` domain is retired and no longer in use. `Author URI` (already pointing at `https://github.com/bungakku` since 1.7.41) is unaffected.
+
+### Notes
+- Extracted the duplicated "N Comments" markup (singular/plural text + screen-reader text + the `comments_link()` anchor) that appeared verbatim in `template-parts/content.php`, `content-blog.php`, and `content-post.php` into one shared `mec_theme_comments_link_markup()` helper in `functions.php`. Output is byte-for-byte identical to the previous inline code in all three callers; purely a maintainability cleanup.
+
 ## [1.7.44]
 
 ### Fixed
@@ -58,7 +69,7 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 - further tightened the tablet/mobile stacked-header spacing per follow-up request -- `.header-top-row`'s gap (between the branding block and the contact block) reduced from 8px to 4px, and `.header-contact-column`'s own internal gap (between phones/email/social) reduced from 8px to 4px at this breakpoint only. Desktop's 8px contact-column gap is untouched.
 
 ### Fixed
-- on tablet/mobile (<=768px), phone numbers, email, and social icons were centered against the FULL header width (`.header-contact-column` had `width: 100%`), while the tagline and site description centered only within their own, narrower shrink-wrapped content width -- two different alignment behaviors that didn't visually match, even though both blocks sit in the same stacked column. Removed `width: 100%` from `.header-contact-column` so it now shrink-wraps and gets centered as a block by `.header-top-row`'s existing `align-items: center`, the exact same mechanism `.site-branding`/`.site-text` already use. The contact block now aligns with the site's actual content width instead of the full page, consistently with the tagline/description, across tablet and mobile (desktop's row layout was never affected either way).
+- on tablet/mobile (<=768px), phone numbers, email, and social icons were centered against the FULL header width (`.header-contact-column` had `width: 100%`), while the tagline and site description centered only within their own, narrower shrink-wrapped content width -- two different alignment behaviors that didn't visually match. Removed `width: 100%` from `.header-contact-column` so it now shrink-wraps and gets centered as a block by `.header-top-row`'s existing `align-items: center`, the exact same mechanism `.site-branding`/`.site-text` already use. The contact block now aligns with the site's actual content width instead of the full page, consistently with the tagline/description, across tablet and mobile (desktop's row layout was never affected either way).
 
 ## [1.7.37]
 
