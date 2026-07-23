@@ -9,7 +9,6 @@
 (function($, api) {
     'use strict';
 
-    // Create a style element to inject dynamic hiding rules
     var $style = $('<style id="mec-theme-hide-description-preview"></style>').appendTo('head');
 
     function updateDescriptionVisibility() {
@@ -27,7 +26,6 @@
         $style.html(css);
     }
 
-    // Bind to setting changes
     api('mec_theme_hide_description_tablet', function(setting) {
         setting.bind(updateDescriptionVisibility);
     });
@@ -35,13 +33,8 @@
         setting.bind(updateDescriptionVisibility);
     });
 
-    // Initial update
     updateDescriptionVisibility();
 
-    // ===== Tagline alignment live preview =====
-    // .site-tagline reads its alignment from the --mec-tagline-align CSS
-    // custom property (see style.css), so we only need to update that
-    // variable on :root — no <style> block needed for this one.
     var validTaglineAlign = ['left', 'center', 'right'];
 
     function updateTaglineAlign(value) {

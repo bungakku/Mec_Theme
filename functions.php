@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'MEC_THEME_VERSION', '1.7.45' );
+define( 'MEC_THEME_VERSION', '1.7.46' );
 define( 'MEC_THEME_DIR', get_template_directory() );
 define( 'MEC_THEME_URI', get_template_directory_uri() );
 define( 'MEC_THEME_ASSETS', MEC_THEME_URI . '/assets' );
@@ -60,7 +60,6 @@ function mec_theme_setup() {
     add_theme_support( 'editor-styles' );
     add_editor_style( 'assets/css/editor-style.css' );
     
-    // Block editor colour palette
     add_theme_support( 'editor-color-palette', array(
         array(
             'name'  => esc_html__( 'Primary', 'mec_theme' ),
@@ -89,7 +88,6 @@ function mec_theme_setup() {
         ),
     ) );
     
-    // Block editor font sizes
     add_theme_support( 'editor-font-sizes', array(
         array(
             'name' => esc_html__( 'Small', 'mec_theme' ),
@@ -161,7 +159,6 @@ function mec_theme_widgets_init() {
         ) );
     }
     
-    // Register custom recent posts widget
     register_widget( 'MEC_Theme_Recent_Posts_Widget' );
 }
 add_action( 'widgets_init', 'mec_theme_widgets_init' );
@@ -172,7 +169,6 @@ add_action( 'widgets_init', 'mec_theme_widgets_init' );
 function mec_theme_scripts() {
     wp_enqueue_style( 'mec-theme-style', get_stylesheet_uri(), array(), MEC_THEME_VERSION );
     
-    // Add cached customizer CSS as inline style
     $customizer_css = mec_theme_get_cached_customizer_css();
     if ( ! empty( $customizer_css ) ) {
         wp_add_inline_style( 'mec-theme-style', $customizer_css );

@@ -2,27 +2,13 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
-/**
- * Customizer: Layout Settings panel
- *
- * Sidebar, Container, Header, Menu, and Footer sections.
- * Registered via mec_theme_customize_register() in inc/customizer.php.
- *
- * Extracted from inc/customizer.php during the 1.7.1 file-organization
- * pass. No behavior changed -- this is the same code that used to live
- * inline inside mec_theme_customize_register(), now in its own function.
- *
- * @package MEC_Theme
- */
 function mec_theme_register_layout_panel( $wp_customize ) {
     
-    // === Layout Settings Panel ===
     $wp_customize->add_panel( 'mec_theme_layout_panel', array(
         'title'       => __( 'Layout Settings', 'mec_theme' ),
         'priority'    => 30,
     ) );
     
-    // --- Sidebar Section ---
     $wp_customize->add_section( 'mec_theme_sidebar_section', array(
         'title'       => __( 'Sidebar', 'mec_theme' ),
         'panel'       => 'mec_theme_layout_panel',
@@ -66,7 +52,6 @@ function mec_theme_register_layout_panel( $wp_customize ) {
         'input_attrs' => array( 'min' => 20, 'max' => 40, 'step' => 1 ),
     ) );
     
-    // NEW: Sidebar Background Color
     $wp_customize->add_setting( 'mec_theme_sidebar_bg', array(
         'default'           => '#ffffff',
         'sanitize_callback' => 'sanitize_hex_color',
@@ -76,7 +61,6 @@ function mec_theme_register_layout_panel( $wp_customize ) {
         'section'  => 'mec_theme_sidebar_section',
     ) ) );
     
-    // --- Container Section ---
     $wp_customize->add_section( 'mec_theme_container_section', array(
         'title'       => __( 'Container', 'mec_theme' ),
         'panel'       => 'mec_theme_layout_panel',
@@ -93,7 +77,6 @@ function mec_theme_register_layout_panel( $wp_customize ) {
         'input_attrs' => array( 'min' => 800, 'max' => 1600, 'step' => 10 ),
     ) );
     
-    // --- Header Section ---
     $wp_customize->add_section( 'mec_theme_header_section', array(
         'title'       => __( 'Header', 'mec_theme' ),
         'panel'       => 'mec_theme_layout_panel',
@@ -192,7 +175,6 @@ function mec_theme_register_layout_panel( $wp_customize ) {
         ),
     ) );
 
-    // NEW: Tagline Alignment (separate from title/description)
     $wp_customize->add_setting( 'mec_theme_tagline_align', array(
         'default'           => 'center',
         'sanitize_callback' => 'mec_theme_sanitize_text_align',
@@ -306,7 +288,6 @@ function mec_theme_register_layout_panel( $wp_customize ) {
         'type'        => 'textarea',
     ) );
     
-    // --- Menu Section ---
     $wp_customize->add_section( 'mec_theme_menu_section', array(
         'title'       => __( 'Menu Settings', 'mec_theme' ),
         'panel'       => 'mec_theme_layout_panel',
@@ -334,7 +315,6 @@ function mec_theme_register_layout_panel( $wp_customize ) {
         'input_attrs' => array( 'min' => 0, 'max' => 50, 'step' => 1 ),
     ) );
     
-    // Main Menu Hover Color
     $wp_customize->add_setting( 'mec_theme_menu_hover_color', array(
         'default'           => '#0274be',
         'sanitize_callback' => 'sanitize_hex_color',
@@ -345,12 +325,6 @@ function mec_theme_register_layout_panel( $wp_customize ) {
         'settings' => 'mec_theme_menu_hover_color',
     ) ) );
 
-    // Desktop Menu Hover Underline Color -- independent of the hover text
-    // color above. The underline effect itself (text-decoration: underline
-    // on .main-navigation > ul > li > a:hover) already exists in style.css,
-    // but previously had no text-decoration-color of its own, so it always
-    // rendered in whatever color currentColor resolved to (the hover text
-    // color) with no way to set it separately.
     $wp_customize->add_setting( 'mec_theme_menu_hover_underline_color', array(
         'default'           => '#0274be',
         'sanitize_callback' => 'sanitize_hex_color',
@@ -371,7 +345,6 @@ function mec_theme_register_layout_panel( $wp_customize ) {
         'type'        => 'checkbox',
     ) );
     
-    // --- Footer Section ---
     $wp_customize->add_section( 'mec_theme_footer_section', array(
         'title'       => __( 'Footer Settings', 'mec_theme' ),
         'panel'       => 'mec_theme_layout_panel',

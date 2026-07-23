@@ -156,16 +156,6 @@ if ( function_exists( 'wp_body_open' ) ) {
                     </div><!-- .contact-social -->
 
                     <?php if ( get_theme_mod( 'mec_theme_show_login_button', false ) ) :
-                        // Deliberately its own element, not merged into
-                        // .contact-social -- semantically the social icons
-                        // are all "leave the site" links, while this stays
-                        // on-site. redirect_to sends the user back to the
-                        // page they were on after logging in. home_url()
-                        // anchors the redirect to this site's own domain
-                        // regardless of the REQUEST_URI value, and the
-                        // final output still goes through esc_url() before
-                        // being printed, matching this theme's existing
-                        // escaping pattern for every other href in this file.
                         $mec_login_redirect = isset( $_SERVER['REQUEST_URI'] )
                             ? esc_url_raw( home_url( wp_unslash( $_SERVER['REQUEST_URI'] ) ) )
                             : home_url( '/' );
@@ -205,7 +195,7 @@ if ( function_exists( 'wp_body_open' ) ) {
                             'theme_location' => 'primary',
                             'menu_id'        => 'primary-menu',
                             'container'      => false,
-                            'fallback_cb'    => 'wp_page_menu', // ✅ Shows pages if no menu assigned
+                            'fallback_cb'    => 'wp_page_menu',
                             'depth'          => 3,
                         )
                     );

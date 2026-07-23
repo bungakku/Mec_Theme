@@ -4,7 +4,7 @@ Theme URI: https://github.com/bungakku/Mec_Theme
 Author: Biswajit
 Author URI: https://github.com/bungakku
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.45
+Version: 1.7.46
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -23,17 +23,6 @@ Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, transl
     --mec-container-width: 1200px;
     --mec-header-padding: 15px;
 
-    /* ===== Spacing Scale =====
-     * A small, consistent set of spacing values used across layout and
-     * widget rules below, replacing what were previously ad-hoc numbers
-     * (15px, 20px, 30px, etc. used inconsistently in different places).
-     * Using a scale instead of one-off values makes the page's vertical
-     * rhythm read as deliberate rather than patched-together, and means
-     * future spacing tweaks only need to happen in one place. This does
-     * not touch colors, typography, or layout structure (sidebar flex
-     * widths, container width, etc. are unchanged) -- it only standardizes
-     * the gaps/padding/margins applied to existing elements.
-     */
     --mec-space-xs: 8px;
     --mec-space-sm: 12px;
     --mec-space-md: 20px;
@@ -53,7 +42,6 @@ Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, transl
     --mec-mobile-close-color: #333333;
     --mec-mobile-close-hover-color: #0274be;
 
-    /* New variables for fixed color controls */
     --mec-header-bg: #ffffff;
     --mec-site-title-color: #333333;
     --mec-tagline-color: #666666;
@@ -62,7 +50,7 @@ Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, transl
     --mec-menu-color: #3a3a3a;
     --mec-menu-hover-color: #0274be;
     --mec-menu-hover-underline-color: #0274be;
-    --mec-sidebar-bg: #ffffff;          /* added for sidebar background */
+    --mec-sidebar-bg: #ffffff;
 }
 
 /* ===== Reset & Base Styles ===== */
@@ -70,17 +58,6 @@ Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, transl
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* Applied universally rather than only on .widget/.entry-content (as in
-       1.7.15/1.7.16) because a long unbroken string -- most commonly a raw
-       URL from imported/pasted content (Facebook share links, Google Drive
-       links, etc.) -- can end up in ANY text-bearing element: a post title,
-       widget title, post meta line, excerpt, anywhere. Scoping the fix to
-       only two selectors meant any other location was still unprotected
-       and could reproduce the same overflow. `anywhere` (not the legacy
-       `break-word`) is used because break-word does not factor into an
-       element's min-content size calculation, which caused a real
-       regression in 1.7.15 when applied to a flex child (see 1.7.16
-       changelog) -- `anywhere` does not have that problem. */
     overflow-wrap: anywhere;
 }
 
@@ -92,18 +69,6 @@ body {
     overflow-x: hidden;
 }
 
-/*
- * Responsive media: without this, an image inserted into post/page content
- * at its native resolution (e.g. a 1600px-wide photo) renders at full size
- * regardless of viewport, pushing .entry-content / .primary / .container
- * wider than the screen. body's overflow-x: hidden above only hides the
- * resulting scrollbar -- it doesn't stop the layout from being computed as
- * wider than the viewport, which is what causes content and backgrounds to
- * look clipped/misaligned at the right edge on phones and tablets.
- * More specific rules later in this file (.post-thumbnail img,
- * .author-info img, etc.) override this safely since they target a
- * narrower selector.
- */
 img,
 video,
 embed,
@@ -112,9 +77,6 @@ object {
     height: auto;
 }
 
-/* Embedded video/iframes (YouTube, Vimeo, etc.) pasted into post content.
-   add_theme_support('responsive-embeds') wraps these in a ratio container,
-   but still needs this to make the iframe itself scale down. */
 .entry-content iframe,
 .wp-block-embed iframe,
 .wp-embed-responsive iframe {
@@ -132,11 +94,6 @@ table {
 .container {
     max-width: var(--mec-container-width);
     margin: 0 auto;
-    /* Unified to 10px on every breakpoint (1.7.33) -- previously only
-       phones (<=480px) got 10px while tablet and desktop kept 20px.
-       10px is feasible everywhere: no other rule (header rows, site
-       branding, logo wrapper, etc.) depends on the old 20px gutter, so
-       this is a pure edge-spacing reduction with no layout side effects. */
     padding: 0 10px;
     width: 100%;
 }
@@ -148,7 +105,7 @@ table {
 
 /* ===== Header Styles ===== */
 .site-header {
-    background-color: var(--mec-header-bg);   /* now uses Customizer setting */
+    background-color: var(--mec-header-bg);
     border-bottom: 1px solid var(--mec-border-color);
     padding: var(--mec-header-padding) 0;
     position: relative;
@@ -182,7 +139,7 @@ table {
 }
 
 .site-title a {
-    color: var(--mec-site-title-color);   /* fixed */
+    color: var(--mec-site-title-color);
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -193,17 +150,16 @@ table {
 
 .site-description {
     font-size: 0.9rem;
-    color: var(--mec-site-description-color);   /* added */
+    color: var(--mec-site-description-color);
     margin-top: 5px;
 }
 
 .site-tagline {
     margin-bottom: 0;
-    text-align: var(--mec-tagline-align, center);  /* dynamic alignment */
-    color: var(--mec-tagline-color);               /* fixed */
+    text-align: var(--mec-tagline-align, center);
+    color: var(--mec-tagline-color);
 }
 
-/* Restore centering for site text (title, description) – default center */
 .site-text {
     text-align: center;
 }
@@ -217,7 +173,6 @@ table {
     justify-content: flex-start;
 }
 
-/* Alignment overrides (if user changes in Customizer) */
 .title-align-desktop-left .site-text { text-align: left; }
 .title-align-desktop-center .site-text { text-align: center; }
 .title-align-desktop-right .site-text { text-align: right; }
@@ -412,7 +367,6 @@ table {
     outline: none;
 }
 
-/* Desktop styles (≥769px) – .mobile-menu-panel is a normal block */
 @media (min-width: 769px) {
     .mobile-menu-panel {
         display: block !important;
@@ -437,7 +391,7 @@ table {
         position: relative;
     }
     .main-navigation a {
-        color: var(--mec-menu-color);        /* fixed */
+        color: var(--mec-menu-color);
         text-decoration: none;
         padding: 10px 0;
         font-weight: 500;
@@ -446,17 +400,6 @@ table {
         white-space: nowrap;
         font-size: 0.95rem;
     }
-    /* Bug fix (1.7.32): this rule previously used a direct-child
-       combinator (.main-navigation > ul > li > a:hover), which never
-       matched anything -- the actual DOM is
-       .main-navigation > .mobile-menu-panel > ul#primary-menu > li > a,
-       so the ul is never a direct child of .main-navigation. That made
-       the whole rule (including the hover-underline-color variable
-       below) dead CSS: no underline of any kind rendered on hover,
-       regardless of what was picked in the Customizer. Targeting the
-       menu's own #primary-menu id instead of relying on DOM depth
-       fixes this and stays robust even if the markup around the menu
-       changes again in future. */
     .main-navigation #primary-menu > li > a:hover {
         text-decoration: underline;
         text-underline-offset: 5px;
@@ -464,7 +407,7 @@ table {
         background-color: transparent;
     }
     .main-navigation a:hover {
-        color: var(--mec-menu-hover-color);  /* fixed */
+        color: var(--mec-menu-hover-color);
     }
     .main-navigation ul ul {
         position: absolute;
@@ -522,14 +465,12 @@ table {
         background-color: var(--mec-dropdown-hover-bg);
         color: var(--mec-dropdown-hover-text);
     }
-    /* Hide mobile‑only elements on desktop */
     .mobile-menu-close,
     .mobile-search-form {
         display: none !important;
     }
 }
 
-/* Mobile Styles (≤768px) – off‑canvas panel */
 @media (max-width: 768px) {
     .site-header {
         padding: 10px 0;
@@ -582,25 +523,12 @@ table {
         transition: right 0.3s ease;
         box-shadow: -2px 0 5px rgba(0,0,0,0.2);
         overflow-y: auto;
-        /* Top padding reduced from 80px to 24px -- the panel is
-           position:fixed so it always starts at the very top of the
-           screen regardless of where the header scrolls to; 80px of
-           empty space above the close button had no functional purpose
-           and just pushed the actual menu content down, visually eating
-           into the area where the header would otherwise be expected. */
         padding: 24px 20px 30px;
         margin: 0;
         border-radius: 0;
         display: block;
     }
 
-    /* The panel above only ever covers 80% of the screen width by design
-       (so there's room to tap outside it to close), but nothing previously
-       indicated that the remaining 20% was an intentional close-tap zone
-       rather than a stray gap -- this backdrop dims that area, and the
-       rest of the page behind it, while the menu is open. Hidden and
-       non-interactive by default so it never affects normal layout or
-       blocks clicks when the menu is closed. */
     .mobile-menu-backdrop {
         position: fixed;
         top: 0;
@@ -647,9 +575,6 @@ table {
         position: relative;
         width: 95%;
         max-width: 280px;
-        /* Top margin reduced 15px -> 6px (1.7.33) to tighten the gap
-           between the close button and the search field; bottom margin
-           (spacing before the menu list) is unchanged. */
         margin: 6px auto 20px auto;
         background: transparent;
         padding: 0;
@@ -710,7 +635,7 @@ table {
     .main-navigation a {
         padding: 12px 15px;
         display: block;
-        color: var(--mec-menu-color);        /* fixed */
+        color: var(--mec-menu-color);
         text-decoration: none;
         font-weight: 500;
         transition: background-color 0.3s ease, color 0.3s ease;
@@ -722,7 +647,7 @@ table {
 
     .main-navigation a:hover {
         background-color: #f8f9fa;
-        color: var(--mec-menu-hover-color);  /* fixed */
+        color: var(--mec-menu-hover-color);
     }
 
     .main-navigation ul ul {
@@ -794,31 +719,9 @@ table {
 
     .content-area {
         flex-direction: column;
-        /* Reduced 20px -> var(--mec-space-sm) (12px). The visible gap here
-           was never just this value though -- .content-area uses flex
-           `gap`, which adds space BETWEEN flex items IN ADDITION to any
-           margin those items already have. On a blog listing (front page,
-           index, archive, search), .primary's last <article> still had its
-           own margin-bottom (20px at this breakpoint, see the `article`
-           rule below), so the real gap before the stacked sidebar was
-           20px (article) + 20px (this gap) = 40px, not the 20px it looked
-           like from this rule alone. See the new
-           `.has-sidebar .primary > *:last-child` rule further down, which
-           zeroes that trailing margin so this gap value is the ONLY thing
-           controlling the space, on every template (blog listings, single
-           posts, pages) rather than compounding differently on each. */
         gap: var(--mec-space-sm);
     }
 
-    /* Prevents the last element inside .primary (an <article> in a blog
-       listing, or whatever the final element is on a single post/page)
-       from adding its own trailing margin-bottom on top of the
-       .content-area gap above, once the layout has stacked into a single
-       column. That margin exists to space consecutive articles/elements
-       apart from EACH OTHER -- it was never meant to also add extra space
-       before the now-stacked sidebar. Scoped to .has-sidebar so pages
-       with no sidebar (where .primary is simply the last thing in
-       .content-area) are unaffected. */
     .has-sidebar .primary > *:last-child {
         margin-bottom: 0;
     }
@@ -1059,13 +962,6 @@ table {
     background-color: #ff0000;
 }
 
-/* ===== Dashboard Login Button (Teacher/Student Login) =====
- * Deliberately NOT styled like a .social-icon circle -- semantically this
- * link stays on-site (login) while every social icon leaves it, so it gets
- * its own small pill shape instead of joining that row. Sits as its own
- * element below .contact-social in the markup (see header.php); off by
- * default via the Customizer toggle.
- */
 .contact-login {
     margin-top: 4px;
     display: flex;
@@ -1109,49 +1005,14 @@ table {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        /* Tightened further per request: var(--mec-space-xs) (8px) ->
-           4px, matching the ~5px already used for .site-description's own
-           margin-top, so the whole stacked header (title, tagline,
-           description, then this gap, then the contact blocks) reads as
-           one continuous, evenly-tight rhythm rather than one block
-           having a visibly bigger gap than the rest. */
         gap: 4px;
     }
     .site-branding {
-        /* Fixes a real mismatch: at tablet width (481-768px), a legacy
-           rule further up this file forces `.site-branding { width: 100%
-           !important; }`, but nothing was ever centering the CONTENT
-           inside that now-full-width box -- .logo-text-wrapper (logo +
-           title + tagline + description) shrink-wraps to its own content
-           and, with no justify-content set here, sat flush at the LEFT
-           edge instead of centering. Meanwhile .header-contact-column
-           (fixed in 1.7.38) correctly shrink-wraps AND centers via
-           .header-top-row's align-items: center. That's exactly the
-           mismatch in the reported screenshot: title/tagline sitting
-           left, phone/email sitting centered. This rule centers
-           .logo-text-wrapper as a whole inside .site-branding at both
-           tablet and mobile widths, putting the branding block on the
-           same central axis as the contact column. */
         justify-content: center;
     }
     .header-contact-column {
         text-align: center;
-        /* No `width: 100%` here (removed): .site-branding / .site-text
-           never had one either -- they shrink-wrap to their own content
-           and get centered as a block purely by .header-top-row's
-           `align-items: center` above. Forcing header-contact-column to
-           span the full container width made phone/email/social center
-           against the ENTIRE page, while the tagline/description centered
-           only within their own, narrower content width -- two different
-           alignment behaviors that didn't visually match. Removing this
-           makes the contact column follow the exact same shrink-wrap +
-           parent-centers-it pattern as the branding block above it. */
         align-items: center;
-        /* Tightened alongside the header-top-row gap above, for the same
-           reason: was var(--mec-space-xs) (8px, inherited from the base
-           rule further up this file), now 4px to match. Desktop's 8px gap
-           is untouched -- this override only applies inside this <=768px
-           media query. */
         gap: 4px;
     }
     .header-contact-column .contact-social {
@@ -1162,9 +1023,6 @@ table {
         white-space: normal;
     }
 
-    /* Phone 1 + Phone 2 side-by-side, with social icons/email below --
-       shared by tablet (481-768px) and mobile (<=480px) per the chosen
-       layout, so this single block covers both ranges. */
     .contact-phones-row {
         display: flex;
         justify-content: center;
@@ -1172,29 +1030,12 @@ table {
         gap: 15px;
         width: 100%;
     }
-
-    /* No margin-bottom overrides here for .contact-phones-row or
-       .contact-email: .header-contact-column already spaces its children
-       (phones row / email / social) apart via its own flex `gap`
-       (see override above). Adding margin-bottom here on top of that gap
-       would compound the two, doubling the visible space between
-       phones->email and email->social. Letting the parent's gap be the
-       ONLY spacing mechanism keeps every gap in this stack equal and
-       intentional. */
 }
 
 
 /* ===== Sidebar & Content Layout ===== */
 .content-area {
     display: flex;
-    /* Reduced 1.7.42: 20px (var(--mec-space-md)) -> 14px, a further
-       tightening of the gap between .primary and .secondary on
-       desktop/tablet, per direct follow-up request after 1.7.33. A
-       hardcoded value is used here (rather than adding a new spacing-scale
-       variable) since 14px doesn't fit the existing xs/sm/md/lg/xl steps
-       and this is the only consumer of this specific value. The <=768px
-       stacked layout keeps its own gap (var(--mec-space-sm), 12px)
-       unchanged -- that value was never part of this request. */
     gap: 14px;
     flex-wrap: wrap;
 }
@@ -1208,7 +1049,7 @@ table {
     flex: 1 1 25%;
     min-width: 250px;
     display: block;
-    background: var(--mec-sidebar-bg, #ffffff);   /* added for sidebar background */
+    background: var(--mec-sidebar-bg, #ffffff);
 }
 
 .no-sidebar .primary {
@@ -1239,12 +1080,6 @@ article {
     padding: var(--mec-space-lg);
     border-radius: 4px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    /* Belt-and-suspenders: .entry-content and .entry-title (nested inside
-       this element) already have overflow-wrap: anywhere, but front-page.php
-       has its own hardcoded post loop that renders directly into a bare
-       <article> with no .entry-content-wrapper in between -- adding it here
-       too closes off any remaining gap between a child wrapping correctly
-       and the parent card itself staying within bounds. */
     overflow-wrap: anywhere;
     word-wrap: break-word;
 }
@@ -1257,11 +1092,6 @@ article {
     margin-bottom: var(--mec-space-md);
 }
 
-/* Title alignment, set per-page/per-post via the "Title Settings" meta box.
-   .entry-header--align-* covers pages (content-page.php), where the whole
-   header is just the title; .entry-title--align-* covers single posts
-   (content-post.php), where only the title itself should align since post
-   meta sits in the same header and stays left-aligned regardless. */
 .entry-header--align-left,
 .entry-title--align-left {
     text-align: left;
@@ -1324,27 +1154,6 @@ article {
     word-wrap: break-word;
 }
 
-/* ===== Block Editor Wide & Full Alignment =====
- * functions.php declares add_theme_support('align-wide'), which tells the
- * block editor to offer "Wide width" and "Full width" alignment options --
- * but no matching front-end CSS existed for either .alignwide or
- * .alignfull, so selecting them had no visible effect at all (not broken,
- * just inert).
- *
- * This theme's articles render as a padded, rounded "card" (see the
- * `article` rule below: padding + border-radius + box-shadow), and
- * .entry-content itself is never narrower than its card -- there's no
- * separate narrow text column the way there is in many block themes. That
- * means:
- * - .alignwide has nothing meaningfully wider to break out to (content is
- *   already full-width within the card), so it's a deliberate near-no-op:
- *   explicit here for clarity/documentation rather than left undefined.
- * - .alignfull breaks out of the card's own left/right padding only, so a
- *   full-width image/cover can reach the card's edges -- a literal
- *   edge-to-viewport bleed would visually punch through the card's
- *   padding/border-radius/shadow in a broken-looking way, so this is
- *   scoped to the card's own bounds instead of 100vw.
- */
 .entry-content > .alignwide {
     width: 100%;
     max-width: 100%;
@@ -1546,53 +1355,15 @@ article {
     background: #fff;
     border-radius: 4px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    /* A long unbroken string with no spaces/hyphens (most commonly a raw
-       URL pasted into post content or a widget, e.g. a Google Drive link,
-       or a Custom HTML widget's own markup) is treated by the browser as
-       one unbreakable "word."
-       IMPORTANT: this MUST be `anywhere`, not the legacy `break-word`.
-       `.secondary` (this widget's container) is a flex child of
-       `.content-area` (display: flex). `break-word` does not factor
-       possible word-breaks into an element's min-content size calculation
-       -- so a flex child containing it gets SIZED as if the long string
-       could not break at all, stretching the sidebar itself to fit it,
-       with the overflow showing up one level up rather than inside the
-       wrapped text. This was tested and confirmed: adding break-word here
-       in v1.7.15 caused exactly this regression on a real site (Custom
-       HTML "news ticker" widget with no other changes triggered a ~30px
-       sidebar overflow that did not happen in v1.7.12). `anywhere` does
-       not have this problem and is the current standard replacement. */
     overflow-wrap: anywhere;
     word-wrap: break-word;
 }
 
-/* Excludes .screen-reader-text (WordPress core's standard visually-hidden-
-   but-accessible utility class) from inheriting .widget's overflow-wrap.
-   That class's entire job is to stay clipped to exactly 1x1px via
-   position:absolute + clip-path + a negative margin -- it never needs to
-   wrap text, since nothing about it is ever visible. Confirmed via
-   real-device testing: turning OFF "Show label" on a Gutenberg Search
-   block widget applies this exact class to the label, and inheriting
-   overflow-wrap: anywhere onto it was found to interfere with the
-   1px-clipping technique on some mobile browsers, producing a full-width,
-   position:absolute box instead of the intended invisible 1px one --
-   which in turn affected the rest of the page's layout. This is the third
-   distinct way overflow-wrap has interacted badly with a sizing-sensitive
-   element in this theme (see the comment above for the first, from
-   v1.7.15); excluding utility classes like this one outright is safer
-   than chasing each new interaction individually. */
 .widget .screen-reader-text {
     overflow-wrap: normal;
     word-wrap: normal;
 }
 
-/* Defensive second layer: pins down the screen-reader-text utility
-   class's critical sizing properties explicitly, with !important, rather
-   than relying solely on excluding overflow-wrap above. This is the one
-   place in this theme !important is used outside the admin-only/print
-   contexts elsewhere, justified because this is a narrow, well-defined
-   utility class (not a content selector), and getting it wrong has a
-   real, confirmed history of affecting page-wide layout. */
 .screen-reader-text {
     position: absolute !important;
     width: 1px !important;
@@ -1602,17 +1373,6 @@ article {
     white-space: nowrap !important;
 }
 
-/* Skip-link focus reveal.
- * The skip-link in header.php carries both .skip-link and
- * .screen-reader-text, which clips it to 1x1px permanently -- with no
- * :focus override, a keyboard user tabbing to it never actually sees
- * "Skip to content" appear, so the feature existed in markup but had no
- * working effect. This overrides .screen-reader-text's !important sizing
- * properties (needs matching !important to win) ONLY on :focus, and ONLY
- * for .skip-link specifically -- not screen-reader-text generally, since
- * other screen-reader-text elements (comment counts, etc.) are not
- * navigation targets and should stay hidden even if something unusual
- * focuses them. */
 .skip-link:focus {
     position: fixed !important;
     top: 10px !important;
@@ -1726,9 +1486,6 @@ article {
     gap: 8px;
 }
 
-/* Below 769px: stack copyright and credit on separate lines instead of
-   trying to fit them on one row, since the combined text is long enough
-   to wrap awkwardly mid-sentence on narrow screens otherwise. */
 @media (max-width: 768px) {
     .footer-bottom {
         flex-direction: column;
@@ -1758,10 +1515,6 @@ article {
     color: var(--mec-copyright-color);
 }
 
-/* On desktop, .theme-credit sits inline right after .copyright (same row,
-   thanks to .footer-bottom's row layout above) -- this dash visually joins
-   them, like "© 2026 College. All rights reserved. - Theme by Biswajit".
-   Hidden on mobile since the two sit on separate lines there instead. */
 .theme-credit::before {
     content: "- ";
 }
@@ -1778,12 +1531,6 @@ article {
 }
 
 .theme-credit a {
-    /* Auto-contrast against the footer background (see
-       mec_theme_get_contrast_color() in inc/customizer-css.php) rather
-       than the fixed accent color, so this stays readable no matter what
-       footer background color is chosen in the Customizer -- no manual
-       color picking or risk of the link disappearing against a dark
-       background. */
     color: var(--mec-footer-credit-color, var(--mec-primary-color));
     text-decoration: none;
     transition: color 0.3s ease;
@@ -1891,7 +1638,6 @@ article {
     text-decoration: underline;
 }
 
-/* Mobile adjustments for recent posts widget */
 @media (max-width: 768px) {
     .widget_mec_recent_posts .mec-recent-post-item {
         gap: 12px;
@@ -1906,7 +1652,6 @@ article {
         font-size: 0.8rem;
     }
 }
-/* Force submenu visibility when toggled */
 @media (max-width: 768px) {
     .main-navigation ul li.toggled > ul {
         max-height: 800px !important;
@@ -1914,12 +1659,6 @@ article {
     }
 }
 
-/* On mobile/tablet, sidebar widgets stack below the main content rather
-   than sitting beside it, and the default spacing (32px margin-bottom,
-   20px padding on all sides) can feel like too much vertical gap between
-   widgets -- especially noticeable above the Search widget since it has
-   no visible title of its own. Tighten both slightly at <=768px only;
-   desktop spacing is unchanged. */
 @media (max-width: 768px) {
     .widget {
         margin-bottom: var(--mec-space-md);
@@ -1931,23 +1670,6 @@ article {
     }
 }
 /* ===== Third-Party Plugin Compatibility: Online Admission Manager ===== */
-/*
- * The admission/application form rendered by the "Online Admission Manager"
- * plugin (.admission-form-wrapper) ships with no responsive CSS of its own --
- * its markup places 2-3 <label>+<input> pairs side by side in a single <p>,
- * relying entirely on the browser's unstyled default input width. On a
- * phone-width screen, three default-width text inputs on one line (e.g. the
- * Father's Name / Father's Contact 1 / Father's Contact 2 row) comfortably
- * exceed the viewport, forcing the page wider than the screen -- which is
- * why the page needs to be pinched/zoomed out to see content that runs off
- * the right edge, and why the rest of the page can look misaligned by
- * comparison once zoomed out to fit the form.
- *
- * Fix: stack every label+input pair onto its own line and let inputs fill
- * the available width, regardless of how many were originally written on
- * one source line. This only targets .admission-form-wrapper, so it can't
- * affect anything else on the site.
- */
 .admission-form-wrapper {
     max-width: 100%;
     overflow-x: hidden;
@@ -1984,7 +1706,7 @@ article {
     padding: 8px 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 16px; /* 16px prevents iOS Safari from auto-zooming in on focus */
+    font-size: 16px;
 }
 
 .admission-form-wrapper .academic-row {

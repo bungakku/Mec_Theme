@@ -2,32 +2,15 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
-/**
- * Customizer: Blog Settings panel
- *
- * Blog Layout, Post Elements, and Single Post sections.
- * Registered via mec_theme_customize_register() in inc/customizer.php.
- *
- * Extracted from inc/customizer.php during the 1.7.1 file-organization
- * pass. No behavior changed -- this is the same code that used to live
- * inline inside mec_theme_customize_register(), now in its own function.
- *
- * @package MEC_Theme
- */
 function mec_theme_register_blog_panel( $wp_customize ) {
-    
-    // === Blog Settings Panel ===
     $wp_customize->add_panel( 'mec_theme_blog_panel', array(
         'title'       => __( 'Blog Settings', 'mec_theme' ),
         'priority'    => 60,
     ) );
-    
-    // --- Blog Layout Section ---
     $wp_customize->add_section( 'mec_theme_blog_layout_section', array(
         'title'       => __( 'Blog Layout', 'mec_theme' ),
         'panel'       => 'mec_theme_blog_panel',
     ) );
-    
     $wp_customize->add_setting( 'mec_theme_blog_layout', array(
         'default'           => 'classic',
         'sanitize_callback' => 'mec_theme_sanitize_blog_layout',
@@ -42,7 +25,6 @@ function mec_theme_register_blog_panel( $wp_customize ) {
             'list'    => __( 'List Layout', 'mec_theme' ),
         ),
     ) );
-    
     $wp_customize->add_setting( 'mec_theme_grid_columns', array(
         'default'           => '2',
         'sanitize_callback' => 'mec_theme_sanitize_grid_columns',
@@ -57,13 +39,10 @@ function mec_theme_register_blog_panel( $wp_customize ) {
             '4' => __( '4 Columns', 'mec_theme' ),
         ),
     ) );
-    
-    // --- Post Elements Section ---
     $wp_customize->add_section( 'mec_theme_post_elements_section', array(
         'title'       => __( 'Post Elements', 'mec_theme' ),
         'panel'       => 'mec_theme_blog_panel',
     ) );
-    
     $wp_customize->add_setting( 'mec_theme_show_featured_image', array(
         'default'           => 'show',
         'sanitize_callback' => 'mec_theme_sanitize_show_hide',
@@ -77,7 +56,6 @@ function mec_theme_register_blog_panel( $wp_customize ) {
             'hide' => __( 'Hide', 'mec_theme' ),
         ),
     ) );
-    
     $wp_customize->add_setting( 'mec_theme_featured_image_size', array(
         'default'           => 'large',
         'sanitize_callback' => 'mec_theme_sanitize_image_size',
@@ -93,7 +71,6 @@ function mec_theme_register_blog_panel( $wp_customize ) {
             'full'      => __( 'Full Size', 'mec_theme' ),
         ),
     ) );
-    
     $wp_customize->add_setting( 'mec_theme_show_post_meta', array(
         'default'           => 'show',
         'sanitize_callback' => 'mec_theme_sanitize_post_meta',
@@ -108,7 +85,6 @@ function mec_theme_register_blog_panel( $wp_customize ) {
             'custom' => __( 'Custom Selection', 'mec_theme' ),
         ),
     ) );
-    
     $wp_customize->add_setting( 'mec_theme_show_post_date', array(
         'default'           => true,
         'sanitize_callback' => 'wp_validate_boolean',
@@ -118,7 +94,6 @@ function mec_theme_register_blog_panel( $wp_customize ) {
         'section'     => 'mec_theme_post_elements_section',
         'type'        => 'checkbox',
     ) );
-    
     $wp_customize->add_setting( 'mec_theme_show_post_author', array(
         'default'           => true,
         'sanitize_callback' => 'wp_validate_boolean',
@@ -128,7 +103,6 @@ function mec_theme_register_blog_panel( $wp_customize ) {
         'section'     => 'mec_theme_post_elements_section',
         'type'        => 'checkbox',
     ) );
-    
     $wp_customize->add_setting( 'mec_theme_show_post_comments', array(
         'default'           => true,
         'sanitize_callback' => 'wp_validate_boolean',
@@ -138,7 +112,6 @@ function mec_theme_register_blog_panel( $wp_customize ) {
         'section'     => 'mec_theme_post_elements_section',
         'type'        => 'checkbox',
     ) );
-    
     $wp_customize->add_setting( 'mec_theme_show_post_categories', array(
         'default'           => false,
         'sanitize_callback' => 'wp_validate_boolean',
@@ -148,7 +121,6 @@ function mec_theme_register_blog_panel( $wp_customize ) {
         'section'     => 'mec_theme_post_elements_section',
         'type'        => 'checkbox',
     ) );
-    
     $wp_customize->add_setting( 'mec_theme_content_display', array(
         'default'           => 'excerpt',
         'sanitize_callback' => 'mec_theme_sanitize_content_display',
@@ -163,7 +135,6 @@ function mec_theme_register_blog_panel( $wp_customize ) {
             'none'    => __( 'No Content (Title Only)', 'mec_theme' ),
         ),
     ) );
-    
     $wp_customize->add_setting( 'mec_theme_excerpt_length', array(
         'default'           => 30,
         'sanitize_callback' => 'absint',
@@ -174,7 +145,6 @@ function mec_theme_register_blog_panel( $wp_customize ) {
         'type'        => 'number',
         'input_attrs' => array( 'min' => 10, 'max' => 100, 'step' => 5 ),
     ) );
-    
     $wp_customize->add_setting( 'mec_theme_show_read_more', array(
         'default'           => true,
         'sanitize_callback' => 'wp_validate_boolean',
@@ -184,7 +154,6 @@ function mec_theme_register_blog_panel( $wp_customize ) {
         'section'     => 'mec_theme_post_elements_section',
         'type'        => 'checkbox',
     ) );
-    
     $wp_customize->add_setting( 'mec_theme_read_more_text', array(
         'default'           => 'Read More',
         'sanitize_callback' => 'sanitize_text_field',
@@ -194,13 +163,10 @@ function mec_theme_register_blog_panel( $wp_customize ) {
         'section'     => 'mec_theme_post_elements_section',
         'type'        => 'text',
     ) );
-    
-    // --- Single Post Section ---
     $wp_customize->add_section( 'mec_theme_single_post_section', array(
         'title'       => __( 'Single Post', 'mec_theme' ),
         'panel'       => 'mec_theme_blog_panel',
     ) );
-    
     $wp_customize->add_setting( 'mec_theme_show_author_bio', array(
         'default'           => true,
         'sanitize_callback' => 'wp_validate_boolean',
@@ -210,7 +176,6 @@ function mec_theme_register_blog_panel( $wp_customize ) {
         'section'     => 'mec_theme_single_post_section',
         'type'        => 'checkbox',
     ) );
-    
     $wp_customize->add_setting( 'mec_theme_show_related_posts', array(
         'default'           => true,
         'sanitize_callback' => 'wp_validate_boolean',
@@ -220,7 +185,6 @@ function mec_theme_register_blog_panel( $wp_customize ) {
         'section'     => 'mec_theme_single_post_section',
         'type'        => 'checkbox',
     ) );
-    
     $wp_customize->add_setting( 'mec_theme_related_count', array(
         'default'           => 3,
         'sanitize_callback' => 'absint',

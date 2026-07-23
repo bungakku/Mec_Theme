@@ -13,17 +13,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package MEC_Theme
  */
 
-/**
- * Sanitization function for text alignment
- */
 function mec_theme_sanitize_text_align( $input ) {
     $valid = array( 'left', 'center', 'right' );
     return in_array( $input, $valid, true ) ? $input : 'left';
 }
 
-/**
- * Sanitization functions
- */
 function mec_theme_sanitize_sidebar_position( $input ) {
     $valid = array( 'left', 'right' );
     return in_array( $input, $valid, true ) ? $input : 'right';
@@ -53,11 +47,6 @@ function mec_theme_sanitize_blog_layout( $input ) {
     return in_array( $input, $valid, true ) ? $input : 'classic';
 }
 
-/**
- * Whitelist sanitizers for font family selects.
- * Must mirror the 'choices' arrays on the matching add_control() calls exactly,
- * since these values are later concatenated directly into a <style> block.
- */
 function mec_theme_sanitize_body_font_family( $input ) {
     $valid = array(
         'default',
@@ -117,9 +106,6 @@ function mec_theme_sanitize_content_display( $input ) {
     return in_array( $input, $valid, true ) ? $input : 'excerpt';
 }
 
-/**
- * Sanitize color or 'transparent'
- */
 function mec_theme_sanitize_color_transparent( $input ) {
     if ( 'transparent' === $input ) {
         return 'transparent';
@@ -127,20 +113,14 @@ function mec_theme_sanitize_color_transparent( $input ) {
     return sanitize_hex_color( $input );
 }
 
-/**
- * Validate that content width + sidebar width does not exceed 100%
- */
 function mec_theme_validate_layout_widths( $validity, $value, $setting ) {
-    // Only validate the two width settings
     if ( ! in_array( $setting->id, array( 'mec_theme_content_width', 'mec_theme_sidebar_width' ), true ) ) {
         return $validity;
     }
 
-    // Get the other setting's value (as it will be after saving)
     $content_width = get_theme_mod( 'mec_theme_content_width', 75 );
     $sidebar_width = get_theme_mod( 'mec_theme_sidebar_width', 22 );
 
-    // If the current setting is being updated, use the new value
     if ( 'mec_theme_content_width' === $setting->id ) {
         $content_width = $value;
     } else {

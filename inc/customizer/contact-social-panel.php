@@ -12,26 +12,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package MEC_Theme
  */
 
-/**
- * Add Contact & Social fields to Customizer
- */
 function mec_theme_customize_contact_social( $wp_customize ) {
     
-    // New section: Contact & Social
     $wp_customize->add_section( 'mec_theme_contact_social_section', array(
         'title'    => __( 'Contact & Social (Header)', 'mec_theme' ),
-        'priority' => 35, // after Header section
+        'priority' => 35,
     ) );
 
-    // --- Independent block visibility toggles: tablet + mobile only ---
-    // These hide each block via CSS at <=768px (tablet + mobile combined),
-    // matching the existing mec_theme_hide_contact_tablet/mobile pattern
-    // just below -- desktop (>768px) always shows all three blocks
-    // regardless of these settings. 'postMessage' transport is used since
-    // this is purely a CSS display toggle at a breakpoint, live-previewed
-    // via updateContactVisibility() in mec_theme_customize_contact_preview()
-    // further down this file, the same way hide_contact_tablet/mobile
-    // already is.
     $wp_customize->add_setting( 'mec_theme_show_contact_phones', array(
         'default'           => true,
         'sanitize_callback' => 'wp_validate_boolean',
@@ -71,14 +58,6 @@ function mec_theme_customize_contact_social( $wp_customize ) {
         'priority'    => 7,
     ) );
 
-    // --- Dashboard Login Button (Teacher/Student login) ---
-    // Off by default: this is an opt-in feature for sites that actually run
-    // a teacher/student portal through wp-login.php, not something every
-    // site needs. Uses the default 'refresh' transport (no postMessage)
-    // since toggling it changes markup, not just CSS -- consistent with
-    // other markup-affecting toggles in this theme (e.g.
-    // mec_theme_show_author_bio, mec_theme_show_related_posts) which also
-    // rely on a full preview refresh rather than live JS binding.
     $wp_customize->add_setting( 'mec_theme_show_login_button', array(
         'default'           => false,
         'sanitize_callback' => 'wp_validate_boolean',
@@ -102,7 +81,6 @@ function mec_theme_customize_contact_social( $wp_customize ) {
         'priority'    => 9,
     ) );
 
-    // Phone number 1
     $wp_customize->add_setting( 'mec_theme_phone_1', array(
         'default'           => '+1 (234) 567-8901',
         'sanitize_callback' => 'sanitize_text_field',
@@ -114,7 +92,6 @@ function mec_theme_customize_contact_social( $wp_customize ) {
         'type'        => 'text',
     ) );
     
-    // Phone number 2
     $wp_customize->add_setting( 'mec_theme_phone_2', array(
         'default'           => '+1 (234) 567-8902',
         'sanitize_callback' => 'sanitize_text_field',
@@ -126,7 +103,6 @@ function mec_theme_customize_contact_social( $wp_customize ) {
         'type'        => 'text',
     ) );
     
-    // Email address
     $wp_customize->add_setting( 'mec_theme_email', array(
         'default'           => 'info@yournonprofit.org',
         'sanitize_callback' => 'sanitize_email',
@@ -138,7 +114,6 @@ function mec_theme_customize_contact_social( $wp_customize ) {
         'type'        => 'email',
     ) );
     
-    // Social: Facebook
     $wp_customize->add_setting( 'mec_theme_facebook_url', array(
         'default'           => '',
         'sanitize_callback' => 'esc_url_raw',
@@ -150,7 +125,6 @@ function mec_theme_customize_contact_social( $wp_customize ) {
         'type'        => 'url',
     ) );
     
-    // Social: Twitter
     $wp_customize->add_setting( 'mec_theme_twitter_url', array(
         'default'           => '',
         'sanitize_callback' => 'esc_url_raw',
@@ -162,7 +136,6 @@ function mec_theme_customize_contact_social( $wp_customize ) {
         'type'        => 'url',
     ) );
     
-    // Social: Instagram
     $wp_customize->add_setting( 'mec_theme_instagram_url', array(
         'default'           => '',
         'sanitize_callback' => 'esc_url_raw',
@@ -174,7 +147,6 @@ function mec_theme_customize_contact_social( $wp_customize ) {
         'type'        => 'url',
     ) );
     
-    // Optional: LinkedIn
     $wp_customize->add_setting( 'mec_theme_linkedin_url', array(
         'default'           => '',
         'sanitize_callback' => 'esc_url_raw',
@@ -186,7 +158,6 @@ function mec_theme_customize_contact_social( $wp_customize ) {
         'type'        => 'url',
     ) );
     
-    // Optional: YouTube
     $wp_customize->add_setting( 'mec_theme_youtube_url', array(
         'default'           => '',
         'sanitize_callback' => 'esc_url_raw',
@@ -198,7 +169,6 @@ function mec_theme_customize_contact_social( $wp_customize ) {
         'type'        => 'url',
     ) );
 
-    // Contact text colors (phone & email)
     $wp_customize->add_setting( 'mec_theme_contact_phone_color', array(
         'default'           => '#333333',
         'sanitize_callback' => 'sanitize_hex_color',
@@ -239,7 +209,6 @@ function mec_theme_customize_contact_social( $wp_customize ) {
         'section'  => 'mec_theme_contact_social_section',
     ) ) );
 
-    // Hide contact column on tablet and mobile
     $wp_customize->add_setting( 'mec_theme_hide_contact_tablet', array(
         'default'           => false,
         'sanitize_callback' => 'wp_validate_boolean',
@@ -262,12 +231,6 @@ function mec_theme_customize_contact_social( $wp_customize ) {
         'type'        => 'checkbox',
     ) );
 
-    // Phone/Email text size -- tablet + mobile ONLY. No desktop control is
-    // added here on purpose: desktop keeps its existing fixed size from
-    // .header-contact-column in style.css, exactly as it did before this
-    // setting existed. Reuses mec_theme_sanitize_float(), the same
-    // sanitizer every other rem-based font-size setting in this theme
-    // (see inc/customizer/typography-panel.php) already uses.
     $wp_customize->add_setting( 'mec_theme_contact_text_size_tablet', array(
         'default'           => '0.85',
         'sanitize_callback' => 'mec_theme_sanitize_float',
@@ -294,9 +257,6 @@ function mec_theme_customize_contact_social( $wp_customize ) {
 }
 add_action( 'customize_register', 'mec_theme_customize_contact_social' );
 
-/**
- * Output CSS to hide contact column based on Customizer settings
- */
 function mec_theme_hide_contact_css() {
     $hide_tablet = get_theme_mod( 'mec_theme_hide_contact_tablet', false );
     $hide_mobile = get_theme_mod( 'mec_theme_hide_contact_mobile', false );
@@ -316,9 +276,6 @@ function mec_theme_hide_contact_css() {
 }
 add_action( 'wp_head', 'mec_theme_hide_contact_css', 20 );
 
-/**
- * Optional: Live preview JavaScript for contact fields
- */
 function mec_theme_customize_contact_preview() {
     if ( ! is_customize_preview() ) {
         return;
@@ -354,7 +311,6 @@ function mec_theme_customize_contact_preview() {
         updateSocial( 'mec_theme_linkedin_url', '.mec-network-linkedin' );
         updateSocial( 'mec_theme_youtube_url', '.mec-network-youtube' );
 
-        // Live preview for contact phone and email colors
         wp.customize( 'mec_theme_contact_phone_color', function( value ) {
             value.bind( function( newval ) {
                 $( '.contact-phone' ).css( 'color', newval );
@@ -366,10 +322,6 @@ function mec_theme_customize_contact_preview() {
             } );
         } );
 
-        // Live preview for phone/email hover colors. :hover can't be set
-        // via jQuery .css(), so this maintains its own <style> tag and
-        // rewrites it on change -- same pattern already used for tagline
-        // alignment and description-hiding preview elsewhere in the theme.
         function updateContactHoverPreview() {
             var phoneHover = wp.customize( 'mec_theme_contact_phone_hover_color' ).get();
             var emailHover = wp.customize( 'mec_theme_contact_email_hover_color' ).get();
@@ -395,8 +347,6 @@ function mec_theme_customize_contact_preview() {
         } );
         updateContactHoverPreview();
 
-        // Live preview for hiding contact column, and for the individual
-        // phone/email/social block toggles (all tablet+mobile-only, <=768px)
         function updateContactVisibility() {
             var hideTablet = wp.customize( 'mec_theme_hide_contact_tablet' ).get();
             var hideMobile = wp.customize( 'mec_theme_hide_contact_mobile' ).get();
@@ -448,12 +398,9 @@ function mec_theme_customize_contact_preview() {
 }
 add_action( 'wp_footer', 'mec_theme_customize_contact_preview' );
 
-// ===== SOCIAL ICON CUSTOMIZATION (Size & Colors) =====
 function mec_theme_social_icon_customizer( $wp_customize ) {
-    // Add settings to existing section 'mec_theme_contact_social_section'
     $section = 'mec_theme_contact_social_section';
     
-    // Social icon size (width/height in pixels)
     $wp_customize->add_setting( 'mec_theme_social_icon_size', array(
         'default'           => 36,
         'sanitize_callback' => 'absint',
@@ -466,7 +413,6 @@ function mec_theme_social_icon_customizer( $wp_customize ) {
         'input_attrs' => array( 'min' => 24, 'max' => 60, 'step' => 2 ),
     ) );
     
-    // Social icon font/svg size (px)
     $wp_customize->add_setting( 'mec_theme_social_icon_font_size', array(
         'default'           => 18,
         'sanitize_callback' => 'absint',
@@ -479,7 +425,6 @@ function mec_theme_social_icon_customizer( $wp_customize ) {
         'input_attrs' => array( 'min' => 12, 'max' => 40, 'step' => 2 ),
     ) );
     
-    // Social icon background color
     $wp_customize->add_setting( 'mec_theme_social_icon_bg', array(
         'default'           => '#e0e0e0',
         'sanitize_callback' => 'sanitize_hex_color',
@@ -490,7 +435,6 @@ function mec_theme_social_icon_customizer( $wp_customize ) {
         'section'  => $section,
     ) ) );
     
-    // Social icon color
     $wp_customize->add_setting( 'mec_theme_social_icon_color', array(
         'default'           => '#333333',
         'sanitize_callback' => 'sanitize_hex_color',
@@ -501,7 +445,6 @@ function mec_theme_social_icon_customizer( $wp_customize ) {
         'section'  => $section,
     ) ) );
     
-    // Social icon hover background color
     $wp_customize->add_setting( 'mec_theme_social_icon_hover_bg', array(
         'default'           => '#cccccc',
         'sanitize_callback' => 'sanitize_hex_color',
@@ -512,7 +455,6 @@ function mec_theme_social_icon_customizer( $wp_customize ) {
         'section'  => $section,
     ) ) );
     
-    // Social icon hover color
     $wp_customize->add_setting( 'mec_theme_social_icon_hover_color', array(
         'default'           => '#ffffff',
         'sanitize_callback' => 'sanitize_hex_color',

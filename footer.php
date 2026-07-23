@@ -55,7 +55,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
             <div class="footer-bottom">
                 <div class="copyright">
                     <?php
-                    // Copyright text – safe with wp_kses, default uses date_i18n() for WP 5.0+ compatibility
                     $copyright_text = get_theme_mod( 'mec_theme_copyright_text', '&copy; ' . date_i18n('Y') . ' ' . get_bloginfo('name') . '. All rights reserved.' );
                     
                     echo wp_kses( $copyright_text, array(
@@ -79,11 +78,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
                 </div>
                 <p class="theme-credit">
                     <?php
-                    // Theme developer credit. Built with wp_kses (same pattern as
-                    // the copyright text above) rather than printf+raw HTML, so a
-                    // translation string can never carry executable markup -- only
-                    // the developer name itself is translatable; the link markup
-                    // is fixed theme code, and wp_kses has the final say regardless.
                     $credit_name = '<a href="' . esc_url( 'https://github.com/bungakku' ) . '" target="_blank" rel="noopener noreferrer"><em>' . esc_html__( 'Biswajit', 'mec_theme' ) . '</em></a>';
                     $credit_html = wp_kses(
                         sprintf(
@@ -100,24 +94,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
                     ?>
                 </p>
                 <?php
-                /**
-                 * Diagnostic-only build fingerprint.
-                 *
-                 * Purely informational -- this NEVER restricts, hides, alters, or
-                 * gates any theme functionality based on its value; nothing in the
-                 * theme reads this comment back. It exists solely so the theme
-                 * author can verify, via "View Source" or a plain HTTP fetch (e.g.
-                 * `curl`), that a given live deployment is running the exact,
-                 * unmodified footer credit for a given theme version, without
-                 * needing admin access to the site. A visitor or site owner who
-                 * sees this comment learns nothing sensitive from it; it does not
-                 * identify the site, the visitor, or transmit anything anywhere.
-                 *
-                 * The hash is computed from the credit markup actually rendered
-                 * above plus the current theme version, so editing or removing the
-                 * credit changes the emitted value -- there is no hidden reference
-                 * hash to "pass"; it simply reports what's really on the page.
-                 */
                 echo "\n<!-- mec-theme-build: " . esc_html( substr( hash( 'sha256', $credit_html . '|' . MEC_THEME_VERSION ), 0, 16 ) ) . " -->\n";
                 ?>
                 

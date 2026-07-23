@@ -24,14 +24,6 @@
 
         if (!menuToggle || !navigation || !mobilePanel) return;
 
-        // Measure the real scrollbar width once (cached after first call).
-        // window.innerWidth includes the scrollbar gutter; clientWidth does
-        // not -- the difference is exactly how many pixels the scrollbar
-        // occupies on this browser/device right now. This is 0 on systems
-        // using overlay scrollbars (most mobile browsers, recent macOS),
-        // and the real value (commonly 15-17px) on classic non-overlay
-        // scrollbars (most desktop Windows/Linux browsers, and some Android
-        // browsers/WebViews that don't use overlay scrollbars).
         var cachedScrollbarWidth = null;
         function getScrollbarWidth() {
             if (cachedScrollbarWidth === null) {
@@ -43,7 +35,6 @@
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.setAttribute('aria-controls', 'primary-menu');
 
-        // Toggle mobile panel
         function toggleMenu() {
             navigation.classList.toggle('toggled');
             const isExpanded = navigation.classList.contains('toggled');
@@ -51,26 +42,11 @@
 
             if (isExpanded) {
                 menuToggle.innerHTML = '✕ ' + defaultCloseText;
-                // 1.7.21 fixed the `overflow` shorthand clobbering
-                // overflow-x unintentionally, but overflow-y: hidden ALONE
-                // is still enough to remove body's vertical scrollbar on
-                // browsers/devices using classic (non-overlay) scrollbars --
-                // and removing a scrollbar after the page has already laid
-                // out grows the available content width, which not every
-                // already-rendered element recomputes cleanly. That's why
-                // the gap survived 1.7.21's fix on real-device testing.
-                // The actual complete fix: measure the scrollbar's width
-                // and add it back as padding-right at the same instant we
-                // hide it, so the content box's total width never changes.
-                // On devices using overlay scrollbars (most mobile browsers)
-                // getScrollbarWidth() correctly returns 0 and this is a
-                // harmless no-op.
                 var sbWidth = getScrollbarWidth();
                 document.body.style.overflowY = 'hidden';
                 if (sbWidth > 0) {
                     document.body.style.paddingRight = sbWidth + 'px';
                 }
-                // Collapse all submenus when opening
                 document.querySelectorAll('.main-navigation li.menu-item-has-children').forEach(function(item) {
                     item.classList.remove('toggled');
                     const parentLink = item.querySelector('> a');
@@ -113,16 +89,13 @@
             if (e.key === 'Escape' && navigation.classList.contains('toggled')) toggleMenu();
         });
 
-        // ===== Submenu toggling – event delegation (works even if menu loads later) =====
         navigation.addEventListener('click', function(e) {
-            // Find the clicked link that is a direct child of a menu-item-has-children
             const link = e.target.closest('.menu-item-has-children > a');
             if (!link) return;
 
             const parentLi = link.closest('li');
             if (!parentLi || !parentLi.classList.contains('menu-item-has-children')) return;
 
-            // Only apply on mobile screen width
             if (window.matchMedia('(max-width: 768px)').matches) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -131,7 +104,6 @@
                 parentLi.classList.toggle('toggled');
                 link.setAttribute('aria-expanded', !isExpanded);
 
-                // Collapse siblings (optional, improves UX)
                 const siblings = parentLi.parentElement.children;
                 for (let sibling of siblings) {
                     if (sibling !== parentLi && sibling.classList.contains('toggled')) {
@@ -143,7 +115,6 @@
             }
         });
 
-        // Reset on resize
         function resetMobileDropdowns() {
             document.querySelectorAll('.main-navigation li.menu-item-has-children').forEach(function(item) {
                 item.classList.remove('toggled');
