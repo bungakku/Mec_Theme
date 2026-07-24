@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.46
+Stable tag: 1.7.47
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.47 =
+* Fixed: front-page.php called template-parts/content-blog.php directly with no `.blog-grid`/`.blog-list` wrapper -- unlike index.php, archive.php, and search.php, which all wrap the loop before calling it. content-blog.php still added `grid-column-N` to each article, but with no parent `.blog-grid` container, style.css's `.blog-grid.grid-columns-N { grid-template-columns: ... }` never applied. Grid/List Blog Layout settings had no visible effect on the front page specifically, while working correctly everywhere else. front-page.php now wraps its loop identically to the other three templates.
 
 = 1.7.46 =
 * Fixed: `languages/mec_theme.pot`'s `Report-Msgid-Bugs-To` header still read `https://biswazit.in/mectheme` -- the last remaining live `biswazit.in` reference in the codebase after 1.7.45's cleanup. Updated to `https://github.com/bungakku/Mec_Theme/issues`, fully retiring the old domain from every theme file.

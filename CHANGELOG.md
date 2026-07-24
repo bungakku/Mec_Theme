@@ -7,6 +7,11 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.47]
+
+### Fixed
+- front-page.php had no `.blog-grid`/`.blog-list` wrapper around its post loop, unlike index.php/archive.php/search.php which all wrap before calling `get_template_part('content','blog')`. Grid and List Blog Layout settings silently had no effect on the front page only (classic layout rendered regardless of the Customizer setting), since content-blog.php's per-article `grid-column-N` class had no parent grid container to attach to. front-page.php now wraps its loop the same way the other three blog-listing templates already do.
+
 ## [1.7.46]
 
 ### Fixed
