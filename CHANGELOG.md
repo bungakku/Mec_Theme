@@ -7,6 +7,11 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.48]
+
+### Fixed
+- the `.screen-reader-text` clipping fix from 1.7.24 was scoped only to `.widget .screen-reader-text`, leaving every other screen-reader-only element in the theme -- the skip-link (header.php), the mobile menu close button's inner SR span (header.php), the search form's SR label (searchform.php), and the SR text inside `mec_theme_comments_link_markup()` (functions.php) -- exposed to the same underlying conflict: the global `* { overflow-wrap: anywhere }` reset can interfere with the 1px `clip-path` clipping technique on some mobile browsers. Moved `overflow-wrap: normal` / `word-wrap: normal` from the `.widget`-scoped rule onto the base `.screen-reader-text` rule itself, so the protection now applies everywhere the class is used. The now-redundant `.widget .screen-reader-text` override was removed.
+
 ## [1.7.47]
 
 ### Fixed

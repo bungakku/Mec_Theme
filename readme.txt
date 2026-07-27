@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.47
+Stable tag: 1.7.48
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.48 =
+* Fixed: the .screen-reader-text clipping fix from 1.7.24 was scoped only to `.widget .screen-reader-text`, so every other screen-reader-only element in the theme -- the skip-link (header.php), the mobile menu close button's inner SR span (header.php), the search form's SR label (searchform.php), and the SR text inside `mec_theme_comments_link_markup()` (functions.php, used in post/blog listings) -- remained exposed to the same underlying conflict: the global `* { overflow-wrap: anywhere }` reset can interfere with the 1px `clip-path` clipping technique on some mobile browsers, same failure pattern documented in 1.7.15/16 and 1.7.24. Moved `overflow-wrap: normal` / `word-wrap: normal` from the `.widget`-scoped rule onto the base `.screen-reader-text` rule itself, so the protection now applies everywhere the class is used, not just inside widgets. The now-redundant `.widget .screen-reader-text` override was removed.
 
 = 1.7.47 =
 * Fixed: front-page.php called template-parts/content-blog.php directly with no `.blog-grid`/`.blog-list` wrapper -- unlike index.php, archive.php, and search.php, which all wrap the loop before calling it. content-blog.php still added `grid-column-N` to each article, but with no parent `.blog-grid` container, style.css's `.blog-grid.grid-columns-N { grid-template-columns: ... }` never applied. Grid/List Blog Layout settings had no visible effect on the front page specifically, while working correctly everywhere else. front-page.php now wraps its loop identically to the other three templates.
