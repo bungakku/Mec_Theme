@@ -5,27 +5,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * GitHub-based update checker for MEC_Theme.
  *
- * This theme isn't distributed via WordPress.org, so WordPress has no
- * built-in way to know a new version exists. This file hooks into the same
- * update-checking system WordPress.org themes use, but points it at GitHub
- * Releases instead: https://github.com/bungakku/Mec_Theme/releases
- *
- * What this gives a site running this theme:
- * - The normal "Update available" notice on Appearance > Themes and on the
- *   Updates screen, with a real version number and changelog link.
- * - A working "Update now" button that downloads and installs the new
- *   version exactly the way a WordPress.org theme update would.
- *
- * What this requires going forward, for every future release:
- * - Tag the release on GitHub as `vX.Y.Z` (e.g. v1.7.8), matching the
- *   `Version:` header in style.css (without the leading "v").
- * - Publish it as a GitHub Release (not just a tag) so it has a downloadable
- *   zip asset, which is what this file fetches.
- *
- * This file only checks for and facilitates installing updates. It does not
- * modify, override, or interfere with any existing theme behaviour, styling,
- * or Customizer functionality in any way.
- *
  * @package MEC_Theme
  */
 

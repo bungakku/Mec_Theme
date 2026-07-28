@@ -5,21 +5,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Customizer Settings - Orchestrator
  *
- * This file pulls in every Customizer panel and registers them against
- * mec_theme_customize_register(), which fires on the customize_register hook.
- *
- * Extracted/reorganized during the 1.7.8 file-organization pass. No behavior
- * changed: every add_panel/add_section/add_setting/add_control call that
- * used to live inline in this file is now in inc/customizer/{name}-panel.php,
- * each wrapped in its own mec_theme_register_{name}_panel() function. This
- * file just requires those files and calls each function in the same order
- * the panels used to appear, so panel priorities and registration order are
- * unchanged.
- *
- * inc/customizer/contact-social-panel.php is self-registering (it has its
- * own add_action( 'customize_register', ... ) calls, same as it did when it
- * lived in functions.php), so it only needs to be required here, not called.
- *
  * @package MEC_Theme
  */
 

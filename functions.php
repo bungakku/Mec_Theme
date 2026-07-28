@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'MEC_THEME_VERSION', '1.7.48' );
+define( 'MEC_THEME_VERSION', '1.7.49' );
 define( 'MEC_THEME_DIR', get_template_directory() );
 define( 'MEC_THEME_URI', get_template_directory_uri() );
 define( 'MEC_THEME_ASSETS', MEC_THEME_URI . '/assets' );
@@ -237,8 +237,20 @@ add_filter( 'excerpt_more', 'mec_theme_excerpt_more' );
 
 /**
  * Add menu descriptions
+ *
+ * Fixed in 1.7.49: this filter previously injected .menu-description markup
+ * for ANY primary/footer menu item that had a description set (Appearance >
+ * Menus > Screen Options > Description), completely ignoring the "Show Menu
+ * Descriptions" Customizer setting (Layout Settings > Menu Settings) that
+ * exists specifically to toggle this on/off. The setting defaulted to false
+ * but had no actual effect -- descriptions rendered regardless the moment an
+ * admin filled in that field. Now gated on the theme mod, matching what the
+ * control's label already promised.
  */
 function mec_theme_add_menu_descriptions( $item_output, $item, $depth, $args ) {
+    if ( ! get_theme_mod( 'mec_theme_show_menu_descriptions', false ) ) {
+        return $item_output;
+    }
     if ( ! empty( $item->description ) && in_array( $args->theme_location, array( 'primary', 'footer' ) ) ) {
         $item_output = str_replace( '</a>', '<span class="menu-description">' . esc_html( $item->description ) . '</span></a>', $item_output );
     }

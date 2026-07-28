@@ -4,7 +4,7 @@ Theme URI: https://github.com/bungakku/Mec_Theme
 Author: Biswajit Thokchom
 Author URI: https://github.com/bungakku
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.48
+Version: 1.7.49
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -343,6 +343,27 @@ table {
     list-style: none;
     margin: 0;
     padding: 0;
+}
+
+/*
+ * Menu item descriptions, controlled by the "Show Menu Descriptions"
+ * Customizer setting (Layout Settings > Menu Settings). No rule existed for
+ * this class until 1.7.49 -- once the setting is enabled and a menu item has
+ * a description (Appearance > Menus > Screen Options), it now renders as a
+ * small, muted line beneath the item's label instead of unstyled inline
+ * text. white-space is reset to normal since it sits inside a menu link
+ * that otherwise forces nowrap (desktop) or has its own wrapping rules
+ * (mobile) -- this keeps the description independently wrappable either way.
+ */
+.menu-description {
+    display: block;
+    white-space: normal;
+    font-size: 0.75rem;
+    line-height: 1.3;
+    font-weight: 400;
+    color: var(--mec-menu-color);
+    opacity: 0.65;
+    margin-top: 2px;
 }
 
 .menu-toggle {

@@ -7,6 +7,14 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.49]
+
+### Fixed
+- the "Show Menu Descriptions" Customizer setting (Layout Settings > Menu Settings) had no effect. `mec_theme_add_menu_descriptions()` in functions.php injected `.menu-description` markup for any primary/footer menu item with a description (Appearance > Menus > Screen Options > Description) regardless of this toggle, so descriptions rendered even with the setting off (its default, `false`). The filter now checks `get_theme_mod( 'mec_theme_show_menu_descriptions', false )` before adding the markup, matching what the control's label promises.
+
+### Added
+- baseline `.menu-description` CSS (style.css). No rule existed for this class before, so once descriptions did display (the setting had no effect, so this was already happening on any site with menu-item descriptions filled in) they rendered as unstyled inline text glued to the link label. It now sits on its own line beneath the label, in small, muted text (`font-size: 0.75rem`, 65% opacity, inherits `--mec-menu-color`), and wraps independently of the parent link's `white-space` behavior on both desktop and mobile.
+
 ## [1.7.48]
 
 ### Fixed

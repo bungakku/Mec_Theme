@@ -5,10 +5,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Custom Recent Posts Widget with Excerpt and Read More
  *
- * Extracted from functions.php during the 1.7.1 file-organization pass.
- * No behavior changed — registration still happens via
- * register_widget( 'MEC_Theme_Recent_Posts_Widget' ) in functions.php.
- *
  * @package MEC_Theme
  */
 

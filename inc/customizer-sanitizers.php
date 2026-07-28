@@ -4,11 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 /**
  * Whitelist sanitizers and validators used by every Customizer setting
- * in this theme. Kept in one file so it's easy to audit: every select/radio
- * control's sanitize_callback should resolve to a function defined here.
- *
- * Extracted from functions.php and inc/customizer.php during the 1.7.1
- * file-organization pass.
+ * in this theme.
  *
  * @package MEC_Theme
  */
