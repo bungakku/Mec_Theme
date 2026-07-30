@@ -7,6 +7,11 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.50]
+
+### Fixed
+- `template-parts/content.php` (the generic fallback template part, reached only when a custom post type has no matching `content-{posttype}.php`) did not call `mec_theme_should_show_title()` / `mec_theme_get_title_align()`, unlike `content-page.php`, `content-post.php`, and `content-blog.php`, which all already did. A page/post's "Hide title on this page" and "Title alignment" settings (Title Settings meta box, added in 1.7.27) silently had no effect for any content type routed through this fallback -- the title always rendered, unaligned. content.php now checks `mec_theme_should_show_title()` before rendering the title, and applies the same `entry-title--align-{left|center|right}` class the other three content templates already use, ported from the identical logic in `content-blog.php`.
+
 ## [1.7.49]
 
 ### Fixed
@@ -242,8 +247,6 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 ### Fixed
 - single blog posts never respected the Blog Settings panel (Post Meta show/hide/custom, individual date/author/comments toggles) since the very beginning. single.php requests get_template_part('content', get_post_type()), which for a standard post should load template-parts/content-post.php -- but that file never existed, so WordPress silently fell back to the generic template-parts/content.php, which hardcodes its entry-meta output with no reference to any Customizer setting at all. Added the missing content-post.php, ported from the same working logic content-blog.php (the blog-listing template) already used correctly. If you were using a "Hide Post Meta" custom CSS rule as a workaround, it's no longer needed -- the actual Customizer toggle now works.
 - front-page.php had its own separate, hardcoded post loop (not using get_template_part at all), which ignored every Blog Settings option -- no excerpt length, no featured image size, no read-more text/toggle, no meta controls, just the full post body dumped unconditionally. This was also the source of a long-URL-in-post-content overflow issue specifically on the front page (confirmed: the same long URL wrapped correctly in the sidebar widget but not in the front-page post loop) -- front-page.php's bare <article> markup didn't share the same protective styling as the properly-built template parts. Replaced the hardcoded loop with the same get_template_part('content', 'blog') call index.php/archive.php/search.php already use.
-
-### Notes
 - Added overflow-wrap: anywhere directly to the base `article` rule as a final safety net, since front-page.php's old hardcoded markup rendered straight into a bare <article> with none of the wrapper elements (.entry-content-wrapper) that already had this protection.
 - Together, these two template fixes mean every blog-post-rendering context in the theme (front page, blog index, archives, search results, and now single posts) goes through the same Customizer-aware, long-URL-safe code path.
 

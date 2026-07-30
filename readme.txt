@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.49
+Stable tag: 1.7.50
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.50 =
+* Fixed: `template-parts/content.php` (the generic fallback template part, reached only when a custom post type has no matching `content-{posttype}.php`) did not call `mec_theme_should_show_title()` / `mec_theme_get_title_align()`, unlike `content-page.php`, `content-post.php`, and `content-blog.php`, which all already did. A page/post's "Hide title on this page" and "Title alignment" settings (Title Settings meta box, added in 1.7.27) silently had no effect for any content type routed through this fallback -- the title always rendered, unaligned. content.php now checks `mec_theme_should_show_title()` before rendering the title, and applies the same `entry-title--align-{left|center|right}` class the other three content templates already use, ported from the identical logic in `content-blog.php`.
 
 = 1.7.49 =
 * Fixed: the "Show Menu Descriptions" Customizer setting (Layout Settings > Menu Settings) had no effect -- `mec_theme_add_menu_descriptions()` in functions.php injected `.menu-description` markup for any primary/footer menu item with a description (Appearance > Menus > Screen Options > Description) regardless of this toggle, so descriptions rendered even with the setting off (its default). The filter now checks the theme mod before adding the markup, matching what the control's label promises.
