@@ -1,8 +1,14 @@
 name: Build & Attach Release Zip
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing tag to (re)build and publish a zip for, e.g. v1.7.50'
+        required: true
 
 permissions:
   contents: write
@@ -11,35 +17,38 @@ jobs:
   build-and-attach:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code at release tag
+      - name: Resolve tag name and version number
+        id: tag
+        run: |
+          TAG="${{ github.event.inputs.tag || github.ref_name }}"
+          echo "name=$TAG" >> "$GITHUB_OUTPUT"
+          echo "number=${TAG#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout code at the tag
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.release.tag_name }}
-
-      - name: Compute version number from tag
-        id: version
-        run: |
-          TAG="${{ github.event.release.tag_name }}"
-          echo "number=${TAG#v}" >> "$GITHUB_OUTPUT"
+          ref: ${{ steps.tag.outputs.name }}
 
       - name: Assemble clean theme folder
         run: |
           mkdir -p build/mec_theme
           rsync -av --exclude-from=".distignore" ./ build/mec_theme/
 
-      - name: Sync style.css Version and readme.txt Stable tag to the release tag
+      - name: Sync style.css Version and readme.txt Stable tag to the tag
         run: |
-          sed -i "s/^Version:.*/Version: ${{ steps.version.outputs.number }}/" build/mec_theme/style.css
+          sed -i "s/^Version:.*/Version: ${{ steps.tag.outputs.number }}/" build/mec_theme/style.css
           if [ -f build/mec_theme/readme.txt ]; then
-            sed -i "s/^Stable tag:.*/Stable tag: ${{ steps.version.outputs.number }}/" build/mec_theme/readme.txt
+            sed -i "s/^Stable tag:.*/Stable tag: ${{ steps.tag.outputs.number }}/" build/mec_theme/readme.txt
           fi
 
       - name: Create versioned zip
         run: |
           cd build
-          zip -r "mec_theme-${{ github.event.release.tag_name }}.zip" mec_theme
+          zip -r "mec_theme-${{ steps.tag.outputs.name }}.zip" mec_theme
 
-      - name: Attach zip to the release
+      - name: Create or update the release and attach the zip
         uses: softprops/action-gh-release@v2
         with:
-          files: build/mec_theme-${{ github.event.release.tag_name }}.zip
+          tag_name: ${{ steps.tag.outputs.name }}
+          generate_release_notes: true
+          files: build/mec_theme-${{ steps.tag.outputs.name }}.zip
