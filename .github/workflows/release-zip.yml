@@ -32,7 +32,16 @@ jobs:
       - name: Assemble clean theme folder
         run: |
           mkdir -p build/mec_theme
-          rsync -av --exclude-from=".distignore" ./ build/mec_theme/
+          rsync -av \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='.gitignore' \
+            --exclude='.distignore' \
+            --exclude='theme_file-structure.txt' \
+            --exclude='node_modules' \
+            --exclude='*.zip' \
+            --exclude='build' \
+            ./ build/mec_theme/
 
       - name: Sync style.css Version and readme.txt Stable tag to the tag
         run: |
