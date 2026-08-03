@@ -3,6 +3,14 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Template part for displaying posts
  *
+ * Fixed in 1.7.50: this generic fallback part (used only when a custom
+ * post type has no matching content-{posttype}.php) never called
+ * mec_theme_should_show_title() / mec_theme_get_title_align(), unlike
+ * content-page.php, content-post.php, and content-blog.php, which all
+ * already did. The Title Settings meta box (1.7.27) silently had no
+ * effect for any content type routed through this fallback. Ported the
+ * same conditional + alignment-class logic already used in content-blog.php.
+ *
  * @package MEC_Theme
  */
 ?>

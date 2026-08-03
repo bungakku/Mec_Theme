@@ -7,6 +7,15 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.51]
+
+### Fixed
+- Desktop dropdown submenus were completely unreachable via keyboard. `style.css`'s `.main-navigation ul li:hover > ul` was the only rule that ever revealed a submenu, and no `:focus-within` rule existed anywhere in the file, so a keyboard/screen-reader user tabbing through the primary menu could not open any submenu -- Tab skipped straight from one top-level item to the next (WCAG 2.1.1). Added `.main-navigation ul li:focus-within > ul` alongside the existing `:hover` rule, using the same opacity/visibility/transform reveal, so tabbing into a submenu link now keeps it visible exactly as hovering already does.
+- `.menu-toggle` (the mobile hamburger button) had `outline: none` on both its base rule and its `:focus` state, with no `:focus-visible` or other replacement anywhere in the file -- a keyboard user tabbing to the primary trigger for all mobile navigation got no visible focus indicator at all (WCAG 2.4.7). Added `.menu-toggle:focus-visible { outline: 2px solid var(--mec-primary-color); outline-offset: 2px; }`. `:focus-visible` only matches keyboard/programmatic focus, not a mouse click, so the original outline-free mouse-click behavior is preserved.
+
+### Notes
+- Both fixes were identified in a full theme accessibility audit (see project audit report, "Immediate" findings #1 and #2) and are CSS-only -- no template, JS, or Customizer changes were needed.
+
 ## [1.7.50]
 
 ### Fixed

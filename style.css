@@ -4,7 +4,7 @@ Theme URI: https://github.com/bungakku/Mec_Theme
 Author: Biswajit Thokchom
 Author URI: https://github.com/bungakku
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.50
+Version: 1.7.51
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -388,6 +388,21 @@ table {
     outline: none;
 }
 
+/*
+ * Fixed in 1.7.51 (audit finding, Immediate #2): the base rule and the
+ * :focus state above both set outline: none with no replacement anywhere
+ * in the file, so a keyboard user tabbing to the hamburger button -- the
+ * primary trigger for all mobile navigation -- got no visible focus
+ * indicator at all (WCAG 2.4.7 failure). :focus-visible only matches
+ * keyboard/programmatic focus, not a mouse click, so this restores the
+ * indicator for keyboard users without bringing back the outline-on-click
+ * the original outline: none was written to avoid.
+ */
+.menu-toggle:focus-visible {
+    outline: 2px solid var(--mec-primary-color);
+    outline-offset: 2px;
+}
+
 @media (min-width: 769px) {
     .mobile-menu-panel {
         display: block !important;
@@ -466,7 +481,18 @@ table {
         right: 100%;
         margin-right: 2px;
     }
-    .main-navigation ul li:hover > ul {
+    /*
+     * Fixed in 1.7.51 (audit finding, Immediate #1): only :hover ever
+     * revealed a submenu, so desktop dropdowns were completely
+     * unreachable via keyboard -- Tab skipped straight from one
+     * top-level item to the next with no way to open a submenu
+     * (WCAG 2.1.1 failure). :focus-within matches whenever any
+     * descendant (the parent link, or a link inside the submenu
+     * itself once opened) has focus, so Tabbing into a submenu link
+     * now keeps it visible exactly as hovering already does.
+     */
+    .main-navigation ul li:hover > ul,
+    .main-navigation ul li:focus-within > ul {
         opacity: 1;
         visibility: visible;
         transform: translateY(0);

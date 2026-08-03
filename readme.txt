@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.50
+Stable tag: 1.7.51
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -56,9 +56,14 @@ Go to Appearance > Widgets and add the widget titled "MEC Recent Posts (with exc
 Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment (left, center, or right). Default is centre for backward compatibility.
 
 = Is the theme accessible? =
-Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, and screen-reader-friendly comment counts.
+Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.51 =
+* Fixed: desktop dropdown submenus were completely unreachable via keyboard -- only `:hover` ever revealed a submenu (`style.css`), and no `:focus-within` rule existed anywhere in the file, so Tab skipped straight from one top-level menu item to the next with no way to open a submenu (WCAG 2.1.1). Added `.main-navigation ul li:focus-within > ul` alongside the existing `:hover` rule, so tabbing into a submenu link now reveals it exactly as hovering already does.
+* Fixed: the mobile hamburger button (`.menu-toggle`) had `outline: none` on both its base rule and its `:focus` state, with no replacement focus indicator anywhere in the file -- a keyboard user tabbing to the primary trigger for all mobile navigation got no visible focus indicator at all (WCAG 2.4.7). Added a `.menu-toggle:focus-visible` rule with a visible outline; `:focus-visible` only matches keyboard/programmatic focus, so a mouse click still gets no outline, preserving the original intent of the `outline: none` rules.
+* Both fixes were identified in a full theme accessibility audit and are CSS-only -- no template, JS, or Customizer changes.
 
 = 1.7.50 =
 * Fixed: `template-parts/content.php` (the generic fallback template part, reached only when a custom post type has no matching `content-{posttype}.php`) did not call `mec_theme_should_show_title()` / `mec_theme_get_title_align()`, unlike `content-page.php`, `content-post.php`, and `content-blog.php`, which all already did. A page/post's "Hide title on this page" and "Title alignment" settings (Title Settings meta box, added in 1.7.27) silently had no effect for any content type routed through this fallback -- the title always rendered, unaligned. content.php now checks `mec_theme_should_show_title()` before rendering the title, and applies the same `entry-title--align-{left|center|right}` class the other three content templates already use, ported from the identical logic in `content-blog.php`.
@@ -122,7 +127,6 @@ Yes, the theme includes aria-expanded states for mobile menu and submenu toggles
 = 1.7.35 =
 * Added: independent Show/Hide toggles for the three Contact & Social blocks -- "Show Phone Numbers", "Show Email Address", "Show Social Icons" (Customize > Contact & Social). Each block can now be disabled on its own without affecting the others, separate from the existing tablet/mobile "hide contact column" toggles, which still hide the whole column at those breakpoints.
 * Added: "Phone Numbers Hover Color" and "Email Address Hover Color" controls, next to their existing (non-hover) color settings. Phone numbers and the email link now have a smooth color transition on hover, live-previewed in the Customizer the same way the existing phone/email colors already were.
-* No existing settings, classes, or markup were removed or renamed. `header.php`'s phone/email/social blocks are now each wrapped in their own visibility check (default: shown, matching current behavior on upgrade); `inc/customizer-css.php` gained two new hover CSS rules alongside the existing phone/email color rules.
 
 = 1.7.34 =
 * Added: separate side-by-side layout for Phone Number 1 and Phone Number 2 on tablet (481-768px) and mobile (<=480px) -- both now sit in a shared, centered, wrapping row (`.contact-phones-row`) above the email and social icons, instead of stacking fully vertically with everything else. Desktop (>768px) layout is unchanged.
