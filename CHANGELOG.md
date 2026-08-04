@@ -7,6 +7,14 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.52]
+
+### Removed
+- `mec_theme_hide_contact_css()` (`inc/customizer/contact-social-panel.php`), a duplicate CSS-output function that ran on every `wp_head` (priority 20) and independently regenerated the same hide-tablet/hide-mobile `.header-contact-column { display: none }` rules already produced by `mec_theme_get_mobile_menu_colors_css()` in `inc/customizer-css.php` -- byte-for-byte identical output, computed twice on every page load. The removed function had also drifted stale: it only ever knew about the two whole-column "hide contact column" toggles, never updated to cover the three individual "Show Phone Numbers/Email/Social Icons" toggles added in 1.7.35/1.7.36, which the customizer-css.php version already handles correctly. Same bug class as `mec_theme_social_icon_css()`, removed for an identical reason in 1.7.30.
+
+### Notes
+- No front-end output changes -- the complete version in `inc/customizer-css.php` was already firing on every page via the cached Customizer stylesheet, so removing the duplicate is purely a dead-code cleanup.
+
 ## [1.7.51]
 
 ### Fixed

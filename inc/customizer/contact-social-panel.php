@@ -254,24 +254,21 @@ function mec_theme_customize_contact_social( $wp_customize ) {
 }
 add_action( 'customize_register', 'mec_theme_customize_contact_social' );
 
-function mec_theme_hide_contact_css() {
-    $hide_tablet = get_theme_mod( 'mec_theme_hide_contact_tablet', false );
-    $hide_mobile = get_theme_mod( 'mec_theme_hide_contact_mobile', false );
-    
-    if ( ! $hide_tablet && ! $hide_mobile ) {
-        return;
-    }
-    
-    echo '<style type="text/css">';
-    if ( $hide_tablet ) {
-        echo '@media (min-width: 481px) and (max-width: 768px) { .header-contact-column { display: none !important; } }';
-    }
-    if ( $hide_mobile ) {
-        echo '@media (max-width: 480px) { .header-contact-column { display: none !important; } }';
-    }
-    echo '</style>';
-}
-add_action( 'wp_head', 'mec_theme_hide_contact_css', 20 );
+/*
+ * Note (removed in 1.7.52): mec_theme_hide_contact_css() used to run here on
+ * every wp_head (priority 20), independently generating the same
+ * hide-tablet/hide-mobile ".header-contact-column { display: none }" rules
+ * that mec_theme_get_mobile_menu_colors_css() in inc/customizer-css.php
+ * ALSO generates -- byte-for-byte identical output, computed twice on every
+ * page load. Worse, this duplicate had drifted stale: it only ever knew
+ * about the two whole-column "hide contact column" toggles, never updated
+ * to cover the three individual "Show Phone Numbers/Email/Social Icons"
+ * toggles added in 1.7.35/1.7.36, which the customizer-css.php version
+ * already handles correctly. Same bug class as mec_theme_social_icon_css(),
+ * removed for an identical reason in 1.7.30. Deleting this function changes
+ * no front-end output -- the complete version in customizer-css.php was
+ * already firing on every page via the cached Customizer stylesheet.
+ */
 
 function mec_theme_customize_contact_preview() {
     if ( ! is_customize_preview() ) {
