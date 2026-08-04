@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.52
+Stable tag: 1.7.53
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.53 =
+* Fixed: the primary navigation (`<nav id="site-navigation" class="main-navigation">` in `header.php`) had no `aria-label`, unlike the footer navigation which already correctly has one -- a real landmark-navigation gap for screen reader users on every single page. Added `aria-label="Primary Menu"`, reusing the same already-translated "Primary Menu" string already registered for this menu location (`functions.php`), so no new translatable string was introduced.
 
 = 1.7.52 =
 * Removed: `mec_theme_hide_contact_css()` (`inc/customizer/contact-social-panel.php`), a duplicate CSS-output function that ran on every `wp_head` and independently regenerated the same hide-tablet/hide-mobile `.header-contact-column` rules already produced by `mec_theme_get_mobile_menu_colors_css()` in `inc/customizer-css.php`. Worse, it had drifted stale -- it never learned about the three individual "Show Phone Numbers/Email/Social Icons" toggles added in 1.7.35/1.7.36, which the customizer-css.php version already handles correctly. Same bug class as `mec_theme_social_icon_css()`, removed for an identical reason in 1.7.30. No front-end output changes -- the complete version was already firing on every page via the cached Customizer stylesheet.

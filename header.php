@@ -177,7 +177,7 @@ if ( function_exists( 'wp_body_open' ) ) {
                 </div><!-- .header-contact-column -->
             </div><!-- .header-top-row -->
 
-            <nav id="site-navigation" class="main-navigation">
+            <nav id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'mec_theme' ); ?>">
                 <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
                     ☰ <?php esc_html_e( 'Menu', 'mec_theme' ); ?>
                 </button>

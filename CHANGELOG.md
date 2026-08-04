@@ -7,6 +7,11 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.53]
+
+### Fixed
+- the primary navigation (`<nav id="site-navigation" class="main-navigation">` in `header.php`) had no `aria-label`, unlike `footer.php`'s footer navigation, which already correctly has one -- a real landmark-navigation gap for screen reader users on every single page, since an unlabeled `<nav>` is harder to distinguish from other navigation landmarks. Added `aria-label="<?php esc_attr_e( 'Primary Menu', 'mec_theme' ); ?>"`, reusing the same already-translated "Primary Menu" string already registered for this menu location in `functions.php`'s `register_nav_menus()` call -- no new translatable string was introduced.
+
 ## [1.7.52]
 
 ### Removed
