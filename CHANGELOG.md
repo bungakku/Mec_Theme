@@ -7,6 +7,11 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.54]
+
+### Fixed
+- `template-parts/related-posts.php`'s `WP_Query` had no `no_found_rows`. Related Posts is a fixed-count grid (controlled by "Number of Related Posts" in the Customizer) that never paginates, so WordPress's default `SQL_CALC_FOUND_ROWS` pass -- which exists only to support pagination -- ran as pure wasted work on every single-post page view, site-wide. Added `'no_found_rows' => true,` to the query args. No visible behavior change; a small but real query-efficiency improvement across the whole site.
+
 ## [1.7.53]
 
 ### Fixed

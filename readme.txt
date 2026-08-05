@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.53
+Stable tag: 1.7.54
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.54 =
+* Fixed: `template-parts/related-posts.php`'s `WP_Query` had no `no_found_rows`, unlike a properly-tuned single-purpose query. Related Posts is a fixed-count grid that never paginates, so WordPress's default `SQL_CALC_FOUND_ROWS` pass -- needed only to support pagination -- ran as wasted work on every single-post page view, site-wide. Added `'no_found_rows' => true,`; no visible behavior change, a small but real query-efficiency win across the whole site.
 
 = 1.7.53 =
 * Fixed: the primary navigation (`<nav id="site-navigation" class="main-navigation">` in `header.php`) had no `aria-label`, unlike the footer navigation which already correctly has one -- a real landmark-navigation gap for screen reader users on every single page. Added `aria-label="Primary Menu"`, reusing the same already-translated "Primary Menu" string already registered for this menu location (`functions.php`), so no new translatable string was introduced.

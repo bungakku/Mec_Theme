@@ -26,6 +26,11 @@ $related_query = new WP_Query( array(
     'post__not_in' => array( get_the_ID() ),
     'posts_per_page' => $related_count,
     'ignore_sticky_posts' => 1,
+    // Fixed in 1.7.54: this query never paginates (Related Posts is a
+    // fixed-count grid, not a paged list), so the default
+    // SQL_CALC_FOUND_ROWS pass WP_Query runs to support pagination was
+    // pure wasted work -- run on every single-post page view, site-wide.
+    'no_found_rows' => true,
 ) );
 
 if ( ! $related_query->have_posts() ) {
