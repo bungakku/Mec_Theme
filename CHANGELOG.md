@@ -7,6 +7,11 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.55]
+
+### Fixed
+- `inc/class-recent-posts-widget.php`'s `update()` method dereferenced `$new_instance['title']`, `['number']`, and `['excerpt_length']` directly with no `isset()` guard, unlike the checkbox fields (`show_thumbnail`, `show_excerpt`, `show_readmore`) on the same lines, which safely tolerate a missing key via `! empty()`. Any partial widget update -- most plausibly a programmatic or REST API-driven save that omits a field -- could trigger an undefined-array-key warning. All three fields now guard with `isset()`, falling back to the same defaults this widget's own `widget()`/`form()` methods already use elsewhere (5 posts, 15-word excerpt, empty title).
+
 ## [1.7.54]
 
 ### Fixed

@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.54
+Stable tag: 1.7.55
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.55 =
+* Fixed: `MEC_Theme_Recent_Posts_Widget::update()` dereferenced `$new_instance['title']`, `['number']`, and `['excerpt_length']` directly with no `isset()` guard, inconsistent with the checkbox fields on the same lines which safely tolerate a missing key via `! empty()`. Any partial widget update (e.g. a programmatic or REST-driven save that omits a field) could trigger an undefined-array-key warning. All three now guard with `isset()`, falling back to the same defaults (5 posts, 15-word excerpt, empty title) already used elsewhere in this widget's `widget()`/`form()` methods.
 
 = 1.7.54 =
 * Fixed: `template-parts/related-posts.php`'s `WP_Query` had no `no_found_rows`, unlike a properly-tuned single-purpose query. Related Posts is a fixed-count grid that never paginates, so WordPress's default `SQL_CALC_FOUND_ROWS` pass -- needed only to support pagination -- ran as wasted work on every single-post page view, site-wide. Added `'no_found_rows' => true,`; no visible behavior change, a small but real query-efficiency win across the whole site.

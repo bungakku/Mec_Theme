@@ -118,12 +118,19 @@ class MEC_Theme_Recent_Posts_Widget extends WP_Widget {
     
     public function update( $new_instance, $old_instance ) {
         $instance = array();
-        $instance['title'] = sanitize_text_field( $new_instance['title'] );
-        $instance['number'] = absint( $new_instance['number'] );
+        // Fixed in 1.7.55: title/number/excerpt_length were dereferenced
+        // directly with no isset() guard, unlike the checkbox fields below
+        // (which safely tolerate a missing key via !empty()) -- an
+        // undefined-array-key warning waiting to happen on any partial
+        // update (e.g. a programmatic/REST-driven widget save that omits
+        // a field). Defaults match this widget's own established fallbacks
+        // already used in widget()/form() above.
+        $instance['title'] = isset( $new_instance['title'] ) ? sanitize_text_field( $new_instance['title'] ) : '';
+        $instance['number'] = isset( $new_instance['number'] ) ? absint( $new_instance['number'] ) : 5;
         $instance['show_thumbnail'] = ! empty( $new_instance['show_thumbnail'] );
         $instance['show_excerpt'] = ! empty( $new_instance['show_excerpt'] );
         $instance['show_readmore'] = ! empty( $new_instance['show_readmore'] );
-        $instance['excerpt_length'] = absint( $new_instance['excerpt_length'] );
+        $instance['excerpt_length'] = isset( $new_instance['excerpt_length'] ) ? absint( $new_instance['excerpt_length'] ) : 15;
         return $instance;
     }
 }
