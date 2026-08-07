@@ -7,6 +7,17 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.56]
+
+### Fixed
+- phone numbers in the header contact column (`header.php`) rendered as plain text, unlike the adjacent email field, which already correctly rendered as a `mailto:` link. On a theme that markets itself as mobile-optimized, this was a real tap-to-call gap for the majority-mobile audience most likely to want it. Both `mec_theme_phone_1` and `mec_theme_phone_2` are now wrapped in `tel:` links.
+
+### Added
+- `mec_theme_get_tel_href()` (`functions.php`) -- a small helper that strips everything except digits and a leading `+` from a formatted phone number string, producing a dialable `tel:` href while leaving the displayed text exactly as the admin entered it (e.g. `+1 (234) 567-8901` stays visually unchanged; the href becomes `tel:+12345678901`).
+
+### Notes
+- Also updated `inc/customizer-css.php`'s phone color/hover-color CSS generation and `inc/customizer/contact-social-panel.php`'s live-preview JS to target the new inner `<a>` instead of the outer `.contact-phone` `<div>`, mirroring the pattern the email field already used. This was a necessary companion fix, not scope creep: without it, the Customizer's live-preview JS -- which previously called `.text()` directly on the div -- would have wiped out the new `<a>` on every keystroke while editing the phone number fields in the Customizer.
+
 ## [1.7.55]
 
 ### Fixed

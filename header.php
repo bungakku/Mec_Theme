@@ -85,13 +85,17 @@ if ( function_exists( 'wp_body_open' ) ) {
                         <?php 
                         $phone1 = get_theme_mod( 'mec_theme_phone_1', '+1 (234) 567-8901' );
                         if ( ! empty( $phone1 ) ) : ?>
-                            <div class="contact-phone contact-phone-1"><?php echo esc_html( $phone1 ); ?></div>
+                            <div class="contact-phone contact-phone-1">
+                                <a href="tel:<?php echo esc_attr( mec_theme_get_tel_href( $phone1 ) ); ?>"><?php echo esc_html( $phone1 ); ?></a>
+                            </div>
                         <?php endif; ?>
 
                         <?php 
                         $phone2 = get_theme_mod( 'mec_theme_phone_2', '+1 (234) 567-8902' );
                         if ( ! empty( $phone2 ) ) : ?>
-                            <div class="contact-phone contact-phone-2"><?php echo esc_html( $phone2 ); ?></div>
+                            <div class="contact-phone contact-phone-2">
+                                <a href="tel:<?php echo esc_attr( mec_theme_get_tel_href( $phone2 ) ); ?>"><?php echo esc_html( $phone2 ); ?></a>
+                            </div>
                         <?php endif; ?>
                     </div><!-- .contact-phones-row -->
 

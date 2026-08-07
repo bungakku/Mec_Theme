@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.55
+Stable tag: 1.7.56
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.56 =
+* Fixed: phone numbers in the header contact column rendered as plain text, unlike the adjacent email field, which was already a proper `mailto:` link -- a real tap-to-call gap on a theme built mobile-first. Both phone numbers are now wrapped in `tel:` links (new `mec_theme_get_tel_href()` helper strips formatting characters for a dialable href while leaving the displayed text exactly as entered). Also updated the phone color/hover-color CSS generation and the Customizer live-preview JS to target the new inner link instead of the outer `<div>`, matching how the email field's color rules and live preview already work -- without this, the live-preview JS would have destroyed the new link on every keystroke in the Customizer (it previously called `.text()` directly on the div).
 
 = 1.7.55 =
 * Fixed: `MEC_Theme_Recent_Posts_Widget::update()` dereferenced `$new_instance['title']`, `['number']`, and `['excerpt_length']` directly with no `isset()` guard, inconsistent with the checkbox fields on the same lines which safely tolerate a missing key via `! empty()`. Any partial widget update (e.g. a programmatic or REST-driven save that omits a field) could trigger an undefined-array-key warning. All three now guard with `isset()`, falling back to the same defaults (5 posts, 15-word excerpt, empty title) already used elsewhere in this widget's `widget()`/`form()` methods.

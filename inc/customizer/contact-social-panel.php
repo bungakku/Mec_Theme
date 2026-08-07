@@ -279,12 +279,12 @@ function mec_theme_customize_contact_preview() {
     ( function( $ ) {
         wp.customize( 'mec_theme_phone_1', function( value ) {
             value.bind( function( newval ) {
-                $( '.contact-phone-1' ).text( newval );
+                $( '.contact-phone-1 a' ).text( newval ).attr( 'href', 'tel:' + newval.replace( /[^0-9+]/g, '' ) );
             } );
         } );
         wp.customize( 'mec_theme_phone_2', function( value ) {
             value.bind( function( newval ) {
-                $( '.contact-phone-2' ).text( newval );
+                $( '.contact-phone-2 a' ).text( newval ).attr( 'href', 'tel:' + newval.replace( /[^0-9+]/g, '' ) );
             } );
         } );
         wp.customize( 'mec_theme_email', function( value ) {
@@ -307,7 +307,7 @@ function mec_theme_customize_contact_preview() {
 
         wp.customize( 'mec_theme_contact_phone_color', function( value ) {
             value.bind( function( newval ) {
-                $( '.contact-phone' ).css( 'color', newval );
+                $( '.contact-phone a' ).css( 'color', newval );
             } );
         } );
         wp.customize( 'mec_theme_contact_email_color', function( value ) {
@@ -326,7 +326,7 @@ function mec_theme_customize_contact_preview() {
             }
             var css = '';
             if ( phoneHover ) {
-                css += '.header-contact-column .contact-phone:hover { color: ' + phoneHover + '; }';
+                css += '.header-contact-column .contact-phone a:hover { color: ' + phoneHover + '; }';
             }
             if ( emailHover ) {
                 css += '.header-contact-column .contact-email a:hover { color: ' + emailHover + '; }';

@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'MEC_THEME_VERSION', '1.7.55' );
+define( 'MEC_THEME_VERSION', '1.7.56' );
 define( 'MEC_THEME_DIR', get_template_directory() );
 define( 'MEC_THEME_URI', get_template_directory_uri() );
 define( 'MEC_THEME_ASSETS', MEC_THEME_URI . '/assets' );
@@ -311,6 +311,21 @@ function mec_theme_comments_link_markup() {
         <span class="screen-reader-text"><?php echo esc_html( $screen_reader_text ); ?></span>
     </a>
     <?php
+}
+
+/**
+ * Convert a formatted phone number (e.g. "+1 (234) 567-8901") into a
+ * tel: URI-safe value by stripping everything except digits and a
+ * leading "+" for international numbers.
+ *
+ * Added in 1.7.56 alongside making header.php's phone numbers clickable.
+ * Kept as a small standalone helper (matching mec_theme_get_color_var(),
+ * mec_theme_get_contrast_color(), etc.) since it's used twice in header.php
+ * and the display text itself is left untouched -- only the href value
+ * needs sanitizing to a dialable format.
+ */
+function mec_theme_get_tel_href( $phone ) {
+    return preg_replace( '/[^0-9+]/', '', $phone );
 }
 
 /**
