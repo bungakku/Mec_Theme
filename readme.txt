@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.56
+Stable tag: 1.7.57
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.57 =
+* Fixed: the off-canvas mobile menu had no keyboard focus trap. Focus correctly moved to the close button on open and Escape correctly closed it, but nothing stopped Tab from carrying keyboard focus straight out of the panel into the rest of the page while it was still visually open -- a real gap on this theme's core mobile interactive component. `navigation.js` now binds a Tab/Shift+Tab focus trap while the panel is open (removed again on close), cycling focus between the panel's own first and last focusable elements -- which already start at the close button, matching the existing focus-on-open behavior. Scoped narrowly: this only adds the wrap-around at the panel's boundaries; it doesn't change which elements inside the panel are reachable.
 
 = 1.7.56 =
 * Fixed: phone numbers in the header contact column rendered as plain text, unlike the adjacent email field, which was already a proper `mailto:` link -- a real tap-to-call gap on a theme built mobile-first. Both phone numbers are now wrapped in `tel:` links (new `mec_theme_get_tel_href()` helper strips formatting characters for a dialable href while leaving the displayed text exactly as entered). Also updated the phone color/hover-color CSS generation and the Customizer live-preview JS to target the new inner link instead of the outer `<div>`, matching how the email field's color rules and live preview already work -- without this, the live-preview JS would have destroyed the new link on every keystroke in the Customizer (it previously called `.text()` directly on the div).

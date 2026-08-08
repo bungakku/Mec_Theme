@@ -7,6 +7,14 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.57]
+
+### Fixed
+- the off-canvas mobile menu had no keyboard focus trap. Focus correctly moved to the close button on open, and Escape correctly closed the panel, but nothing stopped Tab from carrying keyboard focus straight out of the panel and into the rest of the page while it was still visually open -- a real gap on this theme's core mobile interactive component (audit finding, Recommended #11). `assets/js/navigation.js` now binds a `keydown` listener while the panel is open that intercepts `Tab`/`Shift+Tab` at the panel's own existing first and last focusable elements -- which already start at the close button, matching the existing `closeBtn.focus()` call on open -- and wraps focus back around instead of letting it escape. The listener is removed again the moment the panel closes (button click, backdrop click, or Escape), mirroring how the panel's other open/close side effects (scroll lock, ARIA state) are already scoped.
+
+### Notes
+- Deliberately narrow in scope: this only adds the Tab-cycling wrap-around at the panel's boundaries. It does not change which elements inside the panel are focusable, and does not touch the desktop dropdown `:focus-within` behavior fixed separately in 1.7.51.
+
 ## [1.7.56]
 
 ### Fixed

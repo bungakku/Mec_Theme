@@ -31,6 +31,39 @@
             return cachedScrollbarWidth;
         }
 
+        // Fixed in 1.7.57 (audit finding, Recommended #11): the off-canvas
+        // mobile menu moved focus to the close button on open and closed on
+        // Escape, but nothing stopped Tab from carrying focus straight out
+        // of the panel into the rest of the page while it was still open --
+        // a real gap on this theme's core mobile interactive component.
+        // Scoped narrowly: this only traps Tab/Shift+Tab at the panel's
+        // own existing first/last focusable elements (which already start
+        // at the close button, matching the existing focus-on-open above);
+        // it does not change which elements inside the panel are reachable.
+        function getFocusableElements() {
+            return mobilePanel.querySelectorAll(
+                'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+            );
+        }
+
+        function trapFocus(e) {
+            if (e.key !== 'Tab') return;
+            var focusable = getFocusableElements();
+            if (!focusable.length) return;
+            var first = focusable[0];
+            var last = focusable[focusable.length - 1];
+
+            if (e.shiftKey) {
+                if (document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                }
+            } else if (document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        }
+
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.setAttribute('aria-controls', 'primary-menu');
 
@@ -52,6 +85,7 @@
                     if (parentLink) parentLink.setAttribute('aria-expanded', 'false');
                 });
                 if (closeBtn) closeBtn.focus();
+                document.addEventListener('keydown', trapFocus);
             } else {
                 menuToggle.innerHTML = '☰ ' + defaultMenuText;
                 document.body.style.overflowY = '';
@@ -62,6 +96,7 @@
                     if (parentLink) parentLink.setAttribute('aria-expanded', 'false');
                 });
                 menuToggle.focus();
+                document.removeEventListener('keydown', trapFocus);
             }
         }
 
