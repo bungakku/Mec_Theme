@@ -7,6 +7,14 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.58]
+
+### Fixed
+- `--mec-dropdown-text` and `--mec-dropdown-hover-text` (`style.css`'s `:root` block) were the only two dropdown-related CSS custom properties with no static fallback value, inconsistent with `--mec-dropdown-bg` and `--mec-dropdown-hover-bg` immediately above them, which already correctly had one (audit finding, Recommended #6). Added both, matching the PHP-side defaults already used in `mec_theme_get_root_variables_css()` (`#3a3a3a` / `#0274be`).
+
+### Notes
+- No visible change under normal operation -- this is purely defensive. If the inline Customizer-generated stylesheet ever fails to load, dropdown text now falls back to a sane, matching default instead of relying on incidental CSS inheritance.
+
 ## [1.7.57]
 
 ### Fixed

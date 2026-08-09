@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.57
+Stable tag: 1.7.58
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.58 =
+* Fixed: `--mec-dropdown-text` and `--mec-dropdown-hover-text` were the only two dropdown-related CSS custom properties in `style.css`'s `:root` block with no static fallback value -- `--mec-dropdown-bg` and `--mec-dropdown-hover-bg` already correctly had one. Added both, matching the PHP-side defaults in `mec_theme_get_root_variables_css()` (`#3a3a3a` / `#0274be`). No visible change under normal operation; this is purely defensive, so dropdown text keeps a sane color if the inline Customizer stylesheet ever fails to load.
 
 = 1.7.57 =
 * Fixed: the off-canvas mobile menu had no keyboard focus trap. Focus correctly moved to the close button on open and Escape correctly closed it, but nothing stopped Tab from carrying keyboard focus straight out of the panel into the rest of the page while it was still visually open -- a real gap on this theme's core mobile interactive component. `navigation.js` now binds a Tab/Shift+Tab focus trap while the panel is open (removed again on close), cycling focus between the panel's own first and last focusable elements -- which already start at the close button, matching the existing focus-on-open behavior. Scoped narrowly: this only adds the wrap-around at the panel's boundaries; it doesn't change which elements inside the panel are reachable.
