@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MEC_Theme 1.7.58\n"
+"Project-Id-Version: MEC_Theme 1.7.59\n"
 "Report-Msgid-Bugs-To: https://github.com/bungakku/Mec_Theme/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-06 04:00+0000\n"
+"POT-Creation-Date: 2026-08-06 05:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: manually generated\n"
 "X-Domain: mec_theme\n"
@@ -35,61 +35,61 @@ msgid "Next"
 msgstr ""
 
 #: footer.php:81
-#: functions.php:123
+#: functions.php:121
 msgid "Footer Menu"
 msgstr ""
 
-#: functions.php:66
+#: functions.php:65
 msgid "Primary"
 msgstr ""
 
-#: functions.php:71
+#: functions.php:70
 msgid "Secondary"
 msgstr ""
 
-#: functions.php:76
+#: functions.php:75
 msgid "Dark Grey"
 msgstr ""
 
-#: functions.php:81
+#: functions.php:80
 msgid "Light Grey"
 msgstr ""
 
-#: functions.php:86
+#: functions.php:85
 msgid "White"
 msgstr ""
 
-#: functions.php:95
+#: functions.php:93
 msgid "Small"
 msgstr ""
 
-#: functions.php:100
+#: functions.php:98
 msgid "Normal"
 msgstr ""
 
-#: functions.php:105
+#: functions.php:103
 #: inc/customizer/blog-panel.php:93
 msgid "Large"
 msgstr ""
 
-#: functions.php:110
+#: functions.php:108
 msgid "Huge"
 msgstr ""
 
-#: functions.php:122
+#: functions.php:120
 msgid "Primary Menu"
 msgstr ""
 
-#: functions.php:143
+#: functions.php:141
 #: inc/customizer/layout-panel.php:28
 msgid "Sidebar"
 msgstr ""
 
-#: functions.php:145
+#: functions.php:143
 msgid "Main sidebar that appears on posts and pages."
 msgstr ""
 
-#: functions.php:154
+#: functions.php:153
 msgid "Footer Widget Area %d"
 msgstr ""
 
@@ -97,40 +97,40 @@ msgstr ""
 msgid "Add widgets for footer column %d."
 msgstr ""
 
-#: functions.php:194
+#: functions.php:182
 #: header.php:192
 msgid "Menu"
 msgstr ""
 
-#: functions.php:195
+#: functions.php:183
 msgid "Close"
 msgstr ""
 
-#: functions.php:290
+#: functions.php:300
 msgid "0 Comments"
 msgstr ""
 
-#: functions.php:291
+#: functions.php:301
 msgid "0 comments"
 msgstr ""
 
-#: functions.php:293
+#: functions.php:303
 msgid "1 Comment"
 msgstr ""
 
-#: functions.php:294
+#: functions.php:304
 msgid "1 comment"
 msgstr ""
 
-#: functions.php:297
+#: functions.php:307
 msgid "%s Comments"
 msgstr ""
 
-#: functions.php:298
+#: functions.php:309
 msgid "%s comments"
 msgstr ""
 
-#: functions.php:337
+#: functions.php:360
 msgid "Your WordPress version is outdated. MEC_Theme requires WordPress 5.0 or newer for full functionality."
 msgstr ""
 
@@ -176,7 +176,7 @@ msgid "Display recent posts with thumbnail, excerpt and read more link."
 msgstr ""
 
 #: inc/class-recent-posts-widget.php:74
-#: template-parts/content.php:65
+#: template-parts/content.php:73
 msgid "Read More"
 msgstr ""
 
@@ -1107,26 +1107,31 @@ msgstr ""
 msgid "About the Author"
 msgstr ""
 
-#: template-parts/content-blog.php:71
-#: template-parts/content.php:34
+#: template-parts/content-blog.php:73
+#: template-parts/content-post.php:68
+#: template-parts/content.php:44
 msgid "by"
 msgstr ""
 
-#: template-parts/content-blog.php:113
+#: template-parts/content-blog.php:106
 #: template-parts/content-page.php:27
-#: template-parts/content.php:65
+#: template-parts/content-post.php:100
+#: template-parts/content.php:66
 msgid "Pages:"
 msgstr ""
 
-#: template-parts/content-blog.php:100
+#: template-parts/content-blog.php:85
+#: template-parts/content-post.php:80
 msgid "in"
 msgstr ""
 
-#: template-parts/content-blog.php:106
+#: template-parts/content-blog.php:99
+#: template-parts/content-post.php:93
+#: template-parts/content.php:59
 msgid "Continue reading %s <span class=\"meta-nav\">&rarr;</span>"
 msgstr ""
 
-#: template-parts/content-none.php:13
+#: template-parts/content-none.php:12
 msgid "Nothing Found"
 msgstr ""
 

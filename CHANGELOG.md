@@ -7,6 +7,12 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.59]
+
+### Fixed
+- several translatable strings with placeholders were missing `/* translators: */` comments (audit finding, Recommended #8): `functions.php`'s two "Footer Widget Area %d"/"Add widgets for footer column %d." labels, and its `%s comments` screen-reader string (which sits directly below an already-commented sibling `%s Comments` call -- WordPress's i18n tooling requires a comment on each `sprintf`/`printf` call individually, since each generates a separate `msgid`); `search.php`'s "Search Results for: %s" heading; `content-none.php`'s "Ready to publish your first post?" prompt; and the "Continue reading %s..." more-link shared across `content.php`, `content-blog.php`, and `content-post.php`. All now match the comment style already used correctly elsewhere in the theme (e.g. `footer.php`'s "Theme by %s" credit line).
+- `languages/mec_theme.pot`'s `#:` file:line references had drifted out of sync with the actual source for every entry in the six files touched above (including drift introduced by this session's own earlier `functions.php` edits in 1.7.56), and three shared strings -- "by", "in", "Pages:", and "Continue reading %s..." -- were missing their `template-parts/content-post.php` cross-reference entirely, a gap dating back to when that file was added in 1.7.20. All corrected. The theme's total translatable-string count is unchanged (278) since this only fixed comments and reference accuracy, not the string list itself.
+
 ## [1.7.58]
 
 ### Fixed

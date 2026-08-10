@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.58
+Stable tag: 1.7.59
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.59 =
+* Fixed: several translatable strings with placeholders were missing `/* translators: */` comments -- `functions.php` (footer widget column labels, and the screen-reader comment-count string, which sits right next to an already-commented sibling call), `search.php` (search results heading), `content-none.php` ("Ready to publish" prompt), and the "Continue reading" more-link shared across `content.php`/`content-blog.php`/`content-post.php`. All now have accurate translator context, matching the pattern already used correctly elsewhere in the theme (e.g. `footer.php`'s credit line).
+* Fixed: `languages/mec_theme.pot`'s `#:` file:line references had drifted out of sync with the actual source in several places (including from this session's own earlier `functions.php` edits), and three shared strings ("by", "in", "Pages:", "Continue reading %s...") were missing their `template-parts/content-post.php` reference entirely, dating back to when that file was added in 1.7.20. Corrected all affected references; the 278-string count is unchanged since no strings were added or removed, only comments and cross-references corrected.
 
 = 1.7.58 =
 * Fixed: `--mec-dropdown-text` and `--mec-dropdown-hover-text` were the only two dropdown-related CSS custom properties in `style.css`'s `:root` block with no static fallback value -- `--mec-dropdown-bg` and `--mec-dropdown-hover-bg` already correctly had one. Added both, matching the PHP-side defaults in `mec_theme_get_root_variables_css()` (`#3a3a3a` / `#0274be`). No visible change under normal operation; this is purely defensive, so dropdown text keeps a sane color if the inline Customizer stylesheet ever fails to load.

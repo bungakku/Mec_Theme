@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'MEC_THEME_VERSION', '1.7.58' );
+define( 'MEC_THEME_VERSION', '1.7.59' );
 define( 'MEC_THEME_DIR', get_template_directory() );
 define( 'MEC_THEME_URI', get_template_directory_uri() );
 define( 'MEC_THEME_ASSETS', MEC_THEME_URI . '/assets' );
@@ -149,8 +149,10 @@ function mec_theme_widgets_init() {
     
     for ( $i = 1; $i <= 4; $i++ ) {
         register_sidebar( array(
+            /* translators: %d: footer widget column number */
             'name'          => sprintf( esc_html__( 'Footer Widget Area %d', 'mec_theme' ), $i ),
             'id'            => 'footer-' . $i,
+            /* translators: %d: footer widget column number */
             'description'   => sprintf( esc_html__( 'Add widgets for footer column %d.', 'mec_theme' ), $i ),
             'before_widget' => '<section id="%1$s" class="widget %2$s">',
             'after_widget'  => '</section>',
@@ -303,6 +305,7 @@ function mec_theme_comments_link_markup() {
     } else {
         /* translators: %s: number of comments */
         $comments_text = sprintf( __( '%s Comments', 'mec_theme' ), number_format_i18n( $comment_count ) );
+        /* translators: %s: number of comments */
         $screen_reader_text = sprintf( __( '%s comments', 'mec_theme' ), number_format_i18n( $comment_count ) );
     }
     ?>
