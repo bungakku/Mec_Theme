@@ -183,12 +183,12 @@ if ( function_exists( 'wp_body_open' ) ) {
 
             <nav id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'mec_theme' ); ?>">
                 <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
-                    ☰ <?php esc_html_e( 'Menu', 'mec_theme' ); ?>
+                    <span aria-hidden="true">☰</span> <?php esc_html_e( 'Menu', 'mec_theme' ); ?>
                 </button>
 
                 <div class="mobile-menu-panel">
                     <button class="mobile-menu-close" aria-label="<?php esc_attr_e( 'Close menu', 'mec_theme' ); ?>">
-                        ✕ <span class="screen-reader-text"><?php esc_html_e( 'Close menu', 'mec_theme' ); ?></span>
+                        <span aria-hidden="true">✕</span> <span class="screen-reader-text"><?php esc_html_e( 'Close menu', 'mec_theme' ); ?></span>
                     </button>
                     <div class="mobile-search-form">
                         <?php get_search_form(); ?>

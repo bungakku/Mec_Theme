@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.59
+Stable tag: 1.7.60
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.60 =
+* Fixed: the ☰ and ✕ Unicode glyphs used by the mobile hamburger toggle and off-canvas close button weren't wrapped in `aria-hidden="true"`, unlike `searchform.php`'s search icon, which already correctly does this -- meaning a screen reader could announce the raw, unpredictable glyph character alongside (or instead of) the actual "Menu"/"Close menu" label text. Fixed in `header.php`'s initial markup for both buttons, and in `navigation.js`'s dynamic state-toggle text, which fully rewrites the hamburger button's content on every click -- fixing only the PHP template would have looked correct on page load and silently regressed the instant a visitor opened the menu once.
 
 = 1.7.59 =
 * Fixed: several translatable strings with placeholders were missing `/* translators: */` comments -- `functions.php` (footer widget column labels, and the screen-reader comment-count string, which sits right next to an already-commented sibling call), `search.php` (search results heading), `content-none.php` ("Ready to publish" prompt), and the "Continue reading" more-link shared across `content.php`/`content-blog.php`/`content-post.php`. All now have accurate translator context, matching the pattern already used correctly elsewhere in the theme (e.g. `footer.php`'s credit line).

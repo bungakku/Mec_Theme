@@ -73,7 +73,7 @@
             menuToggle.setAttribute('aria-expanded', isExpanded);
 
             if (isExpanded) {
-                menuToggle.innerHTML = '✕ ' + defaultCloseText;
+                menuToggle.innerHTML = '<span aria-hidden="true">✕</span> ' + defaultCloseText;
                 var sbWidth = getScrollbarWidth();
                 document.body.style.overflowY = 'hidden';
                 if (sbWidth > 0) {
@@ -87,7 +87,7 @@
                 if (closeBtn) closeBtn.focus();
                 document.addEventListener('keydown', trapFocus);
             } else {
-                menuToggle.innerHTML = '☰ ' + defaultMenuText;
+                menuToggle.innerHTML = '<span aria-hidden="true">☰</span> ' + defaultMenuText;
                 document.body.style.overflowY = '';
                 document.body.style.paddingRight = '';
                 document.querySelectorAll('.main-navigation li.menu-item-has-children.toggled').forEach(function(item) {

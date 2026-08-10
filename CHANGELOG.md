@@ -7,6 +7,15 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.60]
+
+### Fixed
+- the ☰ and ✕ Unicode glyphs used by the mobile hamburger toggle (`.menu-toggle`) and the off-canvas close button (`.mobile-menu-close`) weren't wrapped in `aria-hidden="true"`, unlike `searchform.php`'s search icon, which already correctly does this (audit finding, Recommended #9). Without it, a screen reader could announce the raw, unpredictable glyph character alongside -- or instead of -- the actual "Menu" / "Close menu" label text. Fixed in three places: `header.php`'s initial server-rendered markup for both buttons, and `navigation.js`'s `toggleMenu()`, which fully rewrites the hamburger button's `innerHTML` on every open/close.
+
+### Notes
+- The `navigation.js` half of this fix was necessary, not optional -- `toggleMenu()` replaces the entire button content via `innerHTML` on every click, so a PHP-only fix would have looked correct on initial page load and silently regressed the instant a visitor opened the mobile menu once. Same class of "fix both the initial render and the JS that overwrites it" issue already handled carefully in 1.7.56 (tel: links) and 1.7.57 (focus trap).
+- This closes out every item on the audit's "Recommended" list (9 of 9 now fixed, following 1.7.52 through this release). Only the six "Optional" items (no user-facing effect) and the still-open v1.7.50 release-notes formatting issue remain from the full theme audit.
+
 ## [1.7.59]
 
 ### Fixed
