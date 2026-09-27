@@ -16,9 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
         <?php if ( is_home() && current_user_can( 'publish_posts' ) ) : ?>
             <p>
                 <?php
-                /* translators: %1$s: URL to create a new post */
                 printf(
                     wp_kses(
+                        /* translators: %1$s: URL to create a new post */
                         __( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'mec_theme' ),
                         array( 'a' => array( 'href' => array() ) )
                     ),

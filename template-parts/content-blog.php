@@ -93,9 +93,9 @@ if ( 'grid' === $blog_layout ) {
         <div class="entry-content">
             <?php
             if ( is_singular() ) :
-                /* translators: %s: post title (screen-reader only) */
                 the_content( sprintf(
                     wp_kses(
+                        /* translators: %s: post title (screen-reader only) */
                         __( 'Continue reading %s <span class="meta-nav">&rarr;</span>', 'mec_theme' ),
                         array( 'span' => array( 'class' => array() ) )
                     ),

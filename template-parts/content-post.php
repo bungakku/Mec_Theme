@@ -87,9 +87,9 @@ $show_meta = get_theme_mod( 'mec_theme_show_post_meta', 'show' );
 
     <div class="entry-content">
         <?php
-        /* translators: %s: post title (screen-reader only) */
         the_content( sprintf(
             wp_kses(
+                /* translators: %s: post title (screen-reader only) */
                 __( 'Continue reading %s <span class="meta-nav">&rarr;</span>', 'mec_theme' ),
                 array( 'span' => array( 'class' => array() ) )
             ),

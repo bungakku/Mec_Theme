@@ -61,7 +61,7 @@ class MEC_Theme_Recent_Posts_Widget extends WP_Widget {
                             </h4>
                             <?php if ( $show_excerpt ) : ?>
                                 <div class="recent-post-excerpt">
-                                    <?php echo wp_trim_words( get_the_excerpt(), $excerpt_length, '...' ); ?>
+                                    <?php echo esc_html( wp_trim_words( get_the_excerpt(), $excerpt_length, '...' ) ); ?>
                                 </div>
                             <?php endif; ?>
                             <?php if ( $show_readmore ) : ?>

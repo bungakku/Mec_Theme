@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 6.6
-Stable tag: 1.7.60
+Stable tag: 1.7.61
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.61 =
+* Fixed: as a follow-up to a first-ever automated `PHPCS`/`WordPress-Coding-Standards` security pass over the theme, found that five translator comments added in 1.7.59 (`search.php`, `content-none.php`, `content.php`, `content-blog.php`, `content-post.php`) were positioned one level too high -- above the outer `printf()`/`sprintf()`/`the_content()` call rather than immediately above the actual `__()`/`esc_html__()` line containing the placeholder, which sits nested inside a `wp_kses()` call. WordPress's i18n tooling requires the comment on the line directly preceding the translation function itself; the 1.7.59 fix modeled the *idea* of `footer.php`'s existing correct example but not its exact placement. All five moved to the correct position.
+* Fixed: `inc/class-recent-posts-widget.php` echoed `wp_trim_words( get_the_excerpt(), $excerpt_length, '...' )` with no escaping function. Unlike `the_excerpt()`, `wp_trim_words()` isn't on WordPress's list of inherently-safe echo functions. Wrapped in `esc_html()`, consistent with how this same widget already escapes its other dynamic output.
 
 = 1.7.60 =
 * Fixed: the ☰ and ✕ Unicode glyphs used by the mobile hamburger toggle and off-canvas close button weren't wrapped in `aria-hidden="true"`, unlike `searchform.php`'s search icon, which already correctly does this -- meaning a screen reader could announce the raw, unpredictable glyph character alongside (or instead of) the actual "Menu"/"Close menu" label text. Fixed in `header.php`'s initial markup for both buttons, and in `navigation.js`'s dynamic state-toggle text, which fully rewrites the hamburger button's content on every click -- fixing only the PHP template would have looked correct on page load and silently regressed the instant a visitor opened the menu once.

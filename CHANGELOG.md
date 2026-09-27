@@ -7,6 +7,17 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.61]
+
+### Fixed
+- a first-ever automated `PHPCS` pass with the `WordPress-Coding-Standards` ruleset (scoped to the security/i18n sniff categories -- `WordPress.Security.*`, `WordPress.DB.*`, `WordPress.WP.I18n`) surfaced two real findings, both now fixed:
+  - Five translator comments added in 1.7.59 (`search.php`, `content-none.php`, and the shared "Continue reading" more-link in `content.php`/`content-blog.php`/`content-post.php`) were positioned above the *outer* `printf()`/`sprintf()`/`the_content()` call rather than immediately above the actual `__()`/`esc_html__()` line, which in each case sits nested one level deeper inside a `wp_kses()` call. WordPress's i18n tooling (and `wp i18n make-pot`) specifically requires the comment on the line directly preceding the gettext function call itself -- the 1.7.59 fix followed `footer.php`'s existing correct example in spirit but not in exact placement. All five corrected.
+  - `inc/class-recent-posts-widget.php` echoed `wp_trim_words( get_the_excerpt(), $excerpt_length, '...' )` with no escaping function. `wp_trim_words()` is not on WordPress's list of inherently-safe-to-echo functions (unlike `the_excerpt()`), so this is now wrapped in `esc_html()`, matching how this widget already escapes its other dynamic output (`esc_html( get_the_author() )`, `esc_html( $title )`, etc.).
+
+### Notes
+- The same PHPCS pass also flagged `$args['before_widget']`, `$args['before_title']`, `$args['after_title']`, and `$args['after_widget']` in this widget's `widget()` method as "unescaped output." These are **confirmed false positives, deliberately left as-is**: these values come directly from this theme's own hardcoded `register_sidebar()` call in `functions.php` (`'<section id="%1$s" class="widget %2$s">'`, `'<h2 class="widget-title">'`, etc.) -- theme-author-controlled markup, not user input or database content. This is a well-documented, expected false-positive pattern for this specific WPCS sniff across the WordPress ecosystem; escaping already-trusted, hardcoded framework markup would be theater, not a security improvement.
+- The full, unscoped `WordPress` PHPCS standard (which also includes `WordPress-Core` and `WordPress-Docs`, covering formatting/whitespace/docblock conventions) was run first and produced thousands of purely cosmetic findings, the large majority auto-fixable. Those were not pursued in this release -- they're a style-consistency exercise, not a security or correctness one, and out of scope for what this pass was for.
+
 ## [1.7.60]
 
 ### Fixed
