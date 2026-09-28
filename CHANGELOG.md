@@ -7,6 +7,14 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.62]
+
+### Changed
+- `Tested up to` (`readme.txt`) bumped from `6.6` to `7.1` -- WordPress's current stable major ("Mary Lou," released August 19, 2026; the theme's previous claim was three majors behind: 6.6 → 6.8 → 7.0 → 7.1). `Requires at least: 5.0` is unchanged.
+
+### Notes
+- This is a declared compatibility claim based on the theme using no deprecated or version-gated WordPress APIs, confirmed across the code-level review already completed this cycle (v1.7.51–v1.7.61) -- not the result of a literal install-and-click-through QA pass on a live WordPress 7.1 site, which this environment has no way to run. Worth a real manual smoke-test on an actual WordPress 7.1 install before relying on this claim for a production launch.
+
 ## [1.7.61]
 
 ### Fixed

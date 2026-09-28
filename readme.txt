@@ -2,8 +2,8 @@
 Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
-Tested up to: 6.6
-Stable tag: 1.7.61
+Tested up to: 7.1
+Stable tag: 1.7.62
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.62 =
+* Changed: `Tested up to` bumped from `6.6` to `7.1` (WordPress's current stable major, "Mary Lou," released August 19, 2026). The theme uses no deprecated or version-specific WordPress APIs, so this reflects confidence based on the code review already completed across this whole audit cycle -- it is a declared compatibility claim, not a literal QA pass on a live WordPress 7.1 install. `Requires at least: 5.0` is unchanged; nothing about the minimum supported version has changed.
 
 = 1.7.61 =
 * Fixed: as a follow-up to a first-ever automated `PHPCS`/`WordPress-Coding-Standards` security pass over the theme, found that five translator comments added in 1.7.59 (`search.php`, `content-none.php`, `content.php`, `content-blog.php`, `content-post.php`) were positioned one level too high -- above the outer `printf()`/`sprintf()`/`the_content()` call rather than immediately above the actual `__()`/`esc_html__()` line containing the placeholder, which sits nested inside a `wp_kses()` call. WordPress's i18n tooling requires the comment on the line directly preceding the translation function itself; the 1.7.59 fix modeled the *idea* of `footer.php`'s existing correct example but not its exact placement. All five moved to the correct position.
