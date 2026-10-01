@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.62
+Stable tag: 1.7.63
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,13 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.63 =
+* Added: a real jsdom-based behavior test harness for `navigation.js` (not shipped with the theme; a development-side verification tool) -- the first time this file's actual DOM/keyboard behavior has been exercised rather than just syntax-checked. It immediately surfaced a genuine, if previously invisible, issue below.
+* Fixed: `navigation.js` used `element.querySelector('> a')` (a bare-combinator selector) in four places. All mainstream browsers accept this leniently as shorthand for `:scope > a`, but it isn't spec-compliant, and a stricter selector engine throws on it -- which is exactly what the new test harness did. Critically, that throw was uncaught and silently aborted the rest of `toggleMenu()` mid-execution, meaning focus-on-open and the entire keyboard focus trap (added in 1.7.57) would never attach in such an environment, with no visible error. Not a bug in any current mainstream browser, but a real fragility now closed by using the explicit, universally-supported `:scope > a` form.
+* Fixed (audit, Optional): scrollbar width in the mobile menu was cached on first computation and never recalculated, so a genuine width change between menu opens (e.g. a responsive layout shift) would silently keep using the stale value. The calculation is cheap enough that caching bought nothing real; it's now computed fresh on every open.
+* Fixed (audit, Optional): the submenu click handler called `window.matchMedia('(max-width: 768px)')` fresh on every click instead of reusing the module-scoped `isMobile` MediaQueryList already created at load time. Now reuses it.
+* With the new test harness, this release also serves as the first actual behavioral confirmation that the 1.7.57 keyboard focus trap works correctly (Tab/Shift+Tab wrap at the panel boundaries, mid-panel Tab is untouched, the trap detaches cleanly on close) -- previously only confirmed via `node -c` syntax validation.
 
 = 1.7.62 =
 * Changed: `Tested up to` bumped from `6.6` to `7.1` (WordPress's current stable major, "Mary Lou," released August 19, 2026). The theme uses no deprecated or version-specific WordPress APIs, so this reflects confidence based on the code review already completed across this whole audit cycle -- it is a declared compatibility claim, not a literal QA pass on a live WordPress 7.1 install. `Requires at least: 5.0` is unchanged; nothing about the minimum supported version has changed.

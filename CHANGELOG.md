@@ -7,6 +7,20 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.63]
+
+### Added
+- a real jsdom-based behavior test harness for `navigation.js` (development-side tooling, not shipped with the theme). This is the first time this file's actual DOM/keyboard behavior has been exercised end-to-end rather than only syntax-checked via `node -c`. It immediately surfaced a genuine issue (below), and also serves as the first real behavioral confirmation that the 1.7.57 keyboard focus trap actually works as intended -- Tab and Shift+Tab correctly wrap at the panel's first/last focusable elements, a Tab press in the middle of the panel is left untouched, and the trap listener detaches cleanly the moment the panel closes.
+
+### Fixed
+- `navigation.js` used the bare-combinator selector `element.querySelector('> a')` in four places (`resetMobileDropdowns()`, both branches of the dropdown-reset loop in `toggleMenu()`, and the sibling-closing loop in the submenu click handler). Every mainstream browser leniently treats this as shorthand for `:scope > a`, but it is not spec-compliant selector syntax, and a stricter selector engine throws a `SyntaxError` on it -- exactly what the new test harness's jsdom environment did. Critically, that exception was uncaught and silently aborted the rest of `toggleMenu()`'s execution at the point of the throw, which meant `closeBtn.focus()` and the `document.addEventListener('keydown', trapFocus)` call that come after it in the same function would never run -- in such an environment, the mobile menu would still visually open, but focus-on-open and the entire keyboard focus trap would silently never activate, with no visible error anywhere. Not a live bug in any current mainstream browser, but a real, previously invisible fragility. Fixed by using the explicit, universally-supported `:scope > a` form in all four places.
+- (audit finding, Optional) scrollbar width in the mobile off-canvas menu was computed once and cached in a module-level variable that was never invalidated, so a genuine scrollbar-width change between menu opens (e.g. a responsive layout shift altering whether a vertical scrollbar is present) would silently keep using the first-computed value on every subsequent open. The underlying calculation (`window.innerWidth - document.documentElement.clientWidth`) is cheap enough that caching provided no real benefit while introducing this staleness risk; it is now recomputed fresh on every open, which also removes seven lines of now-unnecessary caching logic.
+- (audit finding, Optional) the submenu click handler called `window.matchMedia('(max-width: 768px)')` fresh on every click to check for a mobile-width viewport, creating a redundant `MediaQueryList` object identical to the one the module already keeps at the top of the file (`isMobile`). Now reuses `isMobile.matches` directly.
+
+### Notes
+- All three fixes live entirely in `assets/js/navigation.js`; no PHP, CSS, or markup was touched. Verified via the new test harness (20 assertions covering menu open/close, focus management, the keyboard trap in both directions, submenu toggling, and both of the two Optional-item fixes specifically) plus the standard `node -c` syntax check.
+- Closes 2 of the 6 remaining "Optional" audit items (scrollbar-width caching and the redundant `matchMedia()` call). 4 Optional items remain, none in `navigation.js`.
+
 ## [1.7.62]
 
 ### Changed

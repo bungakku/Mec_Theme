@@ -23,12 +23,15 @@
 
         if (!menuToggle || !navigation || !mobilePanel) return;
 
-        var cachedScrollbarWidth = null;
+        // Fixed (audit Optional item): this was previously cached in a
+        // module-level variable and never invalidated, so a scrollbar width
+        // that changed between menu opens (e.g. a responsive layout shift)
+        // would silently keep using the first-computed value. The
+        // calculation itself is cheap enough that caching bought nothing
+        // real; computing it fresh on every open removes the staleness
+        // risk entirely.
         function getScrollbarWidth() {
-            if (cachedScrollbarWidth === null) {
-                cachedScrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-            }
-            return cachedScrollbarWidth;
+            return window.innerWidth - document.documentElement.clientWidth;
         }
 
         // Fixed in 1.7.57 (audit finding, Recommended #11): the off-canvas
@@ -81,7 +84,7 @@
                 }
                 document.querySelectorAll('.main-navigation li.menu-item-has-children').forEach(function(item) {
                     item.classList.remove('toggled');
-                    const parentLink = item.querySelector('> a');
+                    const parentLink = item.querySelector(':scope > a');
                     if (parentLink) parentLink.setAttribute('aria-expanded', 'false');
                 });
                 if (closeBtn) closeBtn.focus();
@@ -92,7 +95,7 @@
                 document.body.style.paddingRight = '';
                 document.querySelectorAll('.main-navigation li.menu-item-has-children.toggled').forEach(function(item) {
                     item.classList.remove('toggled');
-                    const parentLink = item.querySelector('> a');
+                    const parentLink = item.querySelector(':scope > a');
                     if (parentLink) parentLink.setAttribute('aria-expanded', 'false');
                 });
                 menuToggle.focus();
@@ -130,7 +133,7 @@
             const parentLi = link.closest('li');
             if (!parentLi || !parentLi.classList.contains('menu-item-has-children')) return;
 
-            if (window.matchMedia('(max-width: 768px)').matches) {
+            if (isMobile.matches) {
                 e.preventDefault();
                 e.stopPropagation();
 
@@ -142,7 +145,7 @@
                 for (let sibling of siblings) {
                     if (sibling !== parentLi && sibling.classList.contains('toggled')) {
                         sibling.classList.remove('toggled');
-                        const siblingLink = sibling.querySelector('> a');
+                        const siblingLink = sibling.querySelector(':scope > a');
                         if (siblingLink) siblingLink.setAttribute('aria-expanded', 'false');
                     }
                 }
@@ -152,7 +155,7 @@
         function resetMobileDropdowns() {
             document.querySelectorAll('.main-navigation li.menu-item-has-children').forEach(function(item) {
                 item.classList.remove('toggled');
-                const parentLink = item.querySelector('> a');
+                const parentLink = item.querySelector(':scope > a');
                 if (parentLink) parentLink.setAttribute('aria-expanded', 'false');
             });
         }
