@@ -9,8 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     <?php if ( mec_theme_should_show_title() ) : ?>
-    <header class="entry-header entry-header--align-<?php echo esc_attr( mec_theme_get_title_align() ); ?>">
-        <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+    <header class="entry-header">
+        <?php the_title( '<h1 class="entry-title entry-title--align-' . esc_attr( mec_theme_get_title_align() ) . '">', '</h1>' ); ?>
     </header><!-- .entry-header -->
     <?php endif; ?>
 

@@ -7,6 +7,15 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.64]
+
+### Fixed
+- (audit finding, Optional) `template-parts/content-page.php` applied its title-alignment class to the `.entry-header` wrapper (`entry-header--align-{left|center|right}`), unlike the other three content templates (`content.php`, `content-blog.php`, `content-post.php`), which all apply `entry-title--align-{left|center|right}` directly to the title element itself. `style.css` defines both class families with the identical `text-align` rule, and `.entry-header` here wraps only the title, so this was invisible in practice -- a pure consistency fix, not a behavior change. `content-page.php` now follows the same pattern as the other three templates.
+
+### Notes
+- `.entry-header--align-{left|center|right}` in `style.css` is now unreferenced by any template (it was only ever used here). Left in place rather than removed -- harmless to keep, and removing it wasn't part of this finding.
+- Closes 3 of 6 remaining "Optional" audit items (this one, plus the two `navigation.js` fixes in 1.7.63). 3 remain: `title-settings.php` nonce/revision edge cases, missing Customizer `validate_callback`s on email/URL fields, and the redundant `screen-reader-text` span in `.mobile-menu-close`.
+
 ## [1.7.63]
 
 ### Added

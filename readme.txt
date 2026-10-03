@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.63
+Stable tag: 1.7.64
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.64 =
+* Fixed (audit finding, Optional): `template-parts/content-page.php` applied its title-alignment class (`entry-header--align-{left|center|right}`) to the `.entry-header` wrapper, unlike the other three content templates (`content.php`, `content-blog.php`, `content-post.php`), which all apply `entry-title--align-{left|center|right}` directly to the title element itself. Since both class families carry the identical `text-align` rule in style.css and `.entry-header` here contains only the title, this produced no visible difference -- purely a consistency fix. `content-page.php` now matches the other three templates' pattern.
 
 = 1.7.63 =
 * Added: a real jsdom-based behavior test harness for `navigation.js` (not shipped with the theme; a development-side verification tool) -- the first time this file's actual DOM/keyboard behavior has been exercised rather than just syntax-checked. It immediately surfaced a genuine, if previously invisible, issue below.
