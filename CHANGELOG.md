@@ -7,10 +7,20 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
-## [1.7.65]
+## [1.7.66]
 
 ### Fixed
-- (audit finding, Optional) `inc/title-settings.php`: `mec_theme_save_title_settings_meta_box()` ran on `save_post` for revisions as well as real posts. WordPress fires `save_post` for the revision it creates on every manual save, with `$_POST` (and a valid nonce) still present, so the "Hide title" and "Title alignment" meta was also being written onto each revision -- two unused meta rows per save. Revisions are now skipped via `wp_is_post_revision()`.
+- `languages/mec_theme.pot` was an invalid gettext catalog: "Left", "Center" and "Right" were each defined twice (once for `inc/customizer/layout-panel.php`, again for `inc/title-settings.php`, added in 1.7.27), and `msgfmt --check` rejected the file with three fatal "duplicate message definition" errors. Found by running `msgfmt` for the first time against the catalog now that gettext is available in the dev sandbox. The `title-settings.php` references are merged into the existing three entries and the duplicates removed; the file now passes `msgfmt --check`.
+- the `inc/title-settings.php` line references in the same catalog had drifted (24/48/52/54/55/56/60 in the real source vs. 25/39/42/45/46/47/51 recorded). Corrected.
+
+### Notes
+- Correction to 1.7.65's notes: its "revision meta rows" root cause was wrong. Verified on a real WordPress 7.1 install (old vs. new handler, direct `wp_postmeta` query): zero `_mec_theme_*` rows ever existed on revisions, because core's `update_post_meta()` redirects revision IDs to the parent. The 1.7.65 guard is harmless and removes a redundant second write per save, but it fixed no stray data. The 1.7.65 entries in this file, `readme.txt`, and the code comment are corrected accordingly.
+- Unique translatable strings: 278 -> 275 (the three removed entries were duplicates of existing msgids, not strings dropped from the theme). No PHP, CSS, JS, or markup was touched.
+
+## [1.7.65]
+
+### Changed
+- (audit finding, Optional) `inc/title-settings.php`: `mec_theme_save_title_settings_meta_box()` now returns early for revisions via `wp_is_post_revision()`. WordPress fires `save_post` for the revision it creates on every manual save, with `$_POST` (and a valid nonce) still present, so the handler ran a second, redundant time per save. *(Correction, see 1.7.66: the original 1.7.65 notes said meta was also being written onto revisions. It was not -- `update_post_meta()` redirects revision IDs to the parent post -- so the real effect was a redundant duplicate write to the parent, not stray revision meta rows.)*
 - the same function passed `$_POST['mec_theme_title_settings_nonce']` to `wp_verify_nonce()` without `wp_unslash()`/`sanitize_text_field()`. Now sanitized, matching WordPress core practice.
 
 ### Notes

@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.65
+Stable tag: 1.7.66
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -60,8 +60,11 @@ Yes, the theme includes aria-expanded states for mobile menu and submenu toggles
 
 == Changelog ==
 
+= 1.7.66 =
+* Fixed: `languages/mec_theme.pot` was an invalid gettext catalog -- "Left", "Center" and "Right" were each defined twice (once for `layout-panel.php`, once for `title-settings.php`, added in 1.7.27), and `msgfmt --check` rejected it with three fatal "duplicate message definition" errors. The duplicates are merged into the existing entries and the catalog now passes `msgfmt --check`. Also corrected drifted `title-settings.php` line references. Unique string count 278 -> 275 (duplicates removed, no string dropped from the theme). Also corrects 1.7.65's notes: no meta was ever stored on revisions (core's `update_post_meta()` redirects revision IDs to the parent), verified on a real WordPress 7.1 install. No PHP, CSS, JS, or markup was touched.
+
 = 1.7.65 =
-* Fixed (audit, Optional): `inc/title-settings.php` saved its "Hide title"/"Title alignment" meta onto post revisions as well as the real post, because `save_post` fires for the revision WordPress creates on every manual save. Revisions are now skipped via `wp_is_post_revision()`.
+* Changed (audit, Optional): `inc/title-settings.php`'s save handler now returns early for post revisions via `wp_is_post_revision()`. WordPress fires `save_post` for the revision it creates on every manual save, so the handler ran a second, redundant time per save. (Correction, see 1.7.66: the original notes said meta was also written onto revisions; it was not -- `update_post_meta()` redirects revision IDs to the parent post -- so this removes a redundant duplicate write, nothing more.)
 * Fixed: the same handler passed its nonce to `wp_verify_nonce()` without `wp_unslash()`/`sanitize_text_field()`. Now sanitized, matching WordPress core practice. Live-post behavior is unchanged.
 
 = 1.7.64 =

@@ -65,11 +65,13 @@ function mec_theme_render_title_settings_meta_box( $post ) {
 /**
  * Save the meta box fields, with full nonce/capability/sanitization checks.
  *
- * Fixed in 1.7.65: save_post also fires for the revision WordPress creates
- * on every manual save, with $_POST (and so a valid nonce) still present --
- * the handler was writing its meta onto the revision as well as the real
- * post. Revisions are now skipped. The nonce is also now unslashed and
- * sanitized before wp_verify_nonce(), matching WordPress core practice.
+ * Changed in 1.7.65: save_post also fires for the revision WordPress creates
+ * on every manual save, with $_POST (and so a valid nonce) still present.
+ * update_post_meta() redirects a revision ID to its parent post, so no meta
+ * was ever stored on revisions -- but the handler still ran a second,
+ * redundant time per save, rewriting the parent's meta with identical values.
+ * Revisions are now skipped, per standard WordPress practice. The nonce is
+ * also unslashed and sanitized before wp_verify_nonce().
  */
 function mec_theme_save_title_settings_meta_box( $post_id ) {
     if ( wp_is_post_revision( $post_id ) ) {
