@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.64
+Stable tag: 1.7.65
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.65 =
+* Fixed (audit, Optional): `inc/title-settings.php` saved its "Hide title"/"Title alignment" meta onto post revisions as well as the real post, because `save_post` fires for the revision WordPress creates on every manual save. Revisions are now skipped via `wp_is_post_revision()`.
+* Fixed: the same handler passed its nonce to `wp_verify_nonce()` without `wp_unslash()`/`sanitize_text_field()`. Now sanitized, matching WordPress core practice. Live-post behavior is unchanged.
 
 = 1.7.64 =
 * Fixed (audit finding, Optional): `template-parts/content-page.php` applied its title-alignment class (`entry-header--align-{left|center|right}`) to the `.entry-header` wrapper, unlike the other three content templates (`content.php`, `content-blog.php`, `content-post.php`), which all apply `entry-title--align-{left|center|right}` directly to the title element itself. Since both class families carry the identical `text-align` rule in style.css and `.entry-header` here contains only the title, this produced no visible difference -- purely a consistency fix. `content-page.php` now matches the other three templates' pattern.

@@ -7,6 +7,15 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.65]
+
+### Fixed
+- (audit finding, Optional) `inc/title-settings.php`: `mec_theme_save_title_settings_meta_box()` ran on `save_post` for revisions as well as real posts. WordPress fires `save_post` for the revision it creates on every manual save, with `$_POST` (and a valid nonce) still present, so the "Hide title" and "Title alignment" meta was also being written onto each revision -- two unused meta rows per save. Revisions are now skipped via `wp_is_post_revision()`.
+- the same function passed `$_POST['mec_theme_title_settings_nonce']` to `wp_verify_nonce()` without `wp_unslash()`/`sanitize_text_field()`. Now sanitized, matching WordPress core practice.
+
+### Notes
+- Live-post behavior is unchanged. Closes 1 of 3 remaining "Optional" audit items; 2 remain (Customizer `validate_callback`s, redundant `screen-reader-text` span in `.mobile-menu-close`).
+
 ## [1.7.64]
 
 ### Fixed
