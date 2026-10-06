@@ -2,13 +2,14 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MEC_Theme 1.7.66\n"
+"Project-Id-Version: MEC_Theme 1.7.67\n"
 "Report-Msgid-Bugs-To: https://github.com/bungakku/Mec_Theme/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "POT-Creation-Date: 2026-09-28 06:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: manually generated\n"
@@ -32,6 +33,28 @@ msgstr ""
 #: index.php:48
 #: search.php:52
 msgid "Next"
+msgstr ""
+
+#: comments.php:31
+msgid "%s Comment"
+msgid_plural "%s Comments"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:48
+msgid "Comments Navigation"
+msgstr ""
+
+#: comments.php:49
+msgid "Older Comments"
+msgstr ""
+
+#: comments.php:50
+msgid "Newer Comments"
+msgstr ""
+
+#: comments.php:55
+msgid "Comments are closed."
 msgstr ""
 
 #: footer.php:81

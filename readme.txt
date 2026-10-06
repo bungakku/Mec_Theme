@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.66
+Stable tag: 1.7.67
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,12 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.67 =
+* Added: `comments.php`. `single.php` and `page.php` have always called `comments_template()`, but the theme shipped no `comments.php`, so WordPress logged "Theme without comments.php is deprecated since version 3.0.0" (visible with `WP_DEBUG` on) and fell back to its own unstyled legacy template. The new template uses only native comment APIs: a "N Comment(s)" heading, threaded `wp_list_comments()` with avatars, Older/Newer Comments navigation (`previous_comments_link()`/`next_comments_link()`, not `the_comments_navigation()`, which needs WordPress 5.3 while the theme still declares `Requires at least: 5.0`), a "Comments are closed." notice, and `comment_form()`. Password-protected posts return early, so comments stay hidden.
+* Added: a "Comments" section in `style.css` using the theme's existing `--mec-*` variables and spacing scale, including a reset so the theme's global `article` card styling doesn't also hit each `<article class="comment-body">`.
+* Added: 5 translatable strings to `languages/mec_theme.pot` (including a real plural pair), plus a valid `Plural-Forms` header default so `msgfmt --check` still passes. Unique string count 275 -> 280.
+* Verified on WordPress 7.1 with `WP_DEBUG` on across open/closed/password-protected/empty comment states and comment pagination; no PHP warnings, notices, or deprecations. Visual rendering in a real browser was not checked.
 
 = 1.7.66 =
 * Fixed: `languages/mec_theme.pot` was an invalid gettext catalog -- "Left", "Center" and "Right" were each defined twice (once for `layout-panel.php`, once for `title-settings.php`, added in 1.7.27), and `msgfmt --check` rejected it with three fatal "duplicate message definition" errors. The duplicates are merged into the existing entries and the catalog now passes `msgfmt --check`. Also corrected drifted `title-settings.php` line references. Unique string count 278 -> 275 (duplicates removed, no string dropped from the theme). Also corrects 1.7.65's notes: no meta was ever stored on revisions (core's `update_post_meta()` redirects revision IDs to the parent), verified on a real WordPress 7.1 install. No PHP, CSS, JS, or markup was touched.

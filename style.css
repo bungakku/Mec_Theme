@@ -4,7 +4,7 @@ Theme URI: https://github.com/bungakku/Mec_Theme
 Author: Biswajit Thokchom
 Author URI: https://github.com/bungakku
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.66
+Version: 1.7.67
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1400,6 +1400,182 @@ article {
     background: var(--mec-primary-color);
     color: #fff;
     border-color: var(--mec-primary-color);
+}
+
+/* ===== Comments ===== */
+/*
+ * Added in 1.7.67 alongside comments.php. The theme's global `article` rule
+ * (card padding, bottom margin, box-shadow) also matches the <article
+ * class="comment-body"> WordPress emits for each comment under html5
+ * 'comment-list' support, so .comment-body below explicitly resets those
+ * properties -- a class selector outranks the bare `article` element rule,
+ * at every breakpoint, without needing !important.
+ */
+.comments-area {
+    margin-top: var(--mec-space-xl);
+    padding: var(--mec-space-lg);
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.comments-title,
+.comment-reply-title {
+    font-size: 1.4rem;
+    color: var(--mec-heading-color);
+    margin-bottom: var(--mec-space-md);
+    line-height: 1.3;
+}
+
+.comment-list,
+.comment-list .children {
+    list-style: none;
+}
+
+.comment-list .children {
+    margin-left: var(--mec-space-md);
+}
+
+.comment-list .comment-body {
+    margin: 0;
+    padding: var(--mec-space-md) 0;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.comment-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--mec-space-xs) var(--mec-space-sm);
+    margin-bottom: var(--mec-space-xs);
+    font-size: 0.9rem;
+}
+
+.comment-author {
+    display: flex;
+    align-items: center;
+    gap: var(--mec-space-sm);
+    font-weight: 600;
+}
+
+.comment-author .avatar {
+    border-radius: 50%;
+}
+
+/* WordPress emits a visible "says:" after the author name; hidden here, as in core's default themes. */
+.comment-author .says {
+    display: none;
+}
+
+.comment-metadata {
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.comment-metadata a,
+.reply a,
+.comment-content a {
+    color: var(--mec-primary-color);
+    text-decoration: none;
+}
+
+.comment-metadata a:hover,
+.reply a:hover,
+.comment-content a:hover {
+    text-decoration: underline;
+}
+
+.comment-content p {
+    margin-bottom: var(--mec-space-sm);
+}
+
+.reply {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.comment-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--mec-space-md);
+    margin: var(--mec-space-md) 0;
+}
+
+.no-comments {
+    margin: var(--mec-space-md) 0;
+    color: #666;
+}
+
+.comment-respond {
+    margin-top: var(--mec-space-lg);
+}
+
+.comment-form label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.comment-form .comment-form-cookies-consent label {
+    display: inline;
+    font-weight: 400;
+}
+
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form input[type="url"],
+.comment-form textarea {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--mec-border-color);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 16px;
+}
+
+.comment-form input[type="text"]:focus,
+.comment-form input[type="email"]:focus,
+.comment-form input[type="url"]:focus,
+.comment-form textarea:focus {
+    border-color: var(--mec-primary-color);
+    outline: 1px solid var(--mec-primary-color);
+}
+
+.comment-form p {
+    margin-bottom: var(--mec-space-sm);
+}
+
+.comment-form .submit {
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 4px;
+    background: var(--mec-primary-color);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.comment-form .submit:hover,
+.comment-form .submit:focus-visible {
+    opacity: 0.85;
+}
+
+@media (max-width: 768px) {
+    .comments-area {
+        margin-top: var(--mec-space-md);
+        padding: var(--mec-space-md);
+    }
+
+    .comment-list .children {
+        margin-left: var(--mec-space-sm);
+    }
 }
 
 /* ===== Sidebar Widgets ===== */

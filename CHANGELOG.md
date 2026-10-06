@@ -7,6 +7,17 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.67]
+
+### Added
+- `comments.php`. `single.php` and `page.php` have always called `comments_template()`, but the theme shipped no `comments.php`, so WordPress logged "Theme without comments.php is deprecated since version 3.0.0" (visible with `WP_DEBUG` on, found while smoke-testing the theme on a real WordPress 7.1 install) and fell back to its own legacy template, which is unstyled and ignores the theme's markup conventions. The new template uses only native comment APIs: a "N Comment(s)" heading, `wp_list_comments()` in an `<ol class="comment-list">` with threaded replies and 48px avatars, Older/Newer Comments navigation (via `previous_comments_link()`/`next_comments_link()`, not `the_comments_navigation()`, since that was added in WordPress 5.3 and the theme still declares `Requires at least: 5.0`), a "Comments are closed." notice, and `comment_form()`. Password-protected posts return early, so comments stay hidden behind the password.
+- a "Comments" section in `style.css`, using the theme's existing `--mec-*` variables and spacing scale: card styling matching posts/widgets, threaded indent, form fields (16px font-size so iOS Safari doesn't auto-zoom on focus), a primary-color submit button, and a smaller mobile layout. The theme's global `article` rule (card padding, 48px bottom margin, box-shadow) would also have matched the `<article class="comment-body">` WordPress emits for every comment, so `.comment-list .comment-body` explicitly resets those properties.
+- 5 translatable strings in `languages/mec_theme.pot` ("%s Comment"/"%s Comments" as a real plural pair, "Comments Navigation", "Older Comments", "Newer Comments", "Comments are closed."). The catalog header gains a valid `Plural-Forms: nplurals=2; plural=(n != 1);` default, required by `msgfmt` once the file contains a plural entry. Unique string count 275 -> 280.
+
+### Notes
+- Verified on WordPress 7.1 with `WP_DEBUG` on: open post with threaded comments, comment pagination (both directions), closed comments (existing comments shown, form hidden, notice shown), password-protected post (no comments rendered, none leaked), zero-comment post and page (form only), singular vs. plural heading, and a page through `page.php`. No PHP warnings, notices, or deprecations; the "Theme without comments.php" notice is gone. Not verified: visual rendering in a real browser (this sandbox has none) -- worth a quick look at a post with comments on mobile and desktop.
+- Sites that already receive comments will see the new styling immediately after updating; no settings or stored data change.
+
 ## [1.7.66]
 
 ### Fixed
