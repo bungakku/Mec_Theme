@@ -7,6 +7,15 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.69]
+
+### Fixed
+- `languages/mec_theme.pot`: the `#:` file:line references were regenerated from the source. A scripted audit in 1.7.68 found 278 of 343 references were off (most by one line since the `@version` docblock lines were removed in 1.7.27, far more in the Customizer panel files), which made translators' "where is this string used" hints unreliable. This release extracts every string position with `xgettext` (GNU gettext 0.21, with the WordPress gettext keywords) and rewrites only the `#:` lines of the existing catalog -- entry order, `msgid`/`msgid_plural` text, header, and formatting are untouched apart from the `POT-Creation-Date` and `Project-Id-Version` header fields.
+
+### Notes
+- Verified before rewriting: `xgettext` and the existing catalog contain the identical 280 unique strings and the identical 343 references by file; the only difference was line numbers, in 234 entries. After rewriting, every entry's reference set equals `xgettext`'s output, and `msgfmt --check` passes. No PHP, CSS, JS, or markup was touched.
+- This closes the translator-hint drift for good only until the next edit that shifts lines in a file with translatable strings; regenerating again is cheap (xgettext + a rewrite script) and could be added to the release checklist.
+
 ## [1.7.68]
 
 ### Fixed

@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.68
+Stable tag: 1.7.69
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.69 =
+* Fixed: `languages/mec_theme.pot`'s `#:` file:line references were regenerated from the source. A scripted audit in 1.7.68 found 278 of 343 were off (mostly by one line since 1.7.27's `@version` docblock removal, much more in the Customizer panel files), so translators' "where is this used" hints were unreliable. Positions are now extracted with `xgettext` and only the `#:` lines of the existing catalog are rewritten -- the string list, order, and formatting are unchanged (identical 280 unique strings and 343 references by file before and after; only line numbers differed).
+* No PHP, CSS, JS, or markup changes. `msgfmt --check` passes.
 
 = 1.7.68 =
 * Fixed (audit, Optional): `header.php`'s `.mobile-menu-close` button had both an `aria-label` ("Close menu") and a visually-hidden `<span class="screen-reader-text">` with identical text. The accessible name comes from `aria-label` and takes precedence over content, so the span was never read. Removed it; the button keeps its `aria-label` and the `aria-hidden` glyph. Nothing in `navigation.js` depended on the span.
