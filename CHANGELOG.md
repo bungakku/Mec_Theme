@@ -7,6 +7,17 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.68]
+
+### Fixed
+- (audit finding, Optional) `header.php`: the `.mobile-menu-close` button carried both an `aria-label` ("Close menu") and a visually-hidden `<span class="screen-reader-text">` with the identical text. The accessible name comes from `aria-label` and takes precedence over the button's content, so the span was never read -- pure redundancy, plus a duplicate translatable-string occurrence. Removed; the button keeps its `aria-label` and the `aria-hidden` glyph. `navigation.js` only references the button's class, not the span, so nothing else depends on it. The ✕ glyph now sits alone in the button, so it centers fractionally more precisely (the old markup left a trailing space beside the glyph).
+- `languages/mec_theme.pot`: every `header.php` line reference had drifted (e.g. Facebook/Twitter/Instagram/LinkedIn/YouTube aria-labels recorded at 110/120/130/140/150, actually 114/124/134/144/154; "Menu" at 192, actually 186). Corrected, "Close menu" now has its single remaining reference (190), and "Primary Menu" gained its `header.php:184` reference, missing since the 1.7.53 `aria-label` was added.
+
+### Notes
+- Closes 1 of 2 remaining "Optional" audit items; 1 remains (Customizer `validate_callback`s on the email/URL fields).
+- Found while correcting the `header.php` references: a scripted check of every `#:` reference in the `.pot` against the source shows 278 of 343 are off, mostly by one line (the 1.7.27 `@version` docblock removal shifted most files by one), and by much more in the Customizer panel files. Strings themselves are all present and `msgfmt --check` passes -- this only affects translators' "where is this used" hints. Not fixed here; candidate for its own release.
+- Verified on WordPress 7.1 with `WP_DEBUG` on: rendered markup is `<button class="mobile-menu-close" aria-label="Close menu"><span aria-hidden="true">✕</span></button>`; front page, post, page, search and 404 produce no PHP warnings, notices, or deprecations. Not verified in a real browser or with a screen reader.
+
 ## [1.7.67]
 
 ### Added

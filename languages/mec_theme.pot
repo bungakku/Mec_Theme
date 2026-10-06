@@ -2,7 +2,7 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MEC_Theme 1.7.67\n"
+"Project-Id-Version: MEC_Theme 1.7.68\n"
 "Report-Msgid-Bugs-To: https://github.com/bungakku/Mec_Theme/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -100,6 +100,7 @@ msgid "Huge"
 msgstr ""
 
 #: functions.php:120
+#: header.php:184
 msgid "Primary Menu"
 msgstr ""
 
@@ -121,7 +122,7 @@ msgid "Add widgets for footer column %d."
 msgstr ""
 
 #: functions.php:182
-#: header.php:192
+#: header.php:186
 msgid "Menu"
 msgstr ""
 
@@ -161,32 +162,31 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: header.php:110
+#: header.php:114
 msgid "Visit our Facebook page"
 msgstr ""
 
-#: header.php:120
+#: header.php:124
 msgid "Visit our Twitter page"
 msgstr ""
 
-#: header.php:130
+#: header.php:134
 msgid "Visit our Instagram page"
 msgstr ""
 
-#: header.php:140
+#: header.php:144
 msgid "Visit our LinkedIn page"
 msgstr ""
 
-#: header.php:150
+#: header.php:154
 msgid "Visit our YouTube channel"
 msgstr ""
 
-#: header.php:175
+#: header.php:169
 msgid "Teacher/Student Login"
 msgstr ""
 
-#: header.php:196
-#: header.php:197
+#: header.php:190
 msgid "Close menu"
 msgstr ""
 

@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.67
+Stable tag: 1.7.68
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.68 =
+* Fixed (audit, Optional): `header.php`'s `.mobile-menu-close` button had both an `aria-label` ("Close menu") and a visually-hidden `<span class="screen-reader-text">` with identical text. The accessible name comes from `aria-label` and takes precedence over content, so the span was never read. Removed it; the button keeps its `aria-label` and the `aria-hidden` glyph. Nothing in `navigation.js` depended on the span.
+* Fixed: every `header.php` line reference in `languages/mec_theme.pot` had drifted; corrected, and "Primary Menu" gained its missing `header.php` reference. A scripted check found most other references in the catalog are off by a line or more (translator hints only; all strings present, `msgfmt --check` passes) -- left for a dedicated release.
+* Verified on WordPress 7.1 with `WP_DEBUG` on; no PHP warnings, notices, or deprecations. Not checked in a real browser or screen reader.
 
 = 1.7.67 =
 * Added: `comments.php`. `single.php` and `page.php` have always called `comments_template()`, but the theme shipped no `comments.php`, so WordPress logged "Theme without comments.php is deprecated since version 3.0.0" (visible with `WP_DEBUG` on) and fell back to its own unstyled legacy template. The new template uses only native comment APIs: a "N Comment(s)" heading, threaded `wp_list_comments()` with avatars, Older/Newer Comments navigation (`previous_comments_link()`/`next_comments_link()`, not `the_comments_navigation()`, which needs WordPress 5.3 while the theme still declares `Requires at least: 5.0`), a "Comments are closed." notice, and `comment_form()`. Password-protected posts return early, so comments stay hidden.

@@ -188,7 +188,7 @@ if ( function_exists( 'wp_body_open' ) ) {
 
                 <div class="mobile-menu-panel">
                     <button class="mobile-menu-close" aria-label="<?php esc_attr_e( 'Close menu', 'mec_theme' ); ?>">
-                        <span aria-hidden="true">✕</span> <span class="screen-reader-text"><?php esc_html_e( 'Close menu', 'mec_theme' ); ?></span>
+                        <span aria-hidden="true">✕</span>
                     </button>
                     <div class="mobile-search-form">
                         <?php get_search_form(); ?>
