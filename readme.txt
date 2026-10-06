@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.69
+Stable tag: 1.7.70
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,12 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.70 =
+* Added (audit, Optional): server-side validation for the Customizer's email and social URL fields (Customize > Contact & Social). An invalid entry now shows an inline error in the Customizer and cannot be published, instead of being silently altered at save time -- previously `not-an-email` was saved as an empty string, `a b@c.com` was rewritten to `ab@c.com`, `hello world` became the link `http://hello%20world`, and `mailto:`/`ftp://` were accepted as social URLs. The email must pass `is_email()`; a URL must start with `http://` or `https://`, contain no whitespace, and have a host containing a dot. Empty values stay valid. Already-saved values are not re-validated, so existing sites see no change until a field is edited.
+* Added: 2 translatable strings to `languages/mec_theme.pot` (280 -> 282 unique) and refreshed its line references.
+* Closes the last Optional audit item. Known issue found while testing, to be fixed in the next release: the "content width + sidebar width must not exceed 100%" check (since 1.6.6) is attached to a filter that isn't a real WordPress hook, so it has never run.
+* Verified with the Customizer manager on WordPress 7.1 with `WP_DEBUG` on; no PHP warnings, notices, or deprecations. Inline error display in a real browser Customizer was not checked.
 
 = 1.7.69 =
 * Fixed: `languages/mec_theme.pot`'s `#:` file:line references were regenerated from the source. A scripted audit in 1.7.68 found 278 of 343 were off (mostly by one line since 1.7.27's `@version` docblock removal, much more in the Customizer panel files), so translators' "where is this used" hints were unreliable. Positions are now extracted with `xgettext` and only the `#:` lines of the existing catalog are rewritten -- the string list, order, and formatting are unchanged (identical 280 unique strings and 343 references by file before and after; only line numbers differed).

@@ -109,6 +109,45 @@ function mec_theme_sanitize_color_transparent( $input ) {
     return sanitize_hex_color( $input );
 }
 
+/**
+ * Customizer validate_callback for the header email address.
+ *
+ * Added in 1.7.70. An empty value is allowed (header.php hides the email
+ * block when it is empty). Anything else must be a valid email address.
+ * Without this, sanitize_email() silently reduced an invalid entry to an
+ * empty string -- or quietly rewrote it ("a b@c.com" became "ab@c.com") --
+ * at save time, so the field just appeared not to save.
+ */
+function mec_theme_validate_email( $validity, $value ) {
+    $value = trim( (string) $value );
+    if ( '' !== $value && ! is_email( $value ) ) {
+        $validity->add( 'invalid_email', __( 'Please enter a valid email address.', 'mec_theme' ) );
+    }
+    return $validity;
+}
+
+/**
+ * Customizer validate_callback for the header social profile URLs.
+ *
+ * Added in 1.7.70. An empty value is allowed (the icon is simply not
+ * rendered). Anything else must be an http:// or https:// URL with a host
+ * containing a dot and no whitespace. Previously esc_url_raw() accepted
+ * almost anything: "hello world" was saved as "http://hello%20world", and
+ * mailto:/ftp: links were accepted as "social" URLs. Already-saved values
+ * are unaffected -- validation only runs when a value is changed.
+ */
+function mec_theme_validate_url( $validity, $value ) {
+    $value = trim( (string) $value );
+    if ( '' === $value ) {
+        return $validity;
+    }
+    $host = wp_parse_url( $value, PHP_URL_HOST );
+    if ( ! preg_match( '#^https?://#i', $value ) || preg_match( '/\s/', $value ) || empty( $host ) || false === strpos( $host, '.' ) ) {
+        $validity->add( 'invalid_url', __( 'Please enter a valid URL starting with http:// or https://.', 'mec_theme' ) );
+    }
+    return $validity;
+}
+
 function mec_theme_validate_layout_widths( $validity, $value, $setting ) {
     if ( ! in_array( $setting->id, array( 'mec_theme_content_width', 'mec_theme_sidebar_width' ), true ) ) {
         return $validity;

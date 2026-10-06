@@ -7,6 +7,19 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.70]
+
+### Added
+- (audit finding, Optional) server-side validation for the Customizer's email and social URL fields (Customize > Contact & Social). New `mec_theme_validate_email()` and `mec_theme_validate_url()` (`inc/customizer-sanitizers.php`, alongside every other validator/sanitizer) are wired in as `validate_callback` on `mec_theme_email` and the five social URL settings (Facebook, Twitter/X, Instagram, LinkedIn, YouTube). An invalid entry now shows an inline error in the Customizer and cannot be published, instead of being silently altered at save time. Empty values stay valid (the header already hides an empty email/icon). The email must pass `is_email()`; a URL must start with `http://` or `https://`, contain no whitespace, and have a host containing a dot.
+- 2 translatable strings in `languages/mec_theme.pot` ("Please enter a valid email address." / "Please enter a valid URL starting with http:// or https://."). Unique string count 280 -> 282. All `#:` references refreshed against the source (25 entries' line numbers shifted, all in `inc/customizer-sanitizers.php` and `inc/customizer/contact-social-panel.php`).
+
+### Notes
+- What this changes, measured on WordPress 7.1 against the 1.7.69 code with the Customizer's own `validate_setting_values()`: nothing was validated at all. `not-an-email` was saved as an empty string, `a b@c.com` was quietly rewritten to `ab@c.com`, `hello world` was saved as the link `http://hello%20world`, `https://` was saved as-is, and `mailto:`/`ftp://` links were accepted as "social" URLs. All of these are now rejected with a message; `facebook.com/page` (no scheme) is rejected too, with the message telling the user to include `http://` or `https://` (it previously saved silently as insecure `http://`).
+- Values already saved are not re-validated -- validation only runs when a value is changed -- so existing sites see no change until someone edits one of these fields. Default email (`info@yournonprofit.org`) and empty URLs pass.
+- Closes the last "Optional" audit item.
+- **Found while testing (not fixed here, own release next):** `mec_theme_validate_layout_widths()` -- the "content width + sidebar width must not exceed 100%" check, documented since 1.6.6 -- is attached via `add_filter( 'customize_validate_setting', ... )`, which is not a WordPress hook (core only fires `customize_validate_{$setting_id}`; confirmed by searching WordPress 7.1 core). The check has therefore never run: on the same test setup, content width 90 with sidebar width 22 (112%) is accepted. The 1.7.42 notes' explanation of why large content widths seemed to "reject" is likely wrong for the same reason -- a wrap in the flex layout is the more probable cause. Will be fixed and re-documented in a dedicated release.
+- Verified with the Customizer manager on WordPress 7.1 (`WP_DEBUG` on): 6 email cases, 12 social URL cases, all four other URL settings, and front-end pages (home, post with comments, comment page 2, closed/password-protected, page, search, category, 404, RSS) with 0 PHP warnings, notices, or deprecations. Not verified: the inline error rendering in a real browser Customizer UI.
+
 ## [1.7.69]
 
 ### Fixed

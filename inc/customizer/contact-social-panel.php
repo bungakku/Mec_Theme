@@ -103,6 +103,7 @@ function mec_theme_customize_contact_social( $wp_customize ) {
     $wp_customize->add_setting( 'mec_theme_email', array(
         'default'           => 'info@yournonprofit.org',
         'sanitize_callback' => 'sanitize_email',
+        'validate_callback' => 'mec_theme_validate_email',
         'transport'         => 'postMessage',
     ) );
     $wp_customize->add_control( 'mec_theme_email', array(
@@ -114,6 +115,7 @@ function mec_theme_customize_contact_social( $wp_customize ) {
     $wp_customize->add_setting( 'mec_theme_facebook_url', array(
         'default'           => '',
         'sanitize_callback' => 'esc_url_raw',
+        'validate_callback' => 'mec_theme_validate_url',
         'transport'         => 'postMessage',
     ) );
     $wp_customize->add_control( 'mec_theme_facebook_url', array(
@@ -125,6 +127,7 @@ function mec_theme_customize_contact_social( $wp_customize ) {
     $wp_customize->add_setting( 'mec_theme_twitter_url', array(
         'default'           => '',
         'sanitize_callback' => 'esc_url_raw',
+        'validate_callback' => 'mec_theme_validate_url',
         'transport'         => 'postMessage',
     ) );
     $wp_customize->add_control( 'mec_theme_twitter_url', array(
@@ -136,6 +139,7 @@ function mec_theme_customize_contact_social( $wp_customize ) {
     $wp_customize->add_setting( 'mec_theme_instagram_url', array(
         'default'           => '',
         'sanitize_callback' => 'esc_url_raw',
+        'validate_callback' => 'mec_theme_validate_url',
         'transport'         => 'postMessage',
     ) );
     $wp_customize->add_control( 'mec_theme_instagram_url', array(
@@ -147,6 +151,7 @@ function mec_theme_customize_contact_social( $wp_customize ) {
     $wp_customize->add_setting( 'mec_theme_linkedin_url', array(
         'default'           => '',
         'sanitize_callback' => 'esc_url_raw',
+        'validate_callback' => 'mec_theme_validate_url',
         'transport'         => 'postMessage',
     ) );
     $wp_customize->add_control( 'mec_theme_linkedin_url', array(
@@ -158,6 +163,7 @@ function mec_theme_customize_contact_social( $wp_customize ) {
     $wp_customize->add_setting( 'mec_theme_youtube_url', array(
         'default'           => '',
         'sanitize_callback' => 'esc_url_raw',
+        'validate_callback' => 'mec_theme_validate_url',
         'transport'         => 'postMessage',
     ) );
     $wp_customize->add_control( 'mec_theme_youtube_url', array(

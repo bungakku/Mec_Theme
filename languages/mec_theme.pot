@@ -2,7 +2,7 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MEC_Theme 1.7.69\n"
+"Project-Id-Version: MEC_Theme 1.7.70\n"
 "Report-Msgid-Bugs-To: https://github.com/bungakku/Mec_Theme/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"POT-Creation-Date: 2026-10-06 03:46+0000\n"
+"POT-Creation-Date: 2026-10-06 03:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: manually generated\n"
 "X-Domain: mec_theme\n"
@@ -235,7 +235,15 @@ msgstr ""
 msgid "Excerpt length (words):"
 msgstr ""
 
-#: inc/customizer-sanitizers.php:127
+#: inc/customizer-sanitizers.php:124
+msgid "Please enter a valid email address."
+msgstr ""
+
+#: inc/customizer-sanitizers.php:146
+msgid "Please enter a valid URL starting with http:// or https://."
+msgstr ""
+
+#: inc/customizer-sanitizers.php:166
 msgid "Content width and sidebar width must not exceed 100%. Please adjust your values."
 msgstr ""
 
@@ -619,91 +627,91 @@ msgstr ""
 msgid "Phone Number 2"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:109
+#: inc/customizer/contact-social-panel.php:110
 msgid "Email Address"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:120
+#: inc/customizer/contact-social-panel.php:122
 msgid "Facebook URL"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:131
+#: inc/customizer/contact-social-panel.php:134
 msgid "Twitter/X URL"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:142
+#: inc/customizer/contact-social-panel.php:146
 msgid "Instagram URL"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:153
+#: inc/customizer/contact-social-panel.php:158
 msgid "LinkedIn URL (optional)"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:164
+#: inc/customizer/contact-social-panel.php:170
 msgid "YouTube URL (optional)"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:175
+#: inc/customizer/contact-social-panel.php:181
 msgid "Phone Numbers Color"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:185
+#: inc/customizer/contact-social-panel.php:191
 msgid "Phone Numbers Hover Color"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:195
+#: inc/customizer/contact-social-panel.php:201
 msgid "Email Address Color"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:205
+#: inc/customizer/contact-social-panel.php:211
 msgid "Email Address Hover Color"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:215
+#: inc/customizer/contact-social-panel.php:221
 msgid "Hide contact column on tablet (481px - 768px)"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:226
+#: inc/customizer/contact-social-panel.php:232
 msgid "Hide contact column on mobile (=480px)"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:236
+#: inc/customizer/contact-social-panel.php:242
 msgid "Phone & Email Text Size - Tablet (rem)"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:237
+#: inc/customizer/contact-social-panel.php:243
 msgid "Applies at 481-768px only. Desktop size is unaffected."
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:248
+#: inc/customizer/contact-social-panel.php:254
 msgid "Phone & Email Text Size - Mobile (rem)"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:249
+#: inc/customizer/contact-social-panel.php:255
 msgid "Applies at 480px and below only. Desktop size is unaffected."
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:404
+#: inc/customizer/contact-social-panel.php:410
 msgid "Social Icon Size (px)"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:416
+#: inc/customizer/contact-social-panel.php:422
 msgid "Social Icon SVG Size (px)"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:428
+#: inc/customizer/contact-social-panel.php:434
 msgid "Social Icon Background Color"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:438
+#: inc/customizer/contact-social-panel.php:444
 msgid "Social Icon Color"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:448
+#: inc/customizer/contact-social-panel.php:454
 msgid "Social Icon Hover Background Color"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:458
+#: inc/customizer/contact-social-panel.php:464
 msgid "Social Icon Hover Color"
 msgstr ""
 
