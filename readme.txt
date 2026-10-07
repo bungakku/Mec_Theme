@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.71
+Stable tag: 1.7.72
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,12 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.72 =
+* Fixed: on screens narrower than ~1064px (e.g. a 1024px iPad in landscape) the default layout pushed the sidebar below the main content instead of beside it. Cause, measured in headless Chromium: `.content-area` wraps its flex items, and `.has-sidebar .secondary` had `min-width: 250px`; since 1.7.42 changed the default sidebar from 25% to 22%, that floor made the sidebar + 75% content + 14px gap not fit on one line below that width. The floor is now `210px`, restoring the pre-1.7.42 side-by-side breakpoint (~920px viewport). The <=768px stacked layout is unchanged.
+* Fixed: the "Older Comments" / "Newer Comments" links added in 1.7.67 rendered as default blue underlined links, unlike the rest of the comments section; they now use the theme's link styling (found by screenshotting the comments section in a real browser for the first time).
+* Decision: the content + sidebar width limit stays at 100% (not tightened to 98%) -- measured, total width isn't what decides wrapping on narrower screens (the sidebar's min-width is), so no single percentage limit would guarantee side-by-side.
+* CSS-only: one declaration in `style.css`. Verified in headless Chromium 153 against WordPress 7.1 with `WP_DEBUG` on.
 
 = 1.7.71 =
 * Fixed: the "main content width + sidebar width must not exceed 100%" Customizer check (documented since 1.6.6) never ran -- it was attached via `add_filter( 'customize_validate_setting', ... )`, which isn't a WordPress hook (core only fires `customize_validate_{$setting_id}`), so a 112% layout (content 90, sidebar 22) could be published. It is now attached as the `validate_callback` of both settings; an over-limit pair shows the existing error and the Customizer refuses to publish it. Already-saved values are not re-validated, so existing sites are unchanged until one of the two fields is edited.

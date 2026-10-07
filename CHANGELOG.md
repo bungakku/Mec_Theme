@@ -7,6 +7,19 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.72]
+
+### Fixed
+- on screens narrower than ~1064px (a 1024px iPad in landscape, small laptops) the default layout pushed the sidebar below the main content instead of keeping it beside it. Root cause, measured in headless Chromium 153: `.content-area` is `flex-wrap: wrap`, and `.has-sidebar .secondary` had `min-width: 250px`. Since 1.7.42 changed the default sidebar width from 25% to 22%, 22% of any container narrower than ~1136px is below that 250px floor, so the sidebar's hypothetical width stayed 250px and, together with the 75% content basis and the 14px gap, no longer fit on one line -- it wrapped. Reduced the floor to `210px`, which restores the pre-1.7.42 side-by-side breakpoint exactly (the old 70/25 layout stayed side by side down to a 920px viewport and wrapped at 900px; the new 75/22 + 210px floor does the same). Below that, and at <=768px, the sidebar still stacks beneath the content as before.
+
+- the "Older Comments" / "Newer Comments" links added in 1.7.67 rendered as the browser's default blue underlined links, unlike every other link in the comments section (which use the theme's primary color with no underline until hover). Found while screenshotting the comments section in headless Chromium for the first time; `.comment-navigation a` now shares the same link rules as `.reply a` and `.comment-metadata a`.
+
+### Notes
+- Measured side by side at the default 75/22 widths, viewports 1280/1180/1100/1080/1024/960/920/900/800/769: the 1.7.41 layout (emulated) was "ok" down to 920 and wrapped from 900; 1.7.42-1.7.71 was ok only down to 1080 and wrapped from 1024; this release is ok down to 920 and wraps from 900. At 1024px the sidebar is now 229px wide beside a 761px content column (250px floor: wrapped).
+- Decision on the open question from 1.7.71 (tighten the width rule from 100% to 98%?): **no.** Measured result: total width is not what decides wrapping below ~1160px -- the sidebar's `min-width` floor is. A 98% pair like 73/25 wrapped at an 800px viewport but not at 1024px, 70/28 wrapped at 800px, while 60/38 (98%) never wrapped at any width tested, so no single percentage limit guarantees side-by-side. The 100% limit (restored in 1.7.71) stays as the documented rule. Pairs of 99-100% do wrap on wide screens too (e.g. 77/22 and 78/22 at a 1280px viewport) because of the 14px gap; the 1.7.71 note describing that stands.
+- Settings where the saved sidebar width is above 22% were already side by side at these widths and are unaffected. Sites on 22% will see the sidebar stay beside the content on 920-1064px screens, as it did before 1.7.42; the sidebar is 210-250px wide there instead of stacked.
+- Verified in headless Chromium 153 against WordPress 7.1 (`WP_DEBUG` on) with the built zip. No PHP changed.
+
 ## [1.7.71]
 
 ### Fixed

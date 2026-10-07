@@ -4,7 +4,7 @@ Theme URI: https://github.com/bungakku/Mec_Theme
 Author: Biswajit Thokchom
 Author URI: https://github.com/bungakku
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.71
+Version: 1.7.72
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1101,7 +1101,17 @@ table {
 
 .has-sidebar .secondary {
     flex: 1 1 25%;
-    min-width: 250px;
+    /*
+     * 250px -> 210px in 1.7.72. With the 1.7.42 default of a 22% sidebar,
+     * 250px made .content-area (flex-wrap: wrap) push the sidebar below the
+     * content on any container narrower than ~1056px (viewports under
+     * ~1064px, e.g. a 1024px iPad in landscape), because the sidebar's
+     * hypothetical width (250px) plus the 75% content basis plus the 14px
+     * gap no longer fit on one line. 210px restores the pre-1.7.42
+     * side-by-side breakpoint (~920px viewport); the <=768px stacked layout
+     * below is unaffected.
+     */
+    min-width: 210px;
     display: block;
     background: var(--mec-sidebar-bg, #ffffff);
 }
@@ -1477,14 +1487,16 @@ article {
 
 .comment-metadata a,
 .reply a,
-.comment-content a {
+.comment-content a,
+.comment-navigation a {
     color: var(--mec-primary-color);
     text-decoration: none;
 }
 
 .comment-metadata a:hover,
 .reply a:hover,
-.comment-content a:hover {
+.comment-content a:hover,
+.comment-navigation a:hover {
     text-decoration: underline;
 }
 
