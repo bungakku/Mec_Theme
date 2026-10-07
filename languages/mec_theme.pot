@@ -2,7 +2,7 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MEC_Theme 1.7.70\n"
+"Project-Id-Version: MEC_Theme 1.7.71\n"
 "Report-Msgid-Bugs-To: https://github.com/bungakku/Mec_Theme/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"POT-Creation-Date: 2026-10-06 03:54+0000\n"
+"POT-Creation-Date: 2026-10-06 23:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: manually generated\n"
 "X-Domain: mec_theme\n"
@@ -243,7 +243,7 @@ msgstr ""
 msgid "Please enter a valid URL starting with http:// or https://."
 msgstr ""
 
-#: inc/customizer-sanitizers.php:166
+#: inc/customizer-sanitizers.php:187
 msgid "Content width and sidebar width must not exceed 100%. Please adjust your values."
 msgstr ""
 
@@ -276,17 +276,17 @@ msgid "Grid Columns"
 msgstr ""
 
 #: inc/customizer/blog-panel.php:37
-#: inc/customizer/layout-panel.php:363
+#: inc/customizer/layout-panel.php:365
 msgid "2 Columns"
 msgstr ""
 
 #: inc/customizer/blog-panel.php:38
-#: inc/customizer/layout-panel.php:364
+#: inc/customizer/layout-panel.php:366
 msgid "3 Columns"
 msgstr ""
 
 #: inc/customizer/blog-panel.php:39
-#: inc/customizer/layout-panel.php:365
+#: inc/customizer/layout-panel.php:367
 msgid "4 Columns"
 msgstr ""
 
@@ -731,219 +731,219 @@ msgstr ""
 msgid "Right Sidebar"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:36
+#: inc/customizer/layout-panel.php:37
 msgid "Main Content Width (%)"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:37
+#: inc/customizer/layout-panel.php:38
 msgid "Recommended: 75% (with sidebar width 22% leaves 3% for gap)."
 msgstr ""
 
-#: inc/customizer/layout-panel.php:48
+#: inc/customizer/layout-panel.php:50
 msgid "Sidebar Width (%)"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:49
+#: inc/customizer/layout-panel.php:51
 msgid "Recommended: 22% (together with content width should not exceed 100%)."
 msgstr ""
 
-#: inc/customizer/layout-panel.php:60
+#: inc/customizer/layout-panel.php:62
 msgid "Sidebar Background Color"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:65
+#: inc/customizer/layout-panel.php:67
 msgid "Container"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:74
+#: inc/customizer/layout-panel.php:76
 msgid "Container Width (px)"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:81
+#: inc/customizer/layout-panel.php:83
 msgid "Header"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:90
+#: inc/customizer/layout-panel.php:92
 msgid "Logo Position (Desktop)"
-msgstr ""
-
-#: inc/customizer/layout-panel.php:94
-#: inc/customizer/layout-panel.php:110
-#: inc/customizer/layout-panel.php:126
-msgid "Left of Site Title"
-msgstr ""
-
-#: inc/customizer/layout-panel.php:95
-#: inc/customizer/layout-panel.php:111
-#: inc/customizer/layout-panel.php:127
-msgid "Right of Site Title"
 msgstr ""
 
 #: inc/customizer/layout-panel.php:96
 #: inc/customizer/layout-panel.php:112
 #: inc/customizer/layout-panel.php:128
-msgid "Above Site Title"
+msgid "Left of Site Title"
 msgstr ""
 
 #: inc/customizer/layout-panel.php:97
 #: inc/customizer/layout-panel.php:113
 #: inc/customizer/layout-panel.php:129
+msgid "Right of Site Title"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:98
+#: inc/customizer/layout-panel.php:114
+#: inc/customizer/layout-panel.php:130
+msgid "Above Site Title"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:99
+#: inc/customizer/layout-panel.php:115
+#: inc/customizer/layout-panel.php:131
 msgid "Below Site Title"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:106
+#: inc/customizer/layout-panel.php:108
 msgid "Logo Position (Tablet)"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:122
+#: inc/customizer/layout-panel.php:124
 msgid "Logo Position (Mobile)"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:138
+#: inc/customizer/layout-panel.php:140
 msgid "Title/Description Alignment (Desktop)"
-msgstr ""
-
-#: inc/customizer/layout-panel.php:142
-#: inc/customizer/layout-panel.php:157
-#: inc/customizer/layout-panel.php:172
-#: inc/customizer/layout-panel.php:188
-#: inc/title-settings.php:54
-msgid "Left"
-msgstr ""
-
-#: inc/customizer/layout-panel.php:143
-#: inc/customizer/layout-panel.php:158
-#: inc/customizer/layout-panel.php:173
-#: inc/customizer/layout-panel.php:189
-#: inc/title-settings.php:55
-msgid "Center"
 msgstr ""
 
 #: inc/customizer/layout-panel.php:144
 #: inc/customizer/layout-panel.php:159
 #: inc/customizer/layout-panel.php:174
 #: inc/customizer/layout-panel.php:190
+#: inc/title-settings.php:54
+msgid "Left"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:145
+#: inc/customizer/layout-panel.php:160
+#: inc/customizer/layout-panel.php:175
+#: inc/customizer/layout-panel.php:191
+#: inc/title-settings.php:55
+msgid "Center"
+msgstr ""
+
+#: inc/customizer/layout-panel.php:146
+#: inc/customizer/layout-panel.php:161
+#: inc/customizer/layout-panel.php:176
+#: inc/customizer/layout-panel.php:192
 #: inc/title-settings.php:56
 msgid "Right"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:153
+#: inc/customizer/layout-panel.php:155
 msgid "Title/Description Alignment (Tablet)"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:168
+#: inc/customizer/layout-panel.php:170
 msgid "Title/Description Alignment (Mobile)"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:184
+#: inc/customizer/layout-panel.php:186
 msgid "Tagline Alignment"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:200
+#: inc/customizer/layout-panel.php:202
 msgid "Hide Site Description on Tablet"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:211
+#: inc/customizer/layout-panel.php:213
 msgid "Hide Site Description on Mobile"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:221
+#: inc/customizer/layout-panel.php:223
 msgid "Logo Max Width - Desktop (>768px)"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:232
+#: inc/customizer/layout-panel.php:234
 msgid "Logo Max Width - Tablet (481-768px)"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:243
+#: inc/customizer/layout-panel.php:245
 msgid "Logo Max Width - Mobile (≤480px)"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:254
+#: inc/customizer/layout-panel.php:256
 msgid "Enable Sticky Header"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:264
+#: inc/customizer/layout-panel.php:266
 msgid "Header Padding (px)"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:275
+#: inc/customizer/layout-panel.php:277
 msgid "Show Site Description (Global)"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:285
+#: inc/customizer/layout-panel.php:287
 msgid "Custom Site Description"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:286
+#: inc/customizer/layout-panel.php:288
 msgid "You can use HTML tags like &lt;br&gt; for line breaks."
 msgstr ""
 
-#: inc/customizer/layout-panel.php:292
+#: inc/customizer/layout-panel.php:294
 msgid "Menu Settings"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:301
+#: inc/customizer/layout-panel.php:303
 msgid "Menu Item Padding (px)"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:312
+#: inc/customizer/layout-panel.php:314
 msgid "Menu Item Spacing (px)"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:323
+#: inc/customizer/layout-panel.php:325
 msgid "Main Menu Hover Color"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:333
+#: inc/customizer/layout-panel.php:335
 msgid "Desktop Menu Hover Underline Color"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:343
+#: inc/customizer/layout-panel.php:345
 msgid "Show Menu Descriptions"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:349
+#: inc/customizer/layout-panel.php:351
 msgid "Footer Settings"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:358
+#: inc/customizer/layout-panel.php:360
 msgid "Footer Widget Columns"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:362
+#: inc/customizer/layout-panel.php:364
 msgid "1 Column"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:374
+#: inc/customizer/layout-panel.php:376
 msgid "Footer Widgets Layout"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:378
+#: inc/customizer/layout-panel.php:380
 msgid "Horizontal (Row)"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:379
+#: inc/customizer/layout-panel.php:381
 msgid "Vertical (Stack)"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:388
+#: inc/customizer/layout-panel.php:390
 msgid "Footer Background"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:397
+#: inc/customizer/layout-panel.php:399
 msgid "Footer Padding (px)"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:408
+#: inc/customizer/layout-panel.php:410
 msgid "Copyright Text"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:418
+#: inc/customizer/layout-panel.php:420
 msgid "Copyright Text Color"
 msgstr ""
 
-#: inc/customizer/layout-panel.php:427
+#: inc/customizer/layout-panel.php:429
 msgid "Show Footer Menu"
 msgstr ""
 

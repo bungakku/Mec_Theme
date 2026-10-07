@@ -148,24 +148,44 @@ function mec_theme_validate_url( $validity, $value ) {
     return $validity;
 }
 
+/**
+ * Customizer validate_callback: main content width + sidebar width must not
+ * exceed 100%.
+ *
+ * Fixed in 1.7.71. This function was hooked with
+ * add_filter( 'customize_validate_setting', ... ), which is not a WordPress
+ * hook (core only fires "customize_validate_{$setting_id}"), so it never ran
+ * and a 112% layout could be published. It is now attached as the
+ * validate_callback of both settings in inc/customizer/layout-panel.php.
+ *
+ * The other setting's value is read from the same save request when it is
+ * also being changed, falling back to its current effective value otherwise
+ * -- so editing both fields at once is judged on the pair actually about to
+ * be saved, not on a stale stored value. It reads unsanitized_post_values()
+ * directly rather than $other->post_value(): post_value() validates the
+ * value it returns, which would re-enter this callback for the other
+ * setting and recurse endlessly whenever both fields carry pending values.
+ */
 function mec_theme_validate_layout_widths( $validity, $value, $setting ) {
-    if ( ! in_array( $setting->id, array( 'mec_theme_content_width', 'mec_theme_sidebar_width' ), true ) ) {
+    if ( 'mec_theme_content_width' === $setting->id ) {
+        $other_id = 'mec_theme_sidebar_width';
+    } elseif ( 'mec_theme_sidebar_width' === $setting->id ) {
+        $other_id = 'mec_theme_content_width';
+    } else {
         return $validity;
     }
 
-    $content_width = get_theme_mod( 'mec_theme_content_width', 75 );
-    $sidebar_width = get_theme_mod( 'mec_theme_sidebar_width', 22 );
-
-    if ( 'mec_theme_content_width' === $setting->id ) {
-        $content_width = $value;
+    $post_values = $setting->manager->unsanitized_post_values();
+    if ( array_key_exists( $other_id, $post_values ) ) {
+        $other_value = $post_values[ $other_id ];
     } else {
-        $sidebar_width = $value;
+        $other       = $setting->manager->get_setting( $other_id );
+        $other_value = $other ? $other->value() : get_theme_mod( $other_id );
     }
 
-    if ( ( $content_width + $sidebar_width ) > 100 ) {
+    if ( ( absint( $value ) + absint( $other_value ) ) > 100 ) {
         $validity->add( 'width_exceeds_limit', __( 'Content width and sidebar width must not exceed 100%. Please adjust your values.', 'mec_theme' ) );
     }
 
     return $validity;
 }
-add_filter( 'customize_validate_setting', 'mec_theme_validate_layout_widths', 10, 3 );

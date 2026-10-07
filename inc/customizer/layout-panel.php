@@ -31,6 +31,7 @@ function mec_theme_register_layout_panel( $wp_customize ) {
     $wp_customize->add_setting( 'mec_theme_content_width', array(
         'default'           => 75,
         'sanitize_callback' => 'absint',
+        'validate_callback' => 'mec_theme_validate_layout_widths',
     ) );
     $wp_customize->add_control( 'mec_theme_content_width', array(
         'label'       => __( 'Main Content Width (%)', 'mec_theme' ),
@@ -43,6 +44,7 @@ function mec_theme_register_layout_panel( $wp_customize ) {
     $wp_customize->add_setting( 'mec_theme_sidebar_width', array(
         'default'           => 22,
         'sanitize_callback' => 'absint',
+        'validate_callback' => 'mec_theme_validate_layout_widths',
     ) );
     $wp_customize->add_control( 'mec_theme_sidebar_width', array(
         'label'       => __( 'Sidebar Width (%)', 'mec_theme' ),

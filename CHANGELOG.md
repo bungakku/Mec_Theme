@@ -7,6 +7,18 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.71]
+
+### Fixed
+- the "main content width + sidebar width must not exceed 100%" Customizer check (documented since 1.6.6) never ran. `mec_theme_validate_layout_widths()` was attached with `add_filter( 'customize_validate_setting', ... )`, which is not a WordPress hook -- core only fires `customize_validate_{$setting_id}` (confirmed by searching WordPress 7.1 core) -- so it was dead code. Verified on WordPress 7.1 with the Customizer's own save path: content width 90 with sidebar width 22 (112%) was published and saved. The function is now attached as the `validate_callback` of both settings in `inc/customizer/layout-panel.php` (the same mechanism 1.7.70 used for the email/URL fields), and the dead `add_filter()` line is removed. An over-limit pair now shows the existing "Content width and sidebar width must not exceed 100%" error on the control and the Customizer refuses to publish it.
+- the validator itself was also rewritten, because the original logic would have misjudged edits even if it had run: it compared the changed field against the *stored* value of the other field. Editing both fields at once (e.g. content 85 and sidebar 10, a valid 95%) would have been wrongly rejected against the old stored sidebar 22, and a bad pair could have slipped through. It now uses the other field's value from the same save request when that field is also changing, and its current effective value otherwise. (It reads `unsanitized_post_values()` directly: `post_value()` validates what it returns, which re-enters the callback for the other field and recurses endlessly when both fields carry pending values -- confirmed in testing before settling on this.)
+
+### Notes
+- Behavior change to be aware of: layouts totalling more than 100% could previously be published and now cannot. Already-saved values are not re-validated, so an existing site with an over-limit pair is unchanged until one of the two fields is edited.
+- Correction to the 1.7.42 notes: they explained main-content-width values above 75% appearing to be silently rejected as the width validation at work ("not a bug in the validation itself"). That validation never ran, so it cannot have rejected anything. The more likely cause is layout, not validation: `.content-area` is `flex-wrap: wrap` and the sidebar/content flex-basis values come from these two settings, so a pair whose widths plus the 14px column gap exceed the container wraps the sidebar below the content, which looks like the sidebar disappearing. Not reproduced in a real browser.
+- Not changed: because of that 14px gap, a pair totalling 99-100% passes validation (the documented rule is "not above 100%") but can still wrap by the same mechanism; the "Recommended: 75% / 22%" defaults leave 3% for it. Tightening the rule is a design decision for a separate release.
+- Verified on WordPress 7.1 (`WP_DEBUG` on), one scenario per process: 90/22, 79/22, 30 sidebar over saved 75 and 60/45 and 70/35 pending pairs rejected; 78/22, 75/22, 25 sidebar over saved 75 (both exactly 100%), 80/20 and 85/10 pending pairs accepted; a real changeset publish of 90/22 is blocked (theme mod stays 75) and 78/22 publishes. The 1.7.70 email/URL validation and front-end pages were re-checked with 0 PHP warnings, notices, or deprecations. Not verified: the inline error in a real browser Customizer UI.
+
 ## [1.7.70]
 
 ### Added

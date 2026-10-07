@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.70
+Stable tag: 1.7.71
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,12 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.71 =
+* Fixed: the "main content width + sidebar width must not exceed 100%" Customizer check (documented since 1.6.6) never ran -- it was attached via `add_filter( 'customize_validate_setting', ... )`, which isn't a WordPress hook (core only fires `customize_validate_{$setting_id}`), so a 112% layout (content 90, sidebar 22) could be published. It is now attached as the `validate_callback` of both settings; an over-limit pair shows the existing error and the Customizer refuses to publish it. Already-saved values are not re-validated, so existing sites are unchanged until one of the two fields is edited.
+* Fixed: the validator compared the changed field against the other field's *stored* value, so editing both at once (e.g. 85 and 10, a valid 95%) would have been wrongly rejected. It now uses the other field's value from the same save when that field is also changing. (It deliberately avoids `post_value()`, which re-enters the callback and recurses when both fields are pending.)
+* Correction to 1.7.42's notes: the "silent rejection above 75%" it described could not have been this validation, which never ran; the likelier cause is the sidebar wrapping below the content when the two flex widths plus the 14px gap exceed the container (not reproduced in a browser). A pair totalling 99-100% still passes validation but can still wrap that way; left for a separate design decision.
+* Verified on WordPress 7.1 with `WP_DEBUG` on, including a real changeset publish (90/22 blocked, 78/22 published). Inline error display in a real browser Customizer was not checked.
 
 = 1.7.70 =
 * Added (audit, Optional): server-side validation for the Customizer's email and social URL fields (Customize > Contact & Social). An invalid entry now shows an inline error in the Customizer and cannot be published, instead of being silently altered at save time -- previously `not-an-email` was saved as an empty string, `a b@c.com` was rewritten to `ab@c.com`, `hello world` became the link `http://hello%20world`, and `mailto:`/`ftp://` were accepted as social URLs. The email must pass `is_email()`; a URL must start with `http://` or `https://`, contain no whitespace, and have a host containing a dot. Empty values stay valid. Already-saved values are not re-validated, so existing sites see no change until a field is edited.
