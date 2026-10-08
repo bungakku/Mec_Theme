@@ -7,6 +7,20 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.73]
+
+### Fixed
+- **Grid and List blog layouts never collapsed on phones/tablets.** The `(max-width: 768px)` overrides (`.blog-grid.grid-columns-N { grid-template-columns: 1fr }`, `.blog-list .blog-post { flex-direction: column }`, `.blog-list .blog-post .post-thumbnail { flex: 0 0 auto; width: 100% }`) sat in a block far earlier in `style.css` than the base rules they were meant to override. Same specificity, later rule wins -- so the base rules won at every width. Measured in headless Chromium: the Grid layout stayed 2/3/4 columns at 360-480px (a 3-column grid overflowed a 360px screen by 26px, a 4-column grid by 161px -- the "page has to be pinched to fit" symptom from the 1.7.11-1.7.23 era), and the List layout's stacked thumbnail kept a 300px flex-basis. The three rules moved, unchanged, into a `(max-width: 768px)` block directly after the base rules. Desktop is unaffected (2/3/4 columns at 1280/1024/800 verified).
+- **A long unbroken post title stretched the whole single-post page past the screen on phones.** `.entry-title` (and `article`, `.entry-meta`, `.entry-content`, `.widget`) declared `overflow-wrap: anywhere;` and then `word-wrap: break-word;` -- but `word-wrap` is the legacy alias of `overflow-wrap`, so the later declaration silently replaced `anywhere` with `break-word` in every browser. `break-word` does not shrink an element's min-content width, so a title such as a long hyphen- or underscore-joined slug stretched `main.primary` to 1326px on a 480px screen (976px of horizontal overflow at 360px). This is the same class of problem 1.7.15-1.7.17 set out to fix; the `anywhere` declarations from those releases were present but cancelled by the line after them. In all five rules the legacy `word-wrap` now comes first, so browsers that support `anywhere` use it and only very old ones fall back to `break-word`.
+
+### Added
+- baseline styling for `the_post_navigation()` (Previous/Next Post on single posts), which had none and rendered as stacked default blue underlined links: a space-between row using the theme's primary link color, no underline until hover. Found in the same audit.
+
+### Notes
+- Found by the first full real-browser audit of the theme (headless Chromium 153 against WordPress 7.1): 5 layouts (Classic, Grid 2/3/4, List) x home/category/search, plus single post (long title, long URL in content, long URL in a sidebar widget), page and 404, each at 1280/1024/800/480/360px -- 100 page loads. Before: 100 findings including both bugs above (the 403/404 console entries counted there are sandbox noise). After, from the built zip: 0 findings; 1 article per row at <=480px in every layout, 2/3/4 on desktop.
+- Not changed: at 769-~920px the sidebar still stacks below the content (the breakpoint restored in 1.7.72), and the Grid layout keeps its 2/3/4 columns between 769px and the sidebar wrap point; only <=768px collapses to one column, as the original rules intended.
+- CSS-only; no PHP, JS, markup, or translatable strings changed.
+
 ## [1.7.72]
 
 ### Fixed

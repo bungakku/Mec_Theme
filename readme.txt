@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.72
+Stable tag: 1.7.73
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,12 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.73 =
+* Fixed: the Grid and List blog layouts never collapsed to a single column on phones/tablets. The `(max-width: 768px)` overrides sat earlier in `style.css` than the equal-specificity base rules they were meant to override, so the base rules won at every width -- a 3-column grid overflowed a 360px screen by 26px, a 4-column grid by 161px, and the List layout's stacked thumbnail kept a 300px flex-basis. The three rules moved, unchanged, after the base rules. Desktop is unaffected.
+* Fixed: a long unbroken post title stretched the single-post page past the screen on phones (976px of horizontal overflow at 360px). `.entry-title`, `article`, `.entry-meta`, `.entry-content` and `.widget` declared `overflow-wrap: anywhere;` and then `word-wrap: break-word;` -- `word-wrap` is the legacy alias of `overflow-wrap`, so the second line silently replaced the first with `break-word`, which doesn't shrink min-content width. Order swapped so supporting browsers keep `anywhere` (the intent of 1.7.15-1.7.17) and only very old ones fall back.
+* Added: baseline styling for the Previous/Next Post links on single posts (they had none).
+* Found by a first full real-browser audit (headless Chromium, 5 layouts x 6 page types x 5 widths, 100 loads): 100 findings before, 0 after. CSS-only; no PHP, JS, markup, or strings changed.
 
 = 1.7.72 =
 * Fixed: on screens narrower than ~1064px (e.g. a 1024px iPad in landscape) the default layout pushed the sidebar below the main content instead of beside it. Cause, measured in headless Chromium: `.content-area` wraps its flex items, and `.has-sidebar .secondary` had `min-width: 250px`; since 1.7.42 changed the default sidebar from 25% to 22%, that floor made the sidebar + 75% content + 14px gap not fit on one line below that width. The floor is now `210px`, restoring the pre-1.7.42 side-by-side breakpoint (~920px viewport). The <=768px stacked layout is unchanged.
