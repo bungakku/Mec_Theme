@@ -4,7 +4,7 @@ Theme URI: https://github.com/bungakku/Mec_Theme
 Author: Biswajit Thokchom
 Author URI: https://github.com/bungakku
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.73
+Version: 1.7.74
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -237,24 +237,26 @@ table {
     .logo-pos-tablet-bottom.title-align-tablet-right .logo-text-wrapper {
         align-items: flex-end;
     }
-    .header-content.title-align-tablet-left .site-text {
-        text-align: left !important;
+    /*
+     * Fixed in 1.7.74. The three rules that used to sit here were scoped to
+     * .header-content, a class no element in header.php carries, so none of
+     * them ever matched: the Customizer's "Title/Description Alignment
+     * (Tablet)" setting had no effect, and at 481-768px the title followed
+     * the DESKTOP alignment (the unscoped .title-align-desktop-* rules above)
+     * while the logo, via the live .title-align-tablet-* rules just above,
+     * followed the tablet one. Replaced by plain, live rules in the same
+     * form as the mobile ones below -- no !important and no layout
+     * properties (display/width/flex), which only made sense for markup this
+     * theme no longer has.
+     */
+    .title-align-tablet-left .site-text {
+        text-align: left;
     }
-    .header-content.title-align-tablet-center .site-text {
-        display: block !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        text-align: center !important;
-        align-self: auto !important;
-        flex: none !important;
+    .title-align-tablet-center .site-text {
+        text-align: center;
     }
-    .header-content.title-align-tablet-right .site-text {
-        display: block !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        text-align: right !important;
-        align-self: auto !important;
-        flex: none !important;
+    .title-align-tablet-right .site-text {
+        text-align: right;
     }
     .site-branding {
         width: 100% !important;
@@ -426,6 +428,7 @@ table {
     }
     .main-navigation ul {
         display: flex;
+        flex-wrap: wrap; /* 1.7.74: a long menu (9+ items) overflowed and clipped its last items at 769-~900px */
         justify-content: center;
         gap: 20px;
     }

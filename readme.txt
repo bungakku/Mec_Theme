@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.73
+Stable tag: 1.7.74
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.74 =
+* Fixed: the Customizer's "Title/Description Alignment (Tablet)" setting did nothing. Its three rules in the 481-768px block were scoped to `.header-content`, a class no element in `header.php` carries, so at tablet widths the title followed the Desktop alignment while the logo followed the Tablet one. Replaced by live `.title-align-tablet-*` rules matching the mobile ones (computed text-align at 700px was wrong in all 12 tested combinations before, 0 after).
+* Fixed: a long primary menu overflowed the page on narrow desktop/tablet widths -- the 769px+ menu is `display: flex` without wrapping, so 9 top-level items ran 8-74px past the right edge between 900px and 769px and the last items were clipped. It now wraps to a second row; dropdowns still open fully in view. Menus that already fit are unchanged.
+* Found by extending the real-browser audit to the header, menu and footer; the footer and all dropdown, mobile-menu and sticky-header behaviour passed unchanged. CSS-only; no PHP, JS, markup, or strings changed.
 
 = 1.7.73 =
 * Fixed: the Grid and List blog layouts never collapsed to a single column on phones/tablets. The `(max-width: 768px)` overrides sat earlier in `style.css` than the equal-specificity base rules they were meant to override, so the base rules won at every width -- a 3-column grid overflowed a 360px screen by 26px, a 4-column grid by 161px, and the List layout's stacked thumbnail kept a 300px flex-basis. The three rules moved, unchanged, after the base rules. Desktop is unaffected.

@@ -7,6 +7,17 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.74]
+
+### Fixed
+- **The Customizer's "Title/Description Alignment (Tablet)" setting did nothing.** In `style.css`'s 481-768px block, the three rules meant to apply it were scoped to `.header-content`, a class no element in `header.php` carries, so none of them ever matched. At tablet widths the title therefore followed the *Desktop* alignment (the unscoped `.title-align-desktop-*` rules) while the logo followed the Tablet one. Replaced by live `.title-align-tablet-{left|center|right} .site-text` rules in the same form as the existing mobile ones. Measured in headless Chromium 153: 12 logo-position x alignment combinations with a different value per breakpoint -- the computed `text-align` at 700px was wrong in all 12 before, 0 after; desktop and mobile were already correct.
+- **A long primary menu overflowed the page on narrow desktop/tablet widths.** `.main-navigation ul` is `display: flex` at 769px and up without `flex-wrap`, so with 9 top-level items the menu ran past the right edge below ~900px (8px at 900px, 58px at 800px, 74px at 769px with the test menu) and its last items were clipped. Added `flex-wrap: wrap`; the menu now wraps to a second row, and dropdowns on a wrapped menu still open fully in view and on top. Menus of 8 items or fewer that already fit are unchanged.
+
+### Notes
+- Found by extending the real-browser audit to the header (12 logo-position x alignment combinations x 3 breakpoints), the primary menu (hover and keyboard dropdowns to the 3rd level including the last menu item, a 9-item menu at 6 widths, mobile open/expand/Escape, sticky header with dropdown and with the mobile panel) and the footer (1-4 widget columns x horizontal/vertical x 3 widths, copyright/credit/footer-menu row). Everything else in those areas passed unchanged -- including the footer, where an initial "not centered" flag was my own test measuring two of the row's three items.
+- Regression run after the fixes: 50 page loads (6 page types x 7 widths, plus Grid 2/3/4 and List at 1280/360) with no horizontal overflow, the sidebar side by side down to 920px and stacked at 900px as in 1.7.72, plus the dropdown, mobile-menu and sticky-header checks above.
+- CSS-only; no PHP, JS, markup, or translatable strings changed. Not verified: Safari/Firefox, real devices.
+
 ## [1.7.73]
 
 ### Fixed
