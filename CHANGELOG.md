@@ -7,6 +7,17 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.75]
+
+### Fixed
+- **The Customizer live preview ignored unsaved colour, typography and layout changes, and could publish them to visitors.** `mec_theme_get_cached_customizer_css()` returns the generated stylesheet from a 24-hour transient, with no exception for the Customizer preview. While previewing, `get_theme_mod()` returns the *unsaved* values, but the transient holds CSS built from the *saved* ones, so every setting that feeds that stylesheet (colours, font sizes, menu, hamburger, footer, widths) showed no change in the preview until it was published. Worse, if the transient was empty at that moment (after its 24-hour expiry, or after any theme-mod update) the preview request rebuilt the CSS from the unsaved values and stored them: reproduced on a real WordPress 7.1 install with a draft changeset -- saved Link Color `#0274be`, unsaved `#ff0000`, and a logged-out visitor was then served `#ff0000`. The preview now builds its CSS fresh and never reads or writes the cache. A draft preview link opened with no login cookie at all rewrote the cache the same way, so no admin session is needed for it to happen.
+- **After a theme update the site kept serving the previous release's generated CSS for up to 24 hours.** The cache key never changed, and it was only cleared by a Customizer save or a theme-mod update, so an update that changes the generated CSS (as 1.7.45 did for the menu padding rule) was invisible until the day-long transient expired. The theme version is now stored with the CSS and a mismatch rebuilds it. A cache entry written by an older release is a plain string, not the new array, so it is rebuilt on the first page view after updating.
+
+### Notes
+- Found by the audit of whether each Customizer setting actually changes the rendered page: all 140 settings were set to a distinctive value and the computed styles of every element compared across 3 pages x 3 widths. The Related Posts grid's mobile layout (its column count is set inline in the markup) was also checked and is fine -- its mobile override already uses `!important`.
+- Verified from the built zip on WordPress 7.1 with `WP_DEBUG` on: warm-cache preview now shows the unsaved value and leaves the public page and the cache untouched; cold-cache preview no longer writes the draft into the cache; the public CSS output is byte-identical to 1.7.74 for the same settings; an old string-format cache and a cache from another version are both rebuilt.
+- PHP only (`inc/customizer-css.php`); no CSS, JS, markup, or translatable strings changed.
+
 ## [1.7.74]
 
 ### Fixed

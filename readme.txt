@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.74
+Stable tag: 1.7.75
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.75 =
+* Fixed: the Customizer live preview ignored unsaved colour, typography and layout changes -- the generated CSS comes from a 24-hour cache holding the *saved* values, and the preview used it too. Worse, when that cache was empty a preview with unsaved changes rebuilt and stored the draft CSS, so every visitor saw the unpublished values (reproduced: saved Link Color #0274be, draft #ff0000, a logged-out visitor got #ff0000, even when the draft preview link was opened without logging in). The preview now builds its CSS fresh and never touches the cache.
+* Fixed: after a theme update the site kept serving the previous release's generated CSS for up to 24 hours. The theme version is now stored with the cached CSS; a mismatch (or a cache written by an older release) rebuilds it.
+* Found by auditing whether each Customizer setting actually changes the rendered page (140 settings, computed styles compared across 3 pages x 3 widths). PHP only (`inc/customizer-css.php`); no CSS, JS, markup, or strings changed.
 
 = 1.7.74 =
 * Fixed: the Customizer's "Title/Description Alignment (Tablet)" setting did nothing. Its three rules in the 481-768px block were scoped to `.header-content`, a class no element in `header.php` carries, so at tablet widths the title followed the Desktop alignment while the logo followed the Tablet one. Replaced by live `.title-align-tablet-*` rules matching the mobile ones (computed text-align at 700px was wrong in all 12 tested combinations before, 0 after).

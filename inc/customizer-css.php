@@ -529,12 +529,40 @@ function mec_theme_get_customizer_css() {
 }
 
 function mec_theme_get_cached_customizer_css() {
-    $cache_key = 'mec_theme_customizer_css';
-    $css = get_transient( $cache_key );
-    if ( false === $css ) {
-        $css = mec_theme_get_customizer_css();
-        set_transient( $cache_key, $css, DAY_IN_SECONDS );
+    // Fixed in 1.7.75: two problems with this cache, both fixed here.
+    //
+    // 1. Customizer preview. get_theme_mod() returns the *previewed* (unsaved)
+    //    values there, but the cache holds CSS built from the *saved* ones, so
+    //    the live preview ignored every unsaved colour, typography and layout
+    //    change until it was published. Worse, if the cache happened to be
+    //    empty (after the 24h expiry, or after any theme-mod update) while a
+    //    preview with unsaved changes was loading, that request rebuilt the
+    //    CSS from the unsaved values and stored them -- so every public
+    //    visitor was served the unpublished draft. The preview now builds its
+    //    CSS fresh and never reads or writes the cache.
+    //
+    // 2. Theme updates. The cache key never changed, so after updating the
+    //    theme the site kept serving the previous release's generated CSS for
+    //    up to a day (or until the next Customizer save). The theme version is
+    //    now stored with the CSS and a mismatch rebuilds it. A transient saved
+    //    by an older release is a plain string, not an array, so it is rebuilt
+    //    too.
+    if ( is_customize_preview() ) {
+        return mec_theme_get_customizer_css();
     }
+
+    $cache_key = 'mec_theme_customizer_css';
+    $cached    = get_transient( $cache_key );
+
+    if ( is_array( $cached ) && isset( $cached['version'], $cached['css'] ) && MEC_THEME_VERSION === $cached['version'] ) {
+        return $cached['css'];
+    }
+
+    $css = mec_theme_get_customizer_css();
+    set_transient( $cache_key, array(
+        'version' => MEC_THEME_VERSION,
+        'css'     => $css,
+    ), DAY_IN_SECONDS );
     return $css;
 }
 
