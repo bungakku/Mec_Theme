@@ -7,6 +7,17 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.76]
+
+### Fixed
+- **The Customizer's "Link Color" and "Link Hover Color" did nothing for links inside post and page content.** `style.css` styled links in the meta line, widgets, comments, navigation and footer, but had no rule at all for `.entry-content a`, so those links rendered in the browser's default blue (`rgb(0, 0, 238)`) whatever the settings said. Measured in headless Chromium with Link Color `#12ab34` and Link Hover Color `#ab3412`: the content link stayed `rgb(0, 0, 238)` normally and on hover, while the meta-line link next to it turned green. "Link Hover Color" (`--mec-link-hover-color`) was in fact used by exactly one selector, the Recent Posts widget's Read more link. Content links now use Link Color and, on hover, Link Hover Color; the browser's underline is kept so links stay recognisable without relying on colour. The same applies to links in a category/tag/author description (`.archive-description`).
+- **Comment author names and the "Cancel reply" link were default blue too.** `.comment-author a` and `.comment-reply-title a` were missed when the comments styles were added in 1.7.67; they now follow the other comment links (Link Color, underline on hover).
+
+### Notes
+- The new content-link rule is wrapped in `:where()`, so it adds no specificity: any class-based rule (a block's own colour, a plugin, Additional CSS) still wins. `.read-more` and block buttons (`.wp-block-button__link`, `.wp-element-button`) are excluded and unchanged -- verified a block button is still white on its dark background and the Read more link keeps its colour and hover. A browser without `:where()` support (before 2020-21) simply keeps the old default-blue links.
+- Found by checking every Customizer setting that only shows in a hover state or behind the setting that enables it (42 checks, each compared before/after): 40 behaved as labelled. The two that did not are "Link Hover Color" (fixed here) and "Social Icon Hover Background Color", a separate case -- each network's brand hover colour overrides it -- which is not changed in this release.
+- CSS only; no PHP, JS, markup, or translatable strings changed.
+
 ## [1.7.75]
 
 ### Fixed

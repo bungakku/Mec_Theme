@@ -4,7 +4,7 @@ Theme URI: https://github.com/bungakku/Mec_Theme
 Author: Biswajit Thokchom
 Author URI: https://github.com/bungakku
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.75
+Version: 1.7.76
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1240,6 +1240,27 @@ article {
     margin-bottom: 1.5rem;
 }
 
+/*
+ * Content links (added in 1.7.76). The theme styled links in the meta line,
+ * widgets, comments, navigation and footer, but never the links inside post
+ * and page content, so those rendered in the browser's default blue
+ * (#0000ee) and ignored the Customizer's Link Color and Link Hover Color.
+ * The underline is left alone on purpose: it keeps links distinguishable
+ * without relying on colour. :where() keeps the specificity at zero, so any
+ * class-based rule (a block's own link colour, a plugin, Additional CSS)
+ * still wins; the three :not() exclusions are elements that already carry
+ * their own colour (the Read More link and block buttons).
+ */
+:where(.entry-content a:not(.read-more):not(.wp-block-button__link):not(.wp-element-button)),
+:where(.archive-description a) {
+    color: var(--mec-primary-color);
+}
+
+:where(.entry-content a:not(.read-more):not(.wp-block-button__link):not(.wp-element-button)):hover,
+:where(.archive-description a):hover {
+    color: var(--mec-link-hover-color);
+}
+
 .post-thumbnail {
     margin-bottom: 20px;
 }
@@ -1544,7 +1565,9 @@ article {
 .comment-metadata a,
 .reply a,
 .comment-content a,
-.comment-navigation a {
+.comment-navigation a,
+.comment-author a,
+.comment-reply-title a {
     color: var(--mec-primary-color);
     text-decoration: none;
 }
@@ -1552,7 +1575,9 @@ article {
 .comment-metadata a:hover,
 .reply a:hover,
 .comment-content a:hover,
-.comment-navigation a:hover {
+.comment-navigation a:hover,
+.comment-author a:hover,
+.comment-reply-title a:hover {
     text-decoration: underline;
 }
 
