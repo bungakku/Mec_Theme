@@ -398,13 +398,23 @@ function mec_theme_customize_contact_preview() {
 }
 add_action( 'wp_footer', 'mec_theme_customize_contact_preview' );
 
+/*
+ * Social icon styling controls.
+ *
+ * Fixed in 1.7.77: these six settings were declared 'transport' =>
+ * 'postMessage', but no script anywhere listens for them (the live-preview JS
+ * in this file only handles the phone, email and URL fields), so changing a
+ * size or colour here did nothing in the Customizer preview until the change
+ * was published. They now use the default 'refresh' transport like every
+ * colour setting in the Colors panel -- the preview reloads and, since 1.7.75,
+ * builds its CSS from the unsaved values.
+ */
 function mec_theme_social_icon_customizer( $wp_customize ) {
     $section = 'mec_theme_contact_social_section';
     
     $wp_customize->add_setting( 'mec_theme_social_icon_size', array(
         'default'           => 36,
         'sanitize_callback' => 'absint',
-        'transport'         => 'postMessage',
     ) );
     $wp_customize->add_control( 'mec_theme_social_icon_size', array(
         'label'       => __( 'Social Icon Size (px)', 'mec_theme' ),
@@ -416,7 +426,6 @@ function mec_theme_social_icon_customizer( $wp_customize ) {
     $wp_customize->add_setting( 'mec_theme_social_icon_font_size', array(
         'default'           => 18,
         'sanitize_callback' => 'absint',
-        'transport'         => 'postMessage',
     ) );
     $wp_customize->add_control( 'mec_theme_social_icon_font_size', array(
         'label'       => __( 'Social Icon SVG Size (px)', 'mec_theme' ),
@@ -428,7 +437,6 @@ function mec_theme_social_icon_customizer( $wp_customize ) {
     $wp_customize->add_setting( 'mec_theme_social_icon_bg', array(
         'default'           => '#e0e0e0',
         'sanitize_callback' => 'sanitize_hex_color',
-        'transport'         => 'postMessage',
     ) );
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_social_icon_bg', array(
         'label'    => __( 'Social Icon Background Color', 'mec_theme' ),
@@ -438,7 +446,6 @@ function mec_theme_social_icon_customizer( $wp_customize ) {
     $wp_customize->add_setting( 'mec_theme_social_icon_color', array(
         'default'           => '#333333',
         'sanitize_callback' => 'sanitize_hex_color',
-        'transport'         => 'postMessage',
     ) );
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_social_icon_color', array(
         'label'    => __( 'Social Icon Color', 'mec_theme' ),
@@ -448,17 +455,16 @@ function mec_theme_social_icon_customizer( $wp_customize ) {
     $wp_customize->add_setting( 'mec_theme_social_icon_hover_bg', array(
         'default'           => '#cccccc',
         'sanitize_callback' => 'sanitize_hex_color',
-        'transport'         => 'postMessage',
     ) );
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_social_icon_hover_bg', array(
-        'label'    => __( 'Social Icon Hover Background Color', 'mec_theme' ),
-        'section'  => $section,
+        'label'       => __( 'Social Icon Hover Background Color', 'mec_theme' ),
+        'description' => __( 'Leave at the default to keep each network\'s own brand colour on hover; choose another colour to use it for every icon instead.', 'mec_theme' ),
+        'section'     => $section,
     ) ) );
     
     $wp_customize->add_setting( 'mec_theme_social_icon_hover_color', array(
         'default'           => '#ffffff',
         'sanitize_callback' => 'sanitize_hex_color',
-        'transport'         => 'postMessage',
     ) );
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mec_theme_social_icon_hover_color', array(
         'label'    => __( 'Social Icon Hover Color', 'mec_theme' ),

@@ -7,6 +7,17 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.77]
+
+### Fixed
+- **The Customizer's "Social Icon Hover Background Color" never had any visible effect.** `style.css` gives each of the five networks its own brand-colour hover background (`.mec-network-facebook:hover`, `-twitter`, `-instagram`, `-linkedin`, `-youtube`), and those rules beat the generic `.social-icon:hover` rule that reads the setting, so on hover every icon showed its brand colour whatever was chosen. Measured in headless Chromium with the setting at `#12ab34`: the Facebook icon's hover background stayed `rgb(24, 119, 242)`. At the default (`#cccccc`) nothing changes -- the brand colours are kept, and the generated CSS is byte-identical to 1.7.76. Once a different colour is chosen it now applies to all five icons; the rule uses the `background` shorthand because Instagram's hover is a gradient image that `background-color` alone would leave in place. The control now says so ("Leave at the default to keep each network's own brand colour on hover; choose another colour to use it for every icon instead.").
+- **The six Social Icon settings (size, SVG size, background, colour, hover background, hover colour) did nothing in the Customizer preview.** They were declared `'transport' => 'postMessage'`, but no script listens for them -- the live-preview JS only handles the phone, email and URL fields -- so a change showed nowhere until it was published. They now use the default `refresh` transport like every setting in the Colors panel; since 1.7.75 the refreshed preview is built from the unsaved values.
+
+### Notes
+- Found by the audit of whether each Customizer setting actually changes the rendered page: the hover-state check flagged this setting, and the follow-up read of every `postMessage` setting against the preview scripts found the other six without a handler (the other 20 `postMessage` settings all have one).
+- Verified from the release zip on WordPress 7.1 with `WP_DEBUG` on: at the default (and at an explicit `#ccc`/`#CCC`) the five icons' hover backgrounds are unchanged and the generated CSS is byte-identical to 1.7.76; with `#12ab34` all five icons, Instagram included, hover to that colour at 1280px and 400px; a draft preview shows the unsaved icon size and hover rule while the public page keeps 36px and the brand colours; 9 URLs load with no PHP messages.
+- 1 new translatable string (the control description); the `.pot` references for the social-icon strings moved with the code. Unique string count 282 -> 283.
+
 ## [1.7.76]
 
 ### Fixed

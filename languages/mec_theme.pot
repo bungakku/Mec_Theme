@@ -2,7 +2,7 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MEC_Theme 1.7.76\n"
+"Project-Id-Version: MEC_Theme 1.7.77\n"
 "Report-Msgid-Bugs-To: https://github.com/bungakku/Mec_Theme/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -691,27 +691,31 @@ msgstr ""
 msgid "Applies at 480px and below only. Desktop size is unaffected."
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:410
+#: inc/customizer/contact-social-panel.php:420
 msgid "Social Icon Size (px)"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:422
+#: inc/customizer/contact-social-panel.php:431
 msgid "Social Icon SVG Size (px)"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:434
+#: inc/customizer/contact-social-panel.php:442
 msgid "Social Icon Background Color"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:444
+#: inc/customizer/contact-social-panel.php:451
 msgid "Social Icon Color"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:454
+#: inc/customizer/contact-social-panel.php:460
 msgid "Social Icon Hover Background Color"
 msgstr ""
 
-#: inc/customizer/contact-social-panel.php:464
+#: inc/customizer/contact-social-panel.php:461
+msgid "Leave at the default to keep each network's own brand colour on hover; choose another colour to use it for every icon instead."
+msgstr ""
+
+#: inc/customizer/contact-social-panel.php:470
 msgid "Social Icon Hover Color"
 msgstr ""
 

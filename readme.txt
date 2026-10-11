@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.76
+Stable tag: 1.7.77
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.77 =
+* Fixed: the Customizer's "Social Icon Hover Background Color" never had any visible effect -- each network's brand-colour hover rule in `style.css` overrode the rule that reads it (Facebook stayed rgb 24,119,242 on hover with the setting at #12ab34). At its default the brand colours are kept exactly as before; once another colour is chosen it applies to all five icons. The control now says so.
+* Fixed: the six Social Icon style settings (size, SVG size, background, colour, hover background, hover colour) did nothing in the Customizer preview -- they used `postMessage` transport but no script listens for them. They now use the default `refresh` transport like the Colors panel settings.
+* 1 new translatable string. CSS generation in `inc/customizer-css.php`, setting transport in `inc/customizer/contact-social-panel.php`; no `style.css`, JS or markup changes.
 
 = 1.7.76 =
 * Fixed: the Customizer's "Link Color" and "Link Hover Color" did nothing for links inside post and page content -- the theme had no rule for them, so they rendered in the browser's default blue (rgb 0,0,238) whatever the settings said (set to green/red, the content link stayed default blue on hover too). Content links, and links in category/tag/author descriptions, now use Link Color and, on hover, Link Hover Color; the underline is kept.

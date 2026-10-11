@@ -522,6 +522,20 @@ function mec_theme_get_customizer_css() {
     $site_title_color = mec_theme_get_color_var( 'mec_theme_site_title_color', '#333333' );
     $css .= '.site-title a { color: ' . $site_title_color . '; }';
     
+    // Added in 1.7.77: "Social Icon Hover Background Color" never had any
+    // visible effect, because style.css gives each of the five networks its
+    // own brand-colour hover background (.mec-network-*:hover) and those
+    // rules beat the generic .social-icon:hover one that reads the setting.
+    // At its default the brand colours are kept exactly as before; once a
+    // different colour is chosen it applies to every icon. `background` (not
+    // `background-color`) is used on purpose: Instagram's hover is a gradient
+    // image that only the shorthand resets. Same specificity as the brand
+    // rules, and this stylesheet loads after style.css, so it wins.
+    $social_hover_bg = strtolower( mec_theme_get_color_var( 'mec_theme_social_icon_hover_bg', '#cccccc' ) );
+    if ( ! in_array( $social_hover_bg, array( '#cccccc', '#ccc' ), true ) ) {
+        $css .= '.social-icon:hover, .mec-network-facebook:hover, .mec-network-twitter:hover, .mec-network-instagram:hover, .mec-network-linkedin:hover, .mec-network-youtube:hover { background: ' . $social_hover_bg . '; }';
+    }
+    
     $line_height = get_theme_mod( 'mec_theme_body_line_height', '1.6' );
     $css .= 'body { line-height: ' . floatval( $line_height ) . '; }';
     
