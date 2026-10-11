@@ -36,6 +36,21 @@ get_header(); ?>
             <?php if ( 'grid' === $blog_layout || 'list' === $blog_layout ) : ?>
                 </div><!-- .blog-grid or .blog-list -->
             <?php endif; ?>
+
+            <?php
+            // Added in 1.7.78: WordPress uses front-page.php for the posts
+            // index too whenever Settings > Reading is "Your latest posts"
+            // (the default), so this template -- not index.php -- renders the
+            // home page, and without this call visitors had no way to reach
+            // any post beyond the first page. Same arguments as index.php and
+            // archive.php. It prints nothing when a static page is the front
+            // page (a single page has only one "page" of results).
+            the_posts_pagination( array(
+                'mid_size'  => 2,
+                'prev_text' => '&laquo; ' . __( 'Previous', 'mec_theme' ),
+                'next_text' => __( 'Next', 'mec_theme' ) . ' &raquo;',
+            ) );
+            ?>
         </main><!-- #primary -->
 
         <?php if ( is_active_sidebar( 'sidebar-1' ) ) : ?>

@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.77
+Stable tag: 1.7.78
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.78 =
+* Fixed: the home page had no pagination, so older posts could not be reached from it. With Settings > Reading on "Your latest posts" (the WordPress default) the home page is rendered by `front-page.php`, which printed its post loop but never called `the_posts_pagination()` like `index.php`, `archive.php` and `search.php` do -- with 16 posts and 6 per page, `/`, `/?paged=2` and `/?paged=3` showed 6, 6 and 4 posts and no way to move between them. Pagination now appears below the posts (outside the Grid/List wrapper) and prints nothing when a static page is the front page.
+* Found by extending the real-browser audit to pagination, author bio, Related Posts and the archive templates; everything else checked there (1280/800/480/360px, Classic/Grid/List) was fine. PHP only (`front-page.php`); no new strings.
 
 = 1.7.77 =
 * Fixed: the Customizer's "Social Icon Hover Background Color" never had any visible effect -- each network's brand-colour hover rule in `style.css` overrode the rule that reads it (Facebook stayed rgb 24,119,242 on hover with the setting at #12ab34). At its default the brand colours are kept exactly as before; once another colour is chosen it applies to all five icons. The control now says so.

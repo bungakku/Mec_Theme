@@ -7,6 +7,16 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.78]
+
+### Fixed
+- **The home page had no pagination, so older posts could not be reached from it.** With Settings > Reading set to "Your latest posts" (WordPress's default), WordPress renders the home page with `front-page.php` rather than `index.php`, and `front-page.php` printed its post loop but never called `the_posts_pagination()` (`index.php`, `archive.php` and `search.php` all do). Measured on WordPress 7.1 with 16 published posts and 6 per page: `/`, `/?paged=2` and `/?paged=3` showed 6, 6 and 4 posts and no pagination at all, so a visitor could only ever see the newest 6 posts from the home page (the `?paged=N` URLs worked, but nothing linked to them). The same pagination call, with the same arguments as the other three templates, is now placed after the post loop (and after the Grid/List wrapper closes, so it never sits inside a grid cell). It prints nothing when a static page is the front page.
+
+### Notes
+- Found by extending the real-browser audit to pagination, the author bio, Related Posts and the archive templates. Pagination on category and search archives (14-15 pages) was already styled and fits at 1280, 800, 480 and 360px (it wraps to two rows at 480px and below, tap targets 40-44px); the author bio (normal, empty and unbroken-URL descriptions), Related Posts (1, 2, 3 and 6 cards) and the category, author, search, date, empty-search and 404 pages in Classic, Grid and List layouts showed no overflow and exactly one `<h1>` each.
+- Verified from the release zip with `WP_DEBUG` on: `/`, `/?paged=2` and `/?paged=3` now show "1 2 3" with Next/Previous in the right places, the current page is highlighted, and `/?paged=4` is a 404 as before; 27 browser checks (Classic/Grid/List x 1280/800/360px x 3 pages) found the pagination below the posts, outside the grid, in the theme's styling (none in default link blue), with no horizontal overflow and the right page marked current; clicking Next, Next, Previous lands on pages 2, 3, 2; a static front page still shows its page with no pagination.
+- No new strings; the `.pot` gained two source references (Previous/Next in `front-page.php`). PHP only (`front-page.php`).
+
 ## [1.7.77]
 
 ### Fixed

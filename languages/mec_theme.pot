@@ -2,7 +2,7 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MEC_Theme 1.7.77\n"
+"Project-Id-Version: MEC_Theme 1.7.78\n"
 "Report-Msgid-Bugs-To: https://github.com/bungakku/Mec_Theme/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,12 +24,14 @@ msgid "It looks like nothing was found at this location. Maybe try a search?"
 msgstr ""
 
 #: archive.php:46
+#: front-page.php:50
 #: index.php:46
 #: search.php:51
 msgid "Previous"
 msgstr ""
 
 #: archive.php:47
+#: front-page.php:51
 #: index.php:47
 #: search.php:52
 msgid "Next"
