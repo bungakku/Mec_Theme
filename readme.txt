@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.79
+Stable tag: 1.7.80
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.80 =
+* Fixed: comment text, category/tag/author descriptions and Text/Custom HTML/block-widget paragraphs had the same missing typography 1.7.79 fixed for posts and pages. A quote in a comment looked like a plain paragraph, comment lists hung outside the text column, `<pre>` and headings in comments were cramped, and a description's paragraphs and bullets ran together (the bullets were clipped by the page edge). The 1.7.79 `:where()` rules now also cover `.comment-content` and `.archive-description`, and paragraphs in descriptions and Text/Custom HTML/block widgets get a 1em gap. Widget titles and the theme's bare widget link lists (`.widget ul`) are unchanged.
+* Found by auditing the places outside `.entry-content` that show user-written HTML. CSS only (`style.css`); no PHP or string changes.
 
 = 1.7.79 =
 * Fixed: post and page content had almost no typography. The reset at the top of `style.css` (`* { margin: 0; padding: 0 }`) removed the browser's default spacing from everything inside `.entry-content` and nothing put it back -- headings had no margins (h5 and h6 rendered smaller than the body text), list bullets hung outside the text column, a blockquote looked like an ordinary paragraph, `<pre>` blocks had no padding, and tables had no borders or cell padding. Content now gets heading sizes/spacing, list indent, a quote bar, code/pre padding and background, table borders and a horizontal-rule margin, using the values `assets/css/editor-style.css` already used, so the editor and the front end agree. Everything is wrapped in `:where()` (zero specificity), so a block's own class, a plugin or Additional CSS still wins.

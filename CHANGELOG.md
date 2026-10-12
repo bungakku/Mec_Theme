@@ -7,6 +7,17 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.80]
+
+### Fixed
+- **Comment text, category/tag/author descriptions and Text/Custom HTML/block-widget paragraphs had the same missing typography 1.7.79 fixed for posts and pages.** They sit outside `.entry-content`, so the 1.7.79 rules never reached them and the global `* { margin: 0; padding: 0 }` reset still applied. Measured on WordPress 7.1 (headless Chromium 153): a `<blockquote>` in a comment (the most common HTML a visitor can post) rendered exactly like a paragraph; in an administrator's comment the heading had no margins, the list bullets hung outside the text column and a `<pre>` had no padding; a category description's two paragraphs sat on consecutive lines with no gap, and its bullet list lost its bullets to the edge of the page. The 1.7.79 `:where()` rules now use a shared selector group (`.entry-content`, `.comment-content`, `.archive-description`), so comments and descriptions get the same heading, list, quote, code and table styling as content.
+- Paragraphs in category/tag/author descriptions and in Text, Custom HTML and block widgets (`.archive-description p`, `.textwidget p`, `.widget_block p`) get a 1em bottom margin, none on the last one. Lists in widgets are left as they are on purpose: `.widget ul` is the theme's bare link-list style (no bullets, divider lines) and Text-widget lists follow it.
+
+### Notes
+- Widget titles (`.widget-title`), heading blocks inside block widgets and the Recent Posts widget are unchanged (measured: title 19.2px with a 12px bottom margin; a heading block in a block widget stays 24px with no margins). The existing `.comment-content p` spacing (12px) still takes precedence over the new rule.
+- Everything remains zero-specificity (`:where()`): a block's own class, a plugin or Additional CSS still overrides it. Verified the 1.7.79 post/page results are unchanged and that a post with a wide table and a 250-character `<pre>` line still has no horizontal overflow at 1280/800/360px.
+- CSS only (`style.css`); no PHP or translatable-string changes, so the `.pot` only gets the new version in its header.
+
 ## [1.7.79]
 
 ### Fixed

@@ -4,7 +4,7 @@ Theme URI: https://github.com/bungakku/Mec_Theme
 Author: Biswajit Thokchom
 Author URI: https://github.com/bungakku
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.79
+Version: 1.7.80
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1241,9 +1241,11 @@ article {
 }
 
 /*
- * Content typography (added in 1.7.79). The reset at the top of this file
+ * Content typography (added in 1.7.79; extended in 1.7.80 from post and page
+ * content to comment text and category/tag/author descriptions, which had
+ * the same problem). The reset at the top of this file
  * (* { margin: 0; padding: 0 }) also removed the browser's default spacing
- * from everything inside post and page content, and nothing put it back:
+ * from everything inside user-written content, and nothing put it back:
  * headings had no margins (h5/h6 even rendered smaller than the body text),
  * list bullets hung outside the text column, a blockquote looked like a
  * paragraph, <pre> blocks and tables had no padding, and tables had no
@@ -1254,7 +1256,7 @@ article {
  * Additional CSS still overrides it. A browser without :where() support
  * (before 2020-21) simply keeps the old unstyled look.
  */
-:where(.entry-content h1, .entry-content h2, .entry-content h3, .entry-content h4, .entry-content h5, .entry-content h6) {
+:where(:is(.entry-content, .comment-content, .archive-description) :is(h1, h2, h3, h4, h5, h6)) {
     color: var(--mec-heading-color);
     margin-top: 1.5em;
     margin-bottom: 0.5em;
@@ -1262,28 +1264,28 @@ article {
     font-weight: 600;
 }
 
-:where(.entry-content h1) { font-size: 2rem; }
-:where(.entry-content h2) { font-size: 1.7rem; }
-:where(.entry-content h3) { font-size: 1.4rem; }
-:where(.entry-content h4) { font-size: 1.2rem; }
-:where(.entry-content h5) { font-size: 1.1rem; }
-:where(.entry-content h6) { font-size: 1rem; }
+:where(:is(.entry-content, .comment-content, .archive-description) h1) { font-size: 2rem; }
+:where(:is(.entry-content, .comment-content, .archive-description) h2) { font-size: 1.7rem; }
+:where(:is(.entry-content, .comment-content, .archive-description) h3) { font-size: 1.4rem; }
+:where(:is(.entry-content, .comment-content, .archive-description) h4) { font-size: 1.2rem; }
+:where(:is(.entry-content, .comment-content, .archive-description) h5) { font-size: 1.1rem; }
+:where(:is(.entry-content, .comment-content, .archive-description) h6) { font-size: 1rem; }
 
 /* Must come after the heading rule: no extra gap above a leading heading. */
-:where(.entry-content > :first-child) {
+:where(:is(.entry-content, .comment-content, .archive-description) > :first-child) {
     margin-top: 0;
 }
 
-:where(.entry-content ul, .entry-content ol) {
+:where(:is(.entry-content, .comment-content, .archive-description) :is(ul, ol)) {
     margin-bottom: 1.5em;
     padding-left: 1.5em;
 }
 
-:where(.entry-content li > ul, .entry-content li > ol) {
+:where(:is(.entry-content, .comment-content, .archive-description) li > :is(ul, ol)) {
     margin-bottom: 0;
 }
 
-:where(.entry-content blockquote) {
+:where(:is(.entry-content, .comment-content, .archive-description) blockquote) {
     border-left: 4px solid var(--mec-primary-color);
     margin-bottom: 1.5em;
     padding-left: 20px;
@@ -1292,48 +1294,62 @@ article {
 }
 
 /* The Pullquote block has its own look; do not add the quote bar to it. */
-:where(.entry-content .wp-block-pullquote blockquote) {
+:where(:is(.entry-content, .comment-content, .archive-description) .wp-block-pullquote blockquote) {
     border-left: 0;
     padding-left: 0;
     font-style: normal;
 }
 
-:where(.entry-content code, .entry-content pre) {
+:where(:is(.entry-content, .comment-content, .archive-description) :is(code, pre)) {
     background: #f5f5f5;
     border-radius: 3px;
     padding: 2px 5px;
 }
 
-:where(.entry-content pre) {
+:where(:is(.entry-content, .comment-content, .archive-description) pre) {
     margin-bottom: 1.5em;
     padding: 15px;
     overflow-x: auto;
     white-space: pre-wrap;
 }
 
-:where(.entry-content pre code) {
+:where(:is(.entry-content, .comment-content, .archive-description) pre code) {
     background: none;
     padding: 0;
 }
 
-:where(.entry-content table) {
+:where(:is(.entry-content, .comment-content, .archive-description) table) {
     border-collapse: collapse;
     margin-bottom: 1.5em;
 }
 
-:where(.entry-content th, .entry-content td) {
+:where(:is(.entry-content, .comment-content, .archive-description) :is(th, td)) {
     border: 1px solid var(--mec-border-color);
     padding: 8px;
     text-align: start;
 }
 
-:where(.entry-content th) {
+:where(:is(.entry-content, .comment-content, .archive-description) th) {
     background-color: #f5f5f5;
     font-weight: 600;
 }
 
-:where(.entry-content hr) {
+:where(:is(.entry-content, .comment-content, .archive-description) hr) {
     margin: 1.5em 0;
+}
+
+/*
+ * Paragraph spacing where .entry-content p and .comment-content p do not
+ * already provide it: category/tag/author descriptions and Text, Custom HTML
+ * and block-widget paragraphs ran together. Lists inside widgets are left
+ * alone on purpose (.widget ul is the theme's bare link-list style).
+ */
+:where(.archive-description p, .textwidget p, .widget_block p) {
+    margin-bottom: 1em;
+}
+
+:where(.archive-description, .textwidget, .widget_block) > :last-child {
+    margin-bottom: 0;
 }
 
 /*
