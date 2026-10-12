@@ -4,7 +4,7 @@ Theme URI: https://github.com/bungakku/Mec_Theme
 Author: Biswajit Thokchom
 Author URI: https://github.com/bungakku
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.78
+Version: 1.7.79
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1238,6 +1238,102 @@ article {
 
 .entry-content p {
     margin-bottom: 1.5rem;
+}
+
+/*
+ * Content typography (added in 1.7.79). The reset at the top of this file
+ * (* { margin: 0; padding: 0 }) also removed the browser's default spacing
+ * from everything inside post and page content, and nothing put it back:
+ * headings had no margins (h5/h6 even rendered smaller than the body text),
+ * list bullets hung outside the text column, a blockquote looked like a
+ * paragraph, <pre> blocks and tables had no padding, and tables had no
+ * borders. The values below are the ones assets/css/editor-style.css has
+ * always used, so the editor and the front end now agree. As with the
+ * content links below, everything is wrapped in :where() (zero specificity,
+ * later rules win a tie with the reset), so a block's own class, a plugin or
+ * Additional CSS still overrides it. A browser without :where() support
+ * (before 2020-21) simply keeps the old unstyled look.
+ */
+:where(.entry-content h1, .entry-content h2, .entry-content h3, .entry-content h4, .entry-content h5, .entry-content h6) {
+    color: var(--mec-heading-color);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    line-height: 1.3;
+    font-weight: 600;
+}
+
+:where(.entry-content h1) { font-size: 2rem; }
+:where(.entry-content h2) { font-size: 1.7rem; }
+:where(.entry-content h3) { font-size: 1.4rem; }
+:where(.entry-content h4) { font-size: 1.2rem; }
+:where(.entry-content h5) { font-size: 1.1rem; }
+:where(.entry-content h6) { font-size: 1rem; }
+
+/* Must come after the heading rule: no extra gap above a leading heading. */
+:where(.entry-content > :first-child) {
+    margin-top: 0;
+}
+
+:where(.entry-content ul, .entry-content ol) {
+    margin-bottom: 1.5em;
+    padding-left: 1.5em;
+}
+
+:where(.entry-content li > ul, .entry-content li > ol) {
+    margin-bottom: 0;
+}
+
+:where(.entry-content blockquote) {
+    border-left: 4px solid var(--mec-primary-color);
+    margin-bottom: 1.5em;
+    padding-left: 20px;
+    font-style: italic;
+    color: #666666;
+}
+
+/* The Pullquote block has its own look; do not add the quote bar to it. */
+:where(.entry-content .wp-block-pullquote blockquote) {
+    border-left: 0;
+    padding-left: 0;
+    font-style: normal;
+}
+
+:where(.entry-content code, .entry-content pre) {
+    background: #f5f5f5;
+    border-radius: 3px;
+    padding: 2px 5px;
+}
+
+:where(.entry-content pre) {
+    margin-bottom: 1.5em;
+    padding: 15px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+}
+
+:where(.entry-content pre code) {
+    background: none;
+    padding: 0;
+}
+
+:where(.entry-content table) {
+    border-collapse: collapse;
+    margin-bottom: 1.5em;
+}
+
+:where(.entry-content th, .entry-content td) {
+    border: 1px solid var(--mec-border-color);
+    padding: 8px;
+    text-align: start;
+}
+
+:where(.entry-content th) {
+    background-color: #f5f5f5;
+    font-weight: 600;
+}
+
+:where(.entry-content hr) {
+    margin: 1.5em 0;
 }
 
 /*

@@ -7,6 +7,22 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.79]
+
+### Fixed
+- **Post and page content had almost no typography.** `style.css` opens with a reset, `* { margin: 0; padding: 0 }`, which also removed the browser's default spacing from everything inside `.entry-content`, and no rule ever put it back. Measured on a post containing every common element (headless Chromium 153, WordPress 7.1): headings had `margin-top` 0 and sat directly against the text above and below, h5 and h6 rendered at 13.3px and 10.7px (smaller than the 16px body text), list bullets hung outside the text column (`padding-left` 0), a classic blockquote was indistinguishable from a paragraph, `<pre>` had no padding or background, and a plain `<table>` had no borders and no cell padding ("Name Value" ran together). Content now gets: heading colour/size/spacing (h1 2rem ... h6 1rem, 600 weight, 1.5em above and 0.5em below, no gap above a leading heading), list indent and spacing (nested lists without a second bottom margin), a primary-colour quote bar with italic grey text (not on the Pullquote block, which keeps its own look), a light background and padding for `<code>`/`<pre>`, table borders (`--mec-border-color`), cell padding and a shaded header row, and a margin around `<hr>`. The values are the ones `assets/css/editor-style.css` has always used, so authors now see on the front end what the editor showed them.
+- The new rules are wrapped in `:where()` (zero specificity, the same approach as the 1.7.76 link rule), so any class-based rule still wins: a block's own styling, a plugin, Additional CSS. Verified a `.custom-h { margin-top: 7px; color: ... }` rule and a `.entry-content ul { padding-left: 3px }` rule both override the new defaults. A browser without `:where()` support (before 2020-21) simply keeps the old unstyled look.
+- `assets/css/editor-style.css` brought in line with the front end: the editor's line height is 1.8 (as `.entry-content`), links keep their underline (the front end underlines them since 1.7.76; the editor removed it), nested lists no longer get a second bottom margin, code inside `<pre>` no longer gets a second background/padding, and the Pullquote block no longer gets the quote bar.
+
+### Changed
+- Headings inside post and page content now use the Customizer's **Heading Color** (`--mec-heading-color`); before, they inherited **Text Color**, so changing Heading Color affected the post title and widget titles but not the headings in the content. Measured with Heading Color `#ff0000` and Text Color `#0000ff`: content h2 and the post title are red, paragraphs blue.
+- Content headings are slightly larger and bolder than the browser defaults they replace (h2 27.2px vs 24px, h3 22.4px vs 18.7px, h4 19.2px vs 16px, h5 17.6px vs 13.3px, h6 16px vs 10.7px; weight 600 vs 700 on all). Existing sites will see this on their next page load.
+
+### Notes
+- Found by comparing the block editor with the front end in headless Chromium (computed styles of 11 elements): the editor stylesheet described a design the front end never had. Left as they are and **not** changed here: block buttons (the editor shows a blue 4px-radius button, the front end shows WordPress's default dark pill -- changing the front end would restyle every existing button), image corner radius (editor 4px, front end square), and the block editor's own quote/code-block frames.
+- Verified from the release zip with `WP_DEBUG` on: a post with h1-h6, nested and ordered lists, blockquote, `<pre>`, inline code, `<hr>`, a table, a Pullquote block; a block post with a heading, quote, button, list and code block; and a post with an 8-column table, an unbroken 250-character `<pre>` line and a 12-item ordered list -- each at 1280, 800 and 360px with no horizontal overflow (the wide table scrolls inside its own box). A block button, palette colours and font sizes are unchanged.
+- CSS only (`style.css`, `assets/css/editor-style.css`); no PHP or translatable-string changes, so the `.pot` only gets the new version in its header.
+
 ## [1.7.78]
 
 ### Fixed
