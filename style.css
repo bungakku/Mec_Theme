@@ -4,7 +4,7 @@ Theme URI: https://github.com/bungakku/Mec_Theme
 Author: Biswajit Thokchom
 Author URI: https://github.com/bungakku
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.80
+Version: 1.7.81
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1693,6 +1693,17 @@ article {
     text-decoration: underline;
 }
 
+/*
+ * Links inside comment text (added in 1.7.81) keep the underline. The rule
+ * above removes it from every comment link, which is fine for the author,
+ * date and Reply links but left a link in the middle of a sentence
+ * distinguishable only by colour (2.55:1 against the text, below the 3:1 that
+ * WCAG 1.4.1 needs without another cue).
+ */
+.comment-content a {
+    text-decoration: underline;
+}
+
 .comment-content p {
     margin-bottom: var(--mec-space-sm);
 }
@@ -1854,6 +1865,18 @@ article {
 
 .widget a:hover {
     color: var(--mec-primary-color);
+}
+
+/*
+ * Links inside a Text, Custom HTML or block-widget paragraph (added in
+ * 1.7.81). `.widget a` gives every widget link the body text colour with no
+ * underline, which suits the link lists but left a link inside a sentence
+ * with nothing at all to tell it from the words around it. The tag-cloud
+ * block is a cloud of links, not running text, so it is excluded.
+ */
+.textwidget p a,
+.widget_block p:not(.wp-block-tag-cloud) a {
+    text-decoration: underline;
 }
 
 /* ===== Footer Styles ===== */

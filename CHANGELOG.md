@@ -7,6 +7,17 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.81]
+
+### Fixed
+- **Links inside comment text and inside Text, Custom HTML and block-widget paragraphs were not underlined.** `style.css` removed the underline from every comment link (`.comment-content a { text-decoration: none }`, with the author, date and Reply links) and gave every widget link the body text colour with no underline (`.widget a`). That suits those link lists but not a link in the middle of a sentence. In a comment the link was distinguishable only by colour: axe-core 4.10 reported "link-in-text-block" (serious) -- 2.55:1 contrast between the link (`#0274be`) and the surrounding text (`#333333`), below the 3:1 that WCAG 1.4.1 requires when colour is the only cue. In a Text or Custom HTML widget (and in the footer widget areas) the link was the same `rgb(51, 51, 51)` as the sentence with no underline, so nothing marked it as a link at all (axe does not flag identical colours, so this one was found by reading the computed styles). Both are now underlined, as post and page content links have been since 1.7.76.
+- Unchanged on purpose and measured so: comment author, date and Reply links (standalone links, no underline), the link lists in widgets (Recent Posts, Archives, Categories, Meta), and the Tag Cloud block (`p.wp-block-tag-cloud` is excluded; its links stay without underline).
+
+### Notes
+- Found by the first automated accessibility audit of the theme: axe-core 4.10.2 in headless Chromium 153 against WordPress 7.1, on the home page, a post with comments, a page, a category archive, a search with and without results and a 404, each at 1280 and 360px (14 page loads), plus the home/post page with the mobile menu closed and open at 360px and a desktop dropdown hovered. The only violation was the comment link above. A keyboard run (Tab through 63 stops on the home page and a post) found a visible focus indicator on every one.
+- Verified from the release zip with `WP_DEBUG` on: axe clean on the post-with-comments page at 1280px after the change; computed `text-decoration` underline on the comment link and on text-widget, Custom HTML, block-widget and footer-widget in-text links, and none on the tag cloud, author, date, Reply and widget list links.
+- CSS only (`style.css`); no PHP or translatable-string changes, so the `.pot` only gets the new version in its header.
+
 ## [1.7.80]
 
 ### Fixed

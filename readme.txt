@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.80
+Stable tag: 1.7.81
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.81 =
+* Fixed (accessibility): links inside comment text and inside Text, Custom HTML and block-widget paragraphs were not underlined. A comment link was told apart from its sentence by colour alone (2.55:1 contrast against the text, below the 3:1 WCAG 1.4.1 requires without another cue; axe-core "link-in-text-block"), and a widget link had exactly the text colour and no underline, so nothing marked it as a link. Both are now underlined. Author, date and Reply links, widget link lists and the tag-cloud block are unchanged.
+* Found by the first automated accessibility audit (axe-core 4.10 on home, post with comments, page, category, search with and without results and 404 at 1280 and 360px, plus the open mobile menu and a desktop dropdown): everything else passed, and all 63 keyboard tab stops showed a visible focus indicator. CSS only (`style.css`); no PHP or string changes.
 
 = 1.7.80 =
 * Fixed: comment text, category/tag/author descriptions and Text/Custom HTML/block-widget paragraphs had the same missing typography 1.7.79 fixed for posts and pages. A quote in a comment looked like a plain paragraph, comment lists hung outside the text column, `<pre>` and headings in comments were cramped, and a description's paragraphs and bullets ran together (the bullets were clipped by the page edge). The 1.7.79 `:where()` rules now also cover `.comment-content` and `.archive-description`, and paragraphs in descriptions and Text/Custom HTML/block widgets get a 1em gap. Widget titles and the theme's bare widget link lists (`.widget ul`) are unchanged.
