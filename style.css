@@ -4,7 +4,7 @@ Theme URI: https://github.com/bungakku/Mec_Theme
 Author: Biswajit Thokchom
 Author URI: https://github.com/bungakku
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.81
+Version: 1.7.82
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1254,7 +1254,9 @@ article {
  * content links below, everything is wrapped in :where() (zero specificity,
  * later rules win a tie with the reset), so a block's own class, a plugin or
  * Additional CSS still overrides it. A browser without :where() support
- * (before 2020-21) simply keeps the old unstyled look.
+ * (before 2020-21) simply keeps the old unstyled look. The list indent and
+ * the quote bar use logical properties (inline-start), so they sit on the
+ * reading side of the text in right-to-left languages too (1.7.82).
  */
 :where(:is(.entry-content, .comment-content, .archive-description) :is(h1, h2, h3, h4, h5, h6)) {
     color: var(--mec-heading-color);
@@ -1278,7 +1280,7 @@ article {
 
 :where(:is(.entry-content, .comment-content, .archive-description) :is(ul, ol)) {
     margin-bottom: 1.5em;
-    padding-left: 1.5em;
+    padding-inline-start: 1.5em;
 }
 
 :where(:is(.entry-content, .comment-content, .archive-description) li > :is(ul, ol)) {
@@ -1286,17 +1288,17 @@ article {
 }
 
 :where(:is(.entry-content, .comment-content, .archive-description) blockquote) {
-    border-left: 4px solid var(--mec-primary-color);
+    border-inline-start: 4px solid var(--mec-primary-color);
     margin-bottom: 1.5em;
-    padding-left: 20px;
+    padding-inline-start: 20px;
     font-style: italic;
     color: #666666;
 }
 
 /* The Pullquote block has its own look; do not add the quote bar to it. */
 :where(:is(.entry-content, .comment-content, .archive-description) .wp-block-pullquote blockquote) {
-    border-left: 0;
-    padding-left: 0;
+    border-inline-start: 0;
+    padding-inline-start: 0;
     font-style: normal;
 }
 

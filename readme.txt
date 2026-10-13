@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.81
+Stable tag: 1.7.82
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.82 =
+* Fixed: in right-to-left languages (Urdu, Arabic, Sindhi, Kashmiri...) the quote bar and list indent added in 1.7.79 sat on the wrong side of the text -- the bar on the left of right-aligned text, list bullets hanging outside the column. They now use direction-aware properties (`border-inline-start`, `padding-inline-start`) in `style.css` and `assets/css/editor-style.css`; left-to-right sites are unchanged (measured: 24px list indent, 4px bar, 20px padding on the left, as before).
+* Known limitation, not changed here: the theme has no `rtl.css`. On an RTL site the page layout mirrors by itself (logo, contact details, sidebar, menu), but some physical left/right offsets do not -- the default "left" post-title alignment, and the search icon overlapping the placeholder in the mobile menu. CSS only; no PHP or string changes.
 
 = 1.7.81 =
 * Fixed (accessibility): links inside comment text and inside Text, Custom HTML and block-widget paragraphs were not underlined. A comment link was told apart from its sentence by colour alone (2.55:1 contrast against the text, below the 3:1 WCAG 1.4.1 requires without another cue; axe-core "link-in-text-block"), and a widget link had exactly the text colour and no underline, so nothing marked it as a link. Both are now underlined. Author, date and Reply links, widget link lists and the tag-cloud block are unchanged.

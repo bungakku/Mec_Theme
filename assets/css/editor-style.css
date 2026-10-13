@@ -54,17 +54,17 @@ img {
 
 /* ===== Blockquotes ===== */
 blockquote {
-    border-left: 4px solid #0274be;
-    margin-left: 0;
-    padding-left: 20px;
+    border-inline-start: 4px solid #0274be;
+    margin-inline-start: 0;
+    padding-inline-start: 20px;
     font-style: italic;
     color: #666666;
 }
 
 /* The Pullquote block has its own look; no quote bar (same as style.css). */
 .wp-block-pullquote blockquote {
-    border-left: 0;
-    padding-left: 0;
+    border-inline-start: 0;
+    padding-inline-start: 0;
     font-style: normal;
 }
 
@@ -149,7 +149,7 @@ th {
 /* List styles */
 ul, ol {
     margin-bottom: 1.5em;
-    padding-left: 1.5em;
+    padding-inline-start: 1.5em;
 }
 
 li > ul, li > ol {

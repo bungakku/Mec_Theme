@@ -7,6 +7,16 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.82]
+
+### Fixed
+- **The content typography added in 1.7.79 was mirrored the wrong way in right-to-left languages.** The quote bar (`border-left`) and the list indent (`padding-left`) were physical properties, so on an RTL site (forced in a test install with `dir="rtl"`) the bar sat on the left of right-aligned text and list bullets hung outside the column on the right while the indent sat on the left. They now use `border-inline-start` and `padding-inline-start` in `style.css` (posts and pages, comment text and archive descriptions share the rule) and in `assets/css/editor-style.css` (quote, Pullquote reset and lists). Measured in headless Chromium 153: RTL list indent 24px on the right and quote bar 4px on the right with 20px padding; LTR unchanged at 24px / 4px / 20px on the left. `padding-inline-start` and `border-inline-start` are supported by every browser that supports the `:where()` and `:is()` selectors these rules already require.
+
+### Notes
+- Found by looking at the theme in a forced RTL context for the first time. The layout itself mirrors on its own (logo and contact details swap sides, the sidebar moves to the left, the menu and header flex rows reverse, horizontal scroll width unchanged at 360px), so the theme is usable on RTL sites, but it has no `rtl.css` and `style.css` still holds about 26 physical `left`/`right`/`margin-left`/`padding-left` declarations. Two visible ones were observed and are **not** changed here: the Title Settings default alignment "left" is a physical `text-align: left`, so on an RTL site the post title sits on the opposite side of the meta line; and in the mobile menu panel the search icon overlaps the placeholder text. A proper RTL pass (an `rtl.css`, or logical properties throughout) is a separate piece of work.
+- Verified from the release zip with `WP_DEBUG` on, LTR and forced RTL: list indent and quote bar on the reading side in both; pages, comments and the category archive show no change in LTR.
+- CSS only (`style.css`, `assets/css/editor-style.css`); no PHP or translatable-string changes, so the `.pot` only gets the new version in its header.
+
 ## [1.7.81]
 
 ### Fixed
