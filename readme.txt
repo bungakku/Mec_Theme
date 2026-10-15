@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.82
+Stable tag: 1.7.83
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.83 =
+* Added: `rtl.css`, a right-to-left stylesheet. WordPress loads it automatically (and only) when the site language is right-to-left; left-to-right output is unchanged (computed styles identical to 1.7.82 on 6 page types at 3 widths). It mirrors the physical left/right rules of `style.css`: title and description alignment (Desktop, Tablet, Mobile) and post title alignment, the header contact column, desktop dropdowns and third-level submenus, the mobile menu drawer (now slides in from the side of the menu button), its search icon, submenu indents and expand arrow, the sticky post bar, "Next post" link, comment reply indent and the skip link. Phone numbers and e-mail addresses are isolated as left-to-right text (they were drawn as `567-8901 (234) 1+`).
+* Changed: the Tagline Alignment option is output as `start`/`end` instead of `left`/`right` (`inc/customizer-css.php` and the live preview), which is identical in left-to-right text and follows the direction in right-to-left text. `assets/css/editor-style.css` table cells use `text-align: start`. The `rtl.css` URL carries the theme version so browsers refetch it after an update.
+* Not changed here, seen while testing: some `.main-navigation > ul > li:last-child` dropdown rules never match; the sidebar Search block button wraps "Search" onto two lines at the default sidebar width. No new translatable strings.
 
 = 1.7.82 =
 * Fixed: in right-to-left languages (Urdu, Arabic, Sindhi, Kashmiri...) the quote bar and list indent added in 1.7.79 sat on the wrong side of the text -- the bar on the left of right-aligned text, list bullets hanging outside the column. They now use direction-aware properties (`border-inline-start`, `padding-inline-start`) in `style.css` and `assets/css/editor-style.css`; left-to-right sites are unchanged (measured: 24px list indent, 4px bar, 20px padding on the left, as before).

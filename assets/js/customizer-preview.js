@@ -40,6 +40,12 @@
         if (validTaglineAlign.indexOf(value) === -1) {
             value = 'center';
         }
+        // 1.7.83: start/end, as in inc/customizer-css.php, so the preview follows the text direction too.
+        if (value === 'left') {
+            value = 'start';
+        } else if (value === 'right') {
+            value = 'end';
+        }
         document.documentElement.style.setProperty('--mec-tagline-align', value);
     }
 

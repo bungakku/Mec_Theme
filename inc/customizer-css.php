@@ -88,6 +88,14 @@ function mec_theme_get_root_variables_css() {
     $css .= '--mec-tagline-color: ' . $tagline_color . ';';
     
     $tagline_align = get_theme_mod( 'mec_theme_tagline_align', 'center' );
+    // 1.7.83: start/end instead of left/right, so the tagline follows the text direction (identical in LTR).
+    $tagline_align_map = array(
+        'left'  => 'start',
+        'right' => 'end',
+    );
+    if ( isset( $tagline_align_map[ $tagline_align ] ) ) {
+        $tagline_align = $tagline_align_map[ $tagline_align ];
+    }
     $css .= '--mec-tagline-align: ' . esc_attr( $tagline_align ) . ';';
     
     $menu_color = mec_theme_get_color_var( 'mec_theme_menu_color', '#3a3a3a' );

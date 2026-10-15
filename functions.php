@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'MEC_THEME_VERSION', '1.7.82' );
+define( 'MEC_THEME_VERSION', '1.7.83' );
 define( 'MEC_THEME_DIR', get_template_directory() );
 define( 'MEC_THEME_URI', get_template_directory_uri() );
 define( 'MEC_THEME_ASSETS', MEC_THEME_URI . '/assets' );
@@ -188,6 +188,22 @@ function mec_theme_scripts() {
     }
 }
 add_action( 'wp_enqueue_scripts', 'mec_theme_scripts' );
+
+/**
+ * Add the theme version to the RTL stylesheet URL (1.7.83).
+ *
+ * WordPress prints rtl.css itself (locale_stylesheet()) and leaves the ?ver=
+ * query string off, so a browser could keep serving an old copy after a theme
+ * update. The filter receives an empty string when no localized stylesheet
+ * applies, and that is passed through untouched.
+ *
+ * @param string $uri Localized stylesheet URI.
+ * @return string
+ */
+function mec_theme_locale_stylesheet_version( $uri ) {
+    return $uri ? add_query_arg( 'ver', MEC_THEME_VERSION, $uri ) : $uri;
+}
+add_filter( 'locale_stylesheet_uri', 'mec_theme_locale_stylesheet_version' );
 
 /**
  * Enqueue Customizer preview script

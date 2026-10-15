@@ -1,0 +1,177 @@
+/*
+ * MEC_Theme -- right-to-left overrides (added in 1.7.83).
+ *
+ * WordPress prints this file automatically, after style.css, when the site
+ * language is right-to-left (locale_stylesheet()); left-to-right sites never
+ * request it, so their output is unchanged.
+ *
+ * It holds ONLY the physical left/right declarations of style.css, mirrored.
+ * Everything that is already direction-neutral -- flex rows (logo, header,
+ * footer, sidebar order, menu), logical properties (1.7.82) -- mirrors by
+ * itself and is deliberately not repeated here. "Left" and "right" in the
+ * Customizer options and in class names such as .title-align-desktop-left
+ * keep meaning "start" and "end", as the logo position options already do.
+ *
+ * This file loads LAST, so an override here beats an equal-specificity rule
+ * in style.css at EVERY width. Where style.css has a media-query rule that
+ * is meant to take over at another width (e.g. the centred header contact
+ * column on mobile), the override below is scoped to the width it applies to.
+ */
+
+/* ===== Title / description alignment (Customizer: Desktop, Tablet, Mobile) ===== */
+@media (min-width: 769px) {
+    .title-align-desktop-left .site-text {
+        text-align: right;
+    }
+    .title-align-desktop-right .site-text {
+        text-align: left;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .title-align-tablet-left .site-text {
+        text-align: right;
+    }
+    .title-align-tablet-right .site-text {
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    .title-align-mobile-left .site-text {
+        text-align: right;
+    }
+    .title-align-mobile-right .site-text {
+        text-align: left;
+    }
+}
+
+/* ===== Header contact column (desktop; centred on mobile by style.css) ===== */
+@media (min-width: 769px) {
+    .header-contact-column {
+        text-align: left;
+    }
+}
+
+/*
+ * Phone numbers and e-mail addresses always read left-to-right. Inside a
+ * right-to-left line the leading "+" and the brackets of "+1 (234) 567-8901"
+ * otherwise end up on the wrong side ("567-8901 (234) 1+").
+ */
+.contact-phone a,
+.contact-email a {
+    direction: ltr;
+    unicode-bidi: isolate;
+}
+
+/* ===== Desktop dropdown menus ===== */
+@media (min-width: 769px) {
+    .main-navigation ul ul {
+        left: auto;
+        right: 0;
+    }
+    .main-navigation ul ul ul {
+        left: auto;
+        right: 100%;
+        margin-left: 0;
+        margin-right: 2px;
+    }
+}
+
+/* ===== Mobile menu ===== */
+@media (max-width: 768px) {
+    .menu-toggle {
+        margin-left: 10px;
+        margin-right: auto;
+    }
+
+    /* The drawer slides in from the same side as the toggle button. */
+    .mobile-menu-panel {
+        right: auto;
+        left: -80%;
+        transition: left 0.3s ease;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    }
+    .main-navigation.toggled .mobile-menu-panel {
+        right: auto;
+        left: 0;
+    }
+
+    /* Search icon sits at the end of the field; keep the text clear of it. */
+    .mobile-search-form .search-field {
+        padding: 6px 10px 6px 30px;
+    }
+    .mobile-search-form .search-submit {
+        right: auto;
+        left: 8px;
+    }
+
+    /* Submenu indents and the expand arrow. */
+    .main-navigation ul ul a {
+        padding: 8px 30px 8px 15px;
+    }
+    .main-navigation ul ul ul a {
+        padding-left: 15px;
+        padding-right: 45px;
+    }
+    .main-navigation li.menu-item-has-children > a {
+        padding-left: 30px;
+        padding-right: 15px;
+    }
+    .main-navigation ul ul li.menu-item-has-children > a {
+        padding-right: 30px;
+    }
+    .main-navigation ul ul ul li.menu-item-has-children > a {
+        padding-right: 45px;
+    }
+    .main-navigation li.menu-item-has-children > a::after {
+        right: auto;
+        left: 15px;
+    }
+}
+
+/* ===== Posts and meta ===== */
+.sticky {
+    border-left: 0;
+    border-right: 4px solid var(--mec-primary-color);
+}
+
+.entry-header--align-left,
+.entry-title--align-left {
+    text-align: right;
+}
+
+.entry-header--align-right,
+.entry-title--align-right {
+    text-align: left;
+}
+
+/* style.css sets 15px at every width (its 10px mobile rule sits before it). */
+.entry-meta span {
+    margin-right: 0;
+    margin-left: 15px;
+}
+
+.post-navigation .nav-next {
+    margin-left: 0;
+    margin-right: auto;
+    text-align: left;
+}
+
+/* ===== Comments ===== */
+.comment-list .children {
+    margin-left: 0;
+    margin-right: var(--mec-space-md);
+}
+
+@media (max-width: 768px) {
+    .comment-list .children {
+        margin-right: var(--mec-space-sm);
+    }
+}
+
+/* ===== Skip link ===== */
+.skip-link:focus {
+    left: auto !important;
+    right: 10px !important;
+}

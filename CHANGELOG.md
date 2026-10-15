@@ -7,6 +7,28 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.83]
+
+### Added
+- **`rtl.css`: the theme now has a proper right-to-left stylesheet.** WordPress prints it automatically, after `style.css`, only when the site language is right-to-left (Arabic, Urdu, Sindhi, Kashmiri, Hebrew, Persian...); left-to-right sites never request it. It holds only the physical `left`/`right` declarations of `style.css`, mirrored; everything that already mirrors by itself (flex rows, sidebar order, logical properties from 1.7.82) is not repeated. As with the logo position options, "left" and "right" in the Customizer and in class names such as `.title-align-desktop-left` keep meaning "start" and "end".
+- A `locale_stylesheet_uri` filter (`mec_theme_locale_stylesheet_version()` in `functions.php`) adds `?ver=` to the `rtl.css` URL. WordPress prints that file without a version, so a browser could keep an old copy after a theme update.
+
+### Fixed (right-to-left sites only)
+- **Title and description alignment** (Customizer: Desktop, Tablet and Mobile) and the `.entry-title--align-*` post title alignment were physical `text-align: left/right`, so the default "Left" put the title on the opposite side of the meta line. They now follow the text direction.
+- **Tagline alignment** (Customizer) is output as `start`/`end` instead of `left`/`right` in `inc/customizer-css.php` and in the live preview (`assets/js/customizer-preview.js`), because a CSS variable cannot be flipped from `rtl.css`. In left-to-right text `start` and `end` are exactly `left` and `right`: tagline position measured identical for left, centre and right.
+- **Header contact column** is aligned to the end of the header on desktop (still centred on tablet and mobile, as before).
+- **Phone numbers and e-mail addresses** are isolated as left-to-right text. In a right-to-left line `+1 (234) 567-8901` was drawn as `567-8901 (234) 1+`.
+- **Desktop dropdowns** open from the item's reading edge, and a third-level submenu opens towards the start side instead of overlapping its parent.
+- **Mobile menu**: the drawer slides in from the same side as the menu button (the left, in RTL) instead of always from the right, the search icon moved to the end of the field and no longer sits on the placeholder, the submenu indent and the expand arrow switched sides, and the menu button keeps its margin on the correct side.
+- **Sticky post** accent bar, **Next post** navigation link, **threaded comment** indent and the **skip link** now sit on the reading side.
+- `assets/css/editor-style.css`: table cells use `text-align: start`.
+
+### Notes
+- Measured in headless Chromium 141 on a WordPress 7.2-alpha install with `WP_DEBUG` on, forced `dir="rtl"`: title right-aligned at 1280/700/375px with the default setting and left-aligned with "Right"; dropdown right edge equal to its menu item; third-level submenu 2px to the start side of its parent; drawer closed at x -560..0 (700px) and -300..0 (375px), open at 0..560 and 0..300; search icon inside the field at the start side with 30px padding on that side; "Next post" at the left edge; reply indent 20px on the right; skip link on the right. No horizontal overflow on the home page, a post with comments, a page, search, a category, a 404 and page 2 at all three widths, and no PHP notices.
+- **Left-to-right output is unchanged**: computed styles and positions of every element on 6 page types at 1280, 700 and 375px (30 states, drawer open on mobile) are identical to the published 1.7.82, and `rtl.css` is not requested.
+- Seen while checking, **not changed here**: (1) `.main-navigation > ul > li:last-child > ul` and `... ul ul` in `style.css` never match, because the menu `ul` sits inside `.mobile-menu-panel` rather than directly under `.main-navigation`; they are not mirrored. (2) The 10px mobile `margin-right` of `.entry-meta span` sits earlier in the file than the 15px base rule and is always overridden (same ordering problem as 1.7.73); `rtl.css` mirrors the effective 15px. (3) The sidebar Search block button wraps "Search" onto two lines (77px tall) at the default sidebar width, in left-to-right as well.
+- No new translatable strings, so the `.pot` only gets the new version in its header.
+
 ## [1.7.82]
 
 ### Fixed
