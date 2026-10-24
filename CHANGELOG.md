@@ -7,6 +7,16 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.84]
+
+### Fixed
+- **The Search block's button broke its label in two ("Sea" / "rch") in the sidebar and footer widget areas.** The Search block is a flex row (field + button), and the reset at the top of `style.css` puts `overflow-wrap: anywhere` on every element, which lowers an element's min-content width to a single character. A flex item can shrink down to its min-content width, so as soon as the row was tight the button was squeezed to a few pixels narrower than its own label, the label wrapped mid-word, and the field stretched to the button's new height. Measured in headless Chromium 141 (default 22% sidebar, 1280px): button 77x77px with the label on two lines; at 375px: "Searc" / "h" in an 87x67px button. `.wp-block-search__button` now has `overflow-wrap: normal` (the browser default), so the label can wrap only at spaces and the button is never narrower than its longest word; the field gives way instead. Now one line at 1280, 1024, 768, 600, 480, 375 and 320px in the sidebar and in the footer widget areas, LTR and RTL: button 100x51px at 1280px, 88x45px at 375px.
+- **A 320px-wide screen scrolled sideways by 10px, and the first version of the fix above made it 48px.** The field's default width (about 20 characters) counts towards the row's minimum width, and that minimum decides how wide the sidebar column must be; without a shrinkable button it grew by 38px. `.wp-block-search__input` now starts at `width: 0` and fills the row through core's own `flex-grow: 1`, which gives the same field width whenever there is room (121px at 1280px, same as with the button fix alone) and lets the row shrink to the field's 3rem minimum when there is not. The 10px overflow at 320px is gone as well: no horizontal overflow on the home page, a post with comments, a page, search results, a category, a 404 and page 2 at 320, 340, 360, 375, 414, 480, 600, 768, 900, 1024 and 1280px (right-to-left: 320, 360, 375, 768 and 1280px).
+
+### Notes
+- Found while testing 1.7.83 (it was listed there under "not changed here"). Only the Search block button was affected: a scan of every button and submit control on 7 page types at 5 widths found no other label narrower than its text.
+- CSS only (`style.css`): two rules added after the `.widget` rule. No PHP, JS, markup or translatable-string changes, so the `.pot` only gets the new version in its header.
+
 ## [1.7.83]
 
 ### Added

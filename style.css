@@ -4,7 +4,7 @@ Theme URI: https://github.com/bungakku/Mec_Theme
 Author: Biswajit Thokchom
 Author URI: https://github.com/bungakku
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.83
+Version: 1.7.84
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1805,6 +1805,32 @@ article {
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     word-wrap: break-word;
     overflow-wrap: anywhere;
+}
+
+/*
+ * Fixed in 1.7.84. The Search block's button is a flex item next to the
+ * search field, and the reset at the top of this file puts
+ * `overflow-wrap: anywhere` on every element -- which lowers an element's
+ * min-content width to a single character. A flex item can shrink to its
+ * min-content width, so when the row was tight the button was squeezed and its
+ * label broke mid-word ("Sea" / "rch", "Searc" / "h"), and the field grew to
+ * the button's new, taller height. `normal` restores the browser default: the
+ * label can wrap only at spaces, so the button never gets narrower than its
+ * longest word and the field gives way instead.
+ *
+ * That alone made the row's minimum width larger (the field's default width
+ * of about 20 characters counts towards it), so the sidebar needed 38px more
+ * room: a 320px screen overflowed sideways by 48px instead of the 10px it
+ * already did. Starting the field at 0 and letting core's `flex-grow: 1` fill
+ * the row gives the same width as before whenever there is room, and lets the
+ * row shrink to the field's 3rem minimum when there is not.
+ */
+.wp-block-search__button {
+    overflow-wrap: normal;
+}
+
+.wp-block-search__input {
+    width: 0;
 }
 
 .screen-reader-text {

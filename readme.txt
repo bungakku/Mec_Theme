@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.83
+Stable tag: 1.7.84
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.84 =
+* Fixed: the Search block's button split its label mid-word ("Sea" / "rch") in the sidebar and footer widget areas, and the search field grew to match its height. The theme's reset puts `overflow-wrap: anywhere` on every element, so the flex row let the button shrink below the width of its own label; the button now wraps only at spaces and the field gives way instead. The search field starts at zero width and fills the row, which also removes a 10px sideways scroll on 320px-wide screens. One line at 1280, 1024, 768, 600, 480, 375 and 320px, left-to-right and right-to-left.
+* CSS only (`style.css`); no PHP, JS, markup or string changes.
 
 = 1.7.83 =
 * Added: `rtl.css`, a right-to-left stylesheet. WordPress loads it automatically (and only) when the site language is right-to-left; left-to-right output is unchanged (computed styles identical to 1.7.82 on 6 page types at 3 widths). It mirrors the physical left/right rules of `style.css`: title and description alignment (Desktop, Tablet, Mobile) and post title alignment, the header contact column, desktop dropdowns and third-level submenus, the mobile menu drawer (now slides in from the side of the menu button), its search icon, submenu indents and expand arrow, the sticky post bar, "Next post" link, comment reply indent and the skip link. Phone numbers and e-mail addresses are isolated as left-to-right text (they were drawn as `567-8901 (234) 1+`).
