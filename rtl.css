@@ -76,6 +76,18 @@
         margin-left: 0;
         margin-right: 2px;
     }
+    /* The last item is the leftmost one here; its dropdowns open to the right. */
+    .main-navigation .mobile-menu-panel > ul > li:last-child > ul,
+    .main-navigation .mobile-menu-panel > div > ul > li:last-child > ul {
+        right: auto;
+        left: 0;
+    }
+    .main-navigation .mobile-menu-panel > ul > li:last-child ul ul,
+    .main-navigation .mobile-menu-panel > div > ul > li:last-child ul ul {
+        right: auto;
+        left: 100%;
+        margin-left: 2px;
+    }
 }
 
 /* ===== Mobile menu ===== */

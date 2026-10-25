@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.84
+Stable tag: 1.7.85
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.85 =
+* Fixed: the dropdown of the last menu item opened towards the right and could run off the edge of the page; because a hidden dropdown still counts as page width, a long submenu label under the last item made every page scroll sideways even when nothing was hovered (38px at 1280px and 278px at 800px with one long label; 344px and 584px with a third level). The two rules written to anchor that dropdown to the item's right edge were scoped to `.main-navigation > ul > li:last-child`, which never matches because the menu's `<ul>` is inside `.mobile-menu-panel`; they now match the real markup and the `wp_page_menu()` fallback. Mirrored for right-to-left sites in `rtl.css`.
+* Only the last top-level item is anchored, as originally intended. CSS only (`style.css`, `rtl.css`); no PHP, JS, markup or string changes.
 
 = 1.7.84 =
 * Fixed: the Search block's button split its label mid-word ("Sea" / "rch") in the sidebar and footer widget areas, and the search field grew to match its height. The theme's reset puts `overflow-wrap: anywhere` on every element, so the flex row let the button shrink below the width of its own label; the button now wraps only at spaces and the field gives way instead. The search field starts at zero width and fills the row, which also removes a 10px sideways scroll on 320px-wide screens. One line at 1280, 1024, 768, 600, 480, 375 and 320px, left-to-right and right-to-left.

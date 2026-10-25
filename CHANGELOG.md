@@ -7,6 +7,16 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.85]
+
+### Fixed
+- **The dropdown of the last menu item opened off the right edge of the page, and made the whole site scroll sideways even when nothing was hovered.** `style.css` has two rules written to anchor that dropdown to the item's right edge instead (and to open its third level towards the left), but they were scoped to `.main-navigation > ul > li:last-child`. The menu's `<ul>` sits inside `.mobile-menu-panel`, not directly under `.main-navigation`, so the rules never matched and the last item's dropdown always opened from its left edge, towards the right. A hidden dropdown still counts as page width, so a submenu label wider than the room left on the right made every page scroll sideways: with a 352px-wide label under the last item, the page was 38px too wide at 1280px, 178px at 1000px and 278px at 800px; once that submenu had a third level it was 344, 484 and 584px. The selectors now name the real structure (`.main-navigation .mobile-menu-panel > ul > li:last-child`, plus the `> div > ul` form that the `wp_page_menu()` fallback produces when no menu is assigned). Measured in headless Chromium 141 at 1280, 1000 and 800px: the last item's dropdown now ends at the item's right edge (674-1026px for an item at 966-1026px), its third level opens towards the left (369-672px) and there is no horizontal overflow with nothing hovered.
+- **Right-to-left sites**: the same dropdown opened off the left edge. `rtl.css` now mirrors the two rules, so the last item (the leftmost one) opens its dropdown towards the right and its third level to the right of that (254-606px and 608-911px at 1280px, no overflow). Also checked with the page-menu fallback in both directions.
+
+### Notes
+- Seen while testing 1.7.83 (listed there under "not changed here"). Only the last top-level item is anchored, as the original rules intended. A long label under the second-to-last item still pushes past the edge: measured with a 48-character submenu label under "News" (second to last of nine items), the page is 2px too wide at 1280px, 142px at 1000px and 242px at 800px. Anchoring more items would change how dropdowns look on sites that have no problem today, so that is left as a separate decision.
+- CSS only (`style.css`, `rtl.css`); no PHP, JS, markup or translatable-string changes, so the `.pot` only gets the new version in its header.
+
 ## [1.7.84]
 
 ### Fixed
