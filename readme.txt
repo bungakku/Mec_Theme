@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.85
+Stable tag: 1.7.86
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.86 =
+* Changed: the gap between the post meta items (date, author, comments, categories) is now 10px at every screen width; it was 15px. The 10px rule meant for small screens sat before the 15px rule in `style.css` and never applied, so phones got 15px as well; one rule now sets 10px everywhere (mirrored in `rtl.css`) and the dead declaration is removed. The margin now applies to the meta items only: the span inside the comments link used to add a second margin, so the gap before the categories was twice as wide as the others (34px). The visible gap shrinks from about 19px to 14px (the margin plus the space between the items), the same between every item, and a row of items fits on one line at more widths. CSS only (`style.css`, `rtl.css`); no PHP, JS, markup or string changes.
 
 = 1.7.85 =
 * Fixed: the dropdown of the last menu item opened towards the right and could run off the edge of the page; because a hidden dropdown still counts as page width, a long submenu label under the last item made every page scroll sideways even when nothing was hovered (38px at 1280px and 278px at 800px with one long label; 344px and 584px with a third level). The two rules written to anchor that dropdown to the item's right edge were scoped to `.main-navigation > ul > li:last-child`, which never matches because the menu's `<ul>` is inside `.mobile-menu-panel`; they now match the real markup and the `wp_page_menu()` fallback. Mirrored for right-to-left sites in `rtl.css`.

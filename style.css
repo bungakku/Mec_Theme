@@ -4,7 +4,7 @@ Theme URI: https://github.com/bungakku/Mec_Theme
 Author: Biswajit Thokchom
 Author URI: https://github.com/bungakku
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.85
+Version: 1.7.86
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -814,7 +814,6 @@ table {
 
     .entry-meta span {
         display: inline-block;
-        margin-right: 10px;
         font-size: 0.85rem;
     }
 
@@ -1210,8 +1209,16 @@ article {
 }
 
 .entry-meta span {
-    margin-right: 15px;
     display: inline-block;
+}
+
+/*
+ * 10px at every width since 1.7.86 (was 15px; the 10px mobile rule above never
+ * applied). Direct children only: the comments link holds a span of its own,
+ * which used to add a second margin and doubled the gap before the categories.
+ */
+.entry-meta > span {
+    margin-right: 10px;
 }
 
 .entry-meta a {

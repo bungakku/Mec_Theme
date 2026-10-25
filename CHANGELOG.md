@@ -7,6 +7,17 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.86]
+
+### Changed
+- **The gap between the post meta items (date, author, comments, categories) is now 10px at every screen width; it was 15px.** `style.css` had a 10px `margin-right` for `.entry-meta span` inside the `max-width: 768px` block, but that block sits before the base `.entry-meta span { margin-right: 15px }` rule, which has the same specificity and comes later, so the 10px never applied and phones got 15px like every other width. The base rule now says 10px and the dead declaration is removed from the media query (its `display` and `font-size` do apply and stay). `rtl.css` mirrors the same value. The visible gap is the margin plus the space between the inline-blocks, so it goes from 19px to 14px; the items stay clearly separate (also with only date and comments shown, where there is no "by" or "in" word between them).
+- **The margin now applies to the meta items only (`.entry-meta > span`), not to every span inside them.** The comments link contains a span of its own (`<span aria-hidden="true">0 Comments</span>`), and `.entry-meta span` gave it the same margin, so the gap between the comments and the categories (shown only when "Show categories" is on) was the margin twice: 34px against 19px between the other items. It is now 14px like the rest. The inner span keeps `display: inline-block`; the visually hidden screen-reader span in the same link no longer receives the margin either (it is not visible, so nothing moves).
+- Measured in headless Chromium 141 at 320, 375, 480, 600, 768, 769, 1024 and 1280px, left-to-right and right-to-left, on the blog list, search results and a single post, with date, author, comments and categories shown, also with a 35-character author name and a 34-character category name: no horizontal overflow, and a row never needs more lines than before (checked every 5px from 320 to 1280px). It needs fewer where the 5px per item decides: date, author and comments fit on one line at 390-420px, where they wrapped at 15px, and with long names and all four items shown the row fits on one line at 1280px instead of two.
+
+### Notes
+- Visual change on desktop as well, by request ("not much gap"). The gap is not a Customizer option; a site that wants the old 15px can add `.entry-meta > span { margin-right: 15px; }` (and `margin-left` in right-to-left) as additional CSS.
+- CSS only (`style.css`, `rtl.css`); no PHP, JS, markup or translatable-string changes, so the `.pot` only gets the new version in its header.
+
 ## [1.7.85]
 
 ### Fixed

@@ -158,10 +158,10 @@
     text-align: left;
 }
 
-/* style.css sets 15px at every width (its 10px mobile rule sits before it). */
-.entry-meta span {
+/* style.css sets 10px at every width (since 1.7.86). */
+.entry-meta > span {
     margin-right: 0;
-    margin-left: 15px;
+    margin-left: 10px;
 }
 
 .post-navigation .nav-next {
