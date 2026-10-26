@@ -4,7 +4,7 @@ Theme URI: https://github.com/bungakku/Mec_Theme
 Author: Biswajit Thokchom
 Author URI: https://github.com/bungakku
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.86
+Version: 1.7.87
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1851,6 +1851,59 @@ article {
 
 .wp-block-search__input {
     width: 0;
+}
+
+/*
+ * Theme search form (searchform.php): 404 page, "Nothing Found" and the classic
+ * Search widget. Added in 1.7.87 -- it had no rules outside the mobile drawer,
+ * so it showed the browser's default control (19px tall, Arial 13px, ignoring
+ * the Customizer fonts). Scoped so the drawer's own .search-form rules above
+ * are not affected.
+ */
+:is(.page-content, .widget_search) .search-form {
+    display: flex;
+    gap: var(--mec-space-xs);
+    max-width: 480px;
+}
+
+.page-content .search-form {
+    margin-top: var(--mec-space-sm);
+}
+
+:is(.page-content, .widget_search) .search-form label {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+:is(.page-content, .widget_search) .search-field {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--mec-border-color);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 16px;
+}
+
+:is(.page-content, .widget_search) .search-field:focus {
+    border-color: var(--mec-primary-color);
+    outline: 1px solid var(--mec-primary-color);
+}
+
+:is(.page-content, .widget_search) .search-submit {
+    flex: 0 0 auto;
+    padding: 8px 14px;
+    border: 0;
+    border-radius: 4px;
+    background: var(--mec-primary-color);
+    color: #fff;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+:is(.page-content, .widget_search) .search-submit:hover,
+:is(.page-content, .widget_search) .search-submit:focus-visible {
+    opacity: 0.85;
 }
 
 .screen-reader-text {

@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.86
+Stable tag: 1.7.87
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.87 =
+* Fixed: the theme's own search form (`searchform.php`), shown on the 404 page, on "Nothing Found" pages and by the classic Search widget, had no styling outside the mobile menu, so it showed the browser's default controls: 19px tall (below the 24px minimum target size of WCAG 2.2), Arial 13px instead of the Customizer font, and a grey outset button. It now matches the comment form: 38px controls, theme border, focus ring and primary-colour button, the Customizer fonts, and a 480px maximum width. CSS only (`style.css`); the mobile menu's search field is untouched; no PHP, JS, markup or string changes.
 
 = 1.7.86 =
 * Changed: the gap between the post meta items (date, author, comments, categories) is now 10px at every screen width; it was 15px. The 10px rule meant for small screens sat before the 15px rule in `style.css` and never applied, so phones got 15px as well; one rule now sets 10px everywhere (mirrored in `rtl.css`) and the dead declaration is removed. The margin now applies to the meta items only: the span inside the comments link used to add a second margin, so the gap before the categories was twice as wide as the others (34px). The visible gap shrinks from about 19px to 14px (the margin plus the space between the items), the same between every item, and a row of items fits on one line at more widths. CSS only (`style.css`, `rtl.css`); no PHP, JS, markup or string changes.

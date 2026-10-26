@@ -7,6 +7,17 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.87]
+
+### Fixed
+- **The theme's own search form had no styling, so the 404 page, "Nothing Found" pages and the classic Search widget showed the browser's default controls.** `searchform.php` is output by `get_search_form()` on the 404 page, in `content-none.php` (search with no results, empty archive) and by the classic Search widget. `style.css` only had rules for the copy inside the mobile menu (`.mobile-search-form .search-form`), so everywhere else the field was 181 x 19px with a 2px inset border and the button 21 x 19px, grey and outset, both in Arial 13px regardless of the Customizer fonts (form controls do not inherit the font by themselves). 19px is also below the 24 x 24px minimum target size of WCAG 2.2 (2.5.8). New rules, scoped to `.page-content` and `.widget_search` so the mobile menu is not affected, give the form the look of the comment form: a flex row with an 8px gap and a 480px maximum width, a 38px-tall field with the theme border, 4px radius, `font-family: inherit`, 16px text (no zoom on iOS focus) and the primary-colour focus ring, and a primary-colour button with the same hover and `:focus-visible` treatment as the comment form's Submit button. Layout uses flex and logical order only, so right-to-left mirrors with no change to `rtl.css`.
+- Measured in headless Chromium 141 on the 404 page, on "Nothing Found" and in the sidebar as a classic Search widget, at 1280, 375 and 320px, left-to-right and right-to-left: no horizontal overflow, the field fills the row, a Customizer body font (Georgia) reaches the field, and the focus ring and button focus style show with the keyboard.
+
+### Notes
+- Audit pass over archive (category, tag, tag with a very long name, author, date, page 2), search (results, a 70-character query, no results), 404 and single posts with the author box, at 1280, 768 and 375px, left-to-right and right-to-left (36 page loads each): no horizontal overflow, no PHP notices or console errors, one `<h1>` and one `<main>` on every page. The search form was the only defect found.
+- The block-editor Search block (sidebar and footer widget areas) has its own styling from core and 1.7.84 and is unchanged.
+- CSS only (`style.css`); no PHP, JS, markup or translatable-string changes, so the `.pot` only gets the new version in its header.
+
 ## [1.7.86]
 
 ### Changed
