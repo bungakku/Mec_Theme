@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.87
+Stable tag: 1.7.88
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.88 =
+* Fixed: the Grid blog layout squeezed its cards when the content area was narrow. "Grid Columns" was a fixed `repeat(N, 1fr)`, so with the sidebar 4 columns gave cards of 165-201px (3 columns 230px at 1024px) and, with the 32px card padding, titles were broken in the middle of ordinary words ("Archi-ve", "reasonabl-y"). It is now the maximum number of columns: a card is never narrower than 240px, so the number of columns now follows the available width, never above the Customizer setting (measured with the sidebar: 4 columns give 3 at 1280px and 1100px and 2 at 1024px; 3 columns stay 3 at 1280px and 1100px and give 2 at 1024px). Layouts that already had room, 2 columns, List and Classic are unchanged, and the single-column collapse at 768px is unchanged. CSS only (`style.css`); no PHP, JS, markup or string changes.
 
 = 1.7.87 =
 * Fixed: the theme's own search form (`searchform.php`), shown on the 404 page, on "Nothing Found" pages and by the classic Search widget, had no styling outside the mobile menu, so it showed the browser's default controls: 19px tall (below the 24px minimum target size of WCAG 2.2), Arial 13px instead of the Customizer font, and a grey outset button. It now matches the comment form: 38px controls, theme border, focus ring and primary-colour button, the Customizer fonts, and a 480px maximum width. CSS only (`style.css`); the mobile menu's search field is untouched; no PHP, JS, markup or string changes.

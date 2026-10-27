@@ -7,6 +7,17 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.88]
+
+### Fixed
+- **The Grid blog layout squeezed its cards when the content area was narrow, so titles were broken in the middle of ordinary words.** `.blog-grid.grid-columns-N` was a fixed `repeat(N, 1fr)`. With the sidebar beside the content, 4 columns gave cards of 165-201px and 3 columns 230-234px at 769-1024px; with the 32px card padding the inner width was 101-170px, and the 32px titles (with `overflow-wrap: anywhere`) were split mid-word: "Archi-ve", "reasonabl-y", "wrappin-g". (No overflow: the words were broken, not clipped.) "Grid Columns" is now the maximum number of columns: the grid uses `repeat(auto-fill, minmax(max(240px, (100% - gaps) / N - 1px), 1fr))` (the 1px only absorbs sub-pixel rounding, so an exact fit cannot come out one column short in any browser) driven by one custom property, `--mec-grid-columns` (2 by default, 3 and 4 on the existing `.grid-columns-3` / `.grid-columns-4` classes), so a card is never narrower than 240px and the grid never has more than N columns; `auto-fill` keeps the track width when there are fewer posts than columns (3 search results in a 3-column grid keep 279px cards). The `max-width: 768px` collapse to one column is unchanged (its selectors are more specific).
+- Measured in headless Chromium 141 on the home page, 11 widths (1280 to 320px) x 5 layouts, with the sidebar: only the cramped combinations change (8 of 55): 4 columns 1280px 4 -> 3 columns (201 -> 279px cards), 1100px 4 -> 3 (182 -> 253px), 1024px 4 -> 2 (168 -> 366px), 900px 4 -> 3 (198 -> 273px), 800px 4 -> 3 (173 -> 240px), 769px 4 -> 2 (165 -> 360px); 3 columns 1024px 3 -> 2 (234 -> 366px), 769px 3 -> 2 (230 -> 360px). Classic, List, 2 columns, wide 3 columns and everything at 768px and below are identical. No horizontal overflow and no text escaping a card in any of the 55 combinations, and the same result right-to-left. A second sweep of every viewport width from 769 to 1700px (2, 3 and 4 columns, with and without the sidebar; 5,592 checks) found the expected number of columns everywhere, cards never under 240px and no overflow.
+
+### Notes
+- Behaviour change for sites that set Grid Columns to 3 or 4: the setting is now an upper bound. On a wide layout without a sidebar nothing changes.
+- Audit pass, continued from 1.7.87: (1) text contrast on 6 page types at 1280/700/375px, drawer open and dropdown hovered, with the default palette (nothing below 4.5:1) and with a dark Customizer palette (header, menu, dropdown, drawer, footer, sidebar): every text colour that has a setting follows it. What stays low-contrast on the dark header are colours left at their defaults, each with its own setting (contact phone/e-mail text, the Menu button label); the drawer's search icon (#666) is reported by the check but sits on the search field's white background (5.7:1); (2) 36 page loads with extreme typography (24px body, 3.5rem headings, serif fonts, line height 2, 3-column grid): no overflow, PHP notices or console errors. Nothing else needed fixing.
+- CSS only (`style.css`); no PHP, JS, markup or translatable-string changes, so the `.pot` only gets the new version in its header.
+
 ## [1.7.87]
 
 ### Fixed

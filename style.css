@@ -4,7 +4,7 @@ Theme URI: https://github.com/bungakku/Mec_Theme
 Author: Biswajit Thokchom
 Author URI: https://github.com/bungakku
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.87
+Version: 1.7.88
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1424,22 +1424,31 @@ article {
 }
 
 /* ===== Blog Layouts ===== */
+/*
+ * "Grid Columns" is the MAXIMUM number of columns: a card is never narrower
+ * than 240px, so the grid drops to fewer columns where the content area is too
+ * narrow (1.7.88). It used to be a fixed repeat(N, 1fr): with the sidebar, 4
+ * columns gave 165-201px cards (3 columns 230px at 1024px) and, with the 32px
+ * card padding, titles were broken in the middle of ordinary words
+ * ("Archi-ve", "reasonabl-y"). The (100% - gaps) / N term keeps the number of
+ * columns from ever exceeding N; the 1px taken off it only absorbs sub-pixel
+ * rounding, so an exact fit can never come out one column short. The collapse
+ * to one column at 768px below still wins (higher specificity).
+ */
 .blog-grid {
+    --mec-grid-columns: 2;
     display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(max(240px, calc((100% - (var(--mec-grid-columns) - 1) * 30px) / var(--mec-grid-columns) - 1px)), 1fr));
     gap: 30px;
     margin-bottom: 40px;
 }
 
-.blog-grid.grid-columns-2 {
-    grid-template-columns: repeat(2, 1fr);
-}
-
 .blog-grid.grid-columns-3 {
-    grid-template-columns: repeat(3, 1fr);
+    --mec-grid-columns: 3;
 }
 
 .blog-grid.grid-columns-4 {
-    grid-template-columns: repeat(4, 1fr);
+    --mec-grid-columns: 4;
 }
 
 .blog-list .blog-post {
