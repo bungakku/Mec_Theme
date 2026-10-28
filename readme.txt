@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.88
+Stable tag: 1.7.89
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.89 =
+* Fixed: a dropdown widget with long option text (Categories or Archives shown as a dropdown, also the Categories dropdown block) made the page scroll sideways. A <select> is as wide as its longest option and cannot wrap, so one long category name stretched the select, and the column holding it, to hundreds of pixels: in the footer the four columns collapsed to 58/940/115/66px, in the sidebar the page became up to 600px wider than the screen (also on phones, where the whole stacked column stretched), and the same happened to the block in page content. Selects are now capped at their container, the footer columns stay equal, and the stacked sidebar and content columns cannot grow past the screen. CSS only (`style.css`); pages without such a widget are pixel-identical; no PHP, JS, markup or string changes.
 
 = 1.7.88 =
 * Fixed: the Grid blog layout squeezed its cards when the content area was narrow. "Grid Columns" was a fixed `repeat(N, 1fr)`, so with the sidebar 4 columns gave cards of 165-201px (3 columns 230px at 1024px) and, with the 32px card padding, titles were broken in the middle of ordinary words ("Archi-ve", "reasonabl-y"). It is now the maximum number of columns: a card is never narrower than 240px, so the number of columns now follows the available width, never above the Customizer setting (measured with the sidebar: 4 columns give 3 at 1280px and 1100px and 2 at 1024px; 3 columns stay 3 at 1280px and 1100px and give 2 at 1024px). Layouts that already had room, 2 columns, List and Classic are unchanged, and the single-column collapse at 768px is unchanged. CSS only (`style.css`); no PHP, JS, markup or string changes.

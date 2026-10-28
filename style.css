@@ -4,7 +4,7 @@ Theme URI: https://github.com/bungakku/Mec_Theme
 Author: Biswajit Thokchom
 Author URI: https://github.com/bungakku
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.88
+Version: 1.7.89
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -94,6 +94,17 @@ table {
     width: 100%;
     overflow-x: auto;
     display: block;
+}
+
+/*
+ * A <select> is as wide as its longest <option> and, unlike text, cannot
+ * wrap. The Categories/Archives dropdown widgets and blocks list full
+ * category names, so one long name made the select (and the column holding
+ * it) hundreds of pixels wide and the whole page scrolled sideways. Capped
+ * at its container; the closed select shows the chosen option clipped.
+ */
+select {
+    max-width: 100%;
 }
 
 /* ===== Container System ===== */
@@ -801,6 +812,13 @@ table {
     .secondary {
         flex: 1 1 100%;
         min-width: 100%;
+        /*
+         * .content-area keeps flex-wrap: wrap from the base rule, so in this
+         * column layout the line is as wide as its widest child instead of the
+         * container. Without a ceiling, one wide child (a long dropdown) made
+         * the whole column, and the page, wider than the screen.
+         */
+        max-width: 100%;
     }
 
     article {
@@ -2026,6 +2044,13 @@ article {
 
 .footer-widget {
     width: 100%;
+    /*
+     * Grid items default to min-width: auto, so the repeat(N, 1fr) columns
+     * were only equal until a column held something that cannot wrap (a
+     * dropdown, a wide table): that column then grew to fit it and squeezed
+     * its neighbours to ~60px. 0 lets every 1fr track stay an equal share.
+     */
+    min-width: 0;
 }
 
 .footer-widget .widget-title {
