@@ -14,6 +14,13 @@ get_header(); ?>
             <?php
             $blog_layout = get_theme_mod( 'mec_theme_blog_layout', 'classic' );
             $grid_columns = get_theme_mod( 'mec_theme_grid_columns', '2' );
+
+            // 1.7.90: a static front page is one page, not a list of posts. In the
+            // Grid layout the .blog-grid wrapper put the whole page into a single
+            // card (a third to a half of the content width), so only wrap posts.
+            if ( ! is_home() ) {
+                $blog_layout = 'classic';
+            }
             ?>
 
             <?php if ( 'grid' === $blog_layout ) : ?>

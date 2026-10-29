@@ -58,7 +58,16 @@ if ( function_exists( 'wp_body_open' ) ) {
                         }
                         ?>
                         <div class="site-text">
-                            <?php if ( is_front_page() && is_home() ) : ?>
+                            <?php
+                            /*
+                             * 1.7.90: the site name is the page's <h1> wherever nothing else
+                             * is. That was only a blog-style home (is_front_page() && is_home()),
+                             * so a static front page (whose own title the theme always hides,
+                             * see mec_theme_should_show_title()) and the "Posts page" (index.php
+                             * prints no title) had no <h1> at all.
+                             */
+                            if ( is_front_page() || is_home() ) :
+                                ?>
                                 <h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
                             <?php else : ?>
                                 <p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>

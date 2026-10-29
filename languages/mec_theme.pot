@@ -2,7 +2,7 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MEC_Theme 1.7.89\n"
+"Project-Id-Version: MEC_Theme 1.7.90\n"
 "Report-Msgid-Bugs-To: https://github.com/bungakku/Mec_Theme/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,14 +24,14 @@ msgid "It looks like nothing was found at this location. Maybe try a search?"
 msgstr ""
 
 #: archive.php:46
-#: front-page.php:50
+#: front-page.php:57
 #: index.php:46
 #: search.php:51
 msgid "Previous"
 msgstr ""
 
 #: archive.php:47
-#: front-page.php:51
+#: front-page.php:58
 #: index.php:47
 #: search.php:52
 msgid "Next"
@@ -102,7 +102,7 @@ msgid "Huge"
 msgstr ""
 
 #: functions.php:120
-#: header.php:184
+#: header.php:193
 msgid "Primary Menu"
 msgstr ""
 
@@ -124,7 +124,7 @@ msgid "Add widgets for footer column %d."
 msgstr ""
 
 #: functions.php:182
-#: header.php:186
+#: header.php:195
 msgid "Menu"
 msgstr ""
 
@@ -164,31 +164,31 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: header.php:114
+#: header.php:123
 msgid "Visit our Facebook page"
 msgstr ""
 
-#: header.php:124
+#: header.php:133
 msgid "Visit our Twitter page"
 msgstr ""
 
-#: header.php:134
+#: header.php:143
 msgid "Visit our Instagram page"
 msgstr ""
 
-#: header.php:144
+#: header.php:153
 msgid "Visit our LinkedIn page"
 msgstr ""
 
-#: header.php:154
+#: header.php:163
 msgid "Visit our YouTube channel"
 msgstr ""
 
-#: header.php:169
+#: header.php:178
 msgid "Teacher/Student Login"
 msgstr ""
 
-#: header.php:190
+#: header.php:199
 msgid "Close menu"
 msgstr ""
 

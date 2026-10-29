@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.89
+Stable tag: 1.7.90
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.90 =
+* Fixed: sites that use a static front page (Settings > Reading > "A static page") had two problems on their home page. (1) The home page and the "Posts page" had no <h1> at all: the site name in the header was a <p> except on a blog-style home, the theme always hides the front page's own title, and the Posts page template prints none. The site name is now the <h1> on the front page and the Posts page (same look: only the tag changes; every other page type already had exactly one <h1>). (2) With the Grid blog layout selected, the whole static front page was put into one grid card, a third to a half of the content width (373px of 1180px at 1280px with 3 columns); it now uses the full width, like the Classic and List layouts. A blog-style home (the default) is unchanged. PHP only (`header.php`, `front-page.php`); no CSS or string changes (the `.pot` only gets new line references).
 
 = 1.7.89 =
 * Fixed: a dropdown widget with long option text (Categories or Archives shown as a dropdown, also the Categories dropdown block) made the page scroll sideways. A <select> is as wide as its longest option and cannot wrap, so one long category name stretched the select, and the column holding it, to hundreds of pixels: in the footer the four columns collapsed to 58/940/115/66px, in the sidebar the page became up to 600px wider than the screen (also on phones, where the whole stacked column stretched), and the same happened to the block in page content. Selects are now capped at their container, the footer columns stay equal, and the stacked sidebar and content columns cannot grow past the screen. CSS only (`style.css`); pages without such a widget are pixel-identical; no PHP, JS, markup or string changes.
