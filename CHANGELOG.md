@@ -7,6 +7,16 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.91]
+
+### Fixed
+- **A `<pre>` inside a widget did not wrap, so one long line made the whole page scroll sideways.** The theme's `pre` rules (padding, background, `white-space: pre-wrap`) are scoped to `.entry-content`, `.comment-content` and `.archive-description`; nothing covered a widget, so a bare `<pre>` in the Custom HTML or Text widget kept the browser's `white-space: pre` and the `* { overflow-wrap: anywhere }` reset cannot break a line that is not allowed to wrap. A 200-character line was 1,927px wide in a 230px widget and the page was 1,078-1,768px wider than the screen in all 24 combinations tested (home with and without the sidebar and a single post, 1280 to 320px, footer columns and sidebar). Fix: one zero-specificity rule, `:where(.widget pre) { overflow-x: auto; white-space: pre-wrap; }`, placed next to the content rules it mirrors. After: 0 of 24 overflow.
+- Correction to the 1.7.90 note: it listed the Code and Preformatted blocks as affected. They are not: core gives them their own wrapping (`code { white-space: break-spaces }`, `.wp-block-preformatted` and `.wp-block-verse` `pre-wrap`), measured in a widget as 230px in a 230px box. Only a bare `<pre>` (classic HTML) overflowed.
+
+### Notes
+- Everything else is unchanged by design: no padding or background is added to a widget `<pre>` (only the wrapping that was broken), and the content rules are untouched.
+- CSS only (`style.css`); no PHP, JS, markup or translatable-string changes, so the `.pot` only gets the new version in its header.
+
 ## [1.7.90]
 
 ### Fixed

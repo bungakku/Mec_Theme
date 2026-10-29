@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.90
+Stable tag: 1.7.91
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,9 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.91 =
+* Fixed: a plain <pre> inside a widget (the Custom HTML or Text widget, e.g. pasted code or a formatted address block) did not wrap, so one long line ran out of the widget and made the whole page scroll sideways (2,900px wide at 1280px with a 200-character line, in the footer and in the sidebar). It now wraps like a <pre> in post content. The Code, Preformatted and Verse blocks already wrapped and are unchanged. CSS only (`style.css`); no PHP, JS, markup or string changes.
 
 = 1.7.90 =
 * Fixed: sites that use a static front page (Settings > Reading > "A static page") had two problems on their home page. (1) The home page and the "Posts page" had no <h1> at all: the site name in the header was a <p> except on a blog-style home, the theme always hides the front page's own title, and the Posts page template prints none. The site name is now the <h1> on the front page and the Posts page (same look: only the tag changes; every other page type already had exactly one <h1>). (2) With the Grid blog layout selected, the whole static front page was put into one grid card, a third to a half of the content width (373px of 1180px at 1280px with 3 columns); it now uses the full width, like the Classic and List layouts. A blog-style home (the default) is unchanged. PHP only (`header.php`, `front-page.php`); no CSS or string changes (the `.pot` only gets new line references).

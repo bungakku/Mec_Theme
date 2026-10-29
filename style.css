@@ -4,7 +4,7 @@ Theme URI: https://github.com/bungakku/Mec_Theme
 Author: Biswajit Thokchom
 Author URI: https://github.com/bungakku
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.90
+Version: 1.7.91
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -1356,6 +1356,18 @@ article {
 :where(:is(.entry-content, .comment-content, .archive-description) pre code) {
     background: none;
     padding: 0;
+}
+
+/*
+ * A bare <pre> in a widget (the Custom HTML and Text widgets; the Code,
+ * Preformatted and Verse blocks wrap on their own) kept the browser's
+ * white-space: pre, so one long line ran out of the widget and the whole page
+ * scrolled sideways (1.7.91). Same wrapping as the content rule above; zero
+ * specificity, so a block's own style still wins.
+ */
+:where(.widget pre) {
+    overflow-x: auto;
+    white-space: pre-wrap;
 }
 
 :where(:is(.entry-content, .comment-content, .archive-description) table) {
