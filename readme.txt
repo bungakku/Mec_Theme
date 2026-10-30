@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.91
+Stable tag: 1.7.92
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.92 =
+* Fixed: after GitHub could not be reached (or rate-limited the site), the next update check inside the following hour crashed with a fatal error on PHP 8: the Dashboard > Updates screen, a theme install or update, or the scheduled check. The failed check is remembered for an hour, but a database-backed transient hands it back as an empty string instead of "no release", and the updater read that string as a release. Only a real release is accepted now, so the failure is remembered as intended (one GitHub request per hour) and nothing crashes.
+* Fixed: with a child theme active, "Update now" replaced the child theme with a copy of MEC_Theme (the child's files and its Template header were lost and the site stopped with "Cannot redeclare mec_theme_setup()"). The updater keyed the update and the unzipped folder to the active (child) theme instead of MEC_Theme. It now uses the parent theme's folder: the update is offered for MEC_Theme and the child theme is left untouched. Without a child theme nothing changes.
+* PHP only (`inc/github-updater.php`); no CSS, JS, markup or string changes (the `.pot` only gets the new version).
 
 = 1.7.91 =
 * Fixed: a plain <pre> inside a widget (the Custom HTML or Text widget, e.g. pasted code or a formatted address block) did not wrap, so one long line ran out of the widget and made the whole page scroll sideways (2,900px wide at 1280px with a 200-character line, in the footer and in the sidebar). It now wraps like a <pre> in post content. The Code, Preformatted and Verse blocks already wrapped and are unchanged. CSS only (`style.css`); no PHP, JS, markup or string changes.

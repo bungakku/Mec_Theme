@@ -18,7 +18,8 @@ if ( ! defined( 'MEC_THEME_GITHUB_REPO' ) ) {
 function mec_theme_get_latest_github_release() {
     $cached = get_site_transient( 'mec_theme_github_release' );
     if ( false !== $cached ) {
-        return $cached;
+        // A cached failure is stored as false, but a database-backed transient reads it back as '': only an array is a release.
+        return is_array( $cached ) ? $cached : false;
     }
 
     $api_url = sprintf(
@@ -101,7 +102,8 @@ function mec_theme_check_for_update( $transient ) {
         return $transient;
     }
 
-    $stylesheet = get_stylesheet();
+    // The parent theme's folder: with a child theme active, get_stylesheet() is the child's folder.
+    $stylesheet = get_template();
     $current_version = wp_get_theme( $stylesheet )->get( 'Version' );
 
     $release = mec_theme_get_latest_github_release();
@@ -131,11 +133,11 @@ add_filter( 'pre_set_site_transient_update_themes', 'mec_theme_check_for_update'
 function mec_theme_fix_github_zip_folder_name( $source, $remote_source, $upgrader, $hook_extra ) {
     global $wp_filesystem;
 
-    if ( empty( $hook_extra['theme'] ) || get_stylesheet() !== $hook_extra['theme'] ) {
+    if ( empty( $hook_extra['theme'] ) || get_template() !== $hook_extra['theme'] ) {
         return $source;
     }
 
-    $correct_slug = get_stylesheet();
+    $correct_slug = get_template();
     $desired_path = trailingslashit( $remote_source ) . $correct_slug;
 
     if ( untrailingslashit( $source ) === untrailingslashit( $desired_path ) ) {

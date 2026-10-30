@@ -7,6 +7,17 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.92]
+
+### Fixed
+- **A failed GitHub update check made the next check fatal (PHP 8).** When GitHub was unreachable or rate-limited, `mec_theme_get_latest_github_release()` cached the failure for an hour as `false`. A database-backed site transient hands a stored `false` back as `''`, so the `false === $release` guard in `mec_theme_check_for_update()` missed it and `$release['version']` threw `TypeError: Cannot access offset of type string on string`. Measured on PHP 8.3 with a mocked GitHub 403: the next `wp_update_themes()` inside that hour fataled, both as the next scheduled check and as the Dashboard > Updates screen two minutes later. Now only an array counts as a release; a cached failure returns `false` and GitHub is asked once per hour as intended (1 request for the failed check, 0 extra for the repeats).
+- **With a child theme active, "Update now" replaced the child theme with MEC_Theme.** The updater used `get_stylesheet()` (the active, i.e. child, folder) to key the update and to rename the unzipped package folder, so the update was offered for the child (1.0.0 < 1.7.92) and applying it put a full copy of MEC_Theme into the child's folder: the child's own file and its `Template:` header were gone and the site stopped with `Cannot redeclare mec_theme_setup()`. It now uses `get_template()` (the MEC_Theme folder): the update is offered for MEC_Theme and applying it leaves the child intact (child file kept, `Template:` header kept, parent package installed). Without a child theme `get_template()` equals `get_stylesheet()`, so behaviour is identical.
+
+### Notes
+- PHP only (`inc/github-updater.php`, 6 lines added, 4 removed); no CSS, JS, markup or translatable-string changes, so the `.pot` only gets the new version in its header.
+- Checked and unchanged: a normal update from both package shapes (the release asset with a `mec_theme/` folder, and GitHub's zipball with a `bungakku-Mec_Theme-<sha>/` folder) still installs into `mec_theme` with no leftover folder; the update row and update data raise 0 PHP notices, with and without a child theme.
+- Left alone by design: sites with a persistent object cache (by code reading, not measured here: a stored `false` reads back as `false` there, so those sites should not crash; they simply ask GitHub again on each check, which WordPress's own schedule already limits), and `$asset['name']` is read without an `isset` (GitHub always sends it).
+
 ## [1.7.91]
 
 ### Fixed
