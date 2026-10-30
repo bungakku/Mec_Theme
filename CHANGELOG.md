@@ -7,6 +7,16 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.93]
+
+### Fixed
+- **"Check again" on Dashboard > Updates did not find a new release on the first click.** The updater caches the latest GitHub release for 12 hours (`mec_theme_github_release`) and clears it when `update-core.php?force-check=1` loads. That clear was hooked to `load-update-core.php` at the default priority 10, but core registers its own `wp_update_themes()` on the same hook at priority 10 earlier than the theme loads, so core ran first and the updater answered from the old copy. Measured with the 1.7.91 code, the recorded GitHub API data (v1.7.92 newest) and a stale cached copy that said 1.7.91: scheduled check, no update; "Check again" #1, no update (0 GitHub requests); "Check again" #2, update to 1.7.92 (1 request). The clear now runs at priority 5, before core's check: "Check again" #1 shows the update with 1 GitHub request. A normal Updates-screen visit without `force-check` still uses the cached copy (0 requests), and a cold cache behaves as before.
+
+### Notes
+- PHP only (`inc/github-updater.php`, one line plus a comment); no CSS, JS, markup or translatable-string changes, so the `.pot` only gets the new version in its header.
+- Left alone by design: the 12-hour cache itself (WordPress's own scheduled check runs every 12 hours, so a release can take up to about a day to appear without "Check again"), and the cache clear after an upgrade (`upgrader_process_complete`), which also runs after core's check but only matters if a newer release appears during an upgrade.
+- Not measured: the live site that reported the missing notice (Hostinger, PHP 8.4, LiteSpeed Cache): the cause there is not confirmed. The sandbox reproduces the symptom with a stale cache.
+
 ## [1.7.92]
 
 ### Fixed

@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.92
+Stable tag: 1.7.93
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.93 =
+* Fixed: "Check again" on Dashboard > Updates did not find a new release on the first click. The updater keeps the latest GitHub release for 12 hours, and "Check again" is supposed to clear that copy, but it cleared it just after WordPress had already run its theme check, so the first click was answered from the old copy (0 GitHub requests) and only the second click, at least a minute later, asked GitHub. The copy is now cleared first: one click finds the new release (1 GitHub request). A normal visit to the Updates screen still uses the 12-hour copy (0 requests).
+* PHP only (`inc/github-updater.php`, one line); no CSS, JS, markup or string changes (the `.pot` only gets the new version).
 
 = 1.7.92 =
 * Fixed: after GitHub could not be reached (or rate-limited the site), the next update check inside the following hour crashed with a fatal error on PHP 8: the Dashboard > Updates screen, a theme install or update, or the scheduled check. The failed check is remembered for an hour, but a database-backed transient hands it back as an empty string instead of "no release", and the updater read that string as a release. Only a real release is accepted now, so the failure is remembered as intended (one GitHub request per hour) and nothing crashes.

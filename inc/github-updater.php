@@ -169,7 +169,8 @@ function mec_theme_clear_github_release_cache() {
     delete_site_transient( 'mec_theme_github_release' );
 }
 add_action( 'upgrader_process_complete', 'mec_theme_clear_github_release_cache', 10, 0 );
-add_action( 'load-update-core.php', 'mec_theme_clear_github_release_cache_on_check_again' );
+// Priority 5: core's own wp_update_themes() runs on this hook at priority 10 and is registered earlier, so a later clear came too late for the first "Check again".
+add_action( 'load-update-core.php', 'mec_theme_clear_github_release_cache_on_check_again', 5 );
 
 function mec_theme_clear_github_release_cache_on_check_again() {
     if ( isset( $_GET['force-check'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
