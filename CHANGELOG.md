@@ -7,6 +7,17 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.94]
+
+### Fixed
+- **The Customizer live preview did nothing for 18 of the 20 `postMessage` settings.** Only the two "hide site description" toggles updated live; the 17 header contact settings (phone 1 and 2, email, five social URLs, phone and email colour, phone and email hover colour, hide contact column on tablet and mobile, show phones/email/social) and `mec_theme_tagline_align` changed nothing in the preview until the change was published and the page reloaded. Two causes, both in the preview scripts only. (1) `mec_theme_customize_contact_preview()` printed an inline script on `wp_footer` at the default priority 10; `wp.customize` is defined by the `customize-preview` script, printed by `wp_footer` at priority 20, so the inline script threw `ReferenceError: wp is not defined` and attached no listener at all. The hook now runs at priority 25. (2) Once `wp` exists, `updateContactHoverPreview()` and `updateContactVisibility()` (inline script) and `updateDescriptionVisibility()` (`customizer-preview.js`) were each called once at load, before the preview has registered any setting, so `wp.customize( id )` was `undefined` and `.get()` threw `TypeError`; that aborted the rest of the script (the five show/hide bindings, and the tagline alignment handler). The three initial calls are removed: the server already renders the current state, and every handler reads the settings only when one changes. Measured in Chromium against the real Customizer (WordPress 7.2-alpha, PHP 8.3), setting each value through `wp.customize( id ).set()`: 2 of 13 checked settings updated the preview before the fix, 20 of 20 after, with 0 JS errors (2 before).
+- Checked and unchanged: validation and saving. An invalid email, an invalid or `javascript:` URL, a URL without a dot and a content+sidebar width over 100% each show their error and block the save (4 of 4); a valid batch of 7 settings saves (5 of 5 AJAX responses are JSON) and reads back identical; the saved front end matches the preview formulas for phone text and `tel:` link, email, social URL, phone colour and tagline alignment (5 of 5). The panels register 140 controls for 140 settings, none without a container; 0 PHP notices in the Customizer page.
+
+### Notes
+- Customizer preview only: both scripts load only inside the Customizer preview (`is_customize_preview()` and the `customize_preview_init` enqueue), so the published site is unchanged. The `.pot` references for `contact-social-panel.php` are identical before and after (35 of 35, compared with `xgettext`), so the `.pot` only gets the new version in its header.
+- Left alone by design (by code reading, not measured): the live preview does not hide or show an element that the server did not render (for example a social icon whose URL was empty when the page loaded), and it does not drop the element when a value is cleared; a preview refresh or Publish shows the final state.
+- Not measured: the Customizer on a live site (Hostinger, LiteSpeed Cache). A page-optimisation plugin that defers footer scripts could still run the inline script before `wp.customize` exists.
+
 ## [1.7.93]
 
 ### Fixed

@@ -345,7 +345,6 @@ function mec_theme_customize_contact_preview() {
         wp.customize( 'mec_theme_contact_email_hover_color', function( value ) {
             value.bind( updateContactHoverPreview );
         } );
-        updateContactHoverPreview();
 
         function updateContactVisibility() {
             var hideTablet = wp.customize( 'mec_theme_hide_contact_tablet' ).get();
@@ -391,12 +390,13 @@ function mec_theme_customize_contact_preview() {
         wp.customize( 'mec_theme_show_contact_social', function( value ) {
             value.bind( updateContactVisibility );
         } );
-        updateContactVisibility();
+        // No initial updateContactHoverPreview()/updateContactVisibility() call: the settings are not registered in the preview yet when this runs (wp.customize( id ) is undefined, so .get() threw and the bindings after it were never attached), and the server already renders the current state.
     } )( jQuery );
     </script>
     <?php
 }
-add_action( 'wp_footer', 'mec_theme_customize_contact_preview' );
+// Priority 25: the script above needs wp.customize, which the customize-preview script defines when wp_footer prints the footer scripts (priority 20); at the default priority 10 it ran first and threw "wp is not defined".
+add_action( 'wp_footer', 'mec_theme_customize_contact_preview', 25 );
 
 /*
  * Social icon styling controls.

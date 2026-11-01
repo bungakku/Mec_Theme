@@ -32,7 +32,7 @@
         setting.bind(updateDescriptionVisibility);
     });
 
-    updateDescriptionVisibility();
+    // No initial updateDescriptionVisibility() call: the settings are not registered in the preview yet when this runs (api( id ) is undefined, so .get() threw and the tagline code below was never reached), and the server already renders the current state.
 
     var validTaglineAlign = ['left', 'center', 'right'];
 

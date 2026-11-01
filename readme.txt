@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.93
+Stable tag: 1.7.94
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.94 =
+* Fixed: in the Customizer, the live preview of the header contact settings and of the tagline alignment did nothing: phone numbers, email, the five social links, phone and email colours and hover colours, the show/hide toggles for phones, email, social icons and the tablet/mobile contact column, and "Tagline alignment". The change only showed after Publish and a reload (the Customizer panel itself worked, and saving was always correct). Two causes: the contact preview script was printed before the Customizer's own preview script existed ("wp is not defined"), and both preview scripts asked for a setting's value at load, before the preview knew the setting, which stopped the rest of the script. All 20 live-preview settings now update at once (20 of 20 checked; the tablet/mobile "hide site description" pair already worked). The live site is unchanged: these scripts run only inside the Customizer preview.
+* PHP and JavaScript, Customizer preview only (`inc/customizer/contact-social-panel.php`, `assets/js/customizer-preview.js`); no CSS, markup or string changes (the `.pot` only gets the new version).
 
 = 1.7.93 =
 * Fixed: "Check again" on Dashboard > Updates did not find a new release on the first click. The updater keeps the latest GitHub release for 12 hours, and "Check again" is supposed to clear that copy, but it cleared it just after WordPress had already run its theme check, so the first click was answered from the old copy (0 GitHub requests) and only the second click, at least a minute later, asked GitHub. The copy is now cleared first: one click finds the new release (1 GitHub request). A normal visit to the Updates screen still uses the 12-hour copy (0 requests).
