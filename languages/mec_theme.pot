@@ -2,7 +2,7 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MEC_Theme 1.7.95\n"
+"Project-Id-Version: MEC_Theme 1.7.96\n"
 "Report-Msgid-Bugs-To: https://github.com/bungakku/Mec_Theme/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1135,11 +1135,11 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: single.php:21
+#: single.php:27
 msgid "Previous Post"
 msgstr ""
 
-#: single.php:22
+#: single.php:28
 msgid "Next Post"
 msgstr ""
 

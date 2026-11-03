@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.95
+Stable tag: 1.7.96
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.96 =
+* Fixed: a custom post type whose key is `none` showed "Nothing found" instead of its content on its single page. The single template builds the template-part name from the post type, so that key loaded `content-none.php`, the "nothing found" message. It now uses the generic `content.php`; every other post type loads the same template part as before.
+* PHP only (`single.php`); no CSS, JS or string changes (the `.pot` gets the new version and two line references).
 
 = 1.7.95 =
 * Fixed: the post thumbnail links (blog list, archives, search, single posts, custom post types and the Recent Posts widget) had no accessible name when the image has no alt text, which is the WordPress default for an upload: a screen reader announced an unnamed link and keyboard users tabbed twice to the same page as the title link. The thumbnail link is now hidden from assistive technology and skipped by the Tab key, as the Related Posts thumbnails already were. The title link is unchanged and the image can still be clicked with a mouse.

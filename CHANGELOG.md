@@ -7,6 +7,16 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.96]
+
+### Fixed
+- **A custom post type whose key is `none` showed "Nothing found" instead of its content.** `single.php` builds the template-part name from the post type (`content-{post_type}`), so the key `none` loaded `content-none.php`, the "nothing found" message, and the page had a title but no body. Measured in Chromium against WordPress 7.2-beta3 (PHP 8.3) with one sample post of a type keyed `none`: body shown 0 of 1 before, 1 of 1 after (853 characters of body text), one `h1` before and after, 0 PHP messages. `single.php` now loads the generic `content.php` for that key. For the other eight views tested (custom post types `notice`, `event`, `blog` and `bare`, a post, a page, an attachment page and the home page) the served HTML is identical to 1.7.95 apart from the one build-hash comment, so no other post type loads a different part.
+
+### Notes
+- Follow-up to the 1.7.95 audit (`template-parts/content.php`), which left five behaviours for a decision. Decided: (2) fixed here, for the key `none` only; (1) the empty-title gap, (3) the author box on custom post types, (4) Related Posts on a custom post type that uses categories, and (5) the Title Settings box on pages and posts only are left as they are, because none of them hides content and (3) and (4) would change what existing sites show.
+- A custom post type keyed `blog` also loads a different part (`content-blog.php`), but measured against a custom post type with another key its single view is the same size (896 by 409px at 1280px), has the same padding and shadow, and shows the full body (853 of 853 characters). Only the article class names differ (`blog-post classic-post` added). It is left alone: switching it would change the markup of existing sites for no visible gain.
+- The `.pot` gets the new version and two line-number updates for `single.php` (21 to 27 and 22 to 28), compared with `xgettext`; no string changed.
+
 ## [1.7.95]
 
 ### Fixed

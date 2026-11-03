@@ -15,7 +15,13 @@ get_header(); ?>
             while ( have_posts() ) :
                 the_post();
                 
-                get_template_part( 'template-parts/content', get_post_type() );
+                // Added in 1.7.96: a post type keyed "none" would load
+                // content-none.php ("Nothing found", no body); use content.php.
+                $mec_theme_part = get_post_type();
+                if ( 'none' === $mec_theme_part ) {
+                    $mec_theme_part = '';
+                }
+                get_template_part( 'template-parts/content', $mec_theme_part );
                 
                 the_post_navigation( array(
                     'prev_text' => '&laquo; ' . __( 'Previous Post', 'mec_theme' ),
