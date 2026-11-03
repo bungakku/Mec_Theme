@@ -2,7 +2,7 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MEC_Theme 1.7.94\n"
+"Project-Id-Version: MEC_Theme 1.7.95\n"
 "Report-Msgid-Bugs-To: https://github.com/bungakku/Mec_Theme/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -201,7 +201,7 @@ msgid "Display recent posts with thumbnail, excerpt and read more link."
 msgstr ""
 
 #: inc/class-recent-posts-widget.php:69
-#: template-parts/content.php:73
+#: template-parts/content.php:80
 msgid "Read More"
 msgstr ""
 
@@ -1149,14 +1149,14 @@ msgstr ""
 
 #: template-parts/content-blog.php:73
 #: template-parts/content-post.php:68
-#: template-parts/content.php:44
+#: template-parts/content.php:51
 msgid "by"
 msgstr ""
 
 #: template-parts/content-blog.php:106
 #: template-parts/content-page.php:28
 #: template-parts/content-post.php:100
-#: template-parts/content.php:66
+#: template-parts/content.php:73
 msgid "Pages:"
 msgstr ""
 
@@ -1167,7 +1167,7 @@ msgstr ""
 
 #: template-parts/content-blog.php:99
 #: template-parts/content-post.php:93
-#: template-parts/content.php:59
+#: template-parts/content.php:66
 msgid "Continue reading %s <span class=\"meta-nav\">&rarr;</span>"
 msgstr ""
 

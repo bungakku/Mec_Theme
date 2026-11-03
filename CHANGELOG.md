@@ -7,6 +7,18 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.95]
+
+### Fixed
+- **Post thumbnail links had no accessible name.** Every post thumbnail is an image wrapped in a link to the post. When the image has no alt text (the WordPress default for an upload) that link has no text at all, so a screen reader announces an unnamed link and keyboard users tab twice to the same page as the title link. axe-core 4.10.2 (WCAG 2 A and AA, best practice) `link-name`, before then after: blog index 6 of 6 then 0, single post 1 then 0, single custom-post-type view (the `template-parts/content.php` fallback) 1 then 0, custom-post-type archive 1 then 0, search results 1 then 0, Recent Posts widget 2 then 0. The five page views had no other axe violation before or after. The links now carry `aria-hidden="true" tabindex="-1"`, the two attributes `related-posts.php` already used, in `template-parts/content.php`, `content-post.php`, `content-blog.php` and `inc/class-recent-posts-widget.php`. The image can still be clicked with a mouse, and keyboard and screen reader users reach the post through the title link; the CSS hover effect is unchanged.
+
+### Notes
+- Audit of `template-parts/content.php` (the part `single.php` loads for any post type that has no `content-{type}.php`): for the four sample views that reach it (a notice type, an event type with categories, a type without title support, an attachment page) the body shows 4 of 4, each page has one `h1`, and there are 0 PHP messages in the page output and in the server log. Attachment pages are off by default on new installs since WordPress 6.4; they were tested with `wp_attachment_pages_enabled` on.
+- Measured and left alone, each a behaviour decision rather than a break: (1) a custom post type with an empty title keeps the 20px bottom margin of its empty `.entry-header` (content starts at 250px instead of 230px); (2) a custom post type whose key is `none` loads `content-none.php` and shows "Nothing found" instead of its body (0 of 1), and one whose key is `blog` loads `content-blog.php` (body shown, Blog Settings classes applied) because `single.php` builds the file name from the post type; (3) "About the Author" shows on custom post types and attachment pages (6 of 6) although the byline does not and the setting reads "Show Author Bio on Single Posts"; (4) "Related Posts" on a custom post type that uses categories lists regular posts (2 for the sample event); (5) the Title Settings box exists only for pages and posts, so a custom post type cannot change its title options.
+- By code reading, not measured: the `'post'` meta block and the non-singular `else` branch in `content.php` cannot be reached from the theme (posts use `content-post.php`, listings use `content-blog.php`).
+- The `.pot` gets the new version and four line-number updates for `content.php` (+7 lines of comment), compared with `xgettext`; no string changed.
+- Not measured: a real screen reader (NVDA, VoiceOver, TalkBack) and Firefox or Safari. axe-core finds the missing name; it does not test how the page reads aloud.
+
 ## [1.7.94]
 
 ### Fixed

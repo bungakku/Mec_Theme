@@ -25,7 +25,7 @@ if ( 'grid' === $blog_layout ) {
     
     <?php if ( 'show' === $show_image && has_post_thumbnail() ) : ?>
         <div class="post-thumbnail">
-            <a href="<?php the_permalink(); ?>">
+            <a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
                 <?php the_post_thumbnail( $image_size ); ?>
             </a>
         </div>

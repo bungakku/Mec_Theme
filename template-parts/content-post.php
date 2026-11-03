@@ -23,7 +23,7 @@ $show_meta = get_theme_mod( 'mec_theme_show_post_meta', 'show' );
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     <?php if ( has_post_thumbnail() ) : ?>
         <div class="post-thumbnail">
-            <a href="<?php the_permalink(); ?>">
+            <a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
                 <?php the_post_thumbnail( 'large' ); ?>
             </a>
         </div>

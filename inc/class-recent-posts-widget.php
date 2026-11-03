@@ -50,7 +50,7 @@ class MEC_Theme_Recent_Posts_Widget extends WP_Widget {
                     <li class="mec-recent-post-item">
                         <?php if ( $show_thumbnail && has_post_thumbnail() ) : ?>
                             <div class="recent-post-thumb">
-                                <a href="<?php the_permalink(); ?>">
+                                <a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
                                     <?php the_post_thumbnail( 'thumbnail' ); ?>
                                 </a>
                             </div>

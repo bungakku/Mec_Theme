@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.94
+Stable tag: 1.7.95
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,10 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.95 =
+* Fixed: the post thumbnail links (blog list, archives, search, single posts, custom post types and the Recent Posts widget) had no accessible name when the image has no alt text, which is the WordPress default for an upload: a screen reader announced an unnamed link and keyboard users tabbed twice to the same page as the title link. The thumbnail link is now hidden from assistive technology and skipped by the Tab key, as the Related Posts thumbnails already were. The title link is unchanged and the image can still be clicked with a mouse.
+* PHP markup only (`template-parts/content.php`, `content-post.php`, `content-blog.php`, `inc/class-recent-posts-widget.php`): two attributes on four links; no CSS or string changes (the `.pot` gets the new version and four line references).
 
 = 1.7.94 =
 * Fixed: in the Customizer, the live preview of the header contact settings and of the tagline alignment did nothing: phone numbers, email, the five social links, phone and email colours and hover colours, the show/hide toggles for phones, email, social icons and the tablet/mobile contact column, and "Tagline alignment". The change only showed after Publish and a reload (the Customizer panel itself worked, and saving was always correct). Two causes: the contact preview script was printed before the Customizer's own preview script existed ("wp is not defined"), and both preview scripts asked for a setting's value at load, before the preview knew the setting, which stopped the rest of the script. All 20 live-preview settings now update at once (20 of 20 checked; the tablet/mobile "hide site description" pair already worked). The live site is unchanged: these scripts run only inside the Customizer preview.

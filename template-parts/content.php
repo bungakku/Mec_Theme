@@ -11,6 +11,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * effect for any content type routed through this fallback. Ported the
  * same conditional + alignment-class logic already used in content-blog.php.
  *
+ * Fixed in 1.7.95: the thumbnail link wrapped only an image, so with an
+ * empty alt text (the WordPress default) it had no accessible name (axe
+ * "link-name") and added a second tab stop to the same destination as the
+ * title link. It now carries aria-hidden="true" tabindex="-1", exactly as
+ * related-posts.php already did. Same fix in content-post.php,
+ * content-blog.php and the Recent Posts widget.
+ *
  * @package MEC_Theme
  */
 ?>
@@ -18,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     <?php if ( has_post_thumbnail() ) : ?>
         <div class="post-thumbnail">
-            <a href="<?php the_permalink(); ?>">
+            <a href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
                 <?php the_post_thumbnail( 'large' ); ?>
             </a>
         </div>
