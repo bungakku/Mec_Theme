@@ -3,7 +3,7 @@ Contributors: Biswajit Thokchom
 Tags: blog, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, two-columns, right-sidebar, responsive-layout, sticky-header, grid-layout, block-editor-support, accessibility-ready
 Requires at least: 5.0
 Tested up to: 7.1
-Stable tag: 1.7.96
+Stable tag: 1.7.97
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URl:  https://github.com/bungakku
@@ -59,6 +59,11 @@ Yes – go to Customize > Layout Settings > Header and choose Tagline Alignment 
 Yes, the theme includes aria-expanded states for mobile menu and submenu toggles, focus management when opening/closing the menu, a skip-to-content link, keyboard-reachable desktop dropdown submenus, a visible keyboard focus indicator on the mobile menu button, and screen-reader-friendly comment counts.
 
 == Changelog ==
+
+= 1.7.97 =
+* Fixed: on a phone (screen width up to 480px) the logo was centred on the whole block of site title, tagline and description, so once a description was shown the logo sat below the title line instead of level with it. The logo now starts level with the title, as it already does without a description. A logo taller than the text block stays where it was, and the tablet and desktop headers are unchanged.
+* Fixed: on a phone the gap between the tagline and the description was 5px larger than the gap between the title and the tagline; it is now the same.
+* CSS only (`style.css`, inside the existing `max-width: 480px` block); no PHP, JS or string changes (the `.pot` only gets the new version).
 
 = 1.7.96 =
 * Fixed: a custom post type whose key is `none` showed "Nothing found" instead of its content on its single page. The single template builds the template-part name from the post type, so that key loaded `content-none.php`, the "nothing found" message. It now uses the generic `content.php`; every other post type loads the same template part as before.

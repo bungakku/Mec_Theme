@@ -7,6 +7,19 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.97]
+
+### Fixed
+- **On a phone the logo sat below the title line when a description was shown.** The mobile header (screen width up to 480px) centres the logo vertically on the whole text block, so the logo follows the block as it grows. With a 48px logo, title, tagline and description the block is taller than the logo, and the logo started lower than the title. The logo link now has `align-self: flex-start` for the left and right logo positions on phones, so its top is level with the top of the title. Measured in Chromium (WordPress 7.2-beta3), logo top minus title top, before then after: 412px and 480px 11.4px then 0px; 360px and 375px (the title wraps to two lines) 34.1px then 0px. The same numbers with the logo on the right, with centred title text and on a right-to-left page; in the right-to-left page the horizontal positions of logo and title are unchanged.
+- **On a phone the gap between the tagline and the description was larger than the gap between the title and the tagline.** `.site-description` has a 5px top margin; the tagline has none under the title. The margin is now 0 on phones: the gap between the two boxes goes from 5px to 0px at 360, 375, 412 and 480px, equal to the title-to-tagline gap (0px), and the header is 5px shorter (195px to 190px at 412px, 240.4px to 235.4px at 360px).
+
+### Notes
+- Not a regression of an earlier release: in `style.css` the two rules involved (`.logo-text-wrapper { align-items: center }` and `.site-description { margin-top: 5px }`) are the same at 1.7.1, 1.7.50, 1.7.89 and 1.7.96, and `header.php` changed in the branding block only in 1.7.90 (the condition that decides whether the site name is an `h1`). Older releases cannot be rendered in the test setup (1.7.20 was checked: WordPress 7.2 with PHP 8.3 stops it with a fatal error in `wp_add_inline_style()`), so this is by reading the code, not by rendering. The look changes when a description is switched on, or when the title wraps to a second line on a narrow phone.
+- Measured and unchanged, before and after: tablet at 600px and 768px and desktop at 1280px (no measured value differs in any of the 9 header variants), no description or description hidden on mobile in the Customizer at 412px and 480px (identical; at 360px and 375px, where the two-line title makes the block taller than the logo, the logo moves up 8.6px to level with the title), 0 horizontal overflow in all 9 variants at 7 widths (360 to 1280px).
+- A logo taller than the text block (the default 120px) keeps its position (top 10px before and after, header height 244.2px unchanged); the text beside it is 2.5px lower because the block is 5px shorter (11.9px to 14.4px at 412px). With the logo above the text only the 5px margin goes (header 257.4px to 252.4px); with the logo below the text, logo and header sit 5px higher.
+- Only the `max-width: 480px` block of `style.css` changed. The tablet range (481px to 768px) keeps the centred logo and the 5px gap; say so if the same change is wanted there.
+- Not measured: a real phone, Firefox or Safari.
+
 ## [1.7.96]
 
 ### Fixed
