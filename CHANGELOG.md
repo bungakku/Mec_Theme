@@ -7,6 +7,22 @@ Versioning follows a `1.MAJOR.MINOR` scheme specific to this theme's release his
 
 > **Note:** `1.6.2` and `1.7.25` do not appear below. Both are confirmed-absent version numbers (skipped during development, not lost changelog entries) — cross-checked against the historical record.
 
+## [1.7.98]
+
+### Fixed
+- **On a tablet and a desktop the logo sat below the title line when a description was shown.** Same cause as 1.7.97, now on the tablet (481px to 768px) and desktop (769px and up) headers: the logo was centred on the whole text block (title, tagline and description), so a logo shorter than the block started lower than the title. The logo link now has `align-self: flex-start` for the left and right logo positions in both ranges. Measured in Chromium (WordPress 7.2-beta3) with a 48px logo, logo top minus title top, before then after: 481px to 768px 14.3px then 0px; 769px to 1440px 16.3px then 0px. The same numbers with the logo on the right, with centred title text and on a right-to-left page; in the right-to-left page the horizontal positions of logo and title are unchanged.
+- **On a tablet and a desktop the gap between the tagline and the description was larger than the gap between the title and the tagline.** `.site-description` had a 5px top margin; it is now 2px, and phones keep the 0 from 1.7.97. The blank space between the letters, measured on a 4x screenshot of the text block (tagline-to-description minus title-to-tagline): at 600px and 768px +2.75px then -0.25px (9.50px title-to-tagline, 12.25px then 9.25px tagline-to-description); at 1280px +2.75px then -0.25px (10.75px, 13.50px then 10.50px); -0.25px at every width from 481px to 1280px tested. Margins tried at 600px and 1280px (tagline-to-description minus title-to-tagline): 0px -2.25px, 1px -1.25px, 2px -0.25px, 5px +2.75px. On phones, at 412px: 0px -0.25px, 1px +0.75px, so they stay at 0.
+
+### Notes
+- Same two rules as 1.7.97 (`.logo-text-wrapper { align-items: center }` and `.site-description { margin-top: 5px }`, unchanged since 1.7.1), so not a regression of an earlier release.
+- Phones unchanged: no measured value differs at 360px, 412px and 480px in any of the 11 header variants (48px, 80px, 110px and default logos, logo right, logo above, logo below, centred title text, no description, description hidden on tablet and phone, right-to-left page).
+- A logo taller than the text block keeps its position (the default 200px desktop and 150px tablet logos: logo top and header height unchanged at 600px and 1280px); the text beside it is 1.5px lower because the block is 3px shorter (46.7px to 48.2px at 600px, 74.7px to 76.2px at 1280px). At 481px a 110px logo, whose text block is 134.1px tall there, is 8.6px below the title top before and level after.
+- With a 48px logo and a description shown the header is 3px shorter: 203.7px to 200.7px at 600px, 169.8px to 166.8px at 1280px. With the logo above the text only the margin goes (278.7px to 275.7px at 600px, 245.4px to 242.4px at 1280px); with the logo below the text, logo and header are 3px higher.
+- No description: the tablet header is unchanged; on a desktop the 48px logo is 2.3px below the title top before and level after. Description hidden on tablet and phone: only the desktop changes (16.3px then 0px).
+- 0 horizontal overflow in all 11 variants at 10 widths (360px to 1440px).
+- CSS only (`style.css`: the base `.site-description` margin, plus one new rule in each of the `min-width: 769px` and `481px to 768px` blocks); no PHP, JS or string changes (the `.pot` only gets the new version).
+- Not measured: a real phone or tablet, Firefox or Safari.
+
 ## [1.7.97]
 
 ### Fixed

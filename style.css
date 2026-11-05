@@ -4,7 +4,7 @@ Theme URI: https://github.com/bungakku/Mec_Theme
 Author: Biswajit Thokchom
 Author URI: https://github.com/bungakku
 Description: A lightweight theme by Biswajit for Mount Everest College. Fully responsive with mobile-optimized navigation and design.
-Version: 1.7.97
+Version: 1.7.98
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mec_theme
@@ -168,7 +168,8 @@ select {
 .site-description {
     font-size: 0.9rem;
     color: var(--mec-site-description-color);
-    margin-top: 5px;
+    /* 1.7.98: was 5px; at 2px the blank gap under the tagline is within 0.25px of the gap under the title at 481 to 1280px (phones use 0, see below). */
+    margin-top: 2px;
 }
 
 .site-tagline {
@@ -211,6 +212,13 @@ select {
         flex-direction: column-reverse;
         align-items: flex-start;
     }
+    /* 1.7.98: logo level with the title (top of the text block) instead of centred
+       on title + tagline + description; a logo taller than the text block is
+       unchanged. Row layouts only. */
+    .logo-pos-desktop-left .custom-logo-link,
+    .logo-pos-desktop-right .custom-logo-link {
+        align-self: flex-start;
+    }
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
@@ -229,6 +237,11 @@ select {
     .logo-pos-tablet-bottom .logo-text-wrapper {
         flex-direction: column-reverse;
         width: 100%;
+    }
+    /* 1.7.98: logo level with the title, as on desktop and phones. Row layouts only. */
+    .logo-pos-tablet-left .custom-logo-link,
+    .logo-pos-tablet-right .custom-logo-link {
+        align-self: flex-start;
     }
     .logo-pos-tablet-top.title-align-tablet-left .logo-text-wrapper {
         align-items: flex-start;
